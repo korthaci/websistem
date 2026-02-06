@@ -2,7 +2,7 @@
 .vscode/
 .github/
 .agent/
-*.sql
+/*.sql
 *.code-workspace
 *.log
 .htaccess
