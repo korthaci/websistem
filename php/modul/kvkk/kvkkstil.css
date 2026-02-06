@@ -1,0 +1,17 @@
+.kvkk_container {
+	position: fixed;
+	bottom: 0%;
+	background: #e4edee;
+	width: 44%;
+	min-width: 300px;
+	padding: 20px;
+	margin: 5px;
+	border: 1px solid #4db0bd;
+	border-radius: 3px;
+	z-index: 9999;
+	font-size: 14px;
+	color: #252424;
+}
+.kvkk_bilgi{
+	padding:2px;
+}

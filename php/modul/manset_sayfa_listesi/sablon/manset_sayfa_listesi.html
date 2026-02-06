@@ -1,0 +1,17 @@
+{{__foreach %manset->%s}}
+
+<div class="col-md-3 col-sm-6 col-6 pb-1 mb-1">
+	<div class="card no-border">
+		<div class="card-body p-2">
+			<img src="{{%s.resim}}" alt="" class="border-radius2 bgcover" data-bgcover="{{%s.resim}}">
+			<div class="d-flex justify-content-between align-items-center mt-1 mb-1">
+				<p class="card-author">{{%s.etiket}}</p>
+				<!--<span class="badge bg-primary bg-color"><i class="bi-star-fill nonedit"></i> </span>-->
+			</div>
+			<h4 class="card-title"><a href="{{%s.href}}" class="stretched-link">{{%s.adi}}</a></h4>
+			<!--<h5 class="card-date"><i class="bi-calendar-week nonedit"></i>{{%s.tarih}}</h5>-->
+		</div>
+	</div>
+</div>
+
+{{__endforeach}}

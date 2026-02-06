@@ -1,0 +1,30 @@
+.yorum_foto_genel_c {
+	display: block;
+	width: 100%;
+	height: 50px;
+}
+.yorum_foto_genel {
+	width: 50px;
+	margin:auto;
+}
+.yof{
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	margin-right: 30px;
+	float:left;
+}
+.yof img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.fotoyok{
+	font-size:17px;
+	text-align:center;
+}
+.fotoyok.yofbg1{background:#77cadd;}
+.fotoyok.yofbg2{background:#58b96d;}
+.fotoyok.yofbg3{background:#e0578c;}
+.fotoyok.yofbg4{background:#f7c27e;}
+.fotoyok.yofbg5{background:#cd74f7;}

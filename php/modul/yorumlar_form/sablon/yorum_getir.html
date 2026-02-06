@@ -1,0 +1,13 @@
+{{__foreach %yorumlar_liste->%y}}
+<div class="yorumlar_liste">
+	<div class="yorum_foto"><span class="yof"><img class="bgcover" src="{{%y.uye_foto}}" alt="" /></span></div>
+	<div class="yorum_yazi">
+		<div class="yorum_adi_tarih">
+		<a class="#">{{%y.adi}}</a> {{%y.tarih}}
+		</div>
+		<div class="yorum_mesaj">{{%y.mesaj}}</div>
+	</div>
+	<div class="yorum_alt_yorumlar" data-yn="{{%y.no}}"></div>
+</div>
+{{__endforeach}}
+<br><br><br>

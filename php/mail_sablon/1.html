@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" var="logo,mesaj,buton_href,buton_yazi,alt_yazi,mailunsubscribe_link">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
+	<title>Email</title>
+</head>
+<body style="margin: 0;padding: 0;font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size:14px; color:#333;">
+
+	{{__if%logo%
+	<table cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+			<td align="center"><img src="{{$:logo}}" alt="" style="max-width:140px;height:auto;"></td>
+		</tr>
+	</table>
+	__endif}}
+	<br/>
+	<table cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+			<td align="center" bgcolor="#FFFFFF">
+				<p>{{$:mesaj}}</p>
+			</td>
+		</tr>
+	</table>
+	{{__if%html1%
+		<div>{{$:html1}}</div>
+	__endif}}
+	<table cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+			<td align="center" bgcolor="#FFFFFF">
+				{{__if%buton_href%
+				<table align="center" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td bgcolor="#ed5153" style="border-radius: 3px;">
+							<a href="{{$:buton_href}}" style="display: inline-block; padding: 10px 20px; color: #ffffff; text-decoration: none;">{{$:buton_yazi}}</a>
+						</td>
+					</tr>
+				</table>
+				__endif}}
+				<p style="text-align: center;">{{$:alt_yazi}}</p>
+				{{__if%mail_unsubscribe%
+					<p style="text-align: center;"><a href="{{$:mailunsubscribe_link}}" style="color: #8e8e8e; text-decoration: underline;">Unsubscribe</a></p>
+				__endif}}
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

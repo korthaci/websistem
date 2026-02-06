@@ -1,0 +1,15 @@
+<div class="ws_dropdown ws_sm ws_light ws_align_right me-2 ms-auto" data-ws-dropdown>
+	<button class="ws_dropdown_toggle dilbu" type="button">
+		<span><i class="fa fa-globe"></i> {{$:d}}</span>
+		<i class="ws_dropdown_icon"></i>
+	</button>
+
+	<div class="ws_dropdown_menu">
+		<ul class="ws_dropdown_list">
+			{{__foreach %diller->%dil}}
+			<li class="ws_dropdown_item dil_secenek" data-cookie-name="d" data-cookie-value="{{%dil.dkod}}"
+				data-value="{{%dil.dkod}}" data-reload="true"><b>{{%dil.dkod}}</b> | {{%dil.adio}}</li>
+			{{__endforeach}}
+		</ul>
+	</div>
+</div>

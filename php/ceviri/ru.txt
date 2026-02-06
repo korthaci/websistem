@@ -1,0 +1,580 @@
+Sistem v%s sürümünde çalışmaktadır.:::Система работает на версии v%s.
+Menüde ara:::Поиск в меню
+Tema Yönetimi:::Управление темами
+Listeyi Yenile:::Обновить список
+Bir sorun oluştu. Lütfen tekrar deneyin.:::Возникла проблема. Пожалуйста, попробуйте еще раз.
+Mail adresiniz kaydedildi. Teşekkür ederiz.:::Ваш адрес электронной почты был зарегистрирован. Спасибо.
+Bir hata oluştu. Lütfen tekrar deneyin.:::Произошла ошибка. Пожалуйста, попробуйте еще раз.
+Geçersiz mail adresi.:::Недействительный адрес электронной почты.
+Yorumlar tablosu bulunamadı.:::Таблица комментариев не найдена.
+link:::ссылка
+Yorum bulunmamaktadır.:::Комментариев нет.
+Link:::Ссылка
+Stiller:::Стилер
+Bu mail adresi kayıtlı.:::Этот адрес электронной почты зарегистрирован.
+Scriptler:::Скрипты
+Bu sayfayı düzenle:::Редактировать эту страницу
+Ülkeler:::Страны
+Şehirler:::Города
+Kayıt değiştirilmedi.:::Запись не изменена.
+Profil Fotoğrafı:::Профиль Фотография
+Fotoğraf:::Фотография
+Bilgileri düzenle:::Редактировать информацию
+E-posta adresiniz:::Ваш адрес электронной почты
+Email iptal edildi:::Электронная почта отменена
+Şifre değiştir:::Изменить пароль
+Eski şifreyi yanlış girdiniz. Şifre değiştirilemedi.:::Вы ввели неверный старый пароль. Пароль не может быть изменен.
+Yeni şifre alanları eşleşmiyor. Şifre değiştirilemedi.:::Новые поля для ввода пароля не совпадают. Пароль не может быть изменен.
+Şifre başarıyla değiştirildi.:::Пароль успешно изменен.
+Şifre değiştirilemedi. Bir hata oluştu.:::Не удалось изменить пароль. Произошла ошибка.
+Eski şifre:::Старый пароль
+Yeni şifre:::Новый пароль
+Yeni şifre tekrar:::Повторите новый пароль
+Şifre Sıfırla:::Сбросить пароль
+Kullanıcı bulunamadı.:::Пользователь не найден.
+Şifrenizi sıfırlamak için aşağıdaki linke tıklayın:::Чтобы сбросить пароль, нажмите на следующую ссылку
+Şifremi Sıfırla:::Сбросить пароль
+Şifre Sıfırlama:::Сброс пароля
+E-posta adresinize şifre sıfırlama bağlantısı gönderildi.:::На ваш адрес электронной почты была отправлена ссылка для сброса пароля.
+Mail gönderilirken bir hata oluştu.:::При отправке письма произошла ошибка.
+Kullanıcı adı veya E-posta:::Имя пользователя или адрес электронной почты
+E-posta veya kullanıcı adı girin:::Введите адрес электронной почты или имя пользователя
+Yeni Şifre Belirle:::Установить новый пароль
+Geçersiz istek.:::Недействительный запрос.
+Geçersiz veya süresi dolmuş token.:::Недействительный или просроченный токен.
+Şifreniz başarıyla değiştirildi.:::Ваш пароль был успешно изменен.
+Yeni şifre girin:::Введите новый пароль
+En az %s karakter olmalı:::Должно быть не менее %s символов
+Şifreyi Güncelle:::Обновите пароль
+Hesabını aktifleştir:::Активируйте свой аккаунт
+Aktivasyon kodu:::Код активации
+E-posta adresinize aktivasyon kodu gönderildi:::На ваш адрес электронной почты был отправлен код активации.
+Üyelik işlemi henüz tamamlanmadı:::Процесс регистрации еще не завершен.
+Güvenli çıkış:::Безопасный выход
+Üye girişi:::Вход для членов
+E-posta adresi:::Адрес электронной почты
+Beni hatırla:::Запомни меня
+Şifre resetle:::Сбросить пароль
+Giriş yap:::Войти
+Yeni üyelik oluştur:::Создать новую учетную запись
+Google ile giriş yap:::Войти через Google
+Zaten üye misiniz? Giriş yapın:::Вы уже являетесь членом? Войдите
+Google ile kayıt ol:::Зарегистрироваться с помощью Google
+Yeni üyelik aktivasyonu:::Активация нового членства
+Hesabınız başarıyla aktif edildi.:::Ваша учетная запись успешно активирована.
+Giriş sayfasına yönlendiriliyorsunuz...:::Вы перенаправляетесь на страницу входа...
+Hesabınız aktif edilemedi. Lütfen daha sonra tekrar deneyiniz.:::Ваша учетная запись не может быть активирована. Пожалуйста, попробуйте позже.
+Hesabınız aktif edilemedi veya daha önce aktifleştirilmiş.:::Ваша учетная запись не может быть активирована или уже была активирована ранее.
+Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.:::Произошла ошибка. Пожалуйста, попробуйте позже.
+Aktivasyon kodu bulunamadı. Hesabınız aktif edilemedi.:::Активационный код не найден. Ваша учетная запись не может быть активирована.
+Ülke/Şehir:::Страна/Город
+Kontrol paneli:::Панель управления
+Menü yapısı:::Структура меню
+Yorum formu:::Форма для комментариев
+Genel yorumlar:::Общие комментарии
+Diller & Çeviriler:::Языки и переводы
+Temalar:::Темы
+Genel ayarlar:::Общие настройки
+Çıkış:::Выход
+Resim&Dosya:::Изображение&Файл
+%s ve %s okudum, kabul ediyorum.:::Я прочитал %s и %s, согласен.
+Aç:::Открой
+Açıkla:::объяснять
+Açıklama:::Объяснение
+Adı:::Имя
+Adı Soyadı:::Имя и фамилия
+Adınız:::Ваше имя
+Adınız Soyadınız:::твое имя и твоя фамилия
+Adınız ve Soyadınız:::Имя и фамилия
+Adres:::Адрес
+Adresiniz:::Ваш адрес
+Aktivasyon Kodu:::Код активации
+Aktivasyon kodu gönderilemedi:::Не удалось отправить код активации
+Aktivasyon kodu gönderiliyor:::Код активации отправляется
+Aktivasyon kodu mail adresinize gönderildi:::Код активации был отправлен на ваш адрес электронной почты
+Anasayfa:::Домашняя страница
+Anlık Mesaj Sınırı:::Лимит мгновенных сообщений
+ara:::Поиск
+Aradığınız kelimeler, arama kriteri için geçerli değil. Lütfen iki harften daha uzun kelimeler ile arama yapın:::Слова, которые вы ищете, не соответствуют критериям поиска. Пожалуйста, ищите слова длиннее двух букв
+Aradığınız kelimeleri içeren herhangi bir yazı bulunamadı.:::Ни одна статья, содержащая слова, которые вы искали, не найдена. Вы можете выполнить поиск еще раз, используя другие ключевые слова.
+Arama Sonuçları:::результаты поиска
+Aşağıdaki bağlantıya tıklayarak hesabınızı aktif edebilirsiniz:::Вы можете активировать свою учетную запись, нажав на ссылку ниже
+Ay:::месяц
+Ayarlar:::Настройки
+Aynı yorum:::тот же комментарий
+Başarılı:::Успешный
+Başarısız:::Неудачный
+Başka kelimelerle yeniden arama yapabilirsiniz:::Вы можете повторить поиск с другими словами
+Başlık:::Заголовок
+Belirlenmedi:::Не определено
+Belirtilmedi:::Указанный
+Bilgi:::Знание
+Bilgiler:::Информация
+Bilgiler eksik:::Отсутствует информация
+Bilgileri duzenle:::Редактирование информации
+Bilgileri Düzenle:::Редактировать информацию
+Bilgileri onaylıyorum.:::Подтверждаю информацию.
+Bir hata oluştu:::Произошла ошибка
+Bir hata oluştu. Lütfen daha sonra tekrar deneyin.:::Произошла ошибка. Пожалуйста, повторите попытку позже.
+Bizi seçtiğiniz için teşekkür ederiz.:::Спасибо, что выбрали нас.
+Bölüm:::Часть
+Bu alan işaretlenmelidir:::Это поле должно быть отмечено
+Bu alan onaylanmalıdır:::Это поле должно быть утверждено
+Bu bölümde sayfa bulunmamaktadır:::В этом разделе нет страниц
+Bu kişiye mesaj yollamak için tıklayın:::Нажмите здесь, чтобы отправить сообщение этому человеку
+Bu kriterde üye bulunmuyor:::В этом критерии нет членов
+Bu linke tıklayarak mesajlarınızı düzenleyebilirsiniz veya email alımını iptal edebilirsiniz:::Перейдя по этой ссылке, вы можете отредактировать свои сообщения или отменить получение электронных писем
+Bu mail adresinden artık mesaj almamak için tıklayın:::Нажмите здесь, чтобы прекратить получать сообщения с этого адреса электронной почты
+Bugün:::Сегодня
+Buraya tıklayın:::Нажмите здесь
+Cevap:::Ответ
+Cevap yazın:::Написать ответ
+CVC No:::CVC No
+Daha fazla bilgi:::Подробнее
+Daha fazlası:::Больше
+Daha uzun yorum yazmalısınız:::Вы должны писать более длинные отзывы
+Değişiklikleri kaydet:::Сохранить изменения
+Değiştir:::Менять
+Değiştirilmedi:::Изменены
+Detay:::Подробность
+Devam:::Продолжение
+Devam Et:::Продолжай
+Devamı:::Продолжение
+Diğer:::Другой
+Diğer araçlar:::Другие транспортные средства
+Dil:::Язык
+Dil seçin:::Выберите язык
+Doğum Tarihi:::Дата рождения
+Dosya Bulunamadı:::Файл не найден
+Dosya Yüklendi:::Файл загружен
+Dosya Yüklenemedi:::Не удалось загрузить файл
+Dosyalar:::Файлы
+Düzenle:::Редактировать
+E posta adresiniz:::Ваш электронный адрес
+Ek Bilgiler:::Дополнительная информация
+Ek dosyalar:::Дополнительные файлы
+Ekle/Kaldır:::Добавить/Удалить
+Eklendi:::Добавили
+Eklenme Tarihi:::Добавлено
+Eklenmedi:::Не добавлено
+Elektrik:::Электричество
+Email:::Отправить по электронной почте
+Email alımını iptal ettiniz:::Вы отменили получение электронных писем
+Email ile giriş:::Вход по электронной почте
+Email listesi:::Список электронной почты
+Email listesine kayıt olmak için email adresinizi yazın:::Напишите свой адрес электронной почты, чтобы зарегистрироваться в списке электронной почты
+E-Posta Adresi:::Адрес электронной почты
+E-posta alımı iptal edildi:::Прием электронной почты отменен
+E-posta listesine üye olun:::Подпишитесь на нашу рассылку
+Erkek:::Мужской
+Eski Şifre:::Старый пароль
+Eski şifreyi yanlış girdiniz:::Вы неправильно ввели старый пароль
+Etiketler:::Теги
+Fatura Adresi:::Адрес для выставления счетов
+Fatura Ünvanı:::Заголовок счета-фактуры
+Filtreler:::Фильтры
+Form Gönderildi. Teşekkür ederiz:::Форма отправлена. Спасибо
+Form Gönderilemedi:::Форма не может быть отправлена
+Foto:::Фото
+Fotoğraf Galerisi:::Фотогалерея
+Fotoğraf yükle:::Загрузить фото
+Fotoğrafını Yükle:::Загрузите свою фотографию
+Fotoğraflar:::Фотографии
+Geçerli bir mail adresi girin:::Введите действительный адрес электронной почты
+Geçersiz email:::Неверный адрес электронной почты
+Genel:::Общее
+Genel Bilgiler:::Общая информация
+Gerekli:::Необходимый
+Gerekli alan:::Обязательное поле
+Geri:::Назад
+Geri Dön:::Назад
+Giriş Yap:::Войти
+Git:::Идти
+Gizle:::Прятать
+Gizlilik ve güvenlik:::Конфиденциальность и безопасность
+Gönder:::Отправить
+Göster:::Показывать
+GSM:::Стандарт GSM
+Gün:::День
+gün:::день
+Güvenli Çıkış:::Безопасный выход
+Harita:::Карта
+Hatırlatma:::Напоминание
+Hepsi:::Все
+Hesabınız aktif edilemedi. Aktivasyon süresi geçmiş olabilir veya zaten aktif olabilir:::Ваша учетная запись не может быть активирована. Возможно, срок действия активации истек или она уже активна.
+Hesabınız aktif edilmiştir:::Ваша учетная запись активирована
+Hiçbiri:::Никакой
+Hoşgeldiniz:::Добро пожаловать
+Iletişim:::Коммуникация
+İlçe:::Графство
+İletişim formu:::Форма обратной связи
+İletişim formu aracılığıyla istek ve önerilerinizi bildirebilirsiniz:::Вы можете сообщить о своих запросах и предложениях через контактную форму
+İlk:::Первый
+İncele:::Вид
+İsim:::Имя
+İsim kopyalandı:::Имя скопировано
+İsteğe bağlı:::Необязательный
+İstek Gönderildi. Teşekkür ederiz:::Запрос отправлен. Спасибо
+İstek Gönderilemedi:::Запрос не может быть отправлен
+Kadın:::Женщина
+Kampanya:::Кампания
+Kapat:::Отключение
+Kart Numarası:::Номер карты
+Kart üzerindeki isim:::Имя на карте
+Katıl:::Соединять
+Kaydedildi:::Сохранено
+Kaydedilemedi:::Не удалось спасти
+Kaydet:::Спасать
+Kayıt değiştirilmedi:::Запись не была изменена
+Kayıt ol:::Регистрировать
+Kayıt tarihi:::Дата регистрации
+Kaynak:::Источник
+kelime ile ara:::Поиск по слову
+Keşfet:::Исследовать
+Listele:::Список
+Listeye dön:::Возврат к списку
+Listeye Geri Dön:::Назад к списку
+Lütfen daha sonra tekrar deneyin:::Пожалуйста, повторите попытку позже
+Lütfen tekrar deneyin:::Пожалуйста, повторите попытку
+Mail:::Почта
+Mail adresi bulunamadı:::Адрес электронной почты не найден
+Mail Adresi Uygun:::Доступный адрес электронной почты
+Mail Adresi Uygun Değil:::Адрес электронной почты недоступен
+Mail adresini yazın:::Введите адрес электронной почты
+Mail adresiniz görüntülenmez:::Ваш адрес электронной почты не будет отображаться
+Mail adresinizdeki aktivasyon linkine tıklayın veya aktivasyon kodunu aşağıdaki alana yazın:::Нажмите на ссылку активации в своем адресе электронной почты или введите код активации в поле ниже.
+Mail adresinize aktivasyon kodu gönderilecektir:::Код активации будет отправлен на ваш адрес электронной почты.
+Mail Gönderildi:::Отправленная почта
+Mail Gönderilemedi:::Не удалось отправить почту
+Menü:::Меню
+Menüde var:::Это в меню
+Mesaj gönderildi:::Сообщение отправлено
+Mesaj Gönderildi. Teşekkür ederiz:::Сообщение отправлено. Спасибо
+Mesaj Gönderilemedi:::Сообщение не может быть отправлено
+Mesajınız:::Сообщение
+Mesajlarım:::Мои сообщения
+Misafir:::Гость
+Mobil:::Мобильный
+Onayla:::Подтверждать
+Onaylamıyorum:::Не одобряю
+Onaylıyor musunuz:::Одобряете
+Onaylıyorum:::Соглашаться
+Ortalama:::Средний
+Önceki:::Предыдущий
+Önceki Sayfaya Dön:::Вернуться на предыдущую страницу
+önerilen:::рекомендуется
+Önizleme:::Предварительный просмотр
+Paylaş:::Предоставить общий доступ
+Posta Kodu:::Почтовый индекс
+Profil Resmi:::Фото профиля
+Renk:::Цвет
+Resim:::Картина
+Resim Ekle:::Добавить изображение
+Resim Oluşturma:::Создание образа
+Resim Yükleme Sınırı:::Лимит на загрузку изображений
+Resim Yüklendi:::Изображение загружено
+Resim Yüklenemedi:::Не удалось загрузить изображение
+Resimler:::Живопись
+RSS Başlıkları:::RSS-каналы
+Saat:::Час
+Satış sözleşmesi:::Договор купли-продажи
+Sayfa:::Страница
+Sayfa bulunamadı:::Страница не найдена
+Sayfa Bulunamadı. Yayından kaldırılmış veya silinmiş olabilir:::Страница не найдена. Может быть отменена или удалена
+Sayfalar:::Страниц
+Sayı:::Число
+Seç:::Выбирать
+Sehir Seç:::Выберите город
+Semt:::Четверть
+Sınırsız:::Безграничный
+Sıra:::Очередь
+Sıralama:::Договоренность
+Sil:::Удалить
+Silindi:::Уничтоженный
+Silinemedi:::Не удалось удалить
+Son:::Конец
+Son Kullanma Tarihi:::Срок хранения
+Sonraki:::Последующий
+Sonuç:::Результат
+Soru:::Вопрос
+Sosyal medya:::Социальные сети
+Soyadınız:::Фамилия
+Spam, Gereksiz, Gelen Kutusunu kontrol etmeyi unutmayın:::Спам, Ненужные, Не забудьте проверить папку «Входящие»
+Şehir:::Город
+Şehir seçmelisiniz:::Необходимо выбрать город
+Şifre:::Пароль
+Şifre değistir:::Смена пароля
+Şifre Değiştir:::Смена пароля
+Şifre Değiştirildi:::Пароль изменен
+Şifre Değiştirilemedi:::Пароль не может быть изменен
+Şifre Hatırlat:::Напомнить пароль
+Şifre hatırlatması için lütfen kayıtlı email adresinizi yazın:::Пожалуйста, введите свой зарегистрированный адрес электронной почты, чтобы напомнить пароль
+Şifreni mi unuttun?:::Забыли пароль?
+Şifreniz mail adresinize gönderildi:::Ваш пароль отправлен на ваш адрес электронной почты
+Tarih:::История
+Tarih bulunamadı:::Дата не найдена
+Tarihe git:::Перейти к истории
+Taslak olarak kaydet:::Сохранить как черновик
+Tebrik ederiz:::Поздравляю
+Telefon:::Телефон
+Teşekkür ederiz:::Спасибо
+Tüm hakları saklıdır:::Все права защищены
+Tümü:::Все
+Tümünü listele:::Показать все
+Ülke:::Страна
+Ülke Seç:::Выберите страну
+Üye Adı:::Имя участника
+Üye bulunmamaktadır:::Членов нет
+Üye Girişi:::Вход для участников
+üye girişi yap:::Войти
+Üye Ol:::Регистрация
+Üyeler:::Члены
+Üyelik Bilgileri:::Информация о членстве
+Üyelik bilgileriniz aşağıdaki gibidir.:::Информация о вашем членстве приведена ниже.
+Üyelik için buraya tıklayın:::Нажмите здесь, чтобы стать участником
+Üyelik işleminiz tamamlanmadı:::Процесс регистрации не завершен
+Var:::Имеется
+Vergi Dairesi:::Налоговая инспекция
+Vergi Numarası:::Налоговый номер
+Web Adresi:::Веб-адрес
+Yardım:::Справка
+Yaşınız:::Ваш возраст
+Yayın:::Публикация
+Yayın Tarihi:::Дата выхода
+Yayında:::Публикация
+Yayında değil:::Не в прямом эфире
+Yayınlansın:::Пусть будет опубликовано
+Yazdır:::Печатать
+Yazı:::Пишущий
+Yazı Boyutunu Arttır:::Увеличить размер шрифта
+Yazı Boyutunu Azalt:::Уменьшить размер шрифта
+Yazı Boyutunu Ortala:::Размер шрифта по центру
+Yeni sayfa:::Новая страница
+Yeni Şifre:::Новый пароль
+Yeni şifre alanlarını yanlış girdiniz:::Вы неправильно ввели новые поля пароля
+Yeni Şifre Tekrar:::Снова новый пароль
+Yeni üyelik:::Новое членство
+Yeni Yorum Yaz:::Написать комментарий
+Yetki:::Авторитет
+Yetkili:::Санкционированный
+Yıl:::Год
+Yok:::Нет
+Yorum:::Комментарий
+Yorum Açık:::Комментарий
+Yorum gönderildi:::Комментарий отправлен
+Yorum gönderilemedi:::Не удалось оставить комментарий
+Yorum yaz:::Напишите комментарий
+Yorum yazmak için üye girişi yapmalısınız:::Вы должны войти в систему к участнику, чтобы написать комментарий
+Yorumlar:::Комментарии
+Yorumunuzu yazın:::Напишите свой комментарий
+Yönetim Paneli:::Панель управления
+Yükle:::Устанавливать
+Zorunlu alanlardır:::Обязательные поля
+Mesaj gönderilemedi:::Сообщение не может быть отправлено
+Web sitemizde kullanılan çerezler yalnızca teknik amaçlarla sınırlıdır:::Файлы cookie, используемые на нашем веб-сайте, ограничены исключительно техническими целями.
+Bileşen:::Компонент
+Aktif:::Активный
+css, js dosyalarını birleştir veya sil:::Объедините или удалите файлы css и js.
+Birleştirilmiş dosyaları sil:::Удалить объединенные файлы
+Birleştirilmiş css, js dosyaları kullan:::Используйте объединенные файлы css и js.
+Etkin bilesen bulunmamaktadır.:::Активный компонент отсутствует.
+Kur:::Где
+Bileşenler:::Компоненты
+Değişiklik kaydedildi:::Изменение сохранено
+Değişiklik yapılmadı:::Изменения не внесены
+Config dosyası bulunamadı.:::Не удалось найти файл конфигурации.
+Bileşen düzenle:::Редактирование компонентов
+Bileşen yönetim klasörü bulunamadı veya boş.:::Не удалось найти папку управления компонентами или она пуста.
+Bileşen bulunamadı.:::Компонент не найден.
+Bileşen şablonları.:::Шаблоны компонентов.
+Kaydedildi.:::Записано.
+Tüm bloklar:::Все блоки
+Konu başlığı:::Тема
+İçerik yazıları:::Контент-статьи
+Blok düzenleme:::Блок редактирования
+Kelime ile ara:::Поиск по слову
+Bloklar:::Блоки
+Yeni Blok:::Новый блок
+Blok Başlığı:::Заголовок блока
+Ekle:::Добавить
+Blok adı:::Название блока
+Çeviri:::Перевод
+Bu bölümde kayıt bulunmamaktadır:::В этом разделе нет записей.
+Çeviriler:::Переводы
+Tüm alanlar:::Все области
+Sadece boş alanlar:::Только пустые поля
+Master Keys:::Мастер-ключи
+Sync:::Синхронизация
+Tümünü çevir:::Перевести все
+Durdur:::Остановить
+Dosya bulunamadı.:::Файл не найден.
+Dil bulunamadı.:::Язык не найден.
+Bulunan yeni kelimeler:::Найденные новые слова
+Diller:::Языки
+Ülke Adı:::Название страны
+Orjinal:::Оригинал
+Seçenek:::Вариант
+Son eklenen:::Последние добавленные
+Filtrele:::Фильтры
+Dosya:::Файл
+Genel Ayarlar:::Общие настройки
+Yeni Özellik:::Новая функция
+Özellik Adı:::Название функции
+değer:::ценность
+İki veya daha fazla eposta adresi yazabilirsiniz. Ancak eposta adreslerini virgülle ayırmalısınız. abc@abc.com , mail@rehberim.com ** İçerikte değişiklik olmadığında kayıt işlemi yapılmaz.:::Вы можете ввести два или более адреса электронной почты. Однако адреса электронной почты должны быть разделены запятой. abc@abc.com , mail@rehberim.com ** Если в содержании нет изменений, регистрация не производится.
+Bu sayfada işlem yapma yetkiniz yok.:::Вы не имеете права выполнять операции на этой странице.
+Ana sayfaya dön:::Вернуться на главную страницу
+Kontrol Paneli:::Панель управления
+Hoşgeldiniz, sistem durumu ve hızlı işlemler.:::Добро пожаловать, состояние системы и быстрые операции.
+Aktif Sayfa:::Активная страница
+Aktif Modül:::Активный модуль
+Kullanıcılar:::Пользователи
+Sistem Sürümü:::Версия системы
+Hızlı İşlemler & Yönetim:::Быстрые операции и управление
+İçerik Yönetimi:::Управление контентом
+Modüller:::Модули
+Dosya Yöneticisi:::Файловый менеджер
+Son Aktiviteler:::Последние действия
+Henüz kayıtlı aktivite yok.:::Пока нет зарегистрированных действий.
+Sistem Bilgileri:::Информация о системе
+PHP Sürümü:::Версия PHP
+Sunucu Yazılımı:::Серверное программное обеспечение
+Veritabanı Host:::База данных Хост
+Veritabanı Prefix:::Префикс базы данных
+Sayfa seç:::Выберите страницу
+Sekmeler:::Вкладки
+Sekme seç:::Выберите вкладку
+Blok seç:::Выбрать блок
+Menü maddeleri:::Пункты меню
+Bağlantı:::Ссылка
+Modül Yönetimi:::Управление модулями
+Modüllere Dön:::Вернуться к модулям
+Yönetim Aracı Seçimi:::Выбор инструмента управления
+Yönetim dosyası bulunamadı.:::Не удалось найти файл управления.
+Lütfen işlem yapmak için yukarıdan bir dosya seçiniz.:::Пожалуйста, выберите файл сверху, чтобы выполнить операцию.
+Modül yönetim klasörü bulunamadı veya boş.:::Не удалось найти папку управления модулями или она пуста.
+Tazele:::Обновить
+Modül Adı:::Название модуля
+Kod (Hash):::Код (хэш)
+Kısayol:::Ярлык
+Şablonlar:::Шаблоны
+Pasif:::Пассивный
+Hash:::Хеш
+Kopyala:::Копировать
+Yönetim Dosyaları:::Управленческие файлы
+Görünüm Şablonları:::Шаблоны внешнего вида
+Performans için CSS ve JS dosyalarını birleştirebilirsiniz.:::Для повышения производительности вы можете объединить CSS- и JS-файлы.
+Birleşik Dosyaları Sil:::Удалить объединенные файлы
+Dosyaları Birleştir:::Объединить файлы
+Henüz kurulmuş bir modül bulunmuyor.:::Пока нет установленных модулей.
+Kurulabilir Modüller:::Устанавливаемые модули
+Şablon başarıyla kaydedildi.:::Шаблон успешно сохранен.
+Şablonlarını Düzenle:::Редактировать шаблоны
+Şablon Seçimi:::Выбор шаблона
+Şablon dosyası bulunamadı.:::Шаблонный файл не найден.
+Şablon Seçiniz:::Выберите шаблон
+Lütfen düzenlemek için bir şablon seçin:::Пожалуйста, выберите шаблон для редактирования
+Bu şablonlar FRONTEND tarafında modülün nasıl görüneceğini belirler. Standart HTML ve sistem etiketlerini içerebilir.:::Эти шаблоны определяют, как модуль будет отображаться на стороне FRONTEND. Они могут содержать стандартные HTML-теги и системные теги.
+Tarih Aralığı:::Диапазон дат
+Yayında Değil:::Не в эфире
+Yeni Sayfa:::Новая страница
+Sayfa Başlığı:::Заголовок страницы
+Sayfa adı:::Название страницы
+Sekme:::Вкладка
+Manşet:::Заголовок
+Tüm sayfalar:::Все страницы
+Bölüm Seç:::Выберите раздел
+Sayfa açıklamaları:::Описание страницы
+Sayfa resimleri:::Изображения страниц
+Tüm sekmeler:::Все вкладки
+Sekme adı:::Название вкладки
+Sekme açıklamaları:::Описания вкладок
+İçerik sayfada görüntülensin:::Содержание должно отображаться на странице
+Yeni Sekme:::Новая вкладка
+Sekme Adı:::Название вкладки
+Geçersiz tema dizini.:::Недопустимый каталог тем.
+Bloklar başarıyla temanın orijinal haline döndürüldü.:::Блоки были успешно возвращены в исходное состояние темы.
+Yeni bir temaya geçtiniz! Her temanın kendine has bir yapısı olduğu için anasayfa görünümünün tam oturması adına sağ üstteki:::Вы перешли на новую тему! Поскольку каждая тема имеет свою собственную структуру, для правильного отображения главной страницы в правом верхнем углу
+butonunu kullanarak temanın varsayılan bloklarını yüklemenizi öneririz.:::Мы рекомендуем вам загрузить стандартные блоки темы с помощью кнопки.
+Temaya ait blok_html.sql dosyası bulunamadı.:::Не удалось найти файл block_html.sql, относящийся к теме.
+Kayıt Engellendi!:::Регистрация заблокирована!
+Dosya başarıyla kaydedildi. Yedek otomatik olarak oluşturuldu.:::Файл успешно сохранен. Резервная копия создана автоматически.
+Dosya kaydedilirken bir hata oluştu.:::При записи файла произошла ошибка.
+Temasını Düzenle:::Редактировать тему
+Tüm bloklar silinecek ve temanın varsayılan blokları yüklenecektir. Emin misiniz:::Все блоки будут удалены, и будут загружены блоки по умолчанию темы. Вы уверены?
+Anasayfada gösterilen bloklar:::Блоки, отображаемые на главной странице
+Blokları Yeniden Oluştur:::Пересоздать блоки
+Temalara Dön:::Вернуться к темам
+Tema Dosyaları:::Тематические файлы
+Dosya Seçiniz:::Выберите файл
+Yedekler:::Запасные части
+Lütfen düzenlemek için bir dosya seçin...:::Пожалуйста, выберите файл для редактирования...
+Dosya Yedekleri:::Резервные копии файлов
+Boyut:::Размер
+İşlem:::Операция
+Geri Yükle:::Восстановить
+teması başarıyla etkinleştirildi. Görünümün tam olarak oturması için blokları yapılandırmanız gerekebilir.:::Тема успешно активирована. Для правильного отображения внешнего вида может потребоваться настройка блоков.
+Blokları Yapılandır:::Конфигурировать блоки
+Etkinleştir:::Активировать
+Üye düzenle:::Управление членами
+Bir hata oluştu.:::Произошла ошибка.
+Email alımı:::Получение электронной почты
+Email Adresi:::Адрес электронной почты
+Email adresi:::Адрес электронной почты
+Kullanıcı adı:::Имя пользователя
+Aktivasyon:::Активация
+Liste:::Список
+Yeni Üye:::Новый член
+E-posta:::Электронная почта
+Ara:::Заказ
+Son giriş:::Последнее вхождение
+Üye bulunmamaktadır.:::Нет членов.
+Ad Soyad:::Имя Фамилия
+Yetkisiz erişim.:::Несанкционированный доступ.
+Dizin Yok:::Нет индекса
+Dosya yok veya yüklenemedi.:::Файл отсутствует или не может быть загружен.
+Bu dosya türü güvenlik nedeniyle yüklenemez.:::Этот тип файла не может быть загружен по соображениям безопасности.
+Geçersiz resim dosyası. Dosya bozuk veya resim formatında değil.:::Недопустимый файл изображения. Файл поврежден или не имеет формат изображения.
+Bu resim formatı desteklenmiyor.:::Этот формат изображения не поддерживается.
+Geçersiz resim MIME type.:::Недопустимый тип MIME изображения.
+Resim dosya uzantısı geçersiz.:::Расширение файла изображения недействительно.
+Dosyada güvenlik ihlali tespit edildi.:::В файле обнаружено нарушение безопасности.
+Yükleme başarısız.:::Загрузка не удалась.
+Yükleme başarılı.:::Загрузка успешно завершена.
+Geçersiz işlem:::Недействительная операция
+Geçersiz işlem.:::Недействительная операция.
+Bilinmeyen bir hata oluştu.:::Произошла неизвестная ошибка.
+Gerekli bilgiler eksik.:::Недостаточно необходимых сведений.
+Geçersiz veya eksik veri.:::Недействительные или неполные данные.
+Seçenek başarıyla güncellendi.:::Параметр успешно обновлен.
+Değişiklik yapılmadı.:::Изменения не внесены.
+Veritabanı hatası.:::Ошибка базы данных.
+Değer değişmedi.:::Стоимость не изменилась.
+Değer kaydedildi.:::Значение сохранено.
+Değer kaydedilemedi.:::Значение не может быть сохранено.
+Metin kaydedildi.:::Текст сохранен.
+Metin kaydedilemedi veya değişiklik yapılmadı.:::Текст не был сохранен или не было внесено изменений.
+Kayıt başarıyla silindi.:::Запись удалена успешно.
+Kayıt silinemedi.:::Запись не удалена.
+Gerekli parametreler eksik:::Недостающие необходимые параметры
+Sıralama güncellendi:::Рейтинг обновлен
+Sıralama güncellenirken bir hata oluştu:::При обновлении рейтинга произошла ошибка
+Tema adı belirtilmedi.:::Тема не указана.
+Tema başarıyla etkinleştirildi.:::Тема успешно активирована.
+Yeni tema adı belirtilmedi.:::Новое название темы не указано.
+Bu isimde bir tema zaten mevcut.:::Тема с таким названием уже существует.
+Tema başarıyla kopyalandı.:::Тема успешно скопирована.
+Aktif tema silinemez.:::Активная тема не может быть удалена.
+Tema başarıyla arşive kaldırıldı.:::Тема успешно удалена в архив.
+Tema bulunamadı.:::Тема не найдена.
+Dosya adı belirtilmedi.:::Имя файла не указано.
+Dosya adı veya yedek tarihi belirtilmedi.:::Имя файла или дата резервного копирования не указаны.
+Yedek başarıyla geri yüklendi.:::Резервная копия успешно восстановлена.
+Yedek geri yüklenirken bir hata oluştu.:::При восстановлении резервной копии произошла ошибка.
+Yedek dosyası silindi.:::Резервная копия файла удалена.
+Yedek silinirken hata oluştu veya dosya bulunamadı.:::При удалении резервной копии произошла ошибка или файл не найден.
+Geçersiz işlem tipi.:::Недопустимый тип операции.
+Değer:::Ценность
+Özellik:::Характеристика
+Detaylı bilgi için %s’ni inceleyebilirsiniz:::Для получения подробной информации вы можете просмотреть %s.
+E Posta Adresiniz:::Ваш электронный адрес

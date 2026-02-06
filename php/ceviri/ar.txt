@@ -1,0 +1,580 @@
+Sistem v%s sürümünde çalışmaktadır.:::يعمل النظام على الإصدار v%s.
+Menüde ara:::البحث في القائمة
+Tema Yönetimi:::إدارة الموضوعات
+Listeyi Yenile:::تحديث القائمة
+Bir sorun oluştu. Lütfen tekrar deneyin.:::حدث خطأ. يرجى المحاولة مرة أخرى.
+Mail adresiniz kaydedildi. Teşekkür ederiz.:::تم حفظ عنوان بريدك الإلكتروني. شكراً لك.
+Bir hata oluştu. Lütfen tekrar deneyin.:::حدث خطأ. يرجى المحاولة مرة أخرى.
+Geçersiz mail adresi.:::عنوان بريد إلكتروني غير صالح.
+Yorumlar tablosu bulunamadı.:::تعذر العثور على جدول التعليقات.
+link:::رابط
+Yorum bulunmamaktadır.:::لا توجد تعليقات.
+Link:::رابط
+Stiller:::ستيلر
+Bu mail adresi kayıtlı.:::هذا العنوان البريدي الإلكتروني مسجل.
+Scriptler:::نصوص
+Bu sayfayı düzenle:::تحرير هذه الصفحة
+Ülkeler:::البلدان
+Şehirler:::المدن
+Kayıt değiştirilmedi.:::لم يتم تغيير السجل.
+Profil Fotoğrafı:::صورة الملف الشخصي
+Fotoğraf:::صورة فوتوغرافية
+Bilgileri düzenle:::تحرير المعلومات
+E-posta adresiniz:::عنوان بريدك الإلكتروني
+Email iptal edildi:::تم إلغاء البريد الإلكتروني
+Şifre değiştir:::تغيير كلمة المرور
+Eski şifreyi yanlış girdiniz. Şifre değiştirilemedi.:::لقد أدخلت كلمة المرور القديمة بشكل غير صحيح. تعذر تغيير كلمة المرور.
+Yeni şifre alanları eşleşmiyor. Şifre değiştirilemedi.:::حقول كلمة المرور الجديدة غير متطابقة. تعذر تغيير كلمة المرور.
+Şifre başarıyla değiştirildi.:::تم تغيير كلمة المرور بنجاح.
+Şifre değiştirilemedi. Bir hata oluştu.:::تعذر تغيير كلمة المرور. حدث خطأ.
+Eski şifre:::كلمة المرور القديمة
+Yeni şifre:::كلمة مرور جديدة
+Yeni şifre tekrar:::كلمة مرور جديدة مرة أخرى
+Şifre Sıfırla:::إعادة تعيين كلمة المرور
+Kullanıcı bulunamadı.:::لم يتم العثور على المستخدم.
+Şifrenizi sıfırlamak için aşağıdaki linke tıklayın:::لإعادة تعيين كلمة المرور الخاصة بك، انقر على الرابط أدناه
+Şifremi Sıfırla:::إعادة تعيين كلمة المرور
+Şifre Sıfırlama:::إعادة تعيين كلمة المرور
+E-posta adresinize şifre sıfırlama bağlantısı gönderildi.:::تم إرسال رابط إعادة تعيين كلمة المرور إلى عنوان بريدك الإلكتروني.
+Mail gönderilirken bir hata oluştu.:::حدث خطأ أثناء إرسال البريد الإلكتروني.
+Kullanıcı adı veya E-posta:::اسم المستخدم أو البريد الإلكتروني
+E-posta veya kullanıcı adı girin:::يرجى إدخال عنوان بريدك الإلكتروني أو اسم المستخدم
+Yeni Şifre Belirle:::تعيين كلمة مرور جديدة
+Geçersiz istek.:::طلب غير صالح.
+Geçersiz veya süresi dolmuş token.:::رمز غير صالح أو منتهي الصلاحية.
+Şifreniz başarıyla değiştirildi.:::تم تغيير كلمة المرور بنجاح.
+Yeni şifre girin:::أدخل كلمة مرور جديدة
+En az %s karakter olmalı:::يجب أن يتكون من %s أحرف على الأقل.
+Şifreyi Güncelle:::تحديث كلمة المرور
+Hesabını aktifleştir:::قم بتفعيل حسابك
+Aktivasyon kodu:::رمز التفعيل
+E-posta adresinize aktivasyon kodu gönderildi:::تم إرسال رمز التفعيل إلى عنوان بريدك الإلكتروني.
+Üyelik işlemi henüz tamamlanmadı:::لم تكتمل عملية العضوية بعد.
+Güvenli çıkış:::خروج آمن
+Üye girişi:::تسجيل دخول الأعضاء
+E-posta adresi:::عنوان البريد الإلكتروني
+Beni hatırla:::تذكرني
+Şifre resetle:::إعادة تعيين كلمة المرور
+Giriş yap:::تسجيل الدخول
+Yeni üyelik oluştur:::إنشاء عضوية جديدة
+Google ile giriş yap:::تسجيل الدخول باستخدام Google
+Zaten üye misiniz? Giriş yapın:::هل أنت عضو بالفعل؟ تسجيل الدخول
+Google ile kayıt ol:::تسجيل الدخول باستخدام Google
+Yeni üyelik aktivasyonu:::تفعيل عضوية جديدة
+Hesabınız başarıyla aktif edildi.:::تم تنشيط حسابك بنجاح.
+Giriş sayfasına yönlendiriliyorsunuz...:::يتم إعادة توجيهك إلى الصفحة الرئيسية...
+Hesabınız aktif edilemedi. Lütfen daha sonra tekrar deneyiniz.:::تعذر تنشيط حسابك. يرجى المحاولة مرة أخرى لاحقًا.
+Hesabınız aktif edilemedi veya daha önce aktifleştirilmiş.:::لم يتم تفعيل حسابك أو تم تفعيله بالفعل.
+Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.:::حدث خطأ. يرجى المحاولة مرة أخرى لاحقًا.
+Aktivasyon kodu bulunamadı. Hesabınız aktif edilemedi.:::تعذر العثور على رمز التفعيل. تعذر تفعيل حسابك.
+Ülke/Şehir:::البلد/المدينة
+Kontrol paneli:::لوحة التحكم
+Menü yapısı:::هيكل القائمة
+Yorum formu:::نموذج التعليقات
+Genel yorumlar:::تعليقات عامة
+Diller & Çeviriler:::اللغات والترجمة
+Temalar:::المواضيع
+Genel ayarlar:::الإعدادات العامة
+Çıkış:::خروج
+Resim&Dosya:::صورة وملف
+%s ve %s okudum, kabul ediyorum.:::لقد قرأت %s و%s، أوافق على ذلك.
+Aç:::جائع
+Açıkla:::شرح
+Açıklama:::تفسير
+Adı:::اسم
+Adı Soyadı:::الاسم واللقب
+Adınız:::الاسم
+Adınız Soyadınız:::الاسم واللقب
+Adınız ve Soyadınız:::الاسم واللقب
+Adres:::عنوان
+Adresiniz:::عنوان
+Aktivasyon Kodu:::رمز التفعيل
+Aktivasyon kodu gönderilemedi:::تعذر إرسال رمز التفعيل
+Aktivasyon kodu gönderiliyor:::إرسال رمز التفعيل
+Aktivasyon kodu mail adresinize gönderildi:::تم إرسال رمز التفعيل إلى عنوان بريدك الإلكتروني
+Anasayfa:::وطن
+Anlık Mesaj Sınırı:::حد الرسائل الفورية
+ara:::كسر
+Aradığınız kelimeler, arama kriteri için geçerli değil. Lütfen iki harften daha uzun kelimeler ile arama yapın:::لا تنطبق الكلمات التي بحثت عنها على معايير البحث. يرجى البحث عن كلمات أطول من حرفين
+Aradığınız kelimeleri içeren herhangi bir yazı bulunamadı.:::لم يتم العثور على مشاركات تحتوي على الكلمات التي كنت تبحث عنها.
+Arama Sonuçları:::نتائج البحث
+Aşağıdaki bağlantıya tıklayarak hesabınızı aktif edebilirsiniz:::يمكنك تفعيل حسابك من خلال النقر على الرابط أدناه
+Ay:::قمر
+Ayarlar:::طقوم
+Aynı yorum:::نفس التعليق
+Başarılı:::ناجح
+Başarısız:::فشل
+Başka kelimelerle yeniden arama yapabilirsiniz:::يمكنك البحث مرة أخرى بكلمات أخرى
+Başlık:::عنوان
+Belirlenmedi:::غير محدد
+Belirtilmedi:::المحدد
+Bilgi:::عهد
+Bilgiler:::معلومات
+Bilgiler eksik:::المعلومات مفقودة
+Bilgileri duzenle:::تحرير المعلومات
+Bilgileri Düzenle:::تحرير المعلومات
+Bilgileri onaylıyorum.:::أؤكد المعلومات.
+Bir hata oluştu:::حدث خطأ
+Bir hata oluştu. Lütfen daha sonra tekrar deneyin.:::حدث خطأ. يرجى إعادة المحاولة لاحقا.
+Bizi seçtiğiniz için teşekkür ederiz.:::شكرا لاختيارك لنا.
+Bölüm:::جزء
+Bu alan işaretlenmelidir:::يجب وضع علامة على هذا الحقل
+Bu alan onaylanmalıdır:::يجب الموافقة على هذا الحقل
+Bu bölümde sayfa bulunmamaktadır:::لا توجد صفحات في هذا القسم
+Bu kişiye mesaj yollamak için tıklayın:::انقر هنا لإرسال رسالة إلى هذا الشخص
+Bu kriterde üye bulunmuyor:::لا يوجد أعضاء في هذا المعيار
+Bu linke tıklayarak mesajlarınızı düzenleyebilirsiniz veya email alımını iptal edebilirsiniz:::من خلال النقر على هذا الرابط ، يمكنك تعديل رسائلك أو إلغاء استلام رسائل البريد الإلكتروني
+Bu mail adresinden artık mesaj almamak için tıklayın:::انقر هنا لإيقاف تلقي الرسائل من عنوان البريد الإلكتروني هذا
+Bugün:::اليوم
+Buraya tıklayın:::اضغط هنا
+Cevap:::جواب
+Cevap yazın:::اكتب ردا
+CVC No:::رقم CVC
+Daha fazla bilgi:::التعرف على المزيد
+Daha fazlası:::أكثر
+Daha uzun yorum yazmalısınız:::يجب أن تكتب مراجعات أطول
+Değişiklikleri kaydet:::حفظ التغييرات
+Değiştir:::تغيير
+Değiştirilmedi:::تغيير
+Detay:::تفصيل
+Devam:::استمرار
+Devam Et:::استمر
+Devamı:::تتمه
+Diğer:::آخر
+Diğer araçlar:::المركبات الأخرى
+Dil:::اللغة
+Dil seçin:::اختر اللغة
+Doğum Tarihi:::تاريخ الميلاد
+Dosya Bulunamadı:::لم يتم العثور على الملف
+Dosya Yüklendi:::تم تحميل الملف
+Dosya Yüklenemedi:::فشل تحميل الملف
+Dosyalar:::الملفات
+Düzenle:::حرر
+E posta adresiniz:::عنوان بريدك  الإلكتروني
+Ek Bilgiler:::معلومات إضافية
+Ek dosyalar:::ملفات إضافية
+Ekle/Kaldır:::إضافة/إزالة
+Eklendi:::مضاف
+Eklenme Tarihi:::تاريخ الإضافة
+Eklenmedi:::غير مضاف
+Elektrik:::كهرباء
+Email:::البريد الإلكتروني
+Email alımını iptal ettiniz:::لقد ألغيت استلام رسائل البريد الإلكتروني
+Email ile giriş:::تسجيل الدخول عن طريق البريد الإلكتروني
+Email listesi:::قائمة البريد الإلكتروني
+Email listesine kayıt olmak için email adresinizi yazın:::اكتب عنوان بريدك الإلكتروني للتسجيل في قائمة البريد الإلكتروني
+E-Posta Adresi:::عنوان البريد الإلكتروني
+E-posta alımı iptal edildi:::تم إلغاء استقبال البريد الإلكتروني
+E-posta listesine üye olun:::اشترك في قائمتنا البريدية
+Erkek:::ذكر
+Eski Şifre:::كلمة المرور القديمة
+Eski şifreyi yanlış girdiniz:::أدخلت كلمة المرور القديمة بشكل غير صحيح
+Etiketler:::العلامات
+Fatura Adresi:::عنوان إرسال الفواتير
+Fatura Ünvanı:::عنوان الفاتورة
+Filtreler:::مرشحات
+Form Gönderildi. Teşekkür ederiz:::تم تقديم النموذج. شكرا
+Form Gönderilemedi:::تعذر تقديم النموذج
+Foto:::الصور
+Fotoğraf Galerisi:::معرض الصور
+Fotoğraf yükle:::تحميل الصورة
+Fotoğrafını Yükle:::قم بتحميل صورتك
+Fotoğraflar:::الصور
+Geçerli bir mail adresi girin:::أدخل عنوان بريد إلكتروني صالح
+Geçersiz email:::البريد الإلكتروني غير صالح
+Genel:::عام
+Genel Bilgiler:::معلومات عامة
+Gerekli:::ضروري
+Gerekli alan:::حقل مطلوب
+Geri:::ظهر
+Geri Dön:::ظهر
+Giriş Yap:::تسجيل الدخول
+Git:::ذهب
+Gizle:::أخفى
+Gizlilik ve güvenlik:::الخصوصية والأمان
+Gönder:::ارسل
+Göster:::عرض
+GSM:::جي إس إم
+Gün:::يوم
+gün:::يوم
+Güvenli Çıkış:::مخرج آمن
+Harita:::خريطة
+Hatırlatma:::تذكير
+Hepsi:::كل
+Hesabınız aktif edilemedi. Aktivasyon süresi geçmiş olabilir veya zaten aktif olabilir:::تعذر تنشيط حسابك. قد تكون صلاحية التنشيط قد انتهت أو قد تكون نشطة بالفعل
+Hesabınız aktif edilmiştir:::تم تفعيل حسابك
+Hiçbiri:::اي
+Hoşgeldiniz:::أهلًا وسهلًا
+Iletişim:::انتقال
+İlçe:::مقاطعه
+İletişim formu:::نموذج الاتصال
+İletişim formu aracılığıyla istek ve önerilerinizi bildirebilirsiniz:::يمكنك الإبلاغ عن طلباتك واقتراحاتك عبر نموذج الاتصال
+İlk:::أولا
+İncele:::منظر
+İsim:::اسم
+İsim kopyalandı:::تم نسخ الاسم
+İsteğe bağlı:::اختياري
+İstek Gönderildi. Teşekkür ederiz:::تم إرسال الطلب. شكرا
+İstek Gönderilemedi:::تعذر إرسال الطلب
+Kadın:::امرأة
+Kampanya:::حملة
+Kapat:::إيقاف التشغيل
+Kart Numarası:::رقم البطاقة
+Kart üzerindeki isim:::الاسم على البطاقة
+Katıl:::ينضم
+Kaydedildi:::حفظ
+Kaydedilemedi:::تعذر الحفظ
+Kaydet:::أنقذ
+Kayıt değiştirilmedi:::لم يتم تعديل السجل
+Kayıt ol:::سجل
+Kayıt tarihi:::تاريخ التسجيل
+Kaynak:::مصدر
+kelime ile ara:::البحث بالكلمة
+Keşfet:::استكشف
+Listele:::قائمة
+Listeye dön:::العودة إلى اللائحة
+Listeye Geri Dön:::العودة إلى القائمة
+Lütfen daha sonra tekrar deneyin:::يرجى إعادة المحاولة لاحقا
+Lütfen tekrar deneyin:::يرجى المحاولة مرة أخرى
+Mail:::بريد
+Mail adresi bulunamadı:::لم يتم العثور على عنوان البريد الإلكتروني
+Mail Adresi Uygun:::عنوان البريد الإلكتروني متاح
+Mail Adresi Uygun Değil:::عنوان البريد الإلكتروني غير متوفر
+Mail adresini yazın:::اكتب عنوان البريد الإلكتروني
+Mail adresiniz görüntülenmez:::لن يتم عرض عنوان بريدك الإلكتروني
+Mail adresinizdeki aktivasyon linkine tıklayın veya aktivasyon kodunu aşağıdaki alana yazın:::اضغط على رابط التفعيل في عنوان بريدك الإلكتروني أو اكتب رمز التفعيل في الحقل أدناه
+Mail adresinize aktivasyon kodu gönderilecektir:::سيتم إرسال رمز التفعيل إلى عنوان بريدك الإلكتروني
+Mail Gönderildi:::البريد المرسل
+Mail Gönderilemedi:::تعذر إرسال البريد
+Menü:::قائمة
+Menüde var:::إنه في القائمة
+Mesaj gönderildi:::تم إرسال الرسالة
+Mesaj Gönderildi. Teşekkür ederiz:::تم إرسال الرسالة. شكرا
+Mesaj Gönderilemedi:::تعذر إرسال الرسالة
+Mesajınız:::رسالة
+Mesajlarım:::رسائلي
+Misafir:::ضيف
+Mobil:::جوال
+Onayla:::أكد
+Onaylamıyorum:::أنا لا أوافق
+Onaylıyor musunuz:::هل توافق؟
+Onaylıyorum:::اصطلح
+Ortalama:::متوسط
+Önceki:::سابق
+Önceki Sayfaya Dön:::العودة إلى الصفحة السابقة
+önerilen:::مُستَحسَن
+Önizleme:::معاينه
+Paylaş:::سهم
+Posta Kodu:::الرمز البريدي
+Profil Resmi:::صورة الملف الشخصي
+Renk:::لون
+Resim:::رسم
+Resim Ekle:::اضف صورة
+Resim Oluşturma:::إنشاء صورة
+Resim Yükleme Sınırı:::حد تحميل الصور
+Resim Yüklendi:::تم تحميل الصورة
+Resim Yüklenemedi:::فشل تحميل الصورة
+Resimler:::الصور
+RSS Başlıkları:::آر إس إس
+Saat:::ساعة
+Satış sözleşmesi:::عقد البيع
+Sayfa:::صفحة
+Sayfa bulunamadı:::لم يتم العثور على الصفحة
+Sayfa Bulunamadı. Yayından kaldırılmış veya silinmiş olabilir:::لم يتم العثور على الصفحة. يمكن إلغاء نشرها أو حذفها
+Sayfalar:::الصفحات
+Sayı:::رقم
+Seç:::اختار
+Sehir Seç:::اختر المدينة
+Semt:::ربع
+Sınırsız:::بلا حدود
+Sıra:::رتل
+Sıralama:::ترتيب
+Sil:::حذف
+Silindi:::محذوف
+Silinemedi:::تعذر حذفها
+Son:::النهاية
+Son Kullanma Tarihi:::صلاحيه
+Sonraki:::لاحق
+Sonuç:::نتيجة
+Soru:::سؤال
+Sosyal medya:::وسائل التواصل الاجتماعي
+Soyadınız:::اللقب
+Spam, Gereksiz, Gelen Kutusunu kontrol etmeyi unutmayın:::البريد المزعج ، لا لزوم لها ، لا تنس التحقق من البريد الوارد
+Şehir:::مدينة
+Şehir seçmelisiniz:::يجب عليك تحديد مدينة
+Şifre:::شعار
+Şifre değistir:::تغيير كلمة المرور
+Şifre Değiştir:::تغيير كلمة المرور
+Şifre Değiştirildi:::تم تغيير كلمة المرور
+Şifre Değiştirilemedi:::تعذر تغيير كلمة المرور
+Şifre Hatırlat:::تذكير كلمة المرور
+Şifre hatırlatması için lütfen kayıtlı email adresinizi yazın:::يرجى إدخال عنوان بريدك الإلكتروني المسجل ليكون تذكيرا بكلمة المرور
+Şifreni mi unuttun?:::هل نسيت كلمة المرور؟
+Şifreniz mail adresinize gönderildi:::تم إرسال كلمة المرور الخاصة بك إلى عنوان بريدك الإلكتروني
+Tarih:::تاريخ
+Tarih bulunamadı:::لم يتم العثور على التاريخ
+Tarihe git:::اذهب إلى التاريخ
+Taslak olarak kaydet:::حفظ كمسودة
+Tebrik ederiz:::مبروك
+Telefon:::الهاتف
+Teşekkür ederiz:::شكرا
+Tüm hakları saklıdır:::جميع الحقوق محفوظة
+Tümü:::كل
+Tümünü listele:::قائمة الكل
+Ülke:::بلد
+Ülke Seç:::إختر الدولة
+Üye Adı:::اسم العضو
+Üye bulunmamaktadır:::لا يوجد أعضاء
+Üye Girişi:::دخول الأعضاء
+üye girişi yap:::تسجيل الدخول
+Üye Ol:::التسجيل
+Üyeler:::اعضاء
+Üyelik Bilgileri:::معلومات العضوية
+Üyelik bilgileriniz aşağıdaki gibidir.:::معلومات عضويتك هي كما يلي.
+Üyelik için buraya tıklayın:::انقر هنا لتصبح عضوا
+Üyelik işleminiz tamamlanmadı:::لم تكتمل عملية التسجيل الخاصة بك
+Var:::هناك
+Vergi Dairesi:::مكتب الضرائب
+Vergi Numarası:::الرقم الضريبي
+Web Adresi:::عنوان الويب
+Yardım:::تعليمات
+Yaşınız:::عمرك
+Yayın:::نشر
+Yayın Tarihi:::تاريخ الإصدار
+Yayında:::نشر
+Yayında değil:::لا يعيش
+Yayınlansın:::فليكن منشورا
+Yazdır:::طبع
+Yazı:::كتابه
+Yazı Boyutunu Arttır:::تكبير حجم الخط
+Yazı Boyutunu Azalt:::تقليل حجم الخط
+Yazı Boyutunu Ortala:::حجم خط الوسط
+Yeni sayfa:::صفحة جديدة
+Yeni Şifre:::كلمة مرور جديدة
+Yeni şifre alanlarını yanlış girdiniz:::أدخلت حقول كلمة المرور الجديدة بشكل غير صحيح
+Yeni Şifre Tekrar:::كلمة مرور جديدة مرة أخرى
+Yeni üyelik:::عضوية جديدة
+Yeni Yorum Yaz:::اكتب تعليقا جديدا
+Yetki:::سلطة
+Yetkili:::مخول
+Yıl:::سنة
+Yok:::لا
+Yorum:::التعليق
+Yorum Açık:::التعليق على
+Yorum gönderildi:::تم إرسال التعليق
+Yorum gönderilemedi:::فشل نشر التعليقات
+Yorum yaz:::اكتب تعليقًا
+Yorum yazmak için üye girişi yapmalısınız:::يجب عليك تسجيل الدخول إلى عضو لكتابة تعليق
+Yorumlar:::التعليقات
+Yorumunuzu yazın:::اكتب تعليقك
+Yönetim Paneli:::لوحة الإدارة
+Yükle:::أقام
+Zorunlu alanlardır:::الحقول المطلوبة
+Mesaj gönderilemedi:::تعذر إرسال الرسالة
+Web sitemizde kullanılan çerezler yalnızca teknik amaçlarla sınırlıdır:::تقتصر ملفات تعريف الارتباط المستخدمة على موقعنا الإلكتروني على الأغراض التقنية فقط.
+Bileşen:::المكون
+Aktif:::نشط
+css, js dosyalarını birleştir veya sil:::دمج أو حذف ملفات CSS و JS
+Birleştirilmiş dosyaları sil:::حذف الملفات المدمجة
+Birleştirilmiş css, js dosyaları kullan:::استخدم ملفات CSS و JS مدمجة
+Etkin bilesen bulunmamaktadır.:::لا توجد مكونات فعالة.
+Kur:::أين
+Bileşenler:::المكونات
+Değişiklik kaydedildi:::تم تسجيل التغيير.
+Değişiklik yapılmadı:::لم يتم إجراء أي تغييرات.
+Config dosyası bulunamadı.:::تعذر العثور على ملف التكوين.
+Bileşen düzenle:::إدارة المكونات
+Bileşen yönetim klasörü bulunamadı veya boş.:::لا يمكن العثور على مجلد إدارة المكونات أو أنه فارغ.
+Bileşen bulunamadı.:::لم يتم العثور على المكون.
+Bileşen şablonları.:::قوالب المكونات.
+Kaydedildi.:::لقد تم تسجيله.
+Tüm bloklar:::جميع الكتل
+Konu başlığı:::عنوان الموضوع
+İçerik yazıları:::مقالات المحتوى
+Blok düzenleme:::تحرير الكتلة
+Kelime ile ara:::البحث عن طريق الكلمة
+Bloklar:::كتل
+Yeni Blok:::كتلة جديدة
+Blok Başlığı:::رأس الكتلة
+Ekle:::إضافة
+Blok adı:::اسم الكتلة
+Çeviri:::الترجمة
+Bu bölümde kayıt bulunmamaktadır:::لا توجد سجلات في هذا القسم.
+Çeviriler:::الترجمات
+Tüm alanlar:::جميع المناطق
+Sadece boş alanlar:::فقط مساحات فارغة
+Master Keys:::المفاتيح الرئيسية
+Sync:::مزامنة
+Tümünü çevir:::ترجم كل شيء
+Durdur:::توقف
+Dosya bulunamadı.:::لم يتم العثور على الملف.
+Dil bulunamadı.:::لم يتم العثور على اللغة.
+Bulunan yeni kelimeler:::الكلمات المكتشفة حديثًا
+Diller:::اللغات
+Ülke Adı:::اسم البلد
+Orjinal:::الأصل
+Seçenek:::خيار
+Son eklenen:::أحدث الإضافات
+Filtrele:::المرشحات
+Dosya:::ملف
+Genel Ayarlar:::الإعدادات العامة
+Yeni Özellik:::ميزة جديدة
+Özellik Adı:::اسم الميزة
+değer:::القيمة
+İki veya daha fazla eposta adresi yazabilirsiniz. Ancak eposta adreslerini virgülle ayırmalısınız. abc@abc.com , mail@rehberim.com ** İçerikte değişiklik olmadığında kayıt işlemi yapılmaz.:::يمكنك إدخال عنوانين أو أكثر من عناوين البريد الإلكتروني. ولكن يجب عليك فصل عناوين البريد الإلكتروني بفواصل. abc@abc.com، mail@rehberim.com ** لن يتم التسجيل إذا لم تكن هناك تغييرات على المحتوى.
+Bu sayfada işlem yapma yetkiniz yok.:::ليس لديك إذن للقيام بعمليات على هذه الصفحة.
+Ana sayfaya dön:::العودة إلى الصفحة الرئيسية
+Kontrol Paneli:::لوحة التحكم
+Hoşgeldiniz, sistem durumu ve hızlı işlemler.:::مرحبًا بكم، حالة النظام والمعاملات السريعة.
+Aktif Sayfa:::الصفحة النشطة
+Aktif Modül:::الوحدة النشطة
+Kullanıcılar:::المستخدمون
+Sistem Sürümü:::إصدار النظام
+Hızlı İşlemler & Yönetim:::معاملات وإدارة سريعة
+İçerik Yönetimi:::إدارة المحتوى
+Modüller:::الوحدات
+Dosya Yöneticisi:::مدير الملفات
+Son Aktiviteler:::الأنشطة الأخيرة
+Henüz kayıtlı aktivite yok.:::لا توجد أنشطة مسجلة حتى الآن.
+Sistem Bilgileri:::معلومات النظام
+PHP Sürümü:::إصدار PHP
+Sunucu Yazılımı:::برنامج الخادم
+Veritabanı Host:::مضيف قاعدة البيانات
+Veritabanı Prefix:::بادئة قاعدة البيانات
+Sayfa seç:::اختر الصفحة
+Sekmeler:::علامات التبويب
+Sekme seç:::اختر علامة التبويب
+Blok seç:::تحديد الكتلة
+Menü maddeleri:::بنود القائمة
+Bağlantı:::الاتصال
+Modül Yönetimi:::إدارة الوحدات
+Modüllere Dön:::العودة إلى الوحدات
+Yönetim Aracı Seçimi:::اختيار أداة الإدارة
+Yönetim dosyası bulunamadı.:::تعذر العثور على ملف الإدارة.
+Lütfen işlem yapmak için yukarıdan bir dosya seçiniz.:::يرجى اختيار ملف من أعلاه للمتابعة.
+Modül yönetim klasörü bulunamadı veya boş.:::لم يتم العثور على مجلد إدارة الوحدة النمطية أو أنه فارغ.
+Tazele:::تحديث
+Modül Adı:::اسم الوحدة
+Kod (Hash):::الرمز (هاش)
+Kısayol:::اختصار
+Şablonlar:::القوالب
+Pasif:::سلبي
+Hash:::هاش
+Kopyala:::نسخ
+Yönetim Dosyaları:::ملفات الإدارة
+Görünüm Şablonları:::قوالب المظهر
+Performans için CSS ve JS dosyalarını birleştirebilirsiniz.:::يمكنك دمج ملفات CSS و JS لتحسين الأداء.
+Birleşik Dosyaları Sil:::حذف الملفات المجمعة
+Dosyaları Birleştir:::دمج الملفات
+Henüz kurulmuş bir modül bulunmuyor.:::لم يتم تثبيت أي وحدة نمطية حتى الآن.
+Kurulabilir Modüller:::وحدات معيارية
+Şablon başarıyla kaydedildi.:::تم حفظ القالب بنجاح.
+Şablonlarını Düzenle:::تحرير القوالب الخاصة بك
+Şablon Seçimi:::اختيار القالب
+Şablon dosyası bulunamadı.:::تعذر العثور على ملف القالب.
+Şablon Seçiniz:::اختر قالب
+Lütfen düzenlemek için bir şablon seçin:::يرجى اختيار قالب لتحريره
+Bu şablonlar FRONTEND tarafında modülün nasıl görüneceğini belirler. Standart HTML ve sistem etiketlerini içerebilir.:::تحدد هذه القوالب كيفية ظهور الوحدة النمطية على جانب الواجهة الأمامية. قد تحتوي على علامات HTML وعلامات نظام قياسية.
+Tarih Aralığı:::نطاق التاريخ
+Yayında Değil:::غير مذاع
+Yeni Sayfa:::صفحة جديدة
+Sayfa Başlığı:::عنوان الصفحة
+Sayfa adı:::اسم الصفحة
+Sekme:::علامة التبويب
+Manşet:::العنوان الرئيسي
+Tüm sayfalar:::جميع الصفحات
+Bölüm Seç:::اختر القسم
+Sayfa açıklamaları:::وصف الصفحات
+Sayfa resimleri:::صور الصفحة
+Tüm sekmeler:::جميع علامات التبويب
+Sekme adı:::اسم علامة التبويب
+Sekme açıklamaları:::وصف علامات التبويب
+İçerik sayfada görüntülensin:::يجب عرض المحتوى على الصفحة.
+Yeni Sekme:::علامة تبويب جديدة
+Sekme Adı:::اسم علامة التبويب
+Geçersiz tema dizini.:::دليل السمات غير صالح.
+Bloklar başarıyla temanın orijinal haline döndürüldü.:::تمت استعادة الكتل بنجاح إلى حالتها الأصلية.
+Yeni bir temaya geçtiniz! Her temanın kendine has bir yapısı olduğu için anasayfa görünümünün tam oturması adına sağ üstteki:::لقد قمت بالتبديل إلى سمة جديدة! نظرًا لأن كل سمة لها هيكلها الفريد، يرجى النقر على الزاوية اليمنى العليا للتأكد من عرض الصفحة الرئيسية بشكل صحيح.
+butonunu kullanarak temanın varsayılan bloklarını yüklemenizi öneririz.:::نوصي بتحميل الكتل الافتراضية للقالب باستخدام الزر.
+Temaya ait blok_html.sql dosyası bulunamadı.:::تعذر العثور على ملف block_html.sql المرتبط بالسمة.
+Kayıt Engellendi!:::التسجيل محظور!
+Dosya başarıyla kaydedildi. Yedek otomatik olarak oluşturuldu.:::تم حفظ الملف بنجاح. تم إنشاء نسخة احتياطية تلقائيًا.
+Dosya kaydedilirken bir hata oluştu.:::حدث خطأ أثناء حفظ الملف.
+Temasını Düzenle:::تحرير جهة الاتصال
+Tüm bloklar silinecek ve temanın varsayılan blokları yüklenecektir. Emin misiniz:::سيتم حذف جميع الكتل وتحميل الكتل الافتراضية للقالب. هل أنت متأكد؟
+Anasayfada gösterilen bloklar:::الكتل المعروضة على الصفحة الرئيسية
+Blokları Yeniden Oluştur:::إعادة إنشاء الكتل
+Temalara Dön:::العودة إلى الموضوعات
+Tema Dosyaları:::ملفات السمات
+Dosya Seçiniz:::اختر ملف
+Yedekler:::الاحتياطيات
+Lütfen düzenlemek için bir dosya seçin...:::يرجى تحديد ملف لتحريره...
+Dosya Yedekleri:::نسخ احتياطية للملفات
+Boyut:::البعد
+İşlem:::المعاملة
+Geri Yükle:::استعادة
+teması başarıyla etkinleştirildi. Görünümün tam olarak oturması için blokları yapılandırmanız gerekebilir.:::تم تنشيط السمة بنجاح. قد تحتاج إلى تكوين الكتل حتى يظهر التخطيط بشكل صحيح.
+Blokları Yapılandır:::تكوين الكتل
+Etkinleştir:::تنشيط
+Üye düzenle:::تحرير عضو
+Bir hata oluştu.:::حدث خطأ.
+Email alımı:::استقبال البريد الإلكتروني
+Email Adresi:::عنوان البريد الإلكتروني
+Email adresi:::عنوان البريد الإلكتروني
+Kullanıcı adı:::اسم المستخدم
+Aktivasyon:::التفعيل
+Liste:::قائمة
+Yeni Üye:::عضو جديد
+E-posta:::البريد الإلكتروني
+Ara:::طلب
+Son giriş:::آخر إدخال
+Üye bulunmamaktadır.:::لا يوجد أعضاء.
+Ad Soyad:::الاسم الأول الاسم الأخير
+Yetkisiz erişim.:::الوصول غير المصرح به.
+Dizin Yok:::لا يوجد فهرس
+Dosya yok veya yüklenemedi.:::الملف مفقود أو تعذر تحميله.
+Bu dosya türü güvenlik nedeniyle yüklenemez.:::لا يمكن تحميل هذا النوع من الملفات لأسباب أمنية.
+Geçersiz resim dosyası. Dosya bozuk veya resim formatında değil.:::ملف صورة غير صالح. الملف تالف أو ليس بتنسيق صورة.
+Bu resim formatı desteklenmiyor.:::هذا التنسيق غير مدعوم.
+Geçersiz resim MIME type.:::نوع MIME للصورة غير صالح.
+Resim dosya uzantısı geçersiz.:::امتداد ملف الصورة غير صالح.
+Dosyada güvenlik ihlali tespit edildi.:::تم اكتشاف خرق أمني في الملف.
+Yükleme başarısız.:::فشل التحميل.
+Yükleme başarılı.:::تم التحميل بنجاح.
+Geçersiz işlem:::معاملة غير صالحة
+Geçersiz işlem.:::معاملة غير صالحة.
+Bilinmeyen bir hata oluştu.:::حدث خطأ غير معروف.
+Gerekli bilgiler eksik.:::المعلومات الضرورية غير موجودة.
+Geçersiz veya eksik veri.:::بيانات غير صالحة أو غير كاملة.
+Seçenek başarıyla güncellendi.:::تم تحديث الخيار بنجاح.
+Değişiklik yapılmadı.:::لم يتم إجراء أي تغييرات.
+Veritabanı hatası.:::خطأ في قاعدة البيانات.
+Değer değişmedi.:::القيمة لم تتغير.
+Değer kaydedildi.:::القيمة المحفوظة.
+Değer kaydedilemedi.:::تعذر حفظ القيمة.
+Metin kaydedildi.:::تم حفظ النص.
+Metin kaydedilemedi veya değişiklik yapılmadı.:::تعذر حفظ النص أو لم يتم إجراء أي تغييرات.
+Kayıt başarıyla silindi.:::تم حذف السجل بنجاح.
+Kayıt silinemedi.:::تعذر حذف السجل.
+Gerekli parametreler eksik:::المعلمات المطلوبة مفقودة
+Sıralama güncellendi:::تحديث الترتيب
+Sıralama güncellenirken bir hata oluştu:::حدث خطأ أثناء تحديث الترتيب
+Tema adı belirtilmedi.:::اسم الموضوع غير محدد.
+Tema başarıyla etkinleştirildi.:::تم تنشيط السمة بنجاح.
+Yeni tema adı belirtilmedi.:::لم يتم تحديد اسم الموضوع الجديد.
+Bu isimde bir tema zaten mevcut.:::يوجد بالفعل موضوع بهذا الاسم.
+Tema başarıyla kopyalandı.:::تم نسخ السمة بنجاح.
+Aktif tema silinemez.:::لا يمكن حذف السمة النشطة.
+Tema başarıyla arşive kaldırıldı.:::تمت أرشفة الموضوع بنجاح.
+Tema bulunamadı.:::لم يتم العثور على موضوع.
+Dosya adı belirtilmedi.:::لم يتم تحديد اسم الملف.
+Dosya adı veya yedek tarihi belirtilmedi.:::لم يتم تحديد اسم الملف أو تاريخ النسخ الاحتياطي.
+Yedek başarıyla geri yüklendi.:::تمت استعادة النسخة الاحتياطية بنجاح.
+Yedek geri yüklenirken bir hata oluştu.:::حدث خطأ أثناء استعادة النسخة الاحتياطية.
+Yedek dosyası silindi.:::تم حذف ملف النسخة الاحتياطية.
+Yedek silinirken hata oluştu veya dosya bulunamadı.:::حدث خطأ أثناء حذف النسخة الاحتياطية أو تعذر العثور على الملف.
+Geçersiz işlem tipi.:::نوع المعاملة غير صالح.
+Değer:::القيمة
+Özellik:::ميزة
+Detaylı bilgi için %s’ni inceleyebilirsiniz:::للحصول على معلومات مفصلة، يمكنك مراجعة %s.
+E Posta Adresiniz:::عنوان بريدك  الإلكتروني

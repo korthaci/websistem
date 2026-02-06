@@ -1,0 +1,580 @@
+Sistem v%s sürümünde çalışmaktadır.:::El sistema se ejecuta en la versión v%s.
+Menüde ara:::Buscar en el menú
+Tema Yönetimi:::Gestión de temas
+Listeyi Yenile:::Actualizar la lista
+Bir sorun oluştu. Lütfen tekrar deneyin.:::Ha surgido un problema. Por favor, inténtelo de nuevo.
+Mail adresiniz kaydedildi. Teşekkür ederiz.:::Su dirección de correo electrónico ha sido registrada. Gracias.
+Bir hata oluştu. Lütfen tekrar deneyin.:::Se ha producido un error. Por favor, inténtelo de nuevo.
+Geçersiz mail adresi.:::Dirección de correo electrónico no válida.
+Yorumlar tablosu bulunamadı.:::No se ha encontrado la tabla de comentarios.
+link:::enlace
+Yorum bulunmamaktadır.:::No hay comentarios.
+Link:::Enlace
+Stiller:::Stiller
+Bu mail adresi kayıtlı.:::Esta dirección de correo electrónico está registrada.
+Scriptler:::Scripts
+Bu sayfayı düzenle:::Editar esta página
+Ülkeler:::Países
+Şehirler:::Ciudades
+Kayıt değiştirilmedi.:::El registro no se ha modificado.
+Profil Fotoğrafı:::Foto de perfil
+Fotoğraf:::Fotografía
+Bilgileri düzenle:::Editar la información
+E-posta adresiniz:::Tu dirección de correo electrónico
+Email iptal edildi:::El correo electrónico ha sido cancelado.
+Şifre değiştir:::Cambiar contraseña
+Eski şifreyi yanlış girdiniz. Şifre değiştirilemedi.:::Ha introducido incorrectamente la contraseña anterior. No se ha podido cambiar la contraseña.
+Yeni şifre alanları eşleşmiyor. Şifre değiştirilemedi.:::Los nuevos campos de contraseña no coinciden. No se ha podido cambiar la contraseña.
+Şifre başarıyla değiştirildi.:::La contraseña se ha cambiado correctamente.
+Şifre değiştirilemedi. Bir hata oluştu.:::No se pudo cambiar la contraseña. Se ha producido un error.
+Eski şifre:::Contraseña anterior
+Yeni şifre:::Nueva contraseña
+Yeni şifre tekrar:::Repita la nueva contraseña
+Şifre Sıfırla:::Restablecer contraseña
+Kullanıcı bulunamadı.:::No se ha encontrado ningún usuario.
+Şifrenizi sıfırlamak için aşağıdaki linke tıklayın:::Para restablecer su contraseña, haga clic en el siguiente enlace.
+Şifremi Sıfırla:::Restablecer mi contraseña
+Şifre Sıfırlama:::Restablecimiento de contraseña
+E-posta adresinize şifre sıfırlama bağlantısı gönderildi.:::Se ha enviado un enlace para restablecer la contraseña a su dirección de correo electrónico.
+Mail gönderilirken bir hata oluştu.:::Se ha producido un error al enviar el correo electrónico.
+Kullanıcı adı veya E-posta:::Nombre de usuario o correo electrónico
+E-posta veya kullanıcı adı girin:::Introduzca su correo electrónico o nombre de usuario.
+Yeni Şifre Belirle:::Establecer nueva contraseña
+Geçersiz istek.:::Solicitud no válida.
+Geçersiz veya süresi dolmuş token.:::Token no válido o caducado.
+Şifreniz başarıyla değiştirildi.:::Tu contraseña se ha cambiado correctamente.
+Yeni şifre girin:::Introduzca una nueva contraseña.
+En az %s karakter olmalı:::Debe tener al menos %s caracteres.
+Şifreyi Güncelle:::Actualizar contraseña
+Hesabını aktifleştir:::Activa tu cuenta
+Aktivasyon kodu:::Código de activación
+E-posta adresinize aktivasyon kodu gönderildi:::Se ha enviado un código de activación a su dirección de correo electrónico.
+Üyelik işlemi henüz tamamlanmadı:::El proceso de registro aún no se ha completado.
+Güvenli çıkış:::Salida segura
+Üye girişi:::Inicio de sesión para miembros
+E-posta adresi:::Dirección de correo electrónico
+Beni hatırla:::Recuérdame.
+Şifre resetle:::Restablecer contraseña
+Giriş yap:::Iniciar sesión
+Yeni üyelik oluştur:::Crear una nueva cuenta
+Google ile giriş yap:::Iniciar sesión con Google
+Zaten üye misiniz? Giriş yapın:::¿Ya eres miembro? Inicia sesión.
+Google ile kayıt ol:::Regístrate con Google
+Yeni üyelik aktivasyonu:::Activación de nueva membresía
+Hesabınız başarıyla aktif edildi.:::Tu cuenta se ha activado correctamente.
+Giriş sayfasına yönlendiriliyorsunuz...:::Se le redirige a la página de inicio...
+Hesabınız aktif edilemedi. Lütfen daha sonra tekrar deneyiniz.:::Su cuenta no se ha podido activar. Por favor, inténtelo de nuevo más tarde.
+Hesabınız aktif edilemedi veya daha önce aktifleştirilmiş.:::Tu cuenta no se ha podido activar o ya ha sido activada anteriormente.
+Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.:::Se ha producido un error. Por favor, inténtelo de nuevo más tarde.
+Aktivasyon kodu bulunamadı. Hesabınız aktif edilemedi.:::No se ha encontrado el código de activación. No se ha podido activar su cuenta.
+Ülke/Şehir:::País/Ciudad
+Kontrol paneli:::Panel de control
+Menü yapısı:::Estructura del menú
+Yorum formu:::Formulario de comentarios
+Genel yorumlar:::Comentarios generales
+Diller & Çeviriler:::Idiomas y traducciones
+Temalar:::Temas
+Genel ayarlar:::Configuración general
+Çıkış:::Salida
+Resim&Dosya:::Imagen y archivo
+%s ve %s okudum, kabul ediyorum.:::He leído y acepto el %s y el %s.
+Aç:::Abrir
+Açıkla:::Explique
+Açıklama:::Explicación
+Adı:::Nombre
+Adı Soyadı:::Nombre y apellidos
+Adınız:::Su nombre
+Adınız Soyadınız:::Nombre y apellidos
+Adınız ve Soyadınız:::Nombre y apellidos
+Adres:::Dirección
+Adresiniz:::Su dirección
+Aktivasyon Kodu:::Código de activación
+Aktivasyon kodu gönderilemedi:::No se pudo enviar el código de activación.
+Aktivasyon kodu gönderiliyor:::Se está enviando el código de activación.
+Aktivasyon kodu mail adresinize gönderildi:::El código de activación se ha enviado a su dirección de correo electrónico.
+Anasayfa:::Página de inicio
+Anlık Mesaj Sınırı:::Límite de mensajes instantáneos
+ara:::a la izquierda
+Aradığınız kelimeler, arama kriteri için geçerli değil. Lütfen iki harften daha uzun kelimeler ile arama yapın:::Las palabras que ha buscado no son válidas para el criterio de búsqueda. Por favor, realice la búsqueda con palabras de más de dos letras.
+Aradığınız kelimeleri içeren herhangi bir yazı bulunamadı.:::No se ha encontrado ningún texto que contenga las palabras que busca.
+Arama Sonuçları:::Resultados de búsqueda
+Aşağıdaki bağlantıya tıklayarak hesabınızı aktif edebilirsiniz:::Puede activar su cuenta haciendo clic en el siguiente enlace.
+Ay:::Oh
+Ayarlar:::Configuración
+Aynı yorum:::El mismo comentario
+Başarılı:::Exitoso
+Başarısız:::Fracaso
+Başka kelimelerle yeniden arama yapabilirsiniz:::Puede volver a realizar la búsqueda con otras palabras.
+Başlık:::Título
+Belirlenmedi:::No se ha determinado.
+Belirtilmedi:::No se ha especificado.
+Bilgi:::Información
+Bilgiler:::Información
+Bilgiler eksik:::La información está incompleta.
+Bilgileri duzenle:::Organizar la información
+Bilgileri Düzenle:::Editar información
+Bilgileri onaylıyorum.:::Confirmo la información.
+Bir hata oluştu:::Se ha producido un error.
+Bir hata oluştu. Lütfen daha sonra tekrar deneyin.:::Se ha producido un error. Por favor, inténtelo de nuevo más tarde.
+Bizi seçtiğiniz için teşekkür ederiz.:::Gracias por elegirnos.
+Bölüm:::Sección
+Bu alan işaretlenmelidir:::Este campo debe marcarse.
+Bu alan onaylanmalıdır:::Este campo debe ser aprobado.
+Bu bölümde sayfa bulunmamaktadır:::En esta sección no hay ninguna página.
+Bu kişiye mesaj yollamak için tıklayın:::Haga clic aquí para enviar un mensaje a esta persona.
+Bu kriterde üye bulunmuyor:::No hay miembros que cumplan este criterio.
+Bu linke tıklayarak mesajlarınızı düzenleyebilirsiniz veya email alımını iptal edebilirsiniz:::Haga clic en este enlace para editar sus mensajes o cancelar la recepción de correos electrónicos.
+Bu mail adresinden artık mesaj almamak için tıklayın:::Haga clic aquí para dejar de recibir mensajes de esta dirección de correo electrónico.
+Bugün:::Hoy
+Buraya tıklayın:::Haga clic aquí.
+Cevap:::Respuesta
+Cevap yazın:::Escriba la respuesta.
+CVC No:::N.º CVC
+Daha fazla bilgi:::Más información
+Daha fazlası:::Más
+Daha uzun yorum yazmalısınız:::Debes escribir un comentario más largo.
+Değişiklikleri kaydet:::Guardar los cambios
+Değiştir:::Cambiar
+Değiştirilmedi:::No se ha modificado.
+Detay:::Detalles
+Devam:::Continuar
+Devam Et:::Continuar
+Devamı:::Continuación
+Diğer:::Otros
+Diğer araçlar:::Otros vehículos
+Dil:::Para ser sincero
+Dil seçin:::Seleccione el idioma
+Doğum Tarihi:::Fecha de nacimiento
+Dosya Bulunamadı:::No se encontró el archivo.
+Dosya Yüklendi:::Archivo cargado
+Dosya Yüklenemedi:::No se pudo cargar el archivo.
+Dosyalar:::Archivos
+Düzenle:::Editar
+E posta adresiniz:::Tu dirección de correo electrónico
+Ek Bilgiler:::Información adicional
+Ek dosyalar:::Archivos adjuntos
+Ekle/Kaldır:::Añadir/Eliminar
+Eklendi:::Añadido
+Eklenme Tarihi:::Fecha de incorporación
+Eklenmedi:::No se ha añadido.
+Elektrik:::Electricidad
+Email:::Correo electrónico
+Email alımını iptal ettiniz:::Has cancelado la recepción de correos electrónicos.
+Email ile giriş:::Iniciar sesión con correo electrónico
+Email listesi:::Lista de correo electrónico
+Email listesine kayıt olmak için email adresinizi yazın:::Para suscribirse a la lista de correo electrónico, introduzca su dirección de correo electrónico.
+E-Posta Adresi:::Dirección de correo electrónico
+E-posta alımı iptal edildi:::La recepción de correos electrónicos ha sido cancelada.
+E-posta listesine üye olun:::Suscríbase a la lista de correo electrónico.
+Erkek:::Hombre
+Eski Şifre:::Contraseña anterior
+Eski şifreyi yanlış girdiniz:::Ha introducido incorrectamente la contraseña anterior.
+Etiketler:::Etiquetas
+Fatura Adresi:::Dirección de facturación
+Fatura Ünvanı:::Nombre de la factura
+Filtreler:::Filtros
+Form Gönderildi. Teşekkür ederiz:::El formulario ha sido enviado. Gracias.
+Form Gönderilemedi:::No se pudo enviar el formulario.
+Foto:::Foto
+Fotoğraf Galerisi:::Galería de fotos
+Fotoğraf yükle:::Subir foto
+Fotoğrafını Yükle:::Sube tu foto
+Fotoğraflar:::Fotografías
+Geçerli bir mail adresi girin:::Introduzca una dirección de correo electrónico válida.
+Geçersiz email:::Correo electrónico no válido
+Genel:::General
+Genel Bilgiler:::Información general
+Gerekli:::Necesario
+Gerekli alan:::Área requerida
+Geri:::Atrás
+Geri Dön:::Volver
+Giriş Yap:::Iniciar sesión
+Git:::Ir
+Gizle:::Ocultar
+Gizlilik ve güvenlik:::Privacidad y seguridad
+Gönder:::Enviar
+Göster:::Mostrar
+GSM:::Buenos días
+Gün:::Día
+gün:::día
+Güvenli Çıkış:::Salida segura
+Harita:::Entonces
+Hatırlatma:::Recordatorio
+Hepsi:::Todos
+Hesabınız aktif edilemedi. Aktivasyon süresi geçmiş olabilir veya zaten aktif olabilir:::Tu cuenta no se ha podido activar. Es posible que el plazo de activación haya expirado o que ya esté activa.
+Hesabınız aktif edilmiştir:::Tu cuenta ha sido activada.
+Hiçbiri:::Ninguno
+Hoşgeldiniz:::Bienvenidos
+Iletişim:::Comunicación
+İlçe:::Distrito
+İletişim formu:::Formulario de contacto
+İletişim formu aracılığıyla istek ve önerilerinizi bildirebilirsiniz:::Puede comunicarnos sus solicitudes y sugerencias a través del formulario de contacto.
+İlk:::Primero
+İncele:::Examine
+İsim:::Nombre
+İsim kopyalandı:::El nombre se ha copiado.
+İsteğe bağlı:::Opcional
+İstek Gönderildi. Teşekkür ederiz:::Solicitud enviada. Gracias.
+İstek Gönderilemedi:::No se pudo enviar la solicitud.
+Kadın:::Mujer
+Kampanya:::Campaña
+Kapat:::Kapat
+Kart Numarası:::Número de tarjeta
+Kart üzerindeki isim:::El nombre en la tarjeta
+Katıl:::Participar
+Kaydedildi:::Registrado
+Kaydedilemedi:::No se pudo grabar.
+Kaydet:::Guardar
+Kayıt değiştirilmedi:::El registro no se ha modificado.
+Kayıt ol:::Regístrate
+Kayıt tarihi:::Fecha de registro
+Kaynak:::Fuente
+kelime ile ara:::Buscar por palabra
+Keşfet:::Descubrir
+Listele:::Las listas
+Listeye dön:::Volver a la lista
+Listeye Geri Dön:::Volver a la lista
+Lütfen daha sonra tekrar deneyin:::Por favor, inténtelo de nuevo más tarde.
+Lütfen tekrar deneyin:::Por favor, inténtelo de nuevo.
+Mail:::correo electrónico
+Mail adresi bulunamadı:::No se ha encontrado la dirección de correo electrónico.
+Mail Adresi Uygun:::Dirección de correo electrónico válida
+Mail Adresi Uygun Değil:::La dirección de correo electrónico no es válida.
+Mail adresini yazın:::Escriba su dirección de correo electrónico.
+Mail adresiniz görüntülenmez:::Tu dirección de correo electrónico no se muestra.
+Mail adresinizdeki aktivasyon linkine tıklayın veya aktivasyon kodunu aşağıdaki alana yazın:::Haga clic en el enlace de activación de su dirección de correo electrónico o introduzca el código de activación en el siguiente campo.
+Mail adresinize aktivasyon kodu gönderilecektir:::Se le enviará un código de activación a su dirección de correo electrónico.
+Mail Gönderildi:::Correo enviado
+Mail Gönderilemedi:::No se pudo enviar el correo electrónico.
+Menü:::Menú
+Menüde var:::Está en el menú.
+Mesaj gönderildi:::El mensaje ha sido enviado.
+Mesaj Gönderildi. Teşekkür ederiz:::Mensaje enviado. Gracias.
+Mesaj Gönderilemedi:::No se pudo enviar el mensaje.
+Mesajınız:::Tu mensaje
+Mesajlarım:::Mis mensajes
+Misafir:::Invitado
+Mobil:::Coche
+Onayla:::Aceptar
+Onaylamıyorum:::No estoy de acuerdo.
+Onaylıyor musunuz:::¿Está de acuerdo?
+Onaylıyorum:::Acepto
+Ortalama:::Promedio
+Önceki:::Anterior
+Önceki Sayfaya Dön:::Volver a la página anterior
+önerilen:::recomendado
+Önizleme:::Vista previa
+Paylaş:::Compartir
+Posta Kodu:::Código postal
+Profil Resmi:::Perfil Oficial
+Renk:::Color
+Resim:::Imagen
+Resim Ekle:::Añadir imagen
+Resim Oluşturma:::Creación de imágenes
+Resim Yükleme Sınırı:::Límite de carga de imágenes
+Resim Yüklendi:::Imagen cargada
+Resim Yüklenemedi:::No se pudo cargar la imagen.
+Resimler:::Imágenes
+RSS Başlıkları:::RSS Titulares
+Saat:::Cuando
+Satış sözleşmesi:::Contrato de venta
+Sayfa:::Página
+Sayfa bulunamadı:::Página no encontrada
+Sayfa Bulunamadı. Yayından kaldırılmış veya silinmiş olabilir:::Página no encontrada. Puede que haya sido retirada o eliminada.
+Sayfalar:::Páginas
+Sayı:::Número
+Seç:::Seleccionar
+Sehir Seç:::Seleccionar ciudad
+Semt:::Barrio
+Sınırsız:::Ilimitado
+Sıra:::Turno
+Sıralama:::Clasificación
+Sil:::Sil
+Silindi:::Se ha eliminado.
+Silinemedi:::No se puede borrar.
+Son:::Son
+Son Kullanma Tarihi:::Fecha de caducidad
+Sonraki:::Siguiente
+Sonuç:::Resultado
+Soru:::Pregunta
+Sosyal medya:::Redes sociales
+Soyadınız:::Apellido
+Spam, Gereksiz, Gelen Kutusunu kontrol etmeyi unutmayın:::Spam, No deseado, No olvides revisar tu bandeja de entrada.
+Şehir:::Ciudad
+Şehir seçmelisiniz:::Debe seleccionar una ciudad.
+Şifre:::Contraseña
+Şifre değistir:::Cambiar contraseña
+Şifre Değiştir:::Cambiar contraseña
+Şifre Değiştirildi:::Contraseña cambiada
+Şifre Değiştirilemedi:::No se pudo cambiar la contraseña.
+Şifre Hatırlat:::Recordar contraseña
+Şifre hatırlatması için lütfen kayıtlı email adresinizi yazın:::Para recordar su contraseña, introduzca su dirección de correo electrónico registrada.
+Şifreni mi unuttun?:::¿Has olvidado tu contraseña?
+Şifreniz mail adresinize gönderildi:::Su contraseña ha sido enviada a su dirección de correo electrónico.
+Tarih:::Historia
+Tarih bulunamadı:::No se ha encontrado la fecha.
+Tarihe git:::Ir a la historia
+Taslak olarak kaydet:::Guardar como borrador
+Tebrik ederiz:::Enhorabuena.
+Telefon:::Teléfono
+Teşekkür ederiz:::Gracias.
+Tüm hakları saklıdır:::Todos los derechos reservados.
+Tümü:::Todos
+Tümünü listele:::Mostrar todo
+Ülke:::País
+Ülke Seç:::Seleccionar país
+Üye Adı:::Nombre de usuario
+Üye bulunmamaktadır:::No hay miembros.
+Üye Girişi:::Inicio de sesión para miembros
+üye girişi yap:::Iniciar sesión como miembro
+Üye Ol:::Hacerse miembro
+Üyeler:::Miembros
+Üyelik Bilgileri:::Información de membresía
+Üyelik bilgileriniz aşağıdaki gibidir.:::Sus datos de membresía son los siguientes.
+Üyelik için buraya tıklayın:::Haga clic aquí para registrarse.
+Üyelik işleminiz tamamlanmadı:::Tu proceso de registro no se ha completado.
+Var:::Era
+Vergi Dairesi:::Oficina de Impuestos
+Vergi Numarası:::Número de identificación fiscal
+Web Adresi:::Dirección web
+Yardım:::Ayuda
+Yaşınız:::Tu edad
+Yayın:::Publicación
+Yayın Tarihi:::Fecha de publicación
+Yayında:::En emisión
+Yayında değil:::No está en emisión.
+Yayınlansın:::Que se publique.
+Yazdır:::Imprimir
+Yazı:::Artículo
+Yazı Boyutunu Arttır:::Aumentar el tamaño de la fuente
+Yazı Boyutunu Azalt:::Reducir el tamaño de la fuente
+Yazı Boyutunu Ortala:::Centrar el tamaño de la fuente
+Yeni sayfa:::Nueva página
+Yeni Şifre:::Nueva contraseña
+Yeni şifre alanlarını yanlış girdiniz:::Ha introducido incorrectamente los nuevos campos de contraseña.
+Yeni Şifre Tekrar:::Repetición de la nueva contraseña
+Yeni üyelik:::Nueva membresía
+Yeni Yorum Yaz:::Escribir un nuevo comentario
+Yetki:::Autoridad
+Yetkili:::Autorizado
+Yıl:::Año
+Yok:::No
+Yorum:::Comentario
+Yorum Açık:::Comentarios abiertos
+Yorum gönderildi:::Comentario enviado
+Yorum gönderilemedi:::No se pudo enviar el comentario.
+Yorum yaz:::Escribir un comentario
+Yorum yazmak için üye girişi yapmalısınız:::Para escribir un comentario, debe iniciar sesión como miembro.
+Yorumlar:::Comentarios
+Yorumunuzu yazın:::Escriba su comentario
+Yönetim Paneli:::Panel de control
+Yükle:::Cargar
+Zorunlu alanlardır:::Son campos obligatorios.
+Mesaj gönderilemedi:::No se pudo enviar el mensaje.
+Web sitemizde kullanılan çerezler yalnızca teknik amaçlarla sınırlıdır:::Las cookies utilizadas en nuestro sitio web se limitan exclusivamente a fines técnicos.
+Bileşen:::Componente
+Aktif:::Activo
+css, js dosyalarını birleştir veya sil:::Combina o elimina los archivos CSS y JS.
+Birleştirilmiş dosyaları sil:::Eliminar archivos combinados
+Birleştirilmiş css, js dosyaları kullan:::Utiliza archivos CSS y JS combinados.
+Etkin bilesen bulunmamaktadır.:::No hay ningún componente activo.
+Kur:::Dónde
+Bileşenler:::Componentes
+Değişiklik kaydedildi:::El cambio se ha registrado.
+Değişiklik yapılmadı:::No se han realizado cambios.
+Config dosyası bulunamadı.:::No se ha encontrado el archivo de configuración.
+Bileşen düzenle:::Organizar componentes
+Bileşen yönetim klasörü bulunamadı veya boş.:::No se ha encontrado la carpeta de administración de componentes o está vacía.
+Bileşen bulunamadı.:::No se ha encontrado el componente.
+Bileşen şablonları.:::Plantillas de componentes.
+Kaydedildi.:::Grabado.
+Tüm bloklar:::Todos los bloques
+Konu başlığı:::Título del tema
+İçerik yazıları:::Artículos de contenido
+Blok düzenleme:::Edición de bloques
+Kelime ile ara:::Buscar por palabra
+Bloklar:::Bloques
+Yeni Blok:::Nuevo bloque
+Blok Başlığı:::Título del bloque
+Ekle:::Añadir
+Blok adı:::Nombre del bloque
+Çeviri:::Traducción
+Bu bölümde kayıt bulunmamaktadır:::No hay registros en esta sección.
+Çeviriler:::Traducciones
+Tüm alanlar:::Todos los campos
+Sadece boş alanlar:::Solo espacios en blanco
+Master Keys:::Llaves maestras
+Sync:::Sincronizar
+Tümünü çevir:::Traducir todo
+Durdur:::Detener
+Dosya bulunamadı.:::No se ha encontrado el archivo.
+Dil bulunamadı.:::No se encontró el idioma.
+Bulunan yeni kelimeler:::Palabras nuevas encontradas
+Diller:::Idiomas
+Ülke Adı:::Nombre del país
+Orjinal:::Original
+Seçenek:::Opción
+Son eklenen:::Último añadido
+Filtrele:::Los filtros
+Dosya:::Archivo
+Genel Ayarlar:::Configuración general
+Yeni Özellik:::Nueva característica
+Özellik Adı:::Nombre de la característica
+değer:::valor
+İki veya daha fazla eposta adresi yazabilirsiniz. Ancak eposta adreslerini virgülle ayırmalısınız. abc@abc.com , mail@rehberim.com ** İçerikte değişiklik olmadığında kayıt işlemi yapılmaz.:::Puede escribir dos o más direcciones de correo electrónico. Sin embargo, debe separar las direcciones de correo electrónico con comas. abc@abc.com , mail@rehberim.com ** Si no hay cambios en el contenido, no se realizará el registro.
+Bu sayfada işlem yapma yetkiniz yok.:::No tienes permiso para realizar operaciones en esta página.
+Ana sayfaya dön:::Volver a la página principal
+Kontrol Paneli:::Panel de control
+Hoşgeldiniz, sistem durumu ve hızlı işlemler.:::Bienvenido, estado del sistema y transacciones rápidas.
+Aktif Sayfa:::Página activa
+Aktif Modül:::Módulo activo
+Kullanıcılar:::Usuarios
+Sistem Sürümü:::Versión del sistema
+Hızlı İşlemler & Yönetim:::Operaciones rápidas y gestión
+İçerik Yönetimi:::Gestión de contenidos
+Modüller:::Módulos
+Dosya Yöneticisi:::Administrador de archivos
+Son Aktiviteler:::Últimas actividades
+Henüz kayıtlı aktivite yok.:::Aún no hay actividades registradas.
+Sistem Bilgileri:::Información del sistema
+PHP Sürümü:::Versión PHP
+Sunucu Yazılımı:::Software de servidor
+Veritabanı Host:::Host de base de datos
+Veritabanı Prefix:::Prefijo de la base de datos
+Sayfa seç:::Seleccionar página
+Sekmeler:::Pestañas
+Sekme seç:::Seleccionar pestaña
+Blok seç:::Seleccionar bloque
+Menü maddeleri:::Elementos del menú
+Bağlantı:::Conexión
+Modül Yönetimi:::Gestión de módulos
+Modüllere Dön:::Volver a los módulos
+Yönetim Aracı Seçimi:::Selección de la herramienta de gestión
+Yönetim dosyası bulunamadı.:::No se ha encontrado el archivo de administración.
+Lütfen işlem yapmak için yukarıdan bir dosya seçiniz.:::Por favor, seleccione un archivo de arriba para realizar la operación.
+Modül yönetim klasörü bulunamadı veya boş.:::No se ha encontrado la carpeta de gestión de módulos o está vacía.
+Tazele:::Actualizar
+Modül Adı:::Nombre del módulo
+Kod (Hash):::Código (Hash)
+Kısayol:::Atajo
+Şablonlar:::Plantillas
+Pasif:::Pasivo
+Hash:::Hash
+Kopyala:::Copiar
+Yönetim Dosyaları:::Archivos de gestión
+Görünüm Şablonları:::Plantillas de apariencia
+Performans için CSS ve JS dosyalarını birleştirebilirsiniz.:::Para mejorar el rendimiento, puede combinar los archivos CSS y JS.
+Birleşik Dosyaları Sil:::Eliminar archivos combinados
+Dosyaları Birleştir:::Combinar archivos
+Henüz kurulmuş bir modül bulunmuyor.:::Aún no hay ningún módulo instalado.
+Kurulabilir Modüller:::Módulos instalables
+Şablon başarıyla kaydedildi.:::La plantilla se ha guardado correctamente.
+Şablonlarını Düzenle:::Editar plantillas
+Şablon Seçimi:::Selección de plantilla
+Şablon dosyası bulunamadı.:::No se ha encontrado el archivo de plantilla.
+Şablon Seçiniz:::Seleccione una plantilla
+Lütfen düzenlemek için bir şablon seçin:::Por favor, seleccione una plantilla para editar.
+Bu şablonlar FRONTEND tarafında modülün nasıl görüneceğini belirler. Standart HTML ve sistem etiketlerini içerebilir.:::Estas plantillas determinan cómo se verá el módulo en el lado FRONTEND. Pueden contener etiquetas HTML estándar y etiquetas del sistema.
+Tarih Aralığı:::Intervalo de fechas
+Yayında Değil:::No está disponible.
+Yeni Sayfa:::Nueva página
+Sayfa Başlığı:::Título de la página
+Sayfa adı:::Nombre de la página
+Sekme:::Pestaña
+Manşet:::Titular
+Tüm sayfalar:::Todas las páginas
+Bölüm Seç:::Seleccionar sección
+Sayfa açıklamaları:::Descripciones de la página
+Sayfa resimleri:::Imágenes de la página
+Tüm sekmeler:::Todas las pestañas
+Sekme adı:::Nombre de la pestaña
+Sekme açıklamaları:::Descripciones de pestañas
+İçerik sayfada görüntülensin:::El contenido se mostrará en la página.
+Yeni Sekme:::Nueva pestaña
+Sekme Adı:::Nombre de la pestaña
+Geçersiz tema dizini.:::Índice de temas no válido.
+Bloklar başarıyla temanın orijinal haline döndürüldü.:::Los bloques se han restaurado con éxito a su estado original.
+Yeni bir temaya geçtiniz! Her temanın kendine has bir yapısı olduğu için anasayfa görünümünün tam oturması adına sağ üstteki:::¡Has cambiado a un nuevo tema! Dado que cada tema tiene su propia estructura, para que la página de inicio se vea bien, haz clic en la esquina superior derecha.
+butonunu kullanarak temanın varsayılan bloklarını yüklemenizi öneririz.:::Recomendamos que utilice el botón para cargar los bloques predeterminados del tema.
+Temaya ait blok_html.sql dosyası bulunamadı.:::No se ha encontrado el archivo block_html.sql correspondiente al tema.
+Kayıt Engellendi!:::¡El registro ha sido bloqueado!
+Dosya başarıyla kaydedildi. Yedek otomatik olarak oluşturuldu.:::El archivo se ha guardado correctamente. Se ha creado automáticamente una copia de seguridad.
+Dosya kaydedilirken bir hata oluştu.:::Se ha producido un error al guardar el archivo.
+Temasını Düzenle:::Editar tema
+Tüm bloklar silinecek ve temanın varsayılan blokları yüklenecektir. Emin misiniz:::Todos los bloques se eliminarán y se cargarán los bloques predeterminados del tema. ¿Está seguro?
+Anasayfada gösterilen bloklar:::Los bloques que se muestran en la página de inicio
+Blokları Yeniden Oluştur:::Reconstruir los bloques
+Temalara Dön:::Volver a los temas
+Tema Dosyaları:::Archivos de tema
+Dosya Seçiniz:::Seleccione un archivo
+Yedekler:::Reservas
+Lütfen düzenlemek için bir dosya seçin...:::Por favor, seleccione un archivo para editar...
+Dosya Yedekleri:::Copias de seguridad de archivos
+Boyut:::Dimensión
+İşlem:::Operación
+Geri Yükle:::Restaurar
+teması başarıyla etkinleştirildi. Görünümün tam olarak oturması için blokları yapılandırmanız gerekebilir.:::El tema se ha activado correctamente. Es posible que tengas que configurar los bloques para que la apariencia se ajuste perfectamente.
+Blokları Yapılandır:::Configurar los bloques
+Etkinleştir:::Activar
+Üye düzenle:::Editar miembro
+Bir hata oluştu.:::Se ha producido un error.
+Email alımı:::Recepción de correo electrónico
+Email Adresi:::Dirección de correo electrónico
+Email adresi:::Dirección de correo electrónico
+Kullanıcı adı:::Nombre de usuario
+Aktivasyon:::Activación
+Liste:::Lista
+Yeni Üye:::Nuevo miembro
+E-posta:::Correo electrónico
+Ara:::Pedido
+Son giriş:::Último acceso
+Üye bulunmamaktadır.:::No hay miembros.
+Ad Soyad:::Nombre Apellido
+Yetkisiz erişim.:::Acceso no autorizado.
+Dizin Yok:::No hay índice
+Dosya yok veya yüklenemedi.:::El archivo no existe o no se ha podido cargar.
+Bu dosya türü güvenlik nedeniyle yüklenemez.:::Este tipo de archivo no se puede cargar por motivos de seguridad.
+Geçersiz resim dosyası. Dosya bozuk veya resim formatında değil.:::Archivo de imagen no válido. El archivo está dañado o no tiene formato de imagen.
+Bu resim formatı desteklenmiyor.:::Este formato de imagen no es compatible.
+Geçersiz resim MIME type.:::Tipo MIME de imagen no válido.
+Resim dosya uzantısı geçersiz.:::La extensión del archivo de imagen no es válida.
+Dosyada güvenlik ihlali tespit edildi.:::Se ha detectado una violación de seguridad en el archivo.
+Yükleme başarısız.:::Error al cargar.
+Yükleme başarılı.:::Carga completada.
+Geçersiz işlem:::Transacción no válida
+Geçersiz işlem.:::Operación no válida.
+Bilinmeyen bir hata oluştu.:::Se ha producido un error desconocido.
+Gerekli bilgiler eksik.:::Faltan los datos necesarios.
+Geçersiz veya eksik veri.:::Datos inválidos o incompletos.
+Seçenek başarıyla güncellendi.:::La opción se ha actualizado correctamente.
+Değişiklik yapılmadı.:::No se han realizado cambios.
+Veritabanı hatası.:::Error de base de datos.
+Değer değişmedi.:::El valor no ha cambiado.
+Değer kaydedildi.:::El valor se ha registrado.
+Değer kaydedilemedi.:::No se pudo registrar el valor.
+Metin kaydedildi.:::El texto se ha guardado.
+Metin kaydedilemedi veya değişiklik yapılmadı.:::El texto no se ha guardado o no se han realizado cambios.
+Kayıt başarıyla silindi.:::El registro se ha eliminado correctamente.
+Kayıt silinemedi.:::No se pudo eliminar el registro.
+Gerekli parametreler eksik:::Faltan los parámetros necesarios.
+Sıralama güncellendi:::La clasificación se ha actualizado.
+Sıralama güncellenirken bir hata oluştu:::Se ha producido un error al actualizar la clasificación.
+Tema adı belirtilmedi.:::No se ha especificado el nombre del tema.
+Tema başarıyla etkinleştirildi.:::El tema se ha activado correctamente.
+Yeni tema adı belirtilmedi.:::No se ha especificado el nombre del nuevo tema.
+Bu isimde bir tema zaten mevcut.:::Ya existe un tema con ese nombre.
+Tema başarıyla kopyalandı.:::El tema se ha copiado correctamente.
+Aktif tema silinemez.:::El tema activo no se puede eliminar.
+Tema başarıyla arşive kaldırıldı.:::El tema se ha archivado correctamente.
+Tema bulunamadı.:::No se ha encontrado ningún tema.
+Dosya adı belirtilmedi.:::No se ha especificado el nombre del archivo.
+Dosya adı veya yedek tarihi belirtilmedi.:::No se ha especificado el nombre del archivo ni la fecha de la copia de seguridad.
+Yedek başarıyla geri yüklendi.:::La copia de seguridad se ha restaurado correctamente.
+Yedek geri yüklenirken bir hata oluştu.:::Se ha producido un error al restaurar la copia de seguridad.
+Yedek dosyası silindi.:::El archivo de copia de seguridad se ha eliminado.
+Yedek silinirken hata oluştu veya dosya bulunamadı.:::Se ha producido un error al eliminar la copia de seguridad o no se ha encontrado el archivo.
+Geçersiz işlem tipi.:::Tipo de transacción no válida.
+Değer:::Valor
+Özellik:::Característica
+Detaylı bilgi için %s’ni inceleyebilirsiniz:::Para obtener información detallada, puede consultar el %s.
+E Posta Adresiniz:::Su dirección de correo electrónico

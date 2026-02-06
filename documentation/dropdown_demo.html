@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Color Themes Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="dropdown_select.css">
+    <style>
+        :root {
+            --demo-bg: #f8fafc;
+            --demo-card: #ffffff;
+            --demo-text: #1e293b;
+            --demo-primary: #3b82f6;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            padding: 0;
+            margin: 0;
+            background: var(--demo-bg);
+            color: var(--demo-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section {
+            background: var(--demo-card);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .theme-card {
+            background: #f1f5f9;
+            padding: 24px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .theme-card span {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #64748b;
+        }
+
+        /* Documentation specific styles */
+        .doc-section {
+            margin-top: 40px;
+        }
+
+        .doc-section h3 {
+            color: var(--ws-clr-accent);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .code-block code {
+            color: #818cf8;
+        }
+
+        .code-block .keyword {
+            color: #f472b6;
+        }
+
+        .code-block .string {
+            color: #4ade80;
+        }
+
+        .code-block .attr {
+            color: #fbbf24;
+        }
+
+        .tag-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: #475569;
+        }
+
+        .tip {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <a class="tag" href="./"> <- Dökümantasyona dönmek için tıklayınız</a>
+                    <h1>Dropdown Themes</h1>
+                    <p>Modern, responsive, and highly customizable dropdown component with theme support.</p>
+        </div>
+
+        <div class="section">
+            <h2>🎨 Tema Seçenekleri</h2>
+            <div class="grid">
+                <div class="theme-card">
+                    <span>Default / Neutral</span>
+                    <div class="ws_dropdown ws_sm" data-ws-dropdown>
+                        <button class="ws_dropdown_toggle" type="button">Default <svg class="ws_dropdown_icon"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg></button>
+                        <div class="ws_dropdown_menu">
+                            <ul class="ws_dropdown_list">
+                                <li class="ws_dropdown_item">Ayarlar</li>
+                                <li class="ws_dropdown_item ws_selected">Profilim</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-card">
+                    <span>Accent Theme</span>
+                    <div class="ws_dropdown ws_sm ws_accent" data-ws-dropdown>
+                        <button class="ws_dropdown_toggle" type="button">Accent Opt <svg class="ws_dropdown_icon"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg></button>
+                        <div class="ws_dropdown_menu">
+                            <ul class="ws_dropdown_list">
+                                <li class="ws_dropdown_item">Ayarlar</li>
+                                <li class="ws_dropdown_item ws_selected">Profilim</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-card">
+                    <span>Primary Theme</span>
+                    <div class="ws_dropdown ws_sm ws_primary" data-ws-dropdown>
+                        <button class="ws_dropdown_toggle" type="button">Primary <svg class="ws_dropdown_icon"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg></button>
+                        <div class="ws_dropdown_menu">
+                            <ul class="ws_dropdown_list">
+                                <li class="ws_dropdown_item">Ayarlar</li>
+                                <li class="ws_dropdown_item ws_selected">Profilim</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-card">
+                    <span>Success Theme</span>
+                    <div class="ws_dropdown ws_sm ws_success" data-ws-dropdown>
+                        <button class="ws_dropdown_toggle" type="button">Success <svg class="ws_dropdown_icon"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg></button>
+                        <div class="ws_dropdown_menu">
+                            <ul class="ws_dropdown_list">
+                                <li class="ws_dropdown_item">Aktif</li>
+                                <li class="ws_dropdown_item ws_selected">Başarılı</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-card">
+                    <span>Danger Theme</span>
+                    <div class="ws_dropdown ws_sm ws_danger" data-ws-dropdown>
+                        <button class="ws_dropdown_toggle" type="button">Danger Action <svg class="ws_dropdown_icon"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg></button>
+                        <div class="ws_dropdown_menu">
+                            <ul class="ws_dropdown_list">
+                                <li class="ws_dropdown_item">Kapat</li>
+                                <li class="ws_dropdown_item ws_selected">Sil</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-card">
+                    <span>Light & Dark</span>
+                    <div style="display: flex; gap: 10px;">
+                        <div class="ws_dropdown ws_sm ws_light" data-ws-dropdown>
+                            <button class="ws_dropdown_toggle" type="button">Light</button>
+                            <div class="ws_dropdown_menu">
+                                <ul class="ws_dropdown_list">
+                                    <li class="ws_dropdown_item">Seçenek</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ws_dropdown ws_sm ws_dark" data-ws-dropdown>
+                            <button class="ws_dropdown_toggle" type="button">Dark</button>
+                            <div class="ws_dropdown_menu">
+                                <ul class="ws_dropdown_list">
+                                    <li class="ws_dropdown_item">Seçenek</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>✨ Görsel Varyantlar</h2>
+            <div class="grid">
+                <div class="theme-card">
+                    <span>Outline Variant</span>
+                    <div class="ws_dropdown ws_sm ws_accent ws_variant_outline" data-ws-dropdown>
+                        <button class="ws_dropdown_toggle" type="button">Outline Style <svg class="ws_dropdown_icon"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg></button>
+                        <div class="ws_dropdown_menu">
+                            <ul class="ws_dropdown_list">
+                                <li class="ws_dropdown_item">Modern</li>
+                                <li class="ws_dropdown_item">Minimal</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-card">
+                    <span>Gradient Variant</span>
+                    <div class="ws_dropdown ws_sm ws_primary ws_variant_primary" data-ws-dropdown>
+                        <button class="ws_dropdown_toggle" type="button">Gradient Style <svg class="ws_dropdown_icon"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg></button>
+                        <div class="ws_dropdown_menu">
+                            <ul class="ws_dropdown_list">
+                                <li class="ws_dropdown_item">Şık</li>
+                                <li class="ws_dropdown_item">Canlı</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-card">
+                    <span>Large Size</span>
+                    <div class="ws_dropdown ws_lg ws_info" data-ws-dropdown>
+                        <button class="ws_dropdown_toggle" type="button">Large Dropdown</button>
+                        <div class="ws_dropdown_menu">
+                            <ul class="ws_dropdown_list">
+                                <li class="ws_dropdown_item">Daha Büyük</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section doc-section">
+            <h2>📚 Kullanım Dökümanı</h2>
+
+            <div class="doc-block">
+                <h3>🎯 Temel Kullanım</h3>
+                <p>Dropdown bileşeni <strong>CSS-first</strong> bir yaklaşımla tasarlanmıştır. Sadece gerekli
+                    HTML
+                    yapısını oluşturun ve <code>data-ws-dropdown</code> özniteliğini ekleyin. JS dosyası bu
+                    özniteliğe
+                    sahip tüm elemanları otomatik olarak algılar ve çalıştırır.</p>
+
+                <div class="code-block">
+                    <span class="keyword">&lt;div</span> <span class="attr">class</span>=<span
+                        class="string">"ws_dropdown ws_accent"</span> <span class="attr">data-ws-dropdown</span><span
+                        class="keyword">&gt;</span><br>
+                    &nbsp;&nbsp;<span class="keyword">&lt;button</span> <span class="attr">class</span>=<span
+                        class="string">"ws_dropdown_toggle"</span> <span class="attr">type</span>=<span
+                        class="string">"button"</span><span class="keyword">&gt;</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">&lt;span&gt;</span>Dropdown Başlığı<span
+                        class="keyword">&lt;/span&gt;</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">&lt;svg</span> <span class="attr">class</span>=<span
+                        class="string">"ws_dropdown_icon"</span> ...<span class="keyword">&gt;</span>...<span
+                        class="keyword">&lt;/svg&gt;</span><br>
+                    &nbsp;&nbsp;<span class="keyword">&lt;/button&gt;</span><br>
+                    &nbsp;&nbsp;<span class="keyword">&lt;div</span> <span class="attr">class</span>=<span
+                        class="string">"ws_dropdown_menu"</span><span class="keyword">&gt;</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">&lt;ul</span> <span class="attr">class</span>=<span
+                        class="string">"ws_dropdown_list"</span><span class="keyword">&gt;</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">&lt;li</span> <span
+                        class="attr">class</span>=<span class="string">"ws_dropdown_item"</span> <span
+                        class="attr">data-value</span>=<span class="string">"1"</span><span
+                        class="keyword">&gt;</span>Seçenek 1<span class="keyword">&lt;/li&gt;</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">&lt;li</span> <span
+                        class="attr">class</span>=<span class="string">"ws_dropdown_item"</span> <span
+                        class="attr">data-value</span>=<span class="string">"2"</span><span
+                        class="keyword">&gt;</span>Seçenek 2<span class="keyword">&lt;/li&gt;</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">&lt;/ul&gt;</span><br>
+                    &nbsp;&nbsp;<span class="keyword">&lt;/div&gt;</span><br>
+                    <span class="keyword">&lt;/div&gt;</span>
+                </div>
+            </div>
+
+            <div class="doc-block">
+                <h3>🎨 CSS Sınıfları ve Seçenekler</h3>
+
+                <p><strong>Renk Temaları:</strong></p>
+                <ul class="tag-list">
+                    <li class="tag">ws_accent</li>
+                    <li class="tag">ws_primary</li>
+                    <li class="tag">ws_success</li>
+                    <li class="tag">ws_danger</li>
+                    <li class="tag">ws_warning</li>
+                    <li class="tag">ws_info</li>
+                    <li class="tag">ws_light</li>
+                    <li class="tag">ws_dark</li>
+                </ul>
+
+                <p style="margin-top: 20px;"><strong>Boyut ve Stil:</strong></p>
+                <ul class="tag-list">
+                    <li class="tag">ws_sm</li>
+                    <li class="tag">ws_lg</li>
+                    <li class="tag">ws_variant_outline</li>
+                    <li class="tag">ws_variant_primary</li>
+                    <li class="tag">ws_align_right</li>
+                    <li class="tag">ws_align_center</li>
+                </ul>
+
+                <p style="margin-top: 20px;"><strong>Item Durumları:</strong></p>
+                <ul class="tag-list">
+                    <li class="tag">ws_selected</li>
+                    <li class="tag">ws_disabled</li>
+                    <li class="tag">ws_dropdown_divider</li>
+                    <li class="tag">ws_dropdown_badge</li>
+                </ul>
+            </div>
+
+            <div class="doc-block" style="margin-top: 40px;">
+                <h3>⚡ JavaScript Event'leri</h3>
+                <p>Bir seçenek seçildiğinde element üzerinden <code>ws-dropdown-select</code> eventi fırlatılır:
+                </p>
+                <div class="code-block">
+                    document.addEventListener(<span class="string">'ws-dropdown-select'</span>, (e) => {<br>
+                    &nbsp;&nbsp;console.log(<span class="string">'Seçilen Değer:'</span>, e.detail.value);<br>
+                    &nbsp;&nbsp;console.log(<span class="string">'Seçilen Text:'</span>, e.detail.text);<br>
+                    });
+                </div>
+            </div>
+
+            <div class="tip">
+                <strong>💡 İpucu:</strong> Tüm sınıflar <code>ws_</code> öneki ile başlar. Bu sayede mevcut
+                projelerinizdeki CSS sınıfları ile çakışma yaşanmaz ve bileşen tamamen izole çalışır.
+            </div>
+        </div>
+    </div>
+
+    <script src="dropdown_select.js"></script>
+</body>
+
+</html>

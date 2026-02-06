@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Component</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --ws-primary: #2a2a2a;
+            --ws-primary-light: #3a3a3a;
+            --ws-accent: #ff6b35;
+            --ws-accent-dark: #e85a2a;
+            --ws-bg: #fafafa;
+            --ws-surface: #ffffff;
+            --ws-border: #e0e0e0;
+            --ws-text: #2a2a2a;
+            --ws-text-secondary: #666666;
+            --ws-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+            --ws-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --ws-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --ws-radius: 10px;
+            --ws-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Demo Page Styling */
+        .ws_demo_container {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 60px 20px;
+            margin: 0;
+        }
+
+        .ws_demo_header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .ws_demo_header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 16px 0;
+            letter-spacing: -0.02em;
+        }
+
+        .ws_demo_header p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+
+        .ws_demo_grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .ws_demo_card {
+            background: var(--ws-surface);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .ws_demo_card h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--ws-text);
+            margin: 0 0 24px 0;
+        }
+
+        /* ============================================
+           DROPDOWN COMPONENT STYLES
+           Namespace: ws_ (WebStandard)
+           ============================================ */
+
+        /* Dropdown Container */
+        .ws_dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Toggle Button */
+        .ws_dropdown_toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--ws-accent);
+            border: none;
+            border-radius: var(--ws-radius);
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all var(--ws-transition);
+            outline: none;
+            box-shadow: var(--ws-shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ws_dropdown_toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity var(--ws-transition);
+        }
+
+        .ws_dropdown_toggle:hover {
+            background: var(--ws-accent-dark);
+            box-shadow: var(--ws-shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .ws_dropdown_toggle:hover::before {
+            opacity: 1;
+        }
+
+        .ws_dropdown_toggle:focus {
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3), var(--ws-shadow-md);
+        }
+
+        .ws_dropdown_toggle:active {
+            transform: translateY(0);
+        }
+
+        /* Active state */
+        .ws_dropdown.ws_active .ws_dropdown_toggle {
+            background: var(--ws-accent-dark);
+            box-shadow: var(--ws-shadow-md);
+        }
+
+        /* Toggle Icon */
+        .ws_dropdown_icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 8px;
+            transition: transform var(--ws-transition);
+        }
+
+        .ws_dropdown.ws_active .ws_dropdown_icon {
+            transform: rotate(180deg);
+        }
+
+        /* Dropdown Menu */
+        .ws_dropdown_menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            min-width: 200px;
+            background: var(--ws-surface);
+            border: 2px solid var(--ws-border);
+            border-radius: var(--ws-radius);
+            box-shadow: var(--ws-shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all var(--ws-transition);
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Menu alignment variants */
+        .ws_dropdown.ws_align_right .ws_dropdown_menu {
+            left: auto;
+            right: 0;
+        }
+
+        .ws_dropdown.ws_align_center .ws_dropdown_menu {
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+        }
+
+        .ws_dropdown.ws_align_center.ws_active .ws_dropdown_menu {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Scrollbar Styling */
+        .ws_dropdown_menu::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .ws_dropdown_menu::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .ws_dropdown_menu::-webkit-scrollbar-thumb {
+            background: var(--ws-border);
+            border-radius: 4px;
+        }
+
+        .ws_dropdown_menu::-webkit-scrollbar-thumb:hover {
+            background: var(--ws-text-secondary);
+        }
+
+        /* Active state */
+        .ws_dropdown.ws_active .ws_dropdown_menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Menu List */
+        .ws_dropdown_list {
+            list-style: none;
+            margin: 0;
+            padding: 8px 0;
+        }
+
+        /* Menu Items */
+        .ws_dropdown_item {
+            padding: 12px 18px;
+            font-size: 14px;
+            color: var(--ws-text);
+            cursor: pointer;
+            transition: all var(--ws-transition);
+            position: relative;
+        }
+
+        .ws_dropdown_item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0;
+            background: var(--ws-accent);
+            transition: width var(--ws-transition);
+        }
+
+        .ws_dropdown_item:hover {
+            background: linear-gradient(90deg, rgba(255, 107, 53, 0.08) 0%, rgba(255, 107, 53, 0.02) 100%);
+            color: var(--ws-accent-dark);
+        }
+
+        .ws_dropdown_item:hover::before {
+            width: 3px;
+        }
+
+        .ws_dropdown_item:active {
+            background: rgba(255, 107, 53, 0.15);
+        }
+
+        /* Selected state */
+        .ws_dropdown_item.ws_selected {
+            background: linear-gradient(90deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.03) 100%);
+            color: var(--ws-accent-dark);
+            font-weight: 600;
+        }
+
+        /* Divider */
+        .ws_dropdown_divider {
+            height: 1px;
+            background: var(--ws-border);
+            margin: 8px 0;
+        }
+
+        /* Disabled state */
+        .ws_dropdown_item.ws_disabled {
+            color: var(--ws-text-secondary);
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Badge/Label inside item */
+        .ws_dropdown_badge {
+            display: inline-block;
+            padding: 2px 8px;
+            margin-left: 8px;
+            background: var(--ws-accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Icon in menu item */
+        .ws_dropdown_item_icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+            vertical-align: middle;
+            opacity: 0.7;
+        }
+
+        /* Different sizes */
+        .ws_dropdown.ws_sm .ws_dropdown_toggle {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .ws_dropdown.ws_lg .ws_dropdown_toggle {
+            padding: 16px 24px;
+            font-size: 16px;
+        }
+
+        /* Different variants */
+        .ws_dropdown.ws_variant_primary .ws_dropdown_toggle {
+            background: linear-gradient(135deg, var(--ws-accent) 0%, var(--ws-accent-dark) 100%);
+        }
+
+        .ws_dropdown.ws_variant_primary .ws_dropdown_toggle:hover {
+            background: linear-gradient(135deg, var(--ws-accent-dark) 0%, #d64d1f 100%);
+        }
+
+        .ws_dropdown.ws_variant_outline .ws_dropdown_toggle {
+            background: transparent;
+            border: 2px solid var(--ws-accent);
+            color: var(--ws-accent);
+            box-shadow: none;
+        }
+
+        .ws_dropdown.ws_variant_outline .ws_dropdown_toggle:hover {
+            background: rgba(255, 107, 53, 0.05);
+            border-color: var(--ws-accent-dark);
+            color: var(--ws-accent-dark);
+        }
+
+        /* Code example styling */
+        .ws_demo_code {
+            background: var(--ws-primary);
+            color: #61dafb;
+            padding: 20px;
+            border-radius: var(--ws-radius);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin-top: 24px;
+        }
+
+        .ws_demo_code_keyword {
+            color: #c678dd;
+        }
+
+        .ws_demo_code_string {
+            color: #98c379;
+        }
+
+        .ws_demo_code_comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body class="ws_demo_container">
+
+    <div class="ws_demo_header">
+        <p>Pure CSS + Minimal Vanilla JS • Zero Dependencies • 100% Customizable Dropdown</p>
+    </div>
+
+    <div class="ws_demo_grid">
+
+        <!-- Example 1: Basic Dropdown -->
+        <div class="ws_demo_card">
+            <h2>🎯 Basic Dropdown</h2>
+
+            <div class="ws_dropdown" data-ws-dropdown>
+                <button class="ws_dropdown_toggle" type="button">
+                    <span>Menü</span>
+                    <svg class="ws_dropdown_icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <div class="ws_dropdown_menu">
+                    <ul class="ws_dropdown_list">
+                        <li class="ws_dropdown_item" data-value="profile">Profil Ayarları</li>
+                        <li class="ws_dropdown_item" data-value="settings">Genel Ayarlar</li>
+                        <li class="ws_dropdown_item" data-value="notifications">Bildirimler</li>
+                        <li class="ws_dropdown_divider"></li>
+                        <li class="ws_dropdown_item" data-value="logout">Çıkış Yap</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 2: With Icons -->
+        <div class="ws_demo_card">
+            <h2>🌍 With Icons</h2>
+
+            <div class="ws_dropdown" data-ws-dropdown>
+                <button class="ws_dropdown_toggle" type="button">
+                    <span>🌍 Dil</span>
+                    <svg class="ws_dropdown_icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <div class="ws_dropdown_menu">
+                    <ul class="ws_dropdown_list">
+                        <li class="ws_dropdown_item ws_selected" data-value="tr">🇹🇷 Türkçe</li>
+                        <li class="ws_dropdown_item" data-value="en">🇬🇧 English</li>
+                        <li class="ws_dropdown_item" data-value="de">🇩🇪 Deutsch</li>
+                        <li class="ws_dropdown_item" data-value="fr">🇫🇷 Français</li>
+                        <li class="ws_dropdown_item" data-value="es">🇪🇸 Español</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 3: With Badges -->
+        <div class="ws_demo_card">
+            <h2>🏷️ With Badges</h2>
+
+            <div class="ws_dropdown" data-ws-dropdown>
+                <button class="ws_dropdown_toggle" type="button">
+                    <span>💼 Plan</span>
+                    <svg class="ws_dropdown_icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <div class="ws_dropdown_menu">
+                    <ul class="ws_dropdown_list">
+                        <li class="ws_dropdown_item" data-value="free">
+                            Free Plan
+                        </li>
+                        <li class="ws_dropdown_item ws_selected" data-value="pro">
+                            Pro Plan
+                            <span class="ws_dropdown_badge">Current</span>
+                        </li>
+                        <li class="ws_dropdown_item" data-value="enterprise">
+                            Enterprise Plan
+                            <span class="ws_dropdown_badge">New</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 4: Actions Menu -->
+        <div class="ws_demo_card">
+            <h2>⚡ Actions Menu</h2>
+
+            <div class="ws_dropdown" data-ws-dropdown>
+                <button class="ws_dropdown_toggle" type="button">
+                    <span>⚙️ İşlemler</span>
+                    <svg class="ws_dropdown_icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <div class="ws_dropdown_menu">
+                    <ul class="ws_dropdown_list">
+                        <li class="ws_dropdown_item" data-value="edit">✏️ Düzenle</li>
+                        <li class="ws_dropdown_item" data-value="duplicate">📋 Kopyala</li>
+                        <li class="ws_dropdown_item" data-value="share">🔗 Paylaş</li>
+                        <li class="ws_dropdown_divider"></li>
+                        <li class="ws_dropdown_item ws_disabled" data-value="archive">📦 Arşivle (kilitli)</li>
+                        <li class="ws_dropdown_item ws_disabled" data-value="delete">🗑️ Sil (kilitli)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 5: Small Size -->
+        <div class="ws_demo_card">
+            <h2>📏 Small Button</h2>
+
+            <div class="ws_dropdown ws_sm" data-ws-dropdown>
+                <button class="ws_dropdown_toggle" type="button">
+                    <span>Filtrele</span>
+                    <svg class="ws_dropdown_icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <div class="ws_dropdown_menu">
+                    <ul class="ws_dropdown_list">
+                        <li class="ws_dropdown_item" data-value="all">Tümü</li>
+                        <li class="ws_dropdown_item" data-value="active">Aktif</li>
+                        <li class="ws_dropdown_item" data-value="inactive">Pasif</li>
+                        <li class="ws_dropdown_item" data-value="pending">Beklemede</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 6: Large Size -->
+        <div class="ws_demo_card">
+            <h2>📐 Large Button</h2>
+
+            <div class="ws_dropdown ws_lg" data-ws-dropdown>
+                <button class="ws_dropdown_toggle" type="button">
+                    <span>Daha Fazla</span>
+                    <svg class="ws_dropdown_icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <div class="ws_dropdown_menu">
+                    <ul class="ws_dropdown_list">
+                        <li class="ws_dropdown_item" data-value="docs">📄 Dökümanlar</li>
+                        <li class="ws_dropdown_item" data-value="help">❓ Yardım</li>
+                        <li class="ws_dropdown_item" data-value="support">💬 Destek</li>
+                        <li class="ws_dropdown_divider"></li>
+                        <li class="ws_dropdown_item" data-value="about">ℹ️ Hakkında</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 7: Right Aligned Menu -->
+        <div class="ws_demo_card">
+            <h2>➡️ Right Aligned</h2>
+
+            <div class="ws_dropdown ws_align_right" data-ws-dropdown>
+                <button class="ws_dropdown_toggle" type="button">
+                    <span>Kullanıcı</span>
+                    <svg class="ws_dropdown_icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <div class="ws_dropdown_menu">
+                    <ul class="ws_dropdown_list">
+                        <li class="ws_dropdown_item" data-value="profile">👤 Profilim</li>
+                        <li class="ws_dropdown_item" data-value="settings">⚙️ Ayarlar</li>
+                        <li class="ws_dropdown_item" data-value="billing">💳 Faturalar</li>
+                        <li class="ws_dropdown_divider"></li>
+                        <li class="ws_dropdown_item" data-value="logout">🚪 Çıkış</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 8: Center Aligned Menu -->
+        <div class="ws_demo_card">
+            <h2>⬅️➡️ Center Aligned</h2>
+
+            <div class="ws_dropdown ws_align_center" data-ws-dropdown>
+                <button class="ws_dropdown_toggle" type="button">
+                    <span>Sıralama</span>
+                    <svg class="ws_dropdown_icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <div class="ws_dropdown_menu">
+                    <ul class="ws_dropdown_list">
+                        <li class="ws_dropdown_item" data-value="newest">🆕 En Yeni</li>
+                        <li class="ws_dropdown_item" data-value="oldest">⏰ En Eski</li>
+                        <li class="ws_dropdown_item" data-value="popular">🔥 Popüler</li>
+                        <li class="ws_dropdown_item" data-value="trending">📈 Trend</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Documentation Section -->
+    <div
+        style="max-width: 1200px; margin: 60px auto; background: white; border-radius: 16px; padding: 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);">
+        <h2 style="font-size: 32px; font-weight: 700; color: var(--ws-text); margin: 0 0 24px 0;">📚 Kullanım Dökümanı
+        </h2>
+
+        <div style="margin-bottom: 40px;">
+            <h3 style="font-size: 20px; font-weight: 600; color: var(--ws-accent); margin: 0 0 16px 0;">🎯 Temel
+                Kullanım</h3>
+            <p style="font-size: 15px; line-height: 1.7; color: var(--ws-text-secondary); margin: 0 0 16px 0;">
+                Dropdown component'i kullanmak için sadece HTML yapısını oluşturun ve <code
+                    style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">data-ws-dropdown</code>
+                attribute'unu ekleyin. JavaScript otomatik olarak tüm dropdown'ları başlatır.
+            </p>
+            <pre
+                style="background: var(--ws-primary); color: #61dafb; padding: 20px; border-radius: var(--ws-radius); font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto;">
+                <code>&lt;div class="ws_dropdown" data-ws-dropdown&gt;
+                    &lt;button class="ws_dropdown_toggle" type="button"&gt;
+                    &lt;span&gt;Menü Başlığı&lt;/span&gt;
+                    &lt;svg class="ws_dropdown_icon" viewBox="0 0 20 20" fill="currentColor"&gt;
+                    &lt;path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414
+                    1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/&gt;
+                    &lt;/svg&gt;
+                    &lt;/button&gt;
+
+                    &lt;div class="ws_dropdown_menu"&gt;
+                    &lt;ul class="ws_dropdown_list"&gt;
+                    &lt;li class="ws_dropdown_item" data-value="option1"&gt;Seçenek 1&lt;/li&gt;
+                    &lt;li class="ws_dropdown_item" data-value="option2"&gt;Seçenek 2&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;/div&gt;
+                    &lt;/div&gt;</code>
+            </pre>
+        </div>
+
+        <div style="margin-bottom: 40px;">
+            <h3 style="font-size: 20px; font-weight: 600; color: var(--ws-accent); margin: 0 0 16px 0;">🎨 CSS Sınıfları
+                ve Seçenekler</h3>
+
+            <div style="margin-bottom: 24px;">
+                <h4 style="font-size: 16px; font-weight: 600; color: var(--ws-text); margin: 0 0 12px 0;">Boyut
+                    Varyantları</h4>
+                <ul style="margin: 0; padding-left: 24px; color: var(--ws-text-secondary); line-height: 1.8;">
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">.ws_sm</code>
+                        - Küçük boyut (8px padding)</li>
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">varsayılan</code>
+                        - Normal boyut (12px padding)</li>
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">.ws_lg</code>
+                        - Büyük boyut (16px padding)</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 24px;">
+                <h4 style="font-size: 16px; font-weight: 600; color: var(--ws-text); margin: 0 0 12px 0;">Hizalama
+                    Seçenekleri</h4>
+                <ul style="margin: 0; padding-left: 24px; color: var(--ws-text-secondary); line-height: 1.8;">
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">varsayılan</code>
+                        - Sola hizalı (left: 0)</li>
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">.ws_align_right</code>
+                        - Sağa hizalı (right: 0)</li>
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">.ws_align_center</code>
+                        - Ortaya hizalı (center)</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 24px;">
+                <h4 style="font-size: 16px; font-weight: 600; color: var(--ws-text); margin: 0 0 12px 0;">Stil
+                    Varyantları</h4>
+                <ul style="margin: 0; padding-left: 24px; color: var(--ws-text-secondary); line-height: 1.8;">
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">varsayılan</code>
+                        - Solid renkli buton</li>
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">.ws_variant_primary</code>
+                        - Gradient arka plan</li>
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">.ws_variant_outline</code>
+                        - Sadece border</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="font-size: 16px; font-weight: 600; color: var(--ws-text); margin: 0 0 12px 0;">Item Durumları
+                </h4>
+                <ul style="margin: 0; padding-left: 24px; color: var(--ws-text-secondary); line-height: 1.8;">
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">.ws_selected</code>
+                        - Seçili item (vurgulanır)</li>
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">.ws_disabled</code>
+                        - Devre dışı item (tıklanamaz)</li>
+                    <li><code
+                            style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">.ws_dropdown_divider</code>
+                        - Ayırıcı çizgi</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 40px;">
+            <h3 style="font-size: 20px; font-weight: 600; color: var(--ws-accent); margin: 0 0 16px 0;">⚡ JavaScript
+                Event'leri</h3>
+            <p style="font-size: 15px; line-height: 1.7; color: var(--ws-text-secondary); margin: 0 0 16px 0;">
+                Dropdown bir item seçildiğinde custom event dispatch eder. Bu event'i dinleyerek seçilen değeri
+                yakalayabilirsiniz:
+            </p>
+            <pre
+                style="background: var(--ws-primary); color: #61dafb; padding: 20px; border-radius: var(--ws-radius); font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto;">
+                <code>// Tüm dropdown seçimlerini dinle
+                    document.addEventListener('ws-dropdown-select', function(e) {
+                    console.log('Seçilen değer:', e.detail.value);
+                    console.log('Seçilen text:', e.detail.text);
+                    console.log('Seçilen element:', e.detail.element);
+                    });
+
+                    // Belirli bir dropdown'u dinle
+                    const myDropdown = document.querySelector('#myDropdown');
+                    myDropdown.addEventListener('ws-dropdown-select', function(e) {
+                    console.log('Değer:', e.detail.value);
+                    });</code>
+            </pre>
+        </div>
+
+        <div style="margin-bottom: 40px;">
+            <h3 style="font-size: 20px; font-weight: 600; color: var(--ws-accent); margin: 0 0 16px 0;">🔧 Özelleştirme
+            </h3>
+
+            <h4 style="font-size: 16px; font-weight: 600; color: var(--ws-text); margin: 0 0 12px 0;">CSS Değişkenleri
+            </h4>
+            <p style="font-size: 15px; line-height: 1.7; color: var(--ws-text-secondary); margin: 0 0 16px 0;">
+                Tüm renkler ve boyutlar CSS değişkenleri ile kontrol edilir. <code
+                    style="background: #f5f5f5; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">:root</code>
+                içindeki değişkenleri değiştirerek component'in görünümünü özelleştirebilirsiniz:
+            </p>
+            <pre
+                style="background: var(--ws-primary); color: #61dafb; padding: 20px; border-radius: var(--ws-radius); font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto;">
+                <code>:root {
+                    --ws-primary: #2a2a2a;
+                    --ws-accent: #ff6b35; /* Ana renk */
+                    --ws-accent-dark: #e85a2a; /* Hover rengi */
+                    --ws-bg: #fafafa;
+                    --ws-surface: #ffffff;
+                    --ws-border: #e0e0e0;
+                    --ws-radius: 10px; /* Border radius */
+                    --ws-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                    }</code>
+            </pre>
+
+            <h4 style="font-size: 16px; font-weight: 600; color: var(--ws-text); margin: 24px 0 12px 0;">Badge Ekleme
+            </h4>
+            <p style="font-size: 15px; line-height: 1.7; color: var(--ws-text-secondary); margin: 0 0 16px 0;">
+                Dropdown item'lara badge ekleyebilirsiniz:
+            </p>
+            <pre
+                style="background: var(--ws-primary); color: #61dafb; padding: 20px; border-radius: var(--ws-radius); font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto;">
+                <code>&lt;li class="ws_dropdown_item" data-value="pro"&gt;
+                    Pro Plan
+                    &lt;span class="ws_dropdown_badge"&gt;New&lt;/span&gt;
+                    &lt;/li&gt;</code>
+            </pre>
+        </div>
+
+        <div>
+            <h3 style="font-size: 20px; font-weight: 600; color: var(--ws-accent); margin: 0 0 16px 0;">📋 Örnek
+                Kombinasyonlar</h3>
+            <pre
+                style="background: var(--ws-primary); color: #61dafb; padding: 20px; border-radius: var(--ws-radius); font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto;">
+                <code>&lt;!-- Küçük boyut + Sağa hizalı --&gt;
+                    &lt;div class="ws_dropdown ws_sm ws_align_right" data-ws-dropdown&gt;
+                    ...
+                    &lt;/div&gt;
+
+                    &lt;!-- Büyük boyut + Ortaya hizalı + Primary variant --&gt;
+                    &lt;div class="ws_dropdown ws_lg ws_align_center ws_variant_primary" data-ws-dropdown&gt;
+                    ...
+                    &lt;/div&gt;
+
+                    &lt;!-- Outline variant + Normal boyut + Sola hizalı --&gt;
+                    &lt;div class="ws_dropdown ws_variant_outline" data-ws-dropdown&gt;
+                    ...
+                    &lt;/div&gt;</code>
+            </pre>
+        </div>
+
+        <div
+            style="margin-top: 40px; padding: 20px; background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(255, 107, 53, 0.02) 100%); border-left: 4px solid var(--ws-accent); border-radius: 8px;">
+            <p style="font-size: 14px; line-height: 1.7; color: var(--ws-text); margin: 0;">
+                <strong>💡 İpucu:</strong> Tüm class'lar <code
+                    style="background: rgba(255, 107, 53, 0.1); padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">ws_</code>
+                prefix'i ile namespace'lenmiştir. Bu sayede başka kütüphanelerle çakışma riski yoktur ve component
+                tamamen izole çalışır.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Dropdown Component
+         * Namespace: ws_ (WebStandard)
+         * 
+         * Features:
+         * - CSS-first approach (minimal JS)
+         * - Click outside to close
+         * - Keyboard support (ESC to close)
+         * - Multiple instances support
+         * - No global variables pollution
+         */
+
+        (function() {
+            'use strict';
+            class WSDropdown {
+                constructor(element) {
+                    this.dropdown = element;
+                    this.toggle = element.querySelector('.ws_dropdown_toggle');
+                    this.menu = element.querySelector('.ws_dropdown_menu');
+                    this.items = element.querySelectorAll('.ws_dropdown_item:not(.ws_disabled)');
+                    this.isOpen = false;
+                    
+                    this.init();
+                }
+
+                init() {
+                    this.toggle.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.toggleDropdown();
+                    });
+                    this.items.forEach(item => {
+                        item.addEventListener('click', (e) => {
+                            this.selectItem(item);
+                        });
+                    });
+                    document.addEventListener('click', (e) => {
+                        if (this.isOpen && !this.dropdown.contains(e.target)) {
+                            this.closeDropdown();
+                        }
+                    });
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape' && this.isOpen) {
+                            this.closeDropdown();
+                            this.toggle.focus();
+                        }
+                    });
+                }
+
+                toggleDropdown() {
+                    this.isOpen ? this.closeDropdown() : this.openDropdown();
+                }
+
+                openDropdown() {
+                    document.querySelectorAll('.ws_dropdown.ws_active').forEach(dd => {
+                        if (dd !== this.dropdown) {
+                            dd.classList.remove('ws_active');
+                        }
+                    });
+
+                    this.dropdown.classList.add('ws_active');
+                    this.isOpen = true;
+                    this.toggle.setAttribute('aria-expanded', 'true');
+                }
+
+                closeDropdown() {
+                    this.dropdown.classList.remove('ws_active');
+                    this.isOpen = false;
+                    this.toggle.setAttribute('aria-expanded', 'false');
+                }
+
+                selectItem(item) {
+                    this.items.forEach(i => i.classList.remove('ws_selected'));
+                    item.classList.add('ws_selected');
+                    this.closeDropdown();
+                    const event = new CustomEvent('ws-dropdown-select', {
+                        detail: {
+                            value: item.getAttribute('data-value'),
+                            text: item.textContent.trim(),
+                            element: item
+                        }
+                    });
+                    this.dropdown.dispatchEvent(event);
+                }
+            }
+
+            function initDropdowns() {
+                const dropdowns = document.querySelectorAll('[data-ws-dropdown]');
+                dropdowns.forEach(dropdown => {
+                    new WSDropdown(dropdown);
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initDropdowns);
+            } else {
+                initDropdowns();
+            }
+
+            document.addEventListener('ws-dropdown-select', function(e) {
+                console.log('Dropdown selected:', {
+                    value: e.detail.value,
+                    text: e.detail.text
+                });
+            });
+
+        })();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+·İletişim formu aracılığıyla istek ve önerilerinizi bildirebilirsiniz·.<br/>
+<form id="iletisim_formu" method="post" action="#">
+	<input type="hidden" name="m_islem" value="mailgonder" />
+	<input type="hidden" name="m" value="iletisim_formu" />
+	<div class="form-group my-2">
+		<input type="text" name="adisoyadi" id="adisoyadi" class="form-control gerekli " placeholder="·Adınız Soyadınız·" required>
+	</div>
+	<div class="form-group my-2">
+		<input  type="text" name="emailadresi" class="form-control gerekli" placeholder="·E posta adresiniz·" required>
+	</div>
+	<div class="form-group my-2">
+		<input  type="text" name="telefon" id="telefon" class="form-control gerekli" placeholder="·Telefon·" required>
+	</div>
+	<div class="form-group my-2">
+		<textarea name="mesaj" rows="4" id="text" class="form-control gerekli g_99__" placeholder="·Mesajınız·" required></textarea>
+	</div>
+	<button type="submit" id="iletisimformgonder" class="btn btn-primary mt-3"><span class="text-white pr-3"><i class="fa fa-paper-plane"></i> </span>·Gönder·</button>
+</form>

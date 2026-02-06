@@ -1,0 +1,62 @@
+#googlemaps {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 44;
+    background-color: #f0f0f0;
+    margin-bottom: 20px;
+}
+
+#googlemaps .gm-style {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes gmap-pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(3.5);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(5);
+        opacity: 0;
+    }
+}
+
+.gmap-pulse-container {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.gmap-pulse-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: #295be6;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.gmap-pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: rgba(32, 29, 235, 0.3);
+    border-radius: 50%;
+    animation: gmap-pulse 1.2s infinite;
+    z-index: 1;
+}

@@ -1,0 +1,12 @@
+
+<section class="container mt100">
+	<div class="row mt-5">
+		{{__foreach %sekme->%s}}
+		<div class="col-md-6 mb-2">
+			<a class="" href="{{%s.href}}"><span style="background: url({{%s.resim}})"></span></a>
+			<h4 class="sekme_liste"><a href="{{%s.href}}">{{%s.adi}}</a></h4>
+		</div>
+		{{__endforeach}}
+		<div>{{$:siralama_yaz}}</div>
+	</div>
+</section>

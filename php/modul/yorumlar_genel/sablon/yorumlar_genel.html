@@ -1,0 +1,35 @@
+{{__if%yorum_var%
+	
+{{__foreach %yorumlar_liste->%y}}
+<div>
+	<div class="testimonial testimonial-style-5 px-lg-5 mx-lg-5">
+		<blockquote>
+			<p class="mb-0 line-height-8 font-weight-medium text-4">{{%y.mesaj}}</p>
+		</blockquote>
+		<div class="yorum_foto_genel_c"><div class="yorum_foto_genel"><span class="yof"><img class="bgcover" src="{{%y.uye_foto}}" alt="" /></span></div></div>
+		<div class="testimonial-author border-0">
+			<p><strong class="font-weight-extra-bold pt-2">{{%y.adi}}</strong><span>{{%y.tarih}}</span></p>
+		</div>
+	</div>
+</div>
+{{__endforeach}}
+
+__endif}}
+
+<div class="container m-auto g_50__">
+	{{__if%uye_giris%
+	<form id="yorum_formu_genel" class="g_1__">
+		<input type="hidden" name="yorumun_" value="{{$:yorumun}}" />
+		<input type="hidden" name="adisoyadi" value="{{$:uye_adi}}" />
+		<input type="hidden" name="emailadresi" value="{{$:uye_email}}" />
+		<div class="mt-2">
+			<textarea class="i2 bradius-10 g_1__" id="yorumtext_genel" name="yorum" placeholder="·Yorumunuzu yazın·" rows="2"></textarea>
+		</div>
+		<div class="text-right">
+			<button class="btn btn-sm btn-primary" id="yorumgonder_genel">·Gönder·</button>
+		</div>
+	</form>
+	||
+	<div class="yazi1 text-center"><a href="uis/uyegiris">·Yorum yazmak için üye girişi yapmalısınız·</a></div>
+	__endif}}
+</div>

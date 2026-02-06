@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sıkça Sorulan Sorular (FAQ) - Web Sistem Documentation</title>
+    <link rel="stylesheet" href="stil.css">
+</head>
+
+<body>
+
+    <!-- Main Global Header -->
+    <header class="main-header">
+        <a href="./" class="logo">
+            <div class="logo-icon">W</div>
+            <span>Web Sistem</span>
+        </a>
+
+        <nav class="header-nav">
+            <!-- Dynamic header navigation logic in script.js -->
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Toggle -->
+    <header class="header">
+        <button class="menu-toggle" data-onclick-fn="toggleSidebar" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" data-onclick-fn="toggleSidebar"></div>
+
+    <div class="page-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <!-- Search -->
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Dokümantasyonda ara..."
+                        autocomplete="off">
+                    <button class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+
+            <nav id="nav">
+                <!-- Navigation will be populated by script.js auto-discovery -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <article id="content">
+                <h1 id="faq-title">Frequently Asked Questions (FAQ)</h1>
+                <p>Bu sayfa Websistem v1.0 hakkında en çok sorulan soruların yanıtlarını içerir.</p>
+
+                <hr>
+
+                <!-- General -->
+                <section class="faq-section">
+                    <h2 id="general">General</h2>
+
+                    <div class="faq-item">
+                        <span class="faq-question">What is Websistem?</span>
+                        <div class="faq-answer">
+                            Websistem is a lightweight, PHP-based web management system focused on simplicity, clarity,
+                            and control. It provides a clean admin panel, theme system, and modular structure without
+                            the overhead of large frameworks or CMS platforms.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Is Websistem a CMS or a framework?</span>
+                        <div class="faq-answer">
+                            Neither — and intentionally so. Websistem sits between a classic CMS and a custom-coded
+                            project:
+                            <ul>
+                                <li>More structured than a raw PHP setup</li>
+                                <li>Less complex than full CMS or framework solutions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Who is this system for?</span>
+                        <div class="faq-answer">
+                            <ul>
+                                <li>Freelancers building client websites</li>
+                                <li>Developers who want full control without heavy abstractions</li>
+                                <li>Designers who need a manageable admin panel</li>
+                                <li>Small to medium-scale projects</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Who is it NOT for?</span>
+                        <div class="faq-answer">
+                            <ul>
+                                <li>Enterprise-scale applications</li>
+                                <li>Plugin-marketplace–driven ecosystems</li>
+                                <li>CLI-first or headless-only workflows</li>
+                                <li>Projects that require real-time or highly distributed systems</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Installation & Usage -->
+                <section class="faq-section">
+                    <h2 id="installation-usage">Installation & Usage</h2>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Is installation complicated?</span>
+                        <div class="faq-answer">
+                            No. Installation is handled through a web-based wizard and takes only a few minutes. No
+                            command line usage is required.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Can I use MySQL or SQLite?</span>
+                        <div class="faq-answer">
+                            Yes. Both MySQL and SQLite are supported and selectable during installation.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Can I migrate from SQLite to MySQL later?</span>
+                        <div class="faq-answer">
+                            This is not officially supported in v1.0. Database selection is intended to be final per
+                            installation.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Admin Panel -->
+                <section class="faq-section">
+                    <h2 id="admin-panel">Admin Panel</h2>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Can multiple users log in?</span>
+                        <div class="faq-answer">
+                            Yes. The system supports multiple users with different permission levels.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Are deleted items recoverable?</span>
+                        <div class="faq-answer">
+                            No. Deleted pages, blocks, menus, and themes cannot be restored. However:
+                            <ul>
+                                <li>Publish/unpublish actions are reversible</li>
+                                <li>Some changes are logged internally</li>
+                                <li>Modules remain reusable as long as their folders exist</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Does changing a theme delete my content?</span>
+                        <div class="faq-answer">
+                            No. Content remains intact. However, each theme has its own default homepage block
+                            structure. When switching themes, the system may suggest loading theme-specific default
+                            blocks.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Themes & Customization -->
+                <section class="faq-section">
+                    <h2 id="themes-customization">Themes & Customization</h2>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Can I create my own theme?</span>
+                        <div class="faq-answer">
+                            Yes. Themes are HTML-based and fully customizable. Theme creation is documented at a
+                            conceptual level; no framework knowledge is required.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Do themes control menus?</span>
+                        <div class="faq-answer">
+                            Yes. Menu rendering depends on the theme’s <code>menu.html</code> structure. If a dynamic
+                            marker is present, menus are generated automatically. If not, the HTML is rendered exactly
+                            as written.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Modules -->
+                <section class="faq-section">
+                    <h2 id="modules-faq">Modules</h2>
+
+                    <div class="faq-item">
+                        <span class="faq-question">What is a module?</span>
+                        <div class="faq-answer">
+                            A module is a self-contained feature that can be embedded into pages or blocks using a short
+                            code.
+                            Example: <code>[al:modul:example_module]</code>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Can I create custom modules?</span>
+                        <div class="faq-answer">
+                            Yes, but module development requires PHP knowledge. Module development details are
+                            intentionally kept minimal in documentation.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Translation & Languages -->
+                <section class="faq-section">
+                    <h2 id="translation-languages">Translation & Languages</h2>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Does Websistem support multiple languages?</span>
+                        <div class="faq-answer">
+                            Yes. The system includes a built-in translation and language management system.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Can I enable or disable languages?</span>
+                        <div class="faq-answer">
+                            Yes. Languages can be managed directly from the admin panel.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Do I need to use the translation system?</span>
+                        <div class="faq-answer">
+                            No. If you are building a single-language website, you can safely ignore it.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Licensing & Support -->
+                <section class="faq-section">
+                    <h2 id="licensing-support">Licensing & Support</h2>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Is Websistem open source?</span>
+                        <div class="faq-answer">
+                            Parts of the system may be open, but distribution terms depend on where you obtained it.
+                            Always refer to the included license file.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <span class="faq-question">Can I use it for commercial projects?</span>
+                        <div class="faq-answer">
+                            Yes. You can build and sell websites for clients using Websistem.
+                        </div>
+                    </div>
+                </section>
+
+                <div class="tip">
+                    <p>Eğer aradığınız soruyu burada bulamadıysanız, bu durum sistemin bilinçli olarak bu şekilde
+                        tasarlandığı anlamına gelebilir.</p>
+                </div>
+
+            </article>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

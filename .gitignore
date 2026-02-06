@@ -1,0 +1,19 @@
+.env
+.vscode/
+.github/
+.agent/
+*.sql
+*.code-workspace
+*.log
+.htaccess
+rlv_.php
+vendor/
+api/oauth/google_certs.json
+dosya/**
+!dosya/**/
+resim/**
+!resim/**/
+documentation/md/
+__install_db_sample/*
+.backups/*
+!**/ .gitkeep

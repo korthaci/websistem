@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="{{$:dil_kod}}">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<base href="{{$:local}}/">
+	<title>{{$:title}}</title>
+	{{$:meta_index_follow}}
+	<meta name="description" content="{{$:description}}">
+	{{__if%has_meta_tags%
+	<meta name="keywords" content="{{$:tags}}">
+	__endif}}
+	{{__if%has_meta_image%
+	<meta property="og:image" content="{{$:image}}">
+	__endif}}
+	<meta property="og:title" content="{{$:title}}">
+	<meta property="og:description" content="{{$:description}}">
+	<link rel="shortcut icon" type="image/x-icon" href="{{$:local}}/assets/img/logo/favicon.ico" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+	<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">-->
+	<link href="{{$:local}}/assets/css/slimselect.css" rel="stylesheet">
+	{{__if%indexx0%
+	<link rel="stylesheet" href="{{$:local}}/assets/css/chosen.css">
+	__endif}}
+	<link rel="stylesheet" href="{{$:local}}/assets/css/daterangepicker.css">
+
+	<link rel="stylesheet" href="{{$:local}}/assets/css/iziToast.min.css" />
+	<link rel="stylesheet" href="{{$:local}}/assets/css/iziModal.css" />
+	<link rel="stylesheet" href="{{$:local}}/assets/css/min.bulma.css" />
+	<link rel="stylesheet" href="{{$:local}}/assets/css/dropdown_select.css" />
+	{{__if%syetki23%
+	<link rel="stylesheet" href="{{$:local}}/assets/css/sidebar.css" />
+	<!--<link rel="stylesheet" href="{{$:local}}/assets/css/jodit.min.css">-->
+	<link href="https://cdn.jsdelivr.net/npm/jodit@4.7.9/es2021/jodit.fat.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="{{$:local}}/assets/css/dropzone.css">
+	<link rel="stylesheet" href="{{$:local}}/assets/css/uis_dosya.css">
+	<!--<link rel="stylesheet" href="{{$:local}}/assets/css/uppy.css">-->
+	<link rel="stylesheet" href="{{$:local}}/assets/css/uis_ceviri.css">
+	<link rel="stylesheet" href="{{$:local}}/assets/css/uis_menu_nestable.css">
+	__endif}}
+
+	<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{{$:local}}/tema/bulma/assets/css/tema_stil.css" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+		integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	{{__if%syetki2%
+	<link rel="stylesheet" href="{{$:local}}/assets/css/dashboard.css">
+	<link rel="stylesheet" href="{{$:local}}/assets/css/uis2.css">
+	__endif}}
+
+	{{$:modul_css}}
+	{{$:bilesen_css}}
+
+	{{__if%syetki23%
+	{{$:bilesen_css_yp}}
+	__endif}}
+
+	<link rel="stylesheet" href="{{$:local}}/assets/css/s1_core.css" />
+	<script>{{$:script_var}}</script>
+
+</head>
+
+<body class="{{$:yonlendir_index_body_class}}">
+
+	{{__if%syetki23%
+
+	<div class="d-container">
+		{{i:yon:sidebar}}
+		<section class="main-content p-0">
+
+			__endif}}
+
+			{{i:yon:header}}
+			<main id="main">
+				<div class="main-container">
+					{{i:yon:kolon1}}
+				</div>
+			</main>
+
+			{{i:yon:footer}}
+
+			{{__if%syetki23%
+
+		</section>
+	</div>
+	<!-- d-container sonu -->
+
+	__endif}}
+
+	<div id="izi_modal"></div>
+
+	{{__if%google_login_oauth%
+	<div id="g_id_onload" data-client_id="{{$:google_login_client_id}}" data-auto_prompt="true"
+		data-callback="handleCredentialResponse" data-use_fedcm_for_prompt="true">
+	</div>
+	__endif}}
+
+
+	<!-- scriptler -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+		integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="{{$:local}}/assets/js/iziToast.min.js" defer></script>
+	<script src="{{$:local}}/assets/js/iziModal.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js" defer></script>
+	<!--<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js" defer></script>-->
+	<script src="{{$:local}}/assets/js/slimselect.min.js" defer></script>
+	<script src="{{$:local}}/assets/js/chosen.jquery.min.js" defer></script>
+	<script src="{{$:local}}/assets/js/dropdown_select.js" defer></script>
+
+	{{__if%google_login_oauth%
+	<script src="https://accounts.google.com/gsi/client" async defer></script>
+	<script src="{{$:local}}/assets/js/google_login.js" defer></script>
+	__endif}}
+
+	{{$:modul_js}}
+	{{$:bilesen_js}}
+
+	{{__if%syetki2%
+	{{$:bilesen_js_yp}}
+	__endif}}
+
+	{{__if%syetki2%
+	<script src="{{$:local}}/assets/js/jsi_uis_db.js" defer></script>
+	<script src="{{$:local}}/assets/js/jsi_uis.js" defer></script>
+	<script src="{{$:local}}/assets/js/sidebar.js" defer></script>
+	<!--<script src="{{$:local}}/assets/js/jodit.min.js" defer async></script>-->
+	<script src=" https://cdn.jsdelivr.net/npm/jodit@4.7.9/es2021/jodit.fat.min.js" defer></script>
+	<script src="{{$:local}}/assets/js/jodit_script.js?v=2" defer></script>
+	<!--
+			<script src="{{$:local}}/assets/js/uppy.min.js" defer></script>
+			<script src="{{$:local}}/assets/js/uppy_script.js" defer></script>
+		-->
+	<script src="{{$:local}}/assets/js/uis_ceviri.js" defer></script>
+	<script src="{{$:local}}/assets/js/nestable.js" defer></script>
+	<script src="{{$:local}}/assets/js/nestable_menu_script.js" defer></script>
+	__endif}}
+
+	{{__if%uyegiris%
+	<script src="{{$:local}}/assets/js/dropzone.min.js" defer></script>
+	<script src="{{$:local}}/assets/js/dropzone_sy45.js" defer></script>
+	__endif}}
+
+	<script src="{{$:local}}/assets/js/moment-with-locales.min.js" defer></script>
+	<script src="{{$:local}}/assets/js/daterangepicker.js" defer></script>
+
+	<!--
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/intlTelInput.min.js" defer></script>
+	-->
+
+	<script src="{{$:local}}/assets/js/script.js" defer></script>
+	<script src="{{$:local}}/assets/js/jsi.js" defer></script>
+
+	<script src="{{$:local}}/tema/bulma/assets/js/tema_script.js" defer></script>
+
+</body>
+
+</html>

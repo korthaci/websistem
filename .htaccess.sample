@@ -1,0 +1,63 @@
+# ----------------------------------------------------------------------
+# Websistem - Apache Server Configuration Example (.htaccess)
+# ----------------------------------------------------------------------
+
+# Enable URL rewriting engine
+RewriteEngine On
+
+# ----------------------------------------------------------------------
+# SECURITY SETTINGS
+# ----------------------------------------------------------------------
+
+# Deny access to hidden files starting with a dot (e.g., .env, .git)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Deny direct access to SQL backup files
+<FilesMatch "\.sql$">
+    Require all denied
+</FilesMatch>
+
+# Prevent access to SQLite database directory
+RewriteRule ^php/sqlite_data/.*$ - [F,L]
+
+# Disable directory indexing (prevents viewing folder contents)
+Options -Indexes
+
+# ----------------------------------------------------------------------
+# REDIRECTIONS (Uncomment as needed)
+# ----------------------------------------------------------------------
+
+# HTTPS Redirect (If secure connection is mandatory)
+# RewriteCond %{HTTPS} off
+# RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# WWW Redirect (If you want to force www prefix)
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^(.*)$ https://www. %{HTTP_HOST}/$1 [R=301,L]
+
+# ----------------------------------------------------------------------
+# ROUTING RULES
+# ----------------------------------------------------------------------
+
+# Update RewriteBase if you are running in a subdirectory (e.g., /site/)
+RewriteBase /
+
+# Define custom 404 error page
+ErrorDocument 404 /404.html
+
+# If the requested file or directory exists, serve it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route all other requests to index.php (for MVC/Routing structure)
+# E.g.: site.com/page/1 -> index.php?page=1
+RewriteRule ^([^/]+)/?([^/]*)$ index.php?$1=$2 [QSA,L]
+
+# ----------------------------------------------------------------------
+# GENERAL SETTINGS
+# ----------------------------------------------------------------------
+
+# Set default character set to UTF-8
+AddDefaultCharset UTF-8

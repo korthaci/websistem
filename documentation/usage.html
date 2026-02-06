@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanım Rehberi - Web Sistem Documentation</title>
+    <link rel="stylesheet" href="stil.css">
+</head>
+
+<body>
+
+    <!-- Main Global Header -->
+    <header class="main-header">
+        <a href="./" class="logo">
+            <div class="logo-icon">W</div>
+            <span>Web Sistem</span>
+        </a>
+
+        <nav class="header-nav">
+            <!-- Dynamic header navigation logic in script.js -->
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Toggle -->
+    <header class="header">
+        <button class="menu-toggle" data-onclick-fn="toggleSidebar" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" data-onclick-fn="toggleSidebar"></div>
+
+    <div class="page-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <!-- Search -->
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Dokümantasyonda ara..."
+                        autocomplete="off">
+                    <button class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+
+            <nav id="nav">
+                <!-- Navigation will be populated by script.js auto-discovery -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <article id="content">
+                <h1 id="usage-title">Websistem v1.0 – Kullanım Rehberi (Usage)</h1>
+
+                <p>
+                    Bu doküman, Websistem v1.0 yönetim panelini kullanarak sitenizi nasıl yöneteceğinizi açıklar.
+                    Teknik detaylara boğulmadan, sistemin <strong>ne yaptığı</strong>, <strong>nereden
+                        yönetildiği</strong> ve
+                    <strong>hangi varsayılan davranışlara sahip olduğu</strong> anlatılır.
+                </p>
+
+                <hr>
+
+                <h2 id="yönetim-paneline-giriş">1. Yönetim Paneline Giriş</h2>
+                <p>
+                    Standart sayfa girişinde <strong>Üye Girişi</strong> bağlantısı bulunur.
+                </p>
+                <ul>
+                    <li>Sistem yöneticisi ve site kullanıcıları <strong>aynı giriş ekranını</strong> kullanır.</li>
+                    <li>Yetkiler, giriş yapan kullanıcının rolüne göre otomatik olarak belirlenir.</li>
+                </ul>
+
+                <h3 id="yönetici-girişi">Yönetici Girişi</h3>
+                <ul>
+                    <li>Kullanıcı adı ve şifre <strong>kurulum sırasında</strong> belirlenir.</li>
+                    <li>Şifre unutulursa, kurulumda tanımlanan e-posta adresine <strong>şifre sıfırlama
+                            bağlantısı</strong> gönderilir.
+                    </li>
+                </ul>
+
+                <div class="warning">
+                    <div class="warning-title">⚠️ Not</div>
+                    <p>Yönetici yetkisi olan kullanıcılar tüm sistem ayarlarına erişebilir.</p>
+                </div>
+
+                <hr>
+
+                <h2 id="panel-yapısı">2. Yönetim Paneli Yapısı (Sidebar)</h2>
+                <p>
+                    Yönetici olarak giriş yaptıktan sonra, sol tarafta <strong>Sidebar (Yan Menü)</strong> görüntülenir.
+                    Tüm işlemler bu menü üzerinden yapılır.
+                </p>
+
+                <h3 id="sidebar-bölümleri">Sidebar Ana Bölümleri</h3>
+                <ul>
+                    <li><strong>Düzenle:</strong> Sayfalar, Sekmeler, Menüler, Bloklar</li>
+                    <li><strong>Resimler</strong></li>
+                    <li><strong>Dosyalar</strong></li>
+                    <li><strong>Modüller</strong></li>
+                    <li><strong>Üyeler</strong></li>
+                    <li><strong>Temalar</strong></li>
+                    <li><strong>Genel Ayarlar</strong></li>
+                    <li><strong>Çıkış</strong></li>
+                </ul>
+
+                <hr>
+
+                <h2 id="düzenle-menüsü">3. Düzenle Menüsü</h2>
+
+                <h3 id="sayfalar">3.1 Sayfalar</h3>
+                <ul>
+                    <li>Yeni sayfa oluşturulabilir.</li>
+                    <li>Sayfalar sıralanabilir.</li>
+                    <li>Yayına alınabilir veya yayından kaldırılabilir.</li>
+                    <li>Silme işlemi <strong>geri alınamaz</strong> (silmek için iki adımlı onay gerekir).</li>
+                    <li>Sayfalar isteğe bağlı olarak bir <strong>sekmeye</strong> bağlanabilir.</li>
+                    <li>Her sayfaya özel: içerik, başlık ve görsel galerisi eklenebilir.</li>
+                </ul>
+
+                <h3 id="sekmeler">3.2 Sekmeler</h3>
+                <p>Sekmeler, sayfaları gruplamak için kullanılır.</p>
+                <ul>
+                    <li>Yeni sekme oluşturulabilir.</li>
+                    <li>Sekmeler aktif/pasif yapılabilir veya silinebilir.</li>
+                    <li>Tek sayfalık web siteleri için zorunlu değildir.</li>
+                </ul>
+
+                <h3 id="menüler">3.3 Menüler</h3>
+                <p>Menüler, sitenin üst (header) navigasyonunu yönetir. Menü öğeleri üç kaynaktan oluşturulabilir:</p>
+                <ul>
+                    <li>Sayfalar</li>
+                    <li>Sekmeler</li>
+                    <li>Özel başlık + URL</li>
+                </ul>
+                <div class="tip">
+                    <div class="tip-title">Özellikler</div>
+                    <ul>
+                        <li>Sürükle-bırak ile sıralama</li>
+                        <li>İç içe (nested) menü yapıları</li>
+                        <li>Aktif / pasif durumlar</li>
+                    </ul>
+                </div>
+
+                <h3 id="tema-menü-iliskisi">Tema ile Menü İlişkisi</h3>
+                <p>
+                    Menünün görünümü, <strong>aktif temanın <code>menu.html</code> şablonuna</strong> bağlıdır.
+                </p>
+                <ul>
+                    <li>Eğer menü şablonunda <code>data-dynamic</code> tanımı varsa, menü dinamik olarak üretilir.</li>
+                    <li>Aksi halde, <code>menu.html</code> içine yazılan HTML <strong>aynen kullanılır</strong>.</li>
+                </ul>
+
+                <h3 id="bloklar">3.4 Bloklar (Anasayfa Yapısı)</h3>
+                <p>
+                    Bloklar, <strong>anasayfayı oluşturan temel parçalardır</strong>. Her blok bir HTML içeriğidir,
+                    veritabanına kaydedilir ve anasayfada sıralanabilir.
+                </p>
+
+                <h3 id="blok-durumları">Blok Durumları</h3>
+                <ul>
+                    <li><img src="img/yayin1.jpg" alt=""> &nbsp; Yayında → Yeşil bayrak</li>
+                    <li><img src="img/yayin0.jpg" alt=""> &nbsp; Yayında değil → Kırmızı bayrak</li>
+                    <li><img src="img/aktif1.jpg" alt=""> &nbsp; Aktif</li>
+                    <li><img src="img/aktif0.jpg" alt=""> &nbsp; Pasif</li>
+                </ul>
+                <p><em>(Bu bayraklar aynı zamanda tıklanabilir toggle butonudur)</em></p>
+
+                <hr>
+
+                <h2 id="resimler-ve-dosyalar">4. Resimler ve Dosyalar</h2>
+
+                <h3 id="resimler">Resimler</h3>
+                <p>
+                    Güvenli resim dosyaları bu alanda saklanır. Her resimde: "Yeni sekmede aç", "Dosya adını kopyala" ve
+                    "Sil" ikonları bulunur. Sayfa ve profil görselleri bu alandan seçilir.
+                </p>
+
+                <h3 id="dosyalar">Dosyalar</h3>
+                <p>
+                    Güvenli uzantılı dosyalar (PDF, DOC vb.) için ayrı alan bulunur. Sistem, dosya ve resimleri otomatik
+                    olarak ayırır.
+                </p>
+
+                <hr>
+
+                <h2 id="modüller">5. Modüller</h2>
+
+                <h3 id="modül-yönetimi">5.1 Modül Yönetimi</h3>
+                <ul>
+                    <li>Sisteme ekli tüm modüller listelenir.</li>
+                    <li>Modüller aktif/pasif yapılabilir.</li>
+                    <li>Yeni modül eklenebilir.</li>
+                    <li>Modül şablonları düzenlenebilir.</li>
+                </ul>
+
+                <h3 id="modül-kullanımı">5.2 Modül Kullanımı</h3>
+                <p>Modüller, sayfa veya blok içerisine kısa bir kod ile eklenir:</p>
+                <div class="code-header">Kısa Kod Örneği</div>
+                <pre><code>[al:modul:modul_adi]</code></pre>
+                <p>
+                    Bu kod tıklandığında panoya kopyalanır ve içeriğe yapıştırıldığında otomatik çalışır.
+                </p>
+
+                <h3 id="modul-sablonlari">5.3 Modül Şablonları</h3>
+
+                <ul>
+                    <li>Modül şablonları HTML ile düzenlenir.</li>
+                    <li>Her modül, kendi şablon dosyalarına sahiptir.</li>
+                    <li>Bu şablonlar üzerinden modülün ön yüzdeki görünümü kontrol edilir.</li>
+                </ul>
+
+                <p>Örnek bir modül şablonu düzenleme ekranı:</p>
+
+                <a href="img/modul_tema_duzenle.jpg" target="_blank">
+                    <img src="img/modul_tema_duzenle.jpg" alt="Modül Şablonu Düzenleme Ekranı" width="60">
+                </a>
+
+                <p>Modül şablonlarında <strong>hazır değişken alanları</strong> bulunur.<br>
+                    Bu alanlar modül tarafından otomatik olarak sağlanır.</p>
+
+                <blockquote>
+                    Bu bölümde yeni değişken tanımlanmaz.<br>
+                    Sadece modülün sunduğu hazır alanlar kullanılır.<br><br>
+
+                    Bazı modüller, harici servisler için gerekli olan
+                    <strong>API anahtarlarını</strong> sistem ayarları üzerinden alır
+                    (örneğin Google Maps veya Tawk.to).<br>
+                </blockquote>
+
+                <p>Bu anahtarlar yalnızca değer olarak girilir ve modül tarafından otomatik olarak kullanılır. Bu
+                    nedenle çoğu durumda yalnızca HTML düzenlemesi yeterlidir.</p>
+                <hr>
+
+                <h2 id="uyeler">6. Üyeler</h2>
+                <ul>
+                    <li>Üye listesi görüntülenebilir.</li>
+                    <li>Yeni üye oluşturulabilir.</li>
+                    <li>Mevcut üyeler düzenlenebilir.</li>
+                    <li>Yetkilere göre erişim seviyesi belirlenir.</li>
+                </ul>
+
+                <hr>
+
+                <h2 id="temalar">7. Temalar</h2>
+                <p>Sisteme ekli temalar listelenir ve aktif tema değiştirilebilir.</p>
+                <h3 id="tema-degisikligi">Tema Değiştirildiğinde</h3>
+                <ul>
+                    <li>İçerikler <strong>silinmez</strong>.</li>
+                    <li>Sistem, tema ile uyumlu <strong>örnek blokları yüklemek isteyip istemediğinizi</strong> sorar.
+                    </li>
+                </ul>
+
+                <div class="warning">
+                    <div class="warning-title">⚠️ Önemli</div>
+                    <p>Örnek bloklar yüklendiğinde, mevcut anasayfa blokları değiştirilir.</p>
+                </div>
+
+                <hr>
+
+                <h2 id="dil-ve-çeviri">8. Dil ve Çeviri Sistemi</h2>
+                <p>Websistem, çoklu dil desteğine sahiptir.</p>
+
+                <h3 id="panel-çevirileri">Yönetim Paneli Çevirileri</h3>
+                <p>
+                    Diller listelenebilir, aktif/pasif yapılabilir. Çeviriler manuel veya AI destekli oluşturulabilir
+                    (API anahtarı gerektirir).
+                </p>
+
+                <h3 id="şablonlarda-çeviri">Şablonlarda Çeviri Kullanımı</h3>
+                <p>Genel arayüz metinleri, <strong>orta nokta (middle-dot)</strong> kullanılarak işaretlenir:</p>
+                <div class="code-header">Örnek</div>
+                <pre><code>·Çıkış Yap·</code></pre>
+                <p>Bu yapı aktif dile göre otomatik çevrilir.</p>
+
+                <hr>
+
+                <h2 id="genel-ayarlar">9. Genel Ayarlar</h2>
+                <p>
+                    Site adı, yönetici e-posta adresi, meta description ve keywords gibi temel bilgiler buradan
+                    yönetilir.
+                </p>
+
+                <hr>
+
+                <h2 id="varsayılan-davranışlar">10. Varsayılan Davranışlar ve Uyarılar</h2>
+                <ul>
+                    <li>Silinen öğeler <strong>geri alınamaz</strong>.</li>
+                    <li>Yayından kaldırma ≠ silme.</li>
+                    <li>Bazı işlemler loglanır, ancak her işlem geri döndürülebilir değildir.</li>
+                    <li>Modül klasörleri fiziksel olarak silinmediği sürece tekrar etkinleştirilebilir.</li>
+                </ul>
+
+                <p class="content-footer">
+                    Websistem v1.0 – Kontrollü, sade ve esnek bir yönetim deneyimi.
+                </p>
+            </article>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

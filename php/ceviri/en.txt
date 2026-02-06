@@ -1,0 +1,580 @@
+Sistem v%s sürümünde çalışmaktadır.:::The system runs on v%s version.
+Menüde ara:::Search in menu
+Tema Yönetimi:::Theme Management
+Listeyi Yenile:::Refresh List
+Bir sorun oluştu. Lütfen tekrar deneyin.:::An error has occurred. Please try again.
+Mail adresiniz kaydedildi. Teşekkür ederiz.:::Your email address has been saved. Thank you.
+Bir hata oluştu. Lütfen tekrar deneyin.:::An error has occurred. Please try again.
+Geçersiz mail adresi.:::Invalid email address.
+Yorumlar tablosu bulunamadı.:::The comments table could not be found.
+link:::link
+Yorum bulunmamaktadır.:::There are no comments.
+Link:::Link
+Stiller:::Quiet
+Bu mail adresi kayıtlı.:::This email address is registered.
+Scriptler:::Scripts
+Bu sayfayı düzenle:::Edit this page
+Ülkeler:::Countries
+Şehirler:::Cities
+Kayıt değiştirilmedi.:::The record has not been modified.
+Profil Fotoğrafı:::Profile Photo
+Fotoğraf:::Photo
+Bilgileri düzenle:::Edit information
+E-posta adresiniz:::Your email address
+Email iptal edildi:::Email canceled
+Şifre değiştir:::Change password
+Eski şifreyi yanlış girdiniz. Şifre değiştirilemedi.:::You entered the old password incorrectly. The password could not be changed.
+Yeni şifre alanları eşleşmiyor. Şifre değiştirilemedi.:::The new password fields do not match. The password could not be changed.
+Şifre başarıyla değiştirildi.:::Your password has been successfully changed.
+Şifre değiştirilemedi. Bir hata oluştu.:::The password could not be changed. An error occurred.
+Eski şifre:::Old password
+Yeni şifre:::New password
+Yeni şifre tekrar:::New password again
+Şifre Sıfırla:::Reset Password
+Kullanıcı bulunamadı.:::User not found.
+Şifrenizi sıfırlamak için aşağıdaki linke tıklayın:::Click the link below to reset your password
+Şifremi Sıfırla:::Reset My Password
+Şifre Sıfırlama:::Password Reset
+E-posta adresinize şifre sıfırlama bağlantısı gönderildi.:::A password reset link has been sent to your email address.
+Mail gönderilirken bir hata oluştu.:::An error occurred while sending the email.
+Kullanıcı adı veya E-posta:::Username or Email
+E-posta veya kullanıcı adı girin:::Enter your email or username
+Yeni Şifre Belirle:::Set New Password
+Geçersiz istek.:::Invalid request.
+Geçersiz veya süresi dolmuş token.:::Invalid or expired token.
+Şifreniz başarıyla değiştirildi.:::Your password has been successfully changed.
+Yeni şifre girin:::Enter a new password
+En az %s karakter olmalı:::Must be at least %s characters
+Şifreyi Güncelle:::Update Password
+Hesabını aktifleştir:::Activate your account
+Aktivasyon kodu:::Activation code
+E-posta adresinize aktivasyon kodu gönderildi:::An activation code has been sent to your email address.
+Üyelik işlemi henüz tamamlanmadı:::The membership process has not yet been completed.
+Güvenli çıkış:::Safe exit
+Üye girişi:::Member login
+E-posta adresi:::Email address
+Beni hatırla:::Remember me
+Şifre resetle:::Reset password
+Giriş yap:::Log in
+Yeni üyelik oluştur:::Create a new membership
+Google ile giriş yap:::Sign in with Google
+Zaten üye misiniz? Giriş yapın:::Are you already a member? Log in
+Google ile kayıt ol:::Sign up with Google
+Yeni üyelik aktivasyonu:::New membership activation
+Hesabınız başarıyla aktif edildi.:::Your account has been successfully activated.
+Giriş sayfasına yönlendiriliyorsunuz...:::You are being redirected to the home page...
+Hesabınız aktif edilemedi. Lütfen daha sonra tekrar deneyiniz.:::Your account could not be activated. Please try again later.
+Hesabınız aktif edilemedi veya daha önce aktifleştirilmiş.:::Your account could not be activated or has already been activated.
+Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.:::An error has occurred. Please try again later.
+Aktivasyon kodu bulunamadı. Hesabınız aktif edilemedi.:::Activation code not found. Your account could not be activated.
+Ülke/Şehir:::Country/City
+Kontrol paneli:::Control panel
+Menü yapısı:::Menu structure
+Yorum formu:::Comment form
+Genel yorumlar:::General comments
+Diller & Çeviriler:::Languages & Translations
+Temalar:::Themes
+Genel ayarlar:::General settings
+Çıkış:::Exit
+Resim&Dosya:::Image&File
+%s ve %s okudum, kabul ediyorum.:::I have read %s and %s, I agree.
+Aç:::Open
+Açıkla:::Explain
+Açıklama:::Explanation
+Adı:::Name
+Adı Soyadı:::Name & Surname
+Adınız:::Your name
+Adınız Soyadınız:::Name Surname
+Adınız ve Soyadınız:::Name and Surname
+Adres:::Address
+Adresiniz:::Address
+Aktivasyon Kodu:::Activation Code
+Aktivasyon kodu gönderilemedi:::Activation code could not be sent
+Aktivasyon kodu gönderiliyor:::Sending activation code
+Aktivasyon kodu mail adresinize gönderildi:::The activation code has been sent to your e-mail address
+Anasayfa:::Home
+Anlık Mesaj Sınırı:::Instant Message Limit
+ara:::search
+Aradığınız kelimeler, arama kriteri için geçerli değil. Lütfen iki harften daha uzun kelimeler ile arama yapın:::The words you searched for do not apply to the search criteria. Please search for words longer than two letters
+Aradığınız kelimeleri içeren herhangi bir yazı bulunamadı.:::No posts were found that contained the words you were looking for. You can search again with other keywords
+Arama Sonuçları:::Search Results
+Aşağıdaki bağlantıya tıklayarak hesabınızı aktif edebilirsiniz:::You can activate your account by clicking the link below
+Ay:::Month
+Ayarlar:::Sets
+Aynı yorum:::Same comment
+Başarılı:::Successful
+Başarısız:::Failed
+Başka kelimelerle yeniden arama yapabilirsiniz:::You can search again with other words
+Başlık:::Title
+Belirlenmedi:::Not determined
+Belirtilmedi:::Specified
+Bilgi:::Knowledge
+Bilgiler:::Information
+Bilgiler eksik:::Missing information
+Bilgileri duzenle:::Edit information
+Bilgileri Düzenle:::Edit Information
+Bilgileri onaylıyorum.:::I approve the information.
+Bir hata oluştu:::An error occurred
+Bir hata oluştu. Lütfen daha sonra tekrar deneyin.:::An error occurred. Please try again later.
+Bizi seçtiğiniz için teşekkür ederiz.:::Thank you for choosing us.
+Bölüm:::Part
+Bu alan işaretlenmelidir:::This field must be marked
+Bu alan onaylanmalıdır:::This field must be approved
+Bu bölümde sayfa bulunmamaktadır:::There are no pages in this section
+Bu kişiye mesaj yollamak için tıklayın:::Click here to send a message to this person
+Bu kriterde üye bulunmuyor:::There are no members in this criterion
+Bu linke tıklayarak mesajlarınızı düzenleyebilirsiniz veya email alımını iptal edebilirsiniz:::By clicking on this link you can edit your messages or cancel the receipt of emails
+Bu mail adresinden artık mesaj almamak için tıklayın:::Click here to stop receiving messages from this e-mail address
+Bugün:::Today
+Buraya tıklayın:::Click here
+Cevap:::Answer
+Cevap yazın:::Write a reply
+CVC No:::CVC No
+Daha fazla bilgi:::Learn more
+Daha fazlası:::More
+Daha uzun yorum yazmalısınız:::You should write longer reviews
+Değişiklikleri kaydet:::Save changes
+Değiştir:::Change
+Değiştirilmedi:::Changed
+Detay:::Detail
+Devam:::Continuation
+Devam Et:::Go on
+Devamı:::Sequel
+Diğer:::Other
+Diğer araçlar:::Other vehicles
+Dil:::Language
+Dil seçin:::Choose language
+Doğum Tarihi:::Date of birth
+Dosya Bulunamadı:::File Not Found
+Dosya Yüklendi:::File Uploaded
+Dosya Yüklenemedi:::Failed to Upload File
+Dosyalar:::Files
+Düzenle:::Edit
+E posta adresiniz:::Your e -mail address
+Ek Bilgiler:::Additional Information
+Ek dosyalar:::Additional files
+Ekle/Kaldır:::Add/Remove
+Eklendi:::Added
+Eklenme Tarihi:::Date Added
+Eklenmedi:::Not added
+Elektrik:::Electricity
+Email:::E-mail
+Email alımını iptal ettiniz:::You have canceled the receipt of emails
+Email ile giriş:::Login with e-mail
+Email listesi:::Email list
+Email listesine kayıt olmak için email adresinizi yazın:::Write your email address to register with the email list
+E-Posta Adresi:::E-mail Address
+E-posta alımı iptal edildi:::Email reception canceled
+E-posta listesine üye olun:::Sign up for our mailing list
+Erkek:::Male
+Eski Şifre:::Old Password
+Eski şifreyi yanlış girdiniz:::You entered the old password incorrectly
+Etiketler:::Tags
+Fatura Adresi:::Billing address
+Fatura Ünvanı:::Invoice Title
+Filtreler:::Filters
+Form Gönderildi. Teşekkür ederiz:::The form has been submitted. Thank you
+Form Gönderilemedi:::Form Could Not Be Submitted
+Foto:::Photo
+Fotoğraf Galerisi:::Photo Gallery
+Fotoğraf yükle:::Upload photo
+Fotoğrafını Yükle:::Upload Your Photo
+Fotoğraflar:::Photos
+Geçerli bir mail adresi girin:::Enter a valid email address
+Geçersiz email:::Invalid email
+Genel:::General
+Genel Bilgiler:::General Information
+Gerekli:::Necessary
+Gerekli alan:::Required field
+Geri:::Back
+Geri Dön:::Back
+Giriş Yap:::Log in
+Git:::Go
+Gizle:::Hide
+Gizlilik ve güvenlik:::Privacy and security
+Gönder:::Send
+Göster:::Show
+GSM:::GSM
+Gün:::Day
+gün:::day
+Güvenli Çıkış:::Safe Exit
+Harita:::Map
+Hatırlatma:::Reminder
+Hepsi:::All
+Hesabınız aktif edilemedi. Aktivasyon süresi geçmiş olabilir veya zaten aktif olabilir:::Your account could not be activated. Activation may have expired or may already be active
+Hesabınız aktif edilmiştir:::Your account has been activated
+Hiçbiri:::None
+Hoşgeldiniz:::Welcome
+Iletişim:::Communication
+İlçe:::County
+İletişim formu:::Contact form
+İletişim formu aracılığıyla istek ve önerilerinizi bildirebilirsiniz:::You can report your requests and suggestions via the contact form
+İlk:::First
+İncele:::View
+İsim:::Name
+İsim kopyalandı:::Name copied
+İsteğe bağlı:::Optional
+İstek Gönderildi. Teşekkür ederiz:::The request has been sent. Thank you
+İstek Gönderilemedi:::Request Could Not Be Sent
+Kadın:::Woman
+Kampanya:::Campaign
+Kapat:::Shut down
+Kart Numarası:::Card number
+Kart üzerindeki isim:::Name on the card
+Katıl:::Join
+Kaydedildi:::Saved
+Kaydedilemedi:::Could not be saved
+Kaydet:::Save
+Kayıt değiştirilmedi:::The record has not been modified
+Kayıt ol:::Register
+Kayıt tarihi:::Date of registration
+Kaynak:::Source
+kelime ile ara:::Search by word
+Keşfet:::Explore
+Listele:::List
+Listeye dön:::Back to the list
+Listeye Geri Dön:::Back to List
+Lütfen daha sonra tekrar deneyin:::Please try again later
+Lütfen tekrar deneyin:::Please try again
+Mail:::Mail
+Mail adresi bulunamadı:::E-mail address not found
+Mail Adresi Uygun:::E-mail Address Available
+Mail Adresi Uygun Değil:::E-mail Address Not Available
+Mail adresini yazın:::Type the e-mail address
+Mail adresiniz görüntülenmez:::Your e-mail address will not be displayed
+Mail adresinizdeki aktivasyon linkine tıklayın veya aktivasyon kodunu aşağıdaki alana yazın:::Click on the activation link in your e-mail address or write the activation code in the field below
+Mail adresinize aktivasyon kodu gönderilecektir:::An activation code will be sent to your e-mail address
+Mail Gönderildi:::Mail Sent
+Mail Gönderilemedi:::Mail Could Not Be Sent
+Menü:::Menu
+Menüde var:::It&#39;s on the menu
+Mesaj gönderildi:::Message sent
+Mesaj Gönderildi. Teşekkür ederiz:::The message has been sent. Thank you
+Mesaj Gönderilemedi:::Message Could Not Be Sent
+Mesajınız:::Message
+Mesajlarım:::My Messages
+Misafir:::Guest
+Mobil:::Mobile
+Onayla:::Confirm
+Onaylamıyorum:::I don&#39;t approve
+Onaylıyor musunuz:::Do you approve
+Onaylıyorum:::Agree
+Ortalama:::Average
+Önceki:::Previous
+Önceki Sayfaya Dön:::Return to Previous Page
+önerilen:::recommended
+Önizleme:::Preview
+Paylaş:::Share
+Posta Kodu:::Zip code
+Profil Resmi:::Profile Picture
+Renk:::Colour
+Resim:::Picture
+Resim Ekle:::Add Image
+Resim Oluşturma:::Creating an Image
+Resim Yükleme Sınırı:::Image Upload Limit
+Resim Yüklendi:::Image Uploaded
+Resim Yüklenemedi:::Failed to Load Image
+Resimler:::Pictures
+RSS Başlıkları:::RSS Feeds
+Saat:::Time
+Satış sözleşmesi:::Contract of sale
+Sayfa:::Page
+Sayfa bulunamadı:::Page not found
+Sayfa Bulunamadı. Yayından kaldırılmış veya silinmiş olabilir:::Page Not Found. Can be unpublished or deleted
+Sayfalar:::Pages
+Sayı:::Number
+Seç:::Select
+Sehir Seç:::Select City
+Semt:::Quarter
+Sınırsız:::Boundless
+Sıra:::Queue
+Sıralama:::Arrangement
+Sil:::Delete
+Silindi:::Deleted
+Silinemedi:::Could not be deleted
+Son:::The end
+Son Kullanma Tarihi:::Expiration date
+Sonraki:::Subsequent
+Sonuç:::Result
+Soru:::Question
+Sosyal medya:::Social media
+Soyadınız:::Surname
+Spam, Gereksiz, Gelen Kutusunu kontrol etmeyi unutmayın:::Spam, Junk, Don&#39;t forget to check the Inbox
+Şehir:::City
+Şehir seçmelisiniz:::You must select a city
+Şifre:::Password
+Şifre değistir:::Change password
+Şifre Değiştir:::Change Password
+Şifre Değiştirildi:::Password Changed
+Şifre Değiştirilemedi:::Password Could Not Be Changed
+Şifre Hatırlat:::Remind Password
+Şifre hatırlatması için lütfen kayıtlı email adresinizi yazın:::Please enter your registered email address to be a password reminder
+Şifreni mi unuttun?:::Forgot your password?
+Şifreniz mail adresinize gönderildi:::Your password has been sent to your e-mail address
+Tarih:::Date
+Tarih bulunamadı:::Date not found
+Tarihe git:::Go to history
+Taslak olarak kaydet:::Save as draft
+Tebrik ederiz:::Congratulations
+Telefon:::Phone
+Teşekkür ederiz:::Thank you
+Tüm hakları saklıdır:::All rights reserved
+Tümü:::All
+Tümünü listele:::List all
+Ülke:::Country
+Ülke Seç:::Select Country
+Üye Adı:::Member Name
+Üye bulunmamaktadır:::There are no members
+Üye Girişi:::Member Login
+üye girişi yap:::Log in
+Üye Ol:::Sign Up
+Üyeler:::Members
+Üyelik Bilgileri:::Membership Information
+Üyelik bilgileriniz aşağıdaki gibidir.:::Your membership information is as follows.
+Üyelik için buraya tıklayın:::Click here to become a member
+Üyelik işleminiz tamamlanmadı:::Your sign-up process has not been completed
+Var:::There is
+Vergi Dairesi:::Tax Office
+Vergi Numarası:::Tax Number
+Web Adresi:::Web Address
+Yardım:::Help
+Yaşınız:::Your age
+Yayın:::Publication
+Yayın Tarihi:::Release Date
+Yayında:::Publication
+Yayında değil:::Not live
+Yayınlansın:::Let it be published
+Yazdır:::Print
+Yazı:::Writing
+Yazı Boyutunu Arttır:::Increase Font Size
+Yazı Boyutunu Azalt:::Reduce Font Size
+Yazı Boyutunu Ortala:::Center Font Size
+Yeni sayfa:::New page
+Yeni Şifre:::New Password
+Yeni şifre alanlarını yanlış girdiniz:::You entered the new password fields incorrectly
+Yeni Şifre Tekrar:::New Password Again
+Yeni üyelik:::New membership
+Yeni Yorum Yaz:::Write a New Comment
+Yetki:::Authority
+Yetkili:::Authorized
+Yıl:::Year
+Yok:::No
+Yorum:::Comment
+Yorum Açık:::Comment On
+Yorum gönderildi:::Comment sent
+Yorum gönderilemedi:::Failed to post comments
+Yorum yaz:::Write a comment
+Yorum yazmak için üye girişi yapmalısınız:::You must login to a member to write a comment
+Yorumlar:::Comments
+Yorumunuzu yazın:::Write Your Comment
+Yönetim Paneli:::Management Panel
+Yükle:::Install
+Zorunlu alanlardır:::Required fields
+Mesaj gönderilemedi:::Message failed to send
+Web sitemizde kullanılan çerezler yalnızca teknik amaçlarla sınırlıdır:::The cookies used on our website are limited to technical purposes only
+Bileşen:::Component
+Aktif:::Active
+css, js dosyalarını birleştir veya sil:::merge or delete css, js files
+Birleştirilmiş dosyaları sil:::Delete merged files
+Birleştirilmiş css, js dosyaları kullan:::Use merged css, js files
+Etkin bilesen bulunmamaktadır.:::There are no active ingredients.
+Kur:::Install
+Bileşenler:::Components
+Değişiklik kaydedildi:::Change noted
+Değişiklik yapılmadı:::No changes made
+Config dosyası bulunamadı.:::Config file not found.
+Bileşen düzenle:::Edit component
+Bileşen yönetim klasörü bulunamadı veya boş.:::The component management folder is not found or is empty.
+Bileşen bulunamadı.:::No components found.
+Bileşen şablonları.:::Component templates.
+Kaydedildi.:::Recorded.
+Tüm bloklar:::All blocks
+Konu başlığı:::Subject Heading
+İçerik yazıları:::Content articles
+Blok düzenleme:::Block editing
+Kelime ile ara:::Search by word
+Bloklar:::Blocks
+Yeni Blok:::New Block
+Blok Başlığı:::Block Header
+Ekle:::Add
+Blok adı:::Block name
+Çeviri:::Translation
+Bu bölümde kayıt bulunmamaktadır:::There are no records in this section
+Çeviriler:::Translations
+Tüm alanlar:::All areas
+Sadece boş alanlar:::Only empty spaces
+Master Keys:::Master Keys
+Sync:::Sync
+Tümünü çevir:::Translate all
+Durdur:::Stop
+Dosya bulunamadı.:::No file found.
+Dil bulunamadı.:::No languages found.
+Bulunan yeni kelimeler:::New words found
+Diller:::Languages
+Ülke Adı:::Country Name
+Orjinal:::Original
+Seçenek:::Option
+Son eklenen:::Recently added
+Filtrele:::Filter
+Dosya:::File
+Genel Ayarlar:::General Settings
+Yeni Özellik:::New Feature
+Özellik Adı:::Feature Name
+değer:::Value
+İki veya daha fazla eposta adresi yazabilirsiniz. Ancak eposta adreslerini virgülle ayırmalısınız. abc@abc.com , mail@rehberim.com ** İçerikte değişiklik olmadığında kayıt işlemi yapılmaz.:::You can type in two or more email addresses. However, you should separate email addresses with commas. abc@abc.com , mail@rehberim.com ** Registration is not done if there is no change in the content.
+Bu sayfada işlem yapma yetkiniz yok.:::You are not authorized to trade on this page.
+Ana sayfaya dön:::Back to home page
+Kontrol Paneli:::Control Panel
+Hoşgeldiniz, sistem durumu ve hızlı işlemler.:::Welcome, system status and quick actions.
+Aktif Sayfa:::Active Page
+Aktif Modül:::Active Module
+Kullanıcılar:::Users
+Sistem Sürümü:::System Version
+Hızlı İşlemler & Yönetim:::Quick Transactions & Management
+İçerik Yönetimi:::Content Management
+Modüller:::Modules
+Dosya Yöneticisi:::File Manager
+Son Aktiviteler:::Recent Activities
+Henüz kayıtlı aktivite yok.:::There are no registered activities yet.
+Sistem Bilgileri:::System Information
+PHP Sürümü:::PHP Version
+Sunucu Yazılımı:::Server Software
+Veritabanı Host:::Database Host
+Veritabanı Prefix:::Database Prefix
+Sayfa seç:::Select page
+Sekmeler:::Tabs
+Sekme seç:::Select tab
+Blok seç:::Select block
+Menü maddeleri:::Menu items
+Bağlantı:::Connection
+Modül Yönetimi:::Module Management
+Modüllere Dön:::Back to Modules
+Yönetim Aracı Seçimi:::Management Tool Selection
+Yönetim dosyası bulunamadı.:::The management file could not be found.
+Lütfen işlem yapmak için yukarıdan bir dosya seçiniz.:::Please select a file from above to proceed.
+Modül yönetim klasörü bulunamadı veya boş.:::The module management folder could not be found or is empty.
+Tazele:::Refresh
+Modül Adı:::Module Name
+Kod (Hash):::Code (Hash)
+Kısayol:::Shortcut
+Şablonlar:::Templates
+Pasif:::Passive
+Hash:::Hash
+Kopyala:::Copy
+Yönetim Dosyaları:::Management Files
+Görünüm Şablonları:::Appearance Templates
+Performans için CSS ve JS dosyalarını birleştirebilirsiniz.:::You can combine CSS and JS files for performance.
+Birleşik Dosyaları Sil:::Delete Combined Files
+Dosyaları Birleştir:::Merge Files
+Henüz kurulmuş bir modül bulunmuyor.:::No module has been installed yet.
+Kurulabilir Modüller:::Modular Units
+Şablon başarıyla kaydedildi.:::The template has been successfully saved.
+Şablonlarını Düzenle:::Edit Templates
+Şablon Seçimi:::Template Selection
+Şablon dosyası bulunamadı.:::Template file not found.
+Şablon Seçiniz:::Select Template
+Lütfen düzenlemek için bir şablon seçin:::Please select a template to edit
+Bu şablonlar FRONTEND tarafında modülün nasıl görüneceğini belirler. Standart HTML ve sistem etiketlerini içerebilir.:::These templates determine how the module will appear on the FRONTEND. They may contain standard HTML and system tags.
+Tarih Aralığı:::Date Range
+Yayında Değil:::Not on Air
+Yeni Sayfa:::New Page
+Sayfa Başlığı:::Page Title
+Sayfa adı:::Page name
+Sekme:::Tab
+Manşet:::Headline
+Tüm sayfalar:::All pages
+Bölüm Seç:::Select Section
+Sayfa açıklamaları:::Page descriptions
+Sayfa resimleri:::Page images
+Tüm sekmeler:::All tabs
+Sekme adı:::Tab name
+Sekme açıklamaları:::Tab descriptions
+İçerik sayfada görüntülensin:::Display the content on the page
+Yeni Sekme:::New Tab
+Sekme Adı:::Tab Name
+Geçersiz tema dizini.:::Invalid theme directory.
+Bloklar başarıyla temanın orijinal haline döndürüldü.:::The blocks have been successfully restored to their original state.
+Yeni bir temaya geçtiniz! Her temanın kendine has bir yapısı olduğu için anasayfa görünümünün tam oturması adına sağ üstteki:::You&#39;ve switched to a new theme! Since each theme has its own structure, to ensure the homepage displays correctly, please click on the top right corner.
+butonunu kullanarak temanın varsayılan bloklarını yüklemenizi öneririz.:::We recommend loading the theme&#39;s default blocks using the button.
+Temaya ait blok_html.sql dosyası bulunamadı.:::The block_html.sql file for the theme could not be found.
+Kayıt Engellendi!:::Registration Blocked!
+Dosya başarıyla kaydedildi. Yedek otomatik olarak oluşturuldu.:::The file was saved successfully. A backup was created automatically.
+Dosya kaydedilirken bir hata oluştu.:::An error occurred while saving the file.
+Temasını Düzenle:::Edit Theme
+Tüm bloklar silinecek ve temanın varsayılan blokları yüklenecektir. Emin misiniz:::All blocks will be deleted and the theme&#39;s default blocks will be loaded. Are you sure?
+Anasayfada gösterilen bloklar:::Blocks displayed on the homepage
+Blokları Yeniden Oluştur:::Recreate the Blocks
+Temalara Dön:::Back to Themes
+Tema Dosyaları:::Theme Files
+Dosya Seçiniz:::Select File
+Yedekler:::Reserves
+Lütfen düzenlemek için bir dosya seçin...:::Please select a file to edit...
+Dosya Yedekleri:::File Backups
+Boyut:::Dimension
+İşlem:::Process
+Geri Yükle:::Restore
+teması başarıyla etkinleştirildi. Görünümün tam olarak oturması için blokları yapılandırmanız gerekebilir.:::The theme has been successfully activated. You may need to configure the blocks for the layout to fully take effect.
+Blokları Yapılandır:::Configure the Blocks
+Etkinleştir:::Enable
+Üye düzenle:::Edit member
+Bir hata oluştu.:::An error has occurred.
+Email alımı:::Email reception
+Email Adresi:::Email Address
+Email adresi:::Email address
+Kullanıcı adı:::Username
+Aktivasyon:::Activation
+Liste:::List
+Yeni Üye:::New Member
+E-posta:::Email
+Ara:::Arrow
+Son giriş:::Last entry
+Üye bulunmamaktadır.:::There are no members.
+Ad Soyad:::Last Name, First Name
+Yetkisiz erişim.:::Unauthorized access.
+Dizin Yok:::No Index
+Dosya yok veya yüklenemedi.:::File not found or could not be loaded.
+Bu dosya türü güvenlik nedeniyle yüklenemez.:::This file type cannot be uploaded for security reasons.
+Geçersiz resim dosyası. Dosya bozuk veya resim formatında değil.:::Invalid image file. The file is corrupted or not in image format.
+Bu resim formatı desteklenmiyor.:::This image format is not supported.
+Geçersiz resim MIME type.:::Invalid image MIME type.
+Resim dosya uzantısı geçersiz.:::The image file extension is invalid.
+Dosyada güvenlik ihlali tespit edildi.:::A security breach has been detected in the file.
+Yükleme başarısız.:::Upload failed.
+Yükleme başarılı.:::Upload successful.
+Geçersiz işlem:::Invalid transaction
+Geçersiz işlem.:::Invalid transaction.
+Bilinmeyen bir hata oluştu.:::An unknown error has occurred.
+Gerekli bilgiler eksik.:::The necessary information is missing.
+Geçersiz veya eksik veri.:::Invalid or incomplete data.
+Seçenek başarıyla güncellendi.:::The option has been successfully updated.
+Değişiklik yapılmadı.:::No changes were made.
+Veritabanı hatası.:::Database error.
+Değer değişmedi.:::The value has not changed.
+Değer kaydedildi.:::Value saved.
+Değer kaydedilemedi.:::The value could not be saved.
+Metin kaydedildi.:::The text has been saved.
+Metin kaydedilemedi veya değişiklik yapılmadı.:::The text could not be saved or no changes were made.
+Kayıt başarıyla silindi.:::The record has been successfully deleted.
+Kayıt silinemedi.:::The record could not be deleted.
+Gerekli parametreler eksik:::Required parameters are missing
+Sıralama güncellendi:::Ranking updated
+Sıralama güncellenirken bir hata oluştu:::An error occurred while updating the ranking
+Tema adı belirtilmedi.:::Theme name not specified.
+Tema başarıyla etkinleştirildi.:::The theme has been successfully activated.
+Yeni tema adı belirtilmedi.:::The new theme name has not been specified.
+Bu isimde bir tema zaten mevcut.:::A theme with this name already exists.
+Tema başarıyla kopyalandı.:::The theme has been successfully copied.
+Aktif tema silinemez.:::The active theme cannot be deleted.
+Tema başarıyla arşive kaldırıldı.:::The theme has been successfully archived.
+Tema bulunamadı.:::Theme not found.
+Dosya adı belirtilmedi.:::The file name was not specified.
+Dosya adı veya yedek tarihi belirtilmedi.:::The file name or backup date was not specified.
+Yedek başarıyla geri yüklendi.:::The backup was successfully restored.
+Yedek geri yüklenirken bir hata oluştu.:::An error occurred while restoring the backup.
+Yedek dosyası silindi.:::The backup file has been deleted.
+Yedek silinirken hata oluştu veya dosya bulunamadı.:::An error occurred while deleting the backup, or the file could not be found.
+Geçersiz işlem tipi.:::Invalid transaction type.
+Değer:::Value
+Özellik:::Feature
+Detaylı bilgi için %s’ni inceleyebilirsiniz:::For detailed information, you can review %s.
+E Posta Adresiniz:::Your Email Address

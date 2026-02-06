@@ -1,0 +1,64 @@
+
+.yorumlar{
+	min-height:40px;
+	display:block;
+}
+.yorumlar_liste {
+	margin: 40px 0 0 0;
+	display: flex;
+}
+.yorum_foto {
+	width: 50px;
+}
+.yof{
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	margin-right: 30px;
+	float:left;
+}
+.yof img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.fotoyok{
+	font-size:17px;
+	text-align:center;
+}
+.fotoyok.yofbg1{background:#77cadd;}
+.fotoyok.yofbg2{background:#58b96d;}
+.fotoyok.yofbg3{background:#e0578c;}
+.fotoyok.yofbg4{background:#f7c27e;}
+.fotoyok.yofbg5{background:#cd74f7;}
+
+.yorum_yazi {
+	margin-left: 30px;
+}
+.yorum_adi_tarih {
+	font-size: 12px;
+}
+.yorum_mesaj{font-size:13px;}
+.yorum_alt_yorumlar{
+	min-height:2px;
+	padding-left:40px;
+}
+
+
+.istek_listesi_yazi {
+	cursor: pointer
+}
+
+.ikinoktaust {
+	position: relative
+}
+
+.ikinoktaust:after {
+	position: absolute;
+	content: ':';
+	top: 0;
+	right: 0;
+	z-index: 2;
+	width: 5px;
+	height: 100%
+}

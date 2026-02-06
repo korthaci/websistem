@@ -1,0 +1,580 @@
+Sistem v%s sürümünde çalışmaktadır.:::系统运行在 v%s 版本上。
+Menüde ara:::在菜单中搜索
+Tema Yönetimi:::主题管理
+Listeyi Yenile:::刷新列表
+Bir sorun oluştu. Lütfen tekrar deneyin.:::出现了一个问题。请重试。
+Mail adresiniz kaydedildi. Teşekkür ederiz.:::您的邮箱地址已成功保存。感谢您。
+Bir hata oluştu. Lütfen tekrar deneyin.:::发生了一个错误。请重试。
+Geçersiz mail adresi.:::无效的电子邮件地址。
+Yorumlar tablosu bulunamadı.:::评论表未找到。
+link:::链接
+Yorum bulunmamaktadır.:::没有评论。
+Link:::链接
+Stiller:::静谧
+Bu mail adresi kayıtlı.:::该邮箱地址已注册。
+Scriptler:::脚本
+Bu sayfayı düzenle:::编辑此页面
+Ülkeler:::国家
+Şehirler:::城市
+Kayıt değiştirilmedi.:::记录未被修改。
+Profil Fotoğrafı:::个人资料照片
+Fotoğraf:::照片
+Bilgileri düzenle:::编辑信息
+E-posta adresiniz:::您的电子邮件地址
+Email iptal edildi:::电子邮件已被取消
+Şifre değiştir:::更改密码
+Eski şifreyi yanlış girdiniz. Şifre değiştirilemedi.:::您输入了错误的旧密码。密码无法更改。
+Yeni şifre alanları eşleşmiyor. Şifre değiştirilemedi.:::新密码字段不匹配。无法更改密码。
+Şifre başarıyla değiştirildi.:::密码已成功更改。
+Şifre değiştirilemedi. Bir hata oluştu.:::无法更改密码。发生错误。
+Eski şifre:::旧密码
+Yeni şifre:::新密码
+Yeni şifre tekrar:::新密码重复
+Şifre Sıfırla:::重置密码
+Kullanıcı bulunamadı.:::用户未找到。
+Şifrenizi sıfırlamak için aşağıdaki linke tıklayın:::点击以下链接重置您的密码
+Şifremi Sıfırla:::重置密码
+Şifre Sıfırlama:::密码重置
+E-posta adresinize şifre sıfırlama bağlantısı gönderildi.:::密码重置链接已发送至您的电子邮箱。
+Mail gönderilirken bir hata oluştu.:::发送邮件时发生错误。
+Kullanıcı adı veya E-posta:::用户名或电子邮件
+E-posta veya kullanıcı adı girin:::请输入电子邮件或用户名
+Yeni Şifre Belirle:::设置新密码
+Geçersiz istek.:::无效请求。
+Geçersiz veya süresi dolmuş token.:::无效或过期的令牌。
+Şifreniz başarıyla değiştirildi.:::您的密码已成功更改。
+Yeni şifre girin:::请输入新密码
+En az %s karakter olmalı:::至少需要%s个字符
+Şifreyi Güncelle:::更新密码
+Hesabını aktifleştir:::激活您的账户
+Aktivasyon kodu:::激活码
+E-posta adresinize aktivasyon kodu gönderildi:::激活码已发送至您的电子邮箱地址。
+Üyelik işlemi henüz tamamlanmadı:::会员注册尚未完成
+Güvenli çıkış:::安全出口
+Üye girişi:::会员登录
+E-posta adresi:::电子邮件地址
+Beni hatırla:::记住我
+Şifre resetle:::重置密码
+Giriş yap:::登录
+Yeni üyelik oluştur:::创建新账户
+Google ile giriş yap:::使用Google登录
+Zaten üye misiniz? Giriş yapın:::您已经是会员了吗？请登录。
+Google ile kayıt ol:::通过Google注册
+Yeni üyelik aktivasyonu:::新会员激活
+Hesabınız başarıyla aktif edildi.:::您的账户已成功激活。
+Giriş sayfasına yönlendiriliyorsunuz...:::您正在被重定向至首页...
+Hesabınız aktif edilemedi. Lütfen daha sonra tekrar deneyiniz.:::您的账户无法激活。请稍后再试。
+Hesabınız aktif edilemedi veya daha önce aktifleştirilmiş.:::您的账户无法激活或已激活。
+Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.:::发生了一个错误。请稍后再试。
+Aktivasyon kodu bulunamadı. Hesabınız aktif edilemedi.:::无法找到激活码。您的账户无法激活。
+Ülke/Şehir:::国家/城市
+Kontrol paneli:::控制面板
+Menü yapısı:::菜单结构
+Yorum formu:::评论表单
+Genel yorumlar:::总体评论
+Diller & Çeviriler:::语言与翻译
+Temalar:::主题
+Genel ayarlar:::常规设置
+Çıkış:::出口
+Resim&Dosya:::图片&文件
+%s ve %s okudum, kabul ediyorum.:::我已阅读 %s 和 %s，我同意。
+Aç:::饿
+Açıkla:::解释
+Açıklama:::解释
+Adı:::名字
+Adı Soyadı:::姓名
+Adınız:::您的姓名
+Adınız Soyadınız:::姓名 姓氏
+Adınız ve Soyadınız:::你的名字和姓
+Adres:::地址
+Adresiniz:::地址
+Aktivasyon Kodu:::激活码
+Aktivasyon kodu gönderilemedi:::无法发送激活码
+Aktivasyon kodu gönderiliyor:::发送激活码
+Aktivasyon kodu mail adresinize gönderildi:::激活码已发送到您的电子邮件地址
+Anasayfa:::家
+Anlık Mesaj Sınırı:::即时消息限制
+ara:::破
+Aradığınız kelimeler, arama kriteri için geçerli değil. Lütfen iki harften daha uzun kelimeler ile arama yapın:::您搜索的单词不适用于搜索条件。请搜索长度超过两个字母的单词
+Aradığınız kelimeleri içeren herhangi bir yazı bulunamadı.:::没有找到包含您要查找的单词的帖子。
+Arama Sonuçları:::搜索结果
+Aşağıdaki bağlantıya tıklayarak hesabınızı aktif edebilirsiniz:::您可以通过单击下面的链接激活您的帐户
+Ay:::月亮
+Ayarlar:::集
+Aynı yorum:::同样的评论
+Başarılı:::成功的
+Başarısız:::失败
+Başka kelimelerle yeniden arama yapabilirsiniz:::您可以使用其他字词再次搜索
+Başlık:::标题
+Belirlenmedi:::未确定
+Belirtilmedi:::指定
+Bilgi:::知识
+Bilgiler:::信息
+Bilgiler eksik:::信息缺失
+Bilgileri duzenle:::在信息下
+Bilgileri Düzenle:::编辑信息
+Bilgileri onaylıyorum.:::确认信息。
+Bir hata oluştu:::发生错误
+Bir hata oluştu. Lütfen daha sonra tekrar deneyin.:::发生错误。请稍后重试。
+Bizi seçtiğiniz için teşekkür ederiz.:::感谢您选择我们。
+Bölüm:::部分
+Bu alan işaretlenmelidir:::该区域应标记
+Bu alan onaylanmalıdır:::该区域应批准
+Bu bölümde sayfa bulunmamaktadır:::此部分没有页面
+Bu kişiye mesaj yollamak için tıklayın:::单击此处向此人发送消息
+Bu kriterde üye bulunmuyor:::没有成员符合此标准
+Bu linke tıklayarak mesajlarınızı düzenleyebilirsiniz veya email alımını iptal edebilirsiniz:::通过单击此链接，您可以编辑您的消息或取消电子邮件接收
+Bu mail adresinden artık mesaj almamak için tıklayın:::单击此处停止接收来自此电子邮件地址的邮件
+Bugün:::今天
+Buraya tıklayın:::点击这里
+Cevap:::答
+Cevap yazın:::写回复
+CVC No:::CVC 编号
+Daha fazla bilgi:::了解更多信息
+Daha fazlası:::更多的
+Daha uzun yorum yazmalısınız:::你应该写更长的评论
+Değişiklikleri kaydet:::保存更改
+Değiştir:::改变
+Değiştirilmedi:::改变
+Detay:::细节
+Devam:::延续
+Devam Et:::继续
+Devamı:::续集
+Diğer:::其他
+Diğer araçlar:::其他车辆
+Dil:::语言
+Dil seçin:::选择语言
+Doğum Tarihi:::出生日期
+Dosya Bulunamadı:::找不到文件
+Dosya Yüklendi:::已上传的文件
+Dosya Yüklenemedi:::无法上传文件
+Dosyalar:::文件
+Düzenle:::编辑
+E posta adresiniz:::您的电子邮件地址
+Ek Bilgiler:::附加信息
+Ek dosyalar:::其他文件
+Ekle/Kaldır:::添加/删除
+Eklendi:::添加
+Eklenme Tarihi:::添加日期
+Eklenmedi:::未添加
+Elektrik:::电力
+Email:::电子邮件
+Email alımını iptal ettiniz:::您已取消接收电子邮件
+Email ile giriş:::通过电子邮件登录
+Email listesi:::电子邮件列表
+Email listesine kayıt olmak için email adresinizi yazın:::编写您的电子邮件地址以注册电子邮件列表
+E-Posta Adresi:::电子邮件地址
+E-posta alımı iptal edildi:::取消电子邮件接收
+E-posta listesine üye olun:::注册我们的邮件列表
+Erkek:::雄
+Eski Şifre:::旧密码
+Eski şifreyi yanlış girdiniz:::您输入的旧密码有误
+Etiketler:::标签
+Fatura Adresi:::账单地址
+Fatura Ünvanı:::发票标题
+Filtreler:::过滤器
+Form Gönderildi. Teşekkür ederiz:::表格已提交。谢谢
+Form Gönderilemedi:::无法提交表格
+Foto:::相片
+Fotoğraf Galerisi:::图片库
+Fotoğraf yükle:::上传照片
+Fotoğrafını Yükle:::上传您的照片
+Fotoğraflar:::照片
+Geçerli bir mail adresi girin:::输入有效的电子邮件地址
+Geçersiz email:::无效的电子邮件
+Genel:::常规
+Genel Bilgiler:::一般信息
+Gerekli:::必要
+Gerekli alan:::所需区域
+Geri:::后退
+Geri Dön:::返回
+Giriş Yap:::登录
+Git:::去
+Gizle:::隐藏
+Gizlilik ve güvenlik:::隐私和安全
+Gönder:::发送
+Göster:::显示
+GSM:::全球定位系统
+Gün:::日
+gün:::日
+Güvenli Çıkış:::安全出口
+Harita:::地图
+Hatırlatma:::提醒
+Hepsi:::都
+Hesabınız aktif edilemedi. Aktivasyon süresi geçmiş olabilir veya zaten aktif olabilir:::您的帐户无法激活。激活可能已过期或可能已处于活动状态
+Hesabınız aktif edilmiştir:::您的帐户已激活
+Hiçbiri:::没有
+Hoşgeldiniz:::欢迎
+Iletişim:::沟通
+İlçe:::县
+İletişim formu:::联系表格
+İletişim formu aracılığıyla istek ve önerilerinizi bildirebilirsiniz:::您可以通过联系表报告您的请求和建议
+İlk:::第一
+İncele:::视图
+İsim:::名字
+İsim kopyalandı:::复制的名称
+İsteğe bağlı:::自选
+İstek Gönderildi. Teşekkür ederiz:::请求已发送。谢谢
+İstek Gönderilemedi:::无法发送请求
+Kadın:::女人
+Kampanya:::运动
+Kapat:::关闭
+Kart Numarası:::卡号
+Kart üzerindeki isim:::卡上的名字
+Katıl:::加入
+Kaydedildi:::保存
+Kaydedilemedi:::无法保存
+Kaydet:::救
+Kayıt değiştirilmedi:::记录未被修改
+Kayıt ol:::登记
+Kayıt tarihi:::注册日期
+Kaynak:::源
+kelime ile ara:::按单词搜索
+Keşfet:::探讨
+Listele:::列表
+Listeye dön:::返回列表
+Listeye Geri Dön:::返回列表
+Lütfen daha sonra tekrar deneyin:::请稍后重试
+Lütfen tekrar deneyin:::请重试
+Mail:::邮件
+Mail adresi bulunamadı:::未找到电子邮件地址
+Mail Adresi Uygun:::可用的电子邮件地址
+Mail Adresi Uygun Değil:::电子邮件地址不可用
+Mail adresini yazın:::键入电子邮件地址
+Mail adresiniz görüntülenmez:::您的电子邮件地址不会显示
+Mail adresinizdeki aktivasyon linkine tıklayın veya aktivasyon kodunu aşağıdaki alana yazın:::单击您电子邮件地址中的激活链接或在下面的字段中输入激活码
+Mail adresinize aktivasyon kodu gönderilecektir:::激活码将发送到您的电子邮件地址
+Mail Gönderildi:::已发送邮件
+Mail Gönderilemedi:::无法发送邮件
+Menü:::菜单
+Menüde var:::它在菜单上
+Mesaj gönderildi:::发送的消息
+Mesaj Gönderildi. Teşekkür ederiz:::消息已发送。谢谢
+Mesaj Gönderilemedi:::无法发送消息
+Mesajınız:::消息
+Mesajlarım:::我的消息
+Misafir:::客人
+Mobil:::移动
+Onayla:::确认
+Onaylamıyorum:::我不赞成
+Onaylıyor musunuz:::你赞成吗？
+Onaylıyorum:::同意
+Ortalama:::平均
+Önceki:::以前
+Önceki Sayfaya Dön:::返回上一页
+önerilen:::受到推崇的
+Önizleme:::预览
+Paylaş:::共享
+Posta Kodu:::邮政编码
+Profil Resmi:::个人资料图片
+Renk:::颜色
+Resim:::图片
+Resim Ekle:::添加图像
+Resim Oluşturma:::创建图像
+Resim Yükleme Sınırı:::图片上传限制
+Resim Yüklendi:::图片上传
+Resim Yüklenemedi:::加载映像失败
+Resimler:::图片
+RSS Başlıkları:::RSS 提要
+Saat:::小时
+Satış sözleşmesi:::销售协议
+Sayfa:::页
+Sayfa bulunamadı:::没有找到页面
+Sayfa Bulunamadı. Yayından kaldırılmış veya silinmiş olabilir:::找不到页面。可以取消发布或删除
+Sayfalar:::页面
+Sayı:::数
+Seç:::选择
+Sehir Seç:::选择城市
+Semt:::季度
+Sınırsız:::无限
+Sıra:::队列
+Sıralama:::安排
+Sil:::删除
+Silindi:::删除
+Silinemedi:::无法删除
+Son:::结束
+Son Kullanma Tarihi:::保质期
+Sonraki:::随后的
+Sonuç:::结果
+Soru:::问题
+Sosyal medya:::社交媒体
+Soyadınız:::姓
+Spam, Gereksiz, Gelen Kutusunu kontrol etmeyi unutmayın:::垃圾邮件，不必要的，不要忘记检查收件箱
+Şehir:::城市
+Şehir seçmelisiniz:::您必须选择一个城市
+Şifre:::密码
+Şifre değistir:::更改密码
+Şifre Değiştir:::更改密码
+Şifre Değiştirildi:::密码已更改
+Şifre Değiştirilemedi:::无法更改密码
+Şifre Hatırlat:::提醒密码
+Şifre hatırlatması için lütfen kayıtlı email adresinizi yazın:::请输入您注册的电子邮件地址作为密码提醒
+Şifreni mi unuttun?:::忘记密码？
+Şifreniz mail adresinize gönderildi:::您的密码已发送到您的电子邮件地址
+Tarih:::历史
+Tarih bulunamadı:::日期未找到
+Tarihe git:::转到历史记录
+Taslak olarak kaydet:::另存为草稿
+Tebrik ederiz:::祝贺
+Telefon:::电话
+Teşekkür ederiz:::谢谢
+Tüm hakları saklıdır:::版权所有
+Tümü:::都
+Tümünü listele:::列出所有
+Ülke:::国家
+Ülke Seç:::选择国家/地区
+Üye Adı:::成员名称
+Üye bulunmamaktadır:::没有成员
+Üye Girişi:::会员登录
+üye girişi yap:::成为会员
+Üye Ol:::登记
+Üyeler:::成员
+Üyelik Bilgileri:::会员信息
+Üyelik bilgileriniz aşağıdaki gibidir.:::您的会员信息如下。
+Üyelik için buraya tıklayın:::点击这里成为会员
+Üyelik işleminiz tamamlanmadı:::您的注册过程尚未完成
+Var:::有
+Vergi Dairesi:::税务局
+Vergi Numarası:::税号
+Web Adresi:::网址
+Yardım:::帮助
+Yaşınız:::您的年龄
+Yayın:::出版
+Yayın Tarihi:::发布日期
+Yayında:::出版
+Yayında değil:::不直播
+Yayınlansın:::让它被发布
+Yazdır:::打印
+Yazı:::写作
+Yazı Boyutunu Arttır:::增加字体大小
+Yazı Boyutunu Azalt:::减小字体大小
+Yazı Boyutunu Ortala:::居中字体大小
+Yeni sayfa:::新页面
+Yeni Şifre:::新密码
+Yeni şifre alanlarını yanlış girdiniz:::您输入的新密码字段不正确
+Yeni Şifre Tekrar:::再次新密码
+Yeni üyelik:::新会员资格
+Yeni Yorum Yaz:::写一条新评论
+Yetki:::柄
+Yetkili:::授权
+Yıl:::年
+Yok:::不
+Yorum:::评论
+Yorum Açık:::评论
+Yorum gönderildi:::评论发送
+Yorum gönderilemedi:::未能发表评论
+Yorum yaz:::写评论
+Yorum yazmak için üye girişi yapmalısınız:::您必须登录成员写评论
+Yorumlar:::评论
+Yorumunuzu yazın:::写你的评论
+Yönetim Paneli:::管理面板
+Yükle:::安装
+Zorunlu alanlardır:::必填字段
+Mesaj gönderilemedi:::消息发送失败
+Web sitemizde kullanılan çerezler yalnızca teknik amaçlarla sınırlıdır:::本网站使用的Cookie仅限于技术目的。
+Bileşen:::组件
+Aktif:::活跃
+css, js dosyalarını birleştir veya sil:::合并或删除CSS、JS文件
+Birleştirilmiş dosyaları sil:::删除合并的文件
+Birleştirilmiş css, js dosyaları kullan:::使用合并的CSS和JS文件
+Etkin bilesen bulunmamaktadır.:::不存在有效成分。
+Kur:::哪里
+Bileşenler:::组件
+Değişiklik kaydedildi:::更改已保存
+Değişiklik yapılmadı:::未作修改
+Config dosyası bulunamadı.:::配置文件未找到。
+Bileşen düzenle:::组件管理
+Bileşen yönetim klasörü bulunamadı veya boş.:::组件管理文件夹未找到或为空。
+Bileşen bulunamadı.:::组件未找到。
+Bileşen şablonları.:::组件模板。
+Kaydedildi.:::已保存。
+Tüm bloklar:::所有区块
+Konu başlığı:::主题标题
+İçerik yazıları:::内容文章
+Blok düzenleme:::区块编辑
+Kelime ile ara:::按关键词搜索
+Bloklar:::区块
+Yeni Blok:::新区块
+Blok Başlığı:::区块标题
+Ekle:::添加
+Blok adı:::区块名称
+Çeviri:::翻译
+Bu bölümde kayıt bulunmamaktadır:::本节没有记录。
+Çeviriler:::翻译
+Tüm alanlar:::所有区域
+Sadece boş alanlar:::仅空位
+Master Keys:::主钥匙
+Sync:::同步
+Tümünü çevir:::全部翻译
+Durdur:::停止
+Dosya bulunamadı.:::文件未找到。
+Dil bulunamadı.:::未找到语言。
+Bulunan yeni kelimeler:::发现的新词
+Diller:::语言
+Ülke Adı:::国家名称
+Orjinal:::原版
+Seçenek:::选项
+Son eklenen:::最近添加的
+Filtrele:::过滤器
+Dosya:::文件
+Genel Ayarlar:::常规设置
+Yeni Özellik:::新功能
+Özellik Adı:::特性名称
+değer:::价值
+İki veya daha fazla eposta adresi yazabilirsiniz. Ancak eposta adreslerini virgülle ayırmalısınız. abc@abc.com , mail@rehberim.com ** İçerikte değişiklik olmadığında kayıt işlemi yapılmaz.:::您可以输入两个或更多电子邮件地址。但需用逗号分隔电子邮件地址。例如：abc@abc.com, mail@rehberim.com ** 当内容未发生变更时，系统将不执行注册操作。
+Bu sayfada işlem yapma yetkiniz yok.:::您无权在此页面进行操作。
+Ana sayfaya dön:::返回主页
+Kontrol Paneli:::控制面板
+Hoşgeldiniz, sistem durumu ve hızlı işlemler.:::欢迎，系统状态与快速操作。
+Aktif Sayfa:::活动页面
+Aktif Modül:::活动模块
+Kullanıcılar:::用户
+Sistem Sürümü:::系统版本
+Hızlı İşlemler & Yönetim:::快速操作与管理
+İçerik Yönetimi:::内容管理
+Modüller:::模块
+Dosya Yöneticisi:::文件管理器
+Son Aktiviteler:::最近活动
+Henüz kayıtlı aktivite yok.:::目前尚无已记录的活动。
+Sistem Bilgileri:::系统信息
+PHP Sürümü:::PHP版本
+Sunucu Yazılımı:::服务器软件
+Veritabanı Host:::数据库主机
+Veritabanı Prefix:::数据库前缀
+Sayfa seç:::选择页面
+Sekmeler:::标签页
+Sekme seç:::选项卡选择
+Blok seç:::选择区块
+Menü maddeleri:::菜单项目
+Bağlantı:::链接
+Modül Yönetimi:::模块管理
+Modüllere Dön:::返回模块
+Yönetim Aracı Seçimi:::管理工具选择
+Yönetim dosyası bulunamadı.:::管理文件未找到。
+Lütfen işlem yapmak için yukarıdan bir dosya seçiniz.:::请从上方选择一个文件进行操作。
+Modül yönetim klasörü bulunamadı veya boş.:::模块管理文件夹未找到或为空。
+Tazele:::刷新
+Modül Adı:::模块名称
+Kod (Hash):::代码（哈希值）
+Kısayol:::快捷方式
+Şablonlar:::模板
+Pasif:::被动
+Hash:::哈希
+Kopyala:::复制
+Yönetim Dosyaları:::管理文件
+Görünüm Şablonları:::外观模板
+Performans için CSS ve JS dosyalarını birleştirebilirsiniz.:::为了提升性能，您可以合并CSS和JS文件。
+Birleşik Dosyaları Sil:::删除合并文件
+Dosyaları Birleştir:::合并文件
+Henüz kurulmuş bir modül bulunmuyor.:::尚未创建任何模块。
+Kurulabilir Modüller:::可安装模块
+Şablon başarıyla kaydedildi.:::模板已成功保存。
+Şablonlarını Düzenle:::编辑模板
+Şablon Seçimi:::模板选择
+Şablon dosyası bulunamadı.:::无法找到模板文件。
+Şablon Seçiniz:::请选择模板
+Lütfen düzenlemek için bir şablon seçin:::请选择一个模板进行编辑
+Bu şablonlar FRONTEND tarafında modülün nasıl görüneceğini belirler. Standart HTML ve sistem etiketlerini içerebilir.:::这些模板决定了模块在前端（FRONTEND）的显示效果。它们可能包含标准HTML标签和系统标签。
+Tarih Aralığı:::日期范围
+Yayında Değil:::未播出
+Yeni Sayfa:::新页面
+Sayfa Başlığı:::页面标题
+Sayfa adı:::页面名称
+Sekme:::标签页
+Manşet:::标题
+Tüm sayfalar:::所有页面
+Bölüm Seç:::选择章节
+Sayfa açıklamaları:::页面说明
+Sayfa resimleri:::页面图片
+Tüm sekmeler:::所有标签页
+Sekme adı:::标签名称
+Sekme açıklamaları:::标签说明
+İçerik sayfada görüntülensin:::内容应在页面上显示
+Yeni Sekme:::新标签页
+Sekme Adı:::标签名称
+Geçersiz tema dizini.:::无效主题目录。
+Bloklar başarıyla temanın orijinal haline döndürüldü.:::块已成功恢复为主题的原始状态。
+Yeni bir temaya geçtiniz! Her temanın kendine has bir yapısı olduğu için anasayfa görünümünün tam oturması adına sağ üstteki:::您已切换到新主题！由于每个主题都有其独特的结构，为确保首页外观完美呈现，请点击右上角的
+butonunu kullanarak temanın varsayılan bloklarını yüklemenizi öneririz.:::我们建议您使用按钮加载主题的默认区块。
+Temaya ait blok_html.sql dosyası bulunamadı.:::无法找到主题相关的block_html.sql文件。
+Kayıt Engellendi!:::注册被阻止！
+Dosya başarıyla kaydedildi. Yedek otomatik olarak oluşturuldu.:::文件已成功保存。备份已自动创建。
+Dosya kaydedilirken bir hata oluştu.:::文件保存时发生错误。
+Temasını Düzenle:::编辑主题
+Tüm bloklar silinecek ve temanın varsayılan blokları yüklenecektir. Emin misiniz:::所有区块将被删除，并加载主题的默认区块。确定吗？
+Anasayfada gösterilen bloklar:::主页上显示的区块
+Blokları Yeniden Oluştur:::重新创建区块
+Temalara Dön:::返回主题
+Tema Dosyaları:::主题文件
+Dosya Seçiniz:::请选择文件
+Yedekler:::替补队员
+Lütfen düzenlemek için bir dosya seçin...:::请选择一个文件进行编辑...
+Dosya Yedekleri:::文件备份
+Boyut:::尺寸
+İşlem:::操作
+Geri Yükle:::恢复
+teması başarıyla etkinleştirildi. Görünümün tam olarak oturması için blokları yapılandırmanız gerekebilir.:::主题已成功启用。为使外观完全就位，您可能需要配置块。
+Blokları Yapılandır:::构建块
+Etkinleştir:::启用
+Üye düzenle:::会员管理
+Bir hata oluştu.:::发生了一个错误。
+Email alımı:::电子邮件接收
+Email Adresi:::电子邮件地址
+Email adresi:::电子邮件地址
+Kullanıcı adı:::用户名
+Aktivasyon:::激活
+Liste:::列表
+Yeni Üye:::新会员
+E-posta:::电子邮件
+Ara:::订单
+Son giriş:::最后一次登录
+Üye bulunmamaktadır.:::没有会员。
+Ad Soyad:::名字 姓氏
+Yetkisiz erişim.:::未经授权的访问。
+Dizin Yok:::索引不存在
+Dosya yok veya yüklenemedi.:::文件不存在或无法加载。
+Bu dosya türü güvenlik nedeniyle yüklenemez.:::出于安全原因，此文件类型无法上传。
+Geçersiz resim dosyası. Dosya bozuk veya resim formatında değil.:::无效的图片文件。文件损坏或不是图片格式。
+Bu resim formatı desteklenmiyor.:::此图片格式不被支持。
+Geçersiz resim MIME type.:::无效的图片MIME类型。
+Resim dosya uzantısı geçersiz.:::图片文件扩展名无效。
+Dosyada güvenlik ihlali tespit edildi.:::文件中检测到安全漏洞。
+Yükleme başarısız.:::加载失败。
+Yükleme başarılı.:::加载成功。
+Geçersiz işlem:::无效操作
+Geçersiz işlem.:::无效操作。
+Bilinmeyen bir hata oluştu.:::发生了一个未知错误。
+Gerekli bilgiler eksik.:::所需信息不完整。
+Geçersiz veya eksik veri.:::无效或不完整的数据。
+Seçenek başarıyla güncellendi.:::选项已成功更新。
+Değişiklik yapılmadı.:::未作修改。
+Veritabanı hatası.:::数据库错误。
+Değer değişmedi.:::价值没有改变。
+Değer kaydedildi.:::值已保存。
+Değer kaydedilemedi.:::值无法保存。
+Metin kaydedildi.:::文本已保存。
+Metin kaydedilemedi veya değişiklik yapılmadı.:::文本未保存或未进行修改。
+Kayıt başarıyla silindi.:::记录已成功删除。
+Kayıt silinemedi.:::无法删除记录。
+Gerekli parametreler eksik:::缺少必要的参数
+Sıralama güncellendi:::排序已更新
+Sıralama güncellenirken bir hata oluştu:::排序更新时发生错误
+Tema adı belirtilmedi.:::主题名称未指定。
+Tema başarıyla etkinleştirildi.:::主题已成功启用。
+Yeni tema adı belirtilmedi.:::新主题名称未指定。
+Bu isimde bir tema zaten mevcut.:::该名称的主题已存在。
+Tema başarıyla kopyalandı.:::主题已成功复制。
+Aktif tema silinemez.:::活动主题不可删除。
+Tema başarıyla arşive kaldırıldı.:::主题已成功归档。
+Tema bulunamadı.:::未找到主题。
+Dosya adı belirtilmedi.:::文件名未指定。
+Dosya adı veya yedek tarihi belirtilmedi.:::未指定文件名或备份日期。
+Yedek başarıyla geri yüklendi.:::备份已成功恢复。
+Yedek geri yüklenirken bir hata oluştu.:::备份还原时发生错误。
+Yedek dosyası silindi.:::备份文件已被删除。
+Yedek silinirken hata oluştu veya dosya bulunamadı.:::备份删除时发生错误或文件未找到。
+Geçersiz işlem tipi.:::无效的操作类型。
+Değer:::价值
+Özellik:::特性
+Detaylı bilgi için %s’ni inceleyebilirsiniz:::有关详细信息，您可以查看 %s。
+E Posta Adresiniz:::您的电子邮件地址

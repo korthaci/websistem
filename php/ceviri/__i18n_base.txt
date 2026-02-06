@@ -1,0 +1,580 @@
+Sistem v%s sürümünde çalışmaktadır.:::
+Menüde ara:::
+Tema Yönetimi:::
+Listeyi Yenile:::
+Bir sorun oluştu. Lütfen tekrar deneyin.:::
+Mail adresiniz kaydedildi. Teşekkür ederiz.:::
+Bir hata oluştu. Lütfen tekrar deneyin.:::
+Geçersiz mail adresi.:::
+Yorumlar tablosu bulunamadı.:::
+link:::
+Yorum bulunmamaktadır.:::
+Link:::
+Stiller:::
+Bu mail adresi kayıtlı.:::
+Scriptler:::
+Bu sayfayı düzenle:::
+Ülkeler:::
+Şehirler:::
+Kayıt değiştirilmedi.:::
+Profil Fotoğrafı:::
+Fotoğraf:::
+Bilgileri düzenle:::
+E-posta adresiniz:::
+Email iptal edildi:::
+Şifre değiştir:::
+Eski şifreyi yanlış girdiniz. Şifre değiştirilemedi.:::
+Yeni şifre alanları eşleşmiyor. Şifre değiştirilemedi.:::
+Şifre başarıyla değiştirildi.:::
+Şifre değiştirilemedi. Bir hata oluştu.:::
+Eski şifre:::
+Yeni şifre:::
+Yeni şifre tekrar:::
+Şifre Sıfırla:::
+Kullanıcı bulunamadı.:::
+Şifrenizi sıfırlamak için aşağıdaki linke tıklayın:::
+Şifremi Sıfırla:::
+Şifre Sıfırlama:::
+E-posta adresinize şifre sıfırlama bağlantısı gönderildi.:::
+Mail gönderilirken bir hata oluştu.:::
+Kullanıcı adı veya E-posta:::
+E-posta veya kullanıcı adı girin:::
+Yeni Şifre Belirle:::
+Geçersiz istek.:::
+Geçersiz veya süresi dolmuş token.:::
+Şifreniz başarıyla değiştirildi.:::
+Yeni şifre girin:::
+En az %s karakter olmalı:::
+Şifreyi Güncelle:::
+Hesabını aktifleştir:::
+Aktivasyon kodu:::
+E-posta adresinize aktivasyon kodu gönderildi:::
+Üyelik işlemi henüz tamamlanmadı:::
+Güvenli çıkış:::
+Üye girişi:::
+E-posta adresi:::
+Beni hatırla:::
+Şifre resetle:::
+Giriş yap:::
+Yeni üyelik oluştur:::
+Google ile giriş yap:::
+Zaten üye misiniz? Giriş yapın:::
+Google ile kayıt ol:::
+Yeni üyelik aktivasyonu:::
+Hesabınız başarıyla aktif edildi.:::
+Giriş sayfasına yönlendiriliyorsunuz...:::
+Hesabınız aktif edilemedi. Lütfen daha sonra tekrar deneyiniz.:::
+Hesabınız aktif edilemedi veya daha önce aktifleştirilmiş.:::
+Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.:::
+Aktivasyon kodu bulunamadı. Hesabınız aktif edilemedi.:::
+Ülke/Şehir:::
+Kontrol paneli:::
+Menü yapısı:::
+Yorum formu:::
+Genel yorumlar:::
+Diller & Çeviriler:::
+Temalar:::
+Genel ayarlar:::
+Çıkış:::
+Resim&Dosya:::
+%s ve %s okudum, kabul ediyorum.:::
+Aç:::
+Açıkla:::
+Açıklama:::
+Adı:::
+Adı Soyadı:::
+Adınız:::
+Adınız Soyadınız:::
+Adınız ve Soyadınız:::
+Adres:::
+Adresiniz:::
+Aktivasyon Kodu:::
+Aktivasyon kodu gönderilemedi:::
+Aktivasyon kodu gönderiliyor:::
+Aktivasyon kodu mail adresinize gönderildi:::
+Anasayfa:::
+Anlık Mesaj Sınırı:::
+ara:::
+Aradığınız kelimeler, arama kriteri için geçerli değil. Lütfen iki harften daha uzun kelimeler ile arama yapın:::
+Aradığınız kelimeleri içeren herhangi bir yazı bulunamadı.:::
+Arama Sonuçları:::
+Aşağıdaki bağlantıya tıklayarak hesabınızı aktif edebilirsiniz:::
+Ay:::
+Ayarlar:::
+Aynı yorum:::
+Başarılı:::
+Başarısız:::
+Başka kelimelerle yeniden arama yapabilirsiniz:::
+Başlık:::
+Belirlenmedi:::
+Belirtilmedi:::
+Bilgi:::
+Bilgiler:::
+Bilgiler eksik:::
+Bilgileri duzenle:::
+Bilgileri Düzenle:::
+Bilgileri onaylıyorum.:::
+Bir hata oluştu:::
+Bir hata oluştu. Lütfen daha sonra tekrar deneyin.:::
+Bizi seçtiğiniz için teşekkür ederiz.:::
+Bölüm:::
+Bu alan işaretlenmelidir:::
+Bu alan onaylanmalıdır:::
+Bu bölümde sayfa bulunmamaktadır:::
+Bu kişiye mesaj yollamak için tıklayın:::
+Bu kriterde üye bulunmuyor:::
+Bu linke tıklayarak mesajlarınızı düzenleyebilirsiniz veya email alımını iptal edebilirsiniz:::
+Bu mail adresinden artık mesaj almamak için tıklayın:::
+Bugün:::
+Buraya tıklayın:::
+Cevap:::
+Cevap yazın:::
+CVC No:::
+Daha fazla bilgi:::
+Daha fazlası:::
+Daha uzun yorum yazmalısınız:::
+Değişiklikleri kaydet:::
+Değiştir:::
+Değiştirilmedi:::
+Detay:::
+Devam:::
+Devam Et:::
+Devamı:::
+Diğer:::
+Diğer araçlar:::
+Dil:::
+Dil seçin:::
+Doğum Tarihi:::
+Dosya Bulunamadı:::
+Dosya Yüklendi:::
+Dosya Yüklenemedi:::
+Dosyalar:::
+Düzenle:::
+E posta adresiniz:::
+Ek Bilgiler:::
+Ek dosyalar:::
+Ekle/Kaldır:::
+Eklendi:::
+Eklenme Tarihi:::
+Eklenmedi:::
+Elektrik:::
+Email:::
+Email alımını iptal ettiniz:::
+Email ile giriş:::
+Email listesi:::
+Email listesine kayıt olmak için email adresinizi yazın:::
+E-Posta Adresi:::
+E-posta alımı iptal edildi:::
+E-posta listesine üye olun:::
+Erkek:::
+Eski Şifre:::
+Eski şifreyi yanlış girdiniz:::
+Etiketler:::
+Fatura Adresi:::
+Fatura Ünvanı:::
+Filtreler:::
+Form Gönderildi. Teşekkür ederiz:::
+Form Gönderilemedi:::
+Foto:::
+Fotoğraf Galerisi:::
+Fotoğraf yükle:::
+Fotoğrafını Yükle:::
+Fotoğraflar:::
+Geçerli bir mail adresi girin:::
+Geçersiz email:::
+Genel:::
+Genel Bilgiler:::
+Gerekli:::
+Gerekli alan:::
+Geri:::
+Geri Dön:::
+Giriş Yap:::
+Git:::
+Gizle:::
+Gizlilik ve güvenlik:::
+Gönder:::
+Göster:::
+GSM:::
+Gün:::
+gün:::
+Güvenli Çıkış:::
+Harita:::
+Hatırlatma:::
+Hepsi:::
+Hesabınız aktif edilemedi. Aktivasyon süresi geçmiş olabilir veya zaten aktif olabilir:::
+Hesabınız aktif edilmiştir:::
+Hiçbiri:::
+Hoşgeldiniz:::
+Iletişim:::
+İlçe:::
+İletişim formu:::
+İletişim formu aracılığıyla istek ve önerilerinizi bildirebilirsiniz:::
+İlk:::
+İncele:::
+İsim:::
+İsim kopyalandı:::
+İsteğe bağlı:::
+İstek Gönderildi. Teşekkür ederiz:::
+İstek Gönderilemedi:::
+Kadın:::
+Kampanya:::
+Kapat:::
+Kart Numarası:::
+Kart üzerindeki isim:::
+Katıl:::
+Kaydedildi:::
+Kaydedilemedi:::
+Kaydet:::
+Kayıt değiştirilmedi:::
+Kayıt ol:::
+Kayıt tarihi:::
+Kaynak:::
+kelime ile ara:::
+Keşfet:::
+Listele:::
+Listeye dön:::
+Listeye Geri Dön:::
+Lütfen daha sonra tekrar deneyin:::
+Lütfen tekrar deneyin:::
+Mail:::
+Mail adresi bulunamadı:::
+Mail Adresi Uygun:::
+Mail Adresi Uygun Değil:::
+Mail adresini yazın:::
+Mail adresiniz görüntülenmez:::
+Mail adresinizdeki aktivasyon linkine tıklayın veya aktivasyon kodunu aşağıdaki alana yazın:::
+Mail adresinize aktivasyon kodu gönderilecektir:::
+Mail Gönderildi:::
+Mail Gönderilemedi:::
+Menü:::
+Menüde var:::
+Mesaj gönderildi:::
+Mesaj Gönderildi. Teşekkür ederiz:::
+Mesaj Gönderilemedi:::
+Mesajınız:::
+Mesajlarım:::
+Misafir:::
+Mobil:::
+Onayla:::
+Onaylamıyorum:::
+Onaylıyor musunuz:::
+Onaylıyorum:::
+Ortalama:::
+Önceki:::
+Önceki Sayfaya Dön:::
+önerilen:::
+Önizleme:::
+Paylaş:::
+Posta Kodu:::
+Profil Resmi:::
+Renk:::
+Resim:::
+Resim Ekle:::
+Resim Oluşturma:::
+Resim Yükleme Sınırı:::
+Resim Yüklendi:::
+Resim Yüklenemedi:::
+Resimler:::
+RSS Başlıkları:::
+Saat:::
+Satış sözleşmesi:::
+Sayfa:::
+Sayfa bulunamadı:::
+Sayfa Bulunamadı. Yayından kaldırılmış veya silinmiş olabilir:::
+Sayfalar:::
+Sayı:::
+Seç:::
+Sehir Seç:::
+Semt:::
+Sınırsız:::
+Sıra:::
+Sıralama:::
+Sil:::
+Silindi:::
+Silinemedi:::
+Son:::
+Son Kullanma Tarihi:::
+Sonraki:::
+Sonuç:::
+Soru:::
+Sosyal medya:::
+Soyadınız:::
+Spam, Gereksiz, Gelen Kutusunu kontrol etmeyi unutmayın:::
+Şehir:::
+Şehir seçmelisiniz:::
+Şifre:::
+Şifre değistir:::
+Şifre Değiştir:::
+Şifre Değiştirildi:::
+Şifre Değiştirilemedi:::
+Şifre Hatırlat:::
+Şifre hatırlatması için lütfen kayıtlı email adresinizi yazın:::
+Şifreni mi unuttun?:::
+Şifreniz mail adresinize gönderildi:::
+Tarih:::
+Tarih bulunamadı:::
+Tarihe git:::
+Taslak olarak kaydet:::
+Tebrik ederiz:::
+Telefon:::
+Teşekkür ederiz:::
+Tüm hakları saklıdır:::
+Tümü:::
+Tümünü listele:::
+Ülke:::
+Ülke Seç:::
+Üye Adı:::
+Üye bulunmamaktadır:::
+Üye Girişi:::
+üye girişi yap:::
+Üye Ol:::
+Üyeler:::
+Üyelik Bilgileri:::
+Üyelik bilgileriniz aşağıdaki gibidir.:::
+Üyelik için buraya tıklayın:::
+Üyelik işleminiz tamamlanmadı:::
+Var:::
+Vergi Dairesi:::
+Vergi Numarası:::
+Web Adresi:::
+Yardım:::
+Yaşınız:::
+Yayın:::
+Yayın Tarihi:::
+Yayında:::
+Yayında değil:::
+Yayınlansın:::
+Yazdır:::
+Yazı:::
+Yazı Boyutunu Arttır:::
+Yazı Boyutunu Azalt:::
+Yazı Boyutunu Ortala:::
+Yeni sayfa:::
+Yeni Şifre:::
+Yeni şifre alanlarını yanlış girdiniz:::
+Yeni Şifre Tekrar:::
+Yeni üyelik:::
+Yeni Yorum Yaz:::
+Yetki:::
+Yetkili:::
+Yıl:::
+Yok:::
+Yorum:::
+Yorum Açık:::
+Yorum gönderildi:::
+Yorum gönderilemedi:::
+Yorum yaz:::
+Yorum yazmak için üye girişi yapmalısınız:::
+Yorumlar:::
+Yorumunuzu yazın:::
+Yönetim Paneli:::
+Yükle:::
+Zorunlu alanlardır:::
+Mesaj gönderilemedi:::
+Web sitemizde kullanılan çerezler yalnızca teknik amaçlarla sınırlıdır:::
+Bileşen:::
+Aktif:::
+css, js dosyalarını birleştir veya sil:::
+Birleştirilmiş dosyaları sil:::
+Birleştirilmiş css, js dosyaları kullan:::
+Etkin bilesen bulunmamaktadır.:::
+Kur:::
+Bileşenler:::
+Değişiklik kaydedildi:::
+Değişiklik yapılmadı:::
+Config dosyası bulunamadı.:::
+Bileşen düzenle:::
+Bileşen yönetim klasörü bulunamadı veya boş.:::
+Bileşen bulunamadı.:::
+Bileşen şablonları.:::
+Kaydedildi.:::
+Tüm bloklar:::
+Konu başlığı:::
+İçerik yazıları:::
+Blok düzenleme:::
+Kelime ile ara:::
+Bloklar:::
+Yeni Blok:::
+Blok Başlığı:::
+Ekle:::
+Blok adı:::
+Çeviri:::
+Bu bölümde kayıt bulunmamaktadır:::
+Çeviriler:::
+Tüm alanlar:::
+Sadece boş alanlar:::
+Master Keys:::
+Sync:::
+Tümünü çevir:::
+Durdur:::
+Dosya bulunamadı.:::
+Dil bulunamadı.:::
+Bulunan yeni kelimeler:::
+Diller:::
+Ülke Adı:::
+Orjinal:::
+Seçenek:::
+Son eklenen:::
+Filtrele:::
+Dosya:::
+Genel Ayarlar:::
+Yeni Özellik:::
+Özellik Adı:::
+değer:::
+İki veya daha fazla eposta adresi yazabilirsiniz. Ancak eposta adreslerini virgülle ayırmalısınız. abc@abc.com , mail@rehberim.com ** İçerikte değişiklik olmadığında kayıt işlemi yapılmaz.:::
+Bu sayfada işlem yapma yetkiniz yok.:::
+Ana sayfaya dön:::
+Kontrol Paneli:::
+Hoşgeldiniz, sistem durumu ve hızlı işlemler.:::
+Aktif Sayfa:::
+Aktif Modül:::
+Kullanıcılar:::
+Sistem Sürümü:::
+Hızlı İşlemler & Yönetim:::
+İçerik Yönetimi:::
+Modüller:::
+Dosya Yöneticisi:::
+Son Aktiviteler:::
+Henüz kayıtlı aktivite yok.:::
+Sistem Bilgileri:::
+PHP Sürümü:::
+Sunucu Yazılımı:::
+Veritabanı Host:::
+Veritabanı Prefix:::
+Sayfa seç:::
+Sekmeler:::
+Sekme seç:::
+Blok seç:::
+Menü maddeleri:::
+Bağlantı:::
+Modül Yönetimi:::
+Modüllere Dön:::
+Yönetim Aracı Seçimi:::
+Yönetim dosyası bulunamadı.:::
+Lütfen işlem yapmak için yukarıdan bir dosya seçiniz.:::
+Modül yönetim klasörü bulunamadı veya boş.:::
+Tazele:::
+Modül Adı:::
+Kod (Hash):::
+Kısayol:::
+Şablonlar:::
+Pasif:::
+Hash:::
+Kopyala:::
+Yönetim Dosyaları:::
+Görünüm Şablonları:::
+Performans için CSS ve JS dosyalarını birleştirebilirsiniz.:::
+Birleşik Dosyaları Sil:::
+Dosyaları Birleştir:::
+Henüz kurulmuş bir modül bulunmuyor.:::
+Kurulabilir Modüller:::
+Şablon başarıyla kaydedildi.:::
+Şablonlarını Düzenle:::
+Şablon Seçimi:::
+Şablon dosyası bulunamadı.:::
+Şablon Seçiniz:::
+Lütfen düzenlemek için bir şablon seçin:::
+Bu şablonlar FRONTEND tarafında modülün nasıl görüneceğini belirler. Standart HTML ve sistem etiketlerini içerebilir.:::
+Tarih Aralığı:::
+Yayında Değil:::
+Yeni Sayfa:::
+Sayfa Başlığı:::
+Sayfa adı:::
+Sekme:::
+Manşet:::
+Tüm sayfalar:::
+Bölüm Seç:::
+Sayfa açıklamaları:::
+Sayfa resimleri:::
+Tüm sekmeler:::
+Sekme adı:::
+Sekme açıklamaları:::
+İçerik sayfada görüntülensin:::
+Yeni Sekme:::
+Sekme Adı:::
+Geçersiz tema dizini.:::
+Bloklar başarıyla temanın orijinal haline döndürüldü.:::
+Yeni bir temaya geçtiniz! Her temanın kendine has bir yapısı olduğu için anasayfa görünümünün tam oturması adına sağ üstteki:::
+butonunu kullanarak temanın varsayılan bloklarını yüklemenizi öneririz.:::
+Temaya ait blok_html.sql dosyası bulunamadı.:::
+Kayıt Engellendi!:::
+Dosya başarıyla kaydedildi. Yedek otomatik olarak oluşturuldu.:::
+Dosya kaydedilirken bir hata oluştu.:::
+Temasını Düzenle:::
+Tüm bloklar silinecek ve temanın varsayılan blokları yüklenecektir. Emin misiniz:::
+Anasayfada gösterilen bloklar:::
+Blokları Yeniden Oluştur:::
+Temalara Dön:::
+Tema Dosyaları:::
+Dosya Seçiniz:::
+Yedekler:::
+Lütfen düzenlemek için bir dosya seçin...:::
+Dosya Yedekleri:::
+Boyut:::
+İşlem:::
+Geri Yükle:::
+teması başarıyla etkinleştirildi. Görünümün tam olarak oturması için blokları yapılandırmanız gerekebilir.:::
+Blokları Yapılandır:::
+Etkinleştir:::
+Üye düzenle:::
+Bir hata oluştu.:::
+Email alımı:::
+Email Adresi:::
+Email adresi:::
+Kullanıcı adı:::
+Aktivasyon:::
+Liste:::
+Yeni Üye:::
+E-posta:::
+Ara:::
+Son giriş:::
+Üye bulunmamaktadır.:::
+Ad Soyad:::
+Yetkisiz erişim.:::
+Dizin Yok:::
+Dosya yok veya yüklenemedi.:::
+Bu dosya türü güvenlik nedeniyle yüklenemez.:::
+Geçersiz resim dosyası. Dosya bozuk veya resim formatında değil.:::
+Bu resim formatı desteklenmiyor.:::
+Geçersiz resim MIME type.:::
+Resim dosya uzantısı geçersiz.:::
+Dosyada güvenlik ihlali tespit edildi.:::
+Yükleme başarısız.:::
+Yükleme başarılı.:::
+Geçersiz işlem:::
+Geçersiz işlem.:::
+Bilinmeyen bir hata oluştu.:::
+Gerekli bilgiler eksik.:::
+Geçersiz veya eksik veri.:::
+Seçenek başarıyla güncellendi.:::
+Değişiklik yapılmadı.:::
+Veritabanı hatası.:::
+Değer değişmedi.:::
+Değer kaydedildi.:::
+Değer kaydedilemedi.:::
+Metin kaydedildi.:::
+Metin kaydedilemedi veya değişiklik yapılmadı.:::
+Kayıt başarıyla silindi.:::
+Kayıt silinemedi.:::
+Gerekli parametreler eksik:::
+Sıralama güncellendi:::
+Sıralama güncellenirken bir hata oluştu:::
+Tema adı belirtilmedi.:::
+Tema başarıyla etkinleştirildi.:::
+Yeni tema adı belirtilmedi.:::
+Bu isimde bir tema zaten mevcut.:::
+Tema başarıyla kopyalandı.:::
+Aktif tema silinemez.:::
+Tema başarıyla arşive kaldırıldı.:::
+Tema bulunamadı.:::
+Dosya adı belirtilmedi.:::
+Dosya adı veya yedek tarihi belirtilmedi.:::
+Yedek başarıyla geri yüklendi.:::
+Yedek geri yüklenirken bir hata oluştu.:::
+Yedek dosyası silindi.:::
+Yedek silinirken hata oluştu veya dosya bulunamadı.:::
+Geçersiz işlem tipi.:::
+Değer:::
+Özellik:::
+Detaylı bilgi için %s’ni inceleyebilirsiniz:::
+E Posta Adresiniz:::

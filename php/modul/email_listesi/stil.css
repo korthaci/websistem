@@ -1,0 +1,14 @@
+.email_listesi {
+    border: 1px solid #ddd;
+    padding: 4px;
+    min-width: 200px;
+}
+
+.email_listesi::placeholder {
+    font-size: 11px;
+}
+
+.ele_bilgi {
+    padding: 2px;
+    color: #fff;
+}
