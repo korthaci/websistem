@@ -88,7 +88,7 @@ Please review the included `LICENSE` file.
 
 ---
 
-## Philosophy
+## Approach
 
 Websistem values:
 
