@@ -1,89 +1,117 @@
-# License
+# Websistem Community License (WCL)
 
-Author: korthaci
-Project homepage: https://github.com/korthaci/websistem
-Copyright (c) 2026 korthaci
+**Project:** Websistem
 
----
-
-## License Type
-
-This project is released under the **GNU General Public License v3.0 (GPL-3.0)**  
-with additional clarification regarding branding and redistribution.
-
-You are free to:
-
-- Use the software for personal or commercial projects
-- Study and modify the source code
-- Fork the repository
-- Redistribute modified or unmodified versions
-
-Under the following conditions:
+**Author:** korthaci  
+**Project homepage:** https://github.com/korthaci/websistem  
+**Copyright (c) 2026 korthaci**
 
 ---
 
-## Core License (GPL v3)
+## 1. Purpose
 
-This software is licensed under the GNU GPL v3.  
-A copy of the license is available at:  
-https://www.gnu.org/licenses/gpl-3.0.html
+This license governs the use of the **Websistem Core** when obtained from the official GitHub repository.
 
-Any redistribution of this software or derivative works **must remain under GPL v3**.
+Websistem is a **developer-oriented website management system** intended to be used as a foundation for building and delivering websites for clients.
 
----
-
-## Additional Terms & Clarifications
-
-### 1. Attribution & Origin
-
-You **must not**:
-
-- Claim this project as your own original work
-- Remove or alter copyright notices
-- Present modified versions as an official release of this project
-
-Original authorship and repository history must remain clearly visible.
+This is an **open-core, source-available license**. It is not an OSI-approved open-source license.
 
 ---
 
-### 2. Branding & Naming Restriction
+## 2. Grant of Rights
 
-The project name, branding, and identity are **not transferable**.
+Subject to the terms of this license, you are granted a non-exclusive, worldwide, royalty-free right to:
 
-You may **not**:
+- Use the software for personal or commercial purposes
+- Install and run the software on any number of servers
+- Modify the source code for your own needs
+- Use the software to build websites or web projects for clients
+- Deliver completed websites to clients as part of a service
 
-- Redistribute this project under a different product name as your own CMS
-- Sell or promote it as an independent proprietary system
-- Use the original name or branding to imply official endorsement
+---
+
+## 3. Permitted Commercial Use
+
+You **may**:
+
+- Use Websistem to develop websites for clients and receive payment for your services
+- Include Websistem as part of a delivered website project
+- Host and maintain client websites built with Websistem
+
+In all cases, Websistem must remain an **internal component** of the delivered project.
+
+---
+
+## 4. Restrictions
+
+You **may NOT**:
+
+- Sell, sublicense, or redistribute Websistem as a standalone product
+- Redistribute the software (modified or unmodified) as your own CMS, framework, or platform
+- Rebrand, rename, or remove the Websistem identity
+- Claim authorship or present the software as your own original work
+- Offer Websistem for download, sale, or licensing to third parties
+- Create a competing product based primarily on Websistem
+
+---
+
+## 5. Distribution Clarification
+
+The following actions are explicitly **allowed**:
+
+- Delivering a finished website to a client
+- Providing hosting or maintenance services for a website built with Websistem
+
+The following actions are explicitly **prohibited**:
+
+- Selling Websistem itself (source code or binaries)
+- Packaging Websistem for marketplaces or resale
+- Offering "Websistem-based CMS" as a standalone product
+
+---
+
+## 6. Attribution & Notices
+
+You must not:
+
+- Remove copyright notices
+- Remove references to the original author
+- Imply official endorsement by the author
 
 Forks must clearly indicate that they are **unofficial derivatives**.
 
 ---
 
-### 3. Commercial Distribution
+## 7. Themes, Modules, and Extensions
 
-Selling **services, extensions, themes, modules, or integrations** built on top of this project is permitted.
-
-Selling the **core system itself as a standalone proprietary product** is **not permitted**.
-
-This project follows an **Open Core** model:
-- The core system remains open-source
-- Optional extensions, modules, or services may be distributed separately under different terms
+- Themes and modules included in the repository are licensed together with the core system
+- They may not be redistributed separately
+- Additional modules or extensions may be released under separate commercial terms by the author
 
 ---
 
-### 4. No Warranty
+## 8. No Warranty
 
-This software is provided **“as is”**, without warranty of any kind.  
-The author is not liable for any damages arising from the use of this software.
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+
+The author shall not be liable for any damages arising from the use of this software.
 
 ---
 
-## Summary (Non-Legal)
+## 9. Termination
 
-- Core system is open-source
-- Forking and modification are allowed
-- Rebranding and reselling as your own product are not allowed
-- Extensions and services may be sold separately
+Any violation of this license automatically terminates your rights under this license.
 
-If you have questions regarding licensing or commercial usage, please contact the author.
+---
+
+## 10. Summary (Non-Legal)
+
+- You can use Websistem to build and sell websites
+- You cannot sell Websistem itself
+- You cannot claim it as your own product
+- You cannot rebrand or redistribute it
+
+---
+
+**End of License**
+

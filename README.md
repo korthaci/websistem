@@ -1,53 +1,103 @@
 # Websistem v1.0
 
-A lightweight, modular PHP web system focused on clarity, control, and simplicity.
+A **developer-oriented, native PHP website management system** focused on clarity, control, and long-term maintainability.
 
-Websistem is designed for developers and freelancers who want to build manageable, fast, and clean websites without the overhead of large CMS platforms or frameworks.
+Websistem is not a website builder and not a no‑code tool. It is designed for developers and technical users who want a predictable, lightweight system without the complexity of large CMS platforms or full-stack frameworks.
 
 ---
 
 ## What is Websistem?
 
-Websistem is a PHP-based web management system that provides:
+Websistem is a native PHP-based website management engine that provides:
 
-- A clean and simple admin panel
-- Theme-based frontend structure
-- Modular content and feature system
-- No CLI requirement
-- No heavy framework dependency
+- A clean and isolated admin panel
+- Theme-based frontend architecture
+- Modular system structure
+- Browser-based installer (no CLI required)
+- Minimal external dependencies
 
-It is intentionally minimal and predictable.
+It prioritizes **stability, transparency, and control** over abstraction and automation.
+
+---
+
+## What Websistem is NOT
+
+To avoid confusion, Websistem is **not**:
+
+- A no-code or drag‑and‑drop website builder
+- A WordPress, Wix, or SaaS-style platform
+- A framework replacement (Laravel, Symfony, etc.)
+- A plugin marketplace–driven ecosystem
+
+Basic knowledge of **HTML / CSS (and optionally JS)** is expected.
 
 ---
 
 ## Who is it for?
 
-- Freelancers building client websites
-- Developers who prefer clarity over abstraction
-- Designers who need a usable admin panel
-- Small to medium scale projects
+- Developers building custom websites
+- Freelancers delivering client projects
+- Agencies that want a reusable, controllable system
+- Users who prefer native PHP over heavy abstractions
 
 ---
 
 ## Who is it NOT for?
 
-- Enterprise-level applications
-- Plugin-marketplace–driven ecosystems
-- CLI-first workflows
+- Users looking for a no‑code solution
+- Plugin‑first workflows
+- Enterprise-scale applications
 - Real-time or highly distributed systems
 
 ---
 
-## Key Features
+## Core Features
 
 - Web-based installation wizard
 - MySQL and SQLite support
+- Fully isolated admin panel (UIS2)
 - Theme system with full HTML control
-- Block-based homepage structure
-- Modular architecture
-- Built-in translation system
-- File & media management
-- Multi-user admin panel
+- Modular architecture (each module has its own router)
+- Built-in translation infrastructure
+- File and media management
+- Multi-user admin system with permissions
+- REST-compatible and AJAX-driven structure
+
+---
+
+## Themes
+
+Frontend themes are fully independent from the core system.
+
+- Each folder under `/tema/` represents a complete theme
+- Themes control only presentation, not business logic
+- Switching themes is handled from the admin panel
+
+Themes are intended for developers who want **full control over markup**.
+
+---
+
+## Modules
+
+Websistem includes a modular system where:
+
+- Each module is self-contained
+- Modules may define their own routes
+- Modules can be embedded into content using placeholders
+
+The module system is designed to support future commercial extensions.
+
+---
+
+## Installation
+
+Installation is handled entirely through a **browser-based installer**.
+
+- Upload files
+- Open `/install`
+- Follow the setup wizard
+
+No command-line usage is required.
 
 ---
 
@@ -55,36 +105,28 @@ It is intentionally minimal and predictable.
 
 Full documentation is included in the `/documentation` directory.
 
-Main sections:
+Topics include:
 
 - Getting Started
 - Installation
-- Usage
-- Advanced (Architecture Overview)
+- System Architecture
+- Module & Theme Structure
 - FAQ
 - Roadmap
-- Changelog
 
 ---
 
-## Installation
+## Licensing
 
-Installation is handled via a browser-based wizard.
+Licensing depends on where you obtained this software.
 
-No command line usage is required.
+- **GitHub releases** are licensed under the **Websistem Community License**
+- **Commercial distributions** (Gumroad, Envato, etc.) are licensed under the **Websistem Commercial License**
 
-See the **Installation** documentation for details.
+You may build and sell websites using Websistem.
+You may **not** sell, rebrand, or redistribute Websistem itself as a product.
 
----
-
-## License
-
-Licensing terms depend on where you obtained this software  
-(GitHub, Envato, Gumroad, etc.).
-
-This project is open-source, but redistribution under a different license or branding is not permitted.
-
-Please review the included `LICENSE` file.
+Please review the included license file for details.
 
 ---
 
@@ -92,8 +134,14 @@ Please review the included `LICENSE` file.
 
 Websistem values:
 
-- Simplicity over complexity
+- Simplicity over convenience
 - Control over abstraction
 - Stability over trends
 
 If something feels intentionally limited, it probably is.
+
+---
+
+**Websistem v1.0**  
+Built for developers who want to stay in control.
+
