@@ -130,7 +130,7 @@ Please review the included license file for details.
 
 ---
 
-## Philosophy
+## Approach
 
 Websistem values:
 
