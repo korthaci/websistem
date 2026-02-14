@@ -9,200 +9,67 @@
 </head>
 
 <body>
-
-    <!-- Main Global Header -->
-    <header class="main-header">
-        <a href="./" class="logo">
-            <div class="logo-icon">W</div>
-            <span>Web Sistem</span>
-        </a>
-
-        <nav class="header-nav">
-            <!-- Dynamic header navigation logic in script.js -->
-        </nav>
-    </header>
-
-    <!-- Mobile Menu Toggle -->
-    <header class="header">
-        <button class="menu-toggle" data-onclick-fn="toggleSidebar" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </header>
-
-    <!-- Overlay for mobile -->
+    <header class="main-header"><a href="./" class="logo"><div class="logo-icon">W</div><span>Web Sistem</span></a><nav class="header-nav"></nav></header>
+    <header class="header"><button class="menu-toggle" data-onclick-fn="toggleSidebar" aria-label="Toggle menu"><span></span><span></span><span></span></button></header>
     <div class="overlay" data-onclick-fn="toggleSidebar"></div>
 
     <div class="page-wrapper">
-        <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <!-- Search -->
-                <div class="search-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="search-input" id="searchInput" placeholder="Dokümantasyonda ara..."
-                        autocomplete="off">
-                    <button class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button>
-                    <div class="search-results" id="searchResults"></div>
-                </div>
-            </div>
-
-            <nav id="nav">
-                <!-- Navigation will be populated by script.js auto-discovery -->
-            </nav>
+            <div class="sidebar-header"><div class="search-container"><span class="search-icon">🔍</span><input type="text" class="search-input" id="searchInput" placeholder="Search documentation..." autocomplete="off"><button class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button><div class="search-results" id="searchResults"></div></div></div>
+            <nav id="nav"></nav>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content" id="mainContent">
             <article id="content">
-                <h1 id="advanced-title">Websistem v1.0 – Advanced (Genel Mimari & Genişletme Rehberi)</h1>
+                <h1 id="advanced-title">Websistem v1.0 - Advanced Architecture & Extension Guide</h1>
+                <p>This section is for developers who want to understand internal behavior and extend safely.</p>
 
-                <p>
-                    Bu doküman, <strong>Websistem v1.0</strong> kullanan ve sistemi <em>daha derinlemesine anlamak</em>,
-                    mevcut yapıyı <strong>bozmadan esnetmek</strong> isteyen geliştiriciler için hazırlanmıştır.
-                </p>
-
-                <div class="tip">
-                    <div class="tip-title">Bu Bölümün Amacı</div>
-                    <ul>
-                        <li>Sistemin <em>neden böyle tasarlandığını</em> anlatır</li>
-                        <li>Nerelere kadar müdahale edilebileceğini netleştirir</li>
-                        <li>Bilinçli geliştirme ve katkı için yön gösterir</li>
-                    </ul>
-                </div>
-
-                <div class="warning">
-                    <div class="warning-title">⚠️ Dikkat</div>
-                    <p>Bu bir “framework iç yapısı” belgesi değildir. Amaç; kontrolsüz derinlik yerine <strong>kontrollü
-                            açıklık</strong> sağlamaktır.</p>
-                </div>
-
-                <hr>
-
-                <h2 id="mimari-felsefe">1. Genel Mimari Felsefe</h2>
-                <p>Websistem v1.0 şu mimari anlayışla geliştirilmiştir:</p>
+                <h2 id="architecture-philosophy">1. Architecture Philosophy</h2>
                 <ul>
-                    <li>Hafif (lightweight)</li>
-                    <li>Dosya ve klasör yapısı okunabilir</li>
-                    <li>Tema ve içerik ayrımı net</li>
-                    <li>Yönetim paneli ile frontend tamamen ayrık</li>
+                    <li>Lightweight and readable structure</li>
+                    <li>Clear separation between content and presentation</li>
+                    <li>Admin panel and frontend kept isolated</li>
                 </ul>
-                <p>
-                    Sistem, büyük framework’lerin aksine <strong>“her ihtimale göre”</strong> değil, <strong>“gerçek
-                        kullanım senaryolarına göre”</strong> şekillendirilmiştir.
-                </p>
 
-                <hr>
-
-                <h2 id="klasor-yapisi">2. Klasör Yapısı ve Sorumluluklar (Özet)</h2>
-                <div class="code-header">Directory Structure</div>
-                <pre><code>/
-                        ├── index.php
-                        ├── a_.php
-                        ├── rlv_.php
-                        ├── .env
-                        ├── php/
-                        │ ├── uis2/ → Yönetim paneli
-                        │ ├── modul/ → Modüller
-                        │ ├── bilesen/ → Bileşenler
-                        │ ├── yon/ → Yönlendirme / kolon yapıları
-                        │ └── ceviri/ → Dil ve çeviri dosyaları
-                        ├── tema/ → Frontend temaları
-                        ├── api/ → AJAX / JSON uçları
-                        ├── resim/ → Yüklenen görseller
-                        ├── dosya/ → Yüklenen dosyalar
-                        └── install/ → Kurulum sihirbazı</code></pre>
-
-                <hr>
-
-                <h2 id="istek-akisi">3. İstek Akışı (High-Level)</h2>
+                <h2 id="request-flow">2. Request Flow (High-Level)</h2>
                 <div class="code-header">Request Flow</div>
-                <pre><code>Request
-                        ↓
-                        index.php
-                        ↓
-                        a_.php
-                        ↓
-                        routing / içerik çözümleme
-                        ↓
-                        aktif tema
-                        ↓
-                        HTML çıktı</code></pre>
+                <pre><code>Request -> index.php -> core routing -> active theme -> HTML output</code></pre>
 
-                <hr>
+                <h2 id="theme-behavior">3. Theme Behavior</h2>
+                <p>Theme switching changes visual rendering and layout mapping, not the content source itself.</p>
 
-                <h2 id="tema-sistemi">4. Tema Sistemi</h2>
-                <ul>
-                    <li>Her tema bağımsızdır</li>
-                    <li>İçerik silinmez</li>
-                    <li>Sadece görünüm değişir</li>
-                </ul>
-                <p>Tema değişimi blokları, menüyü ve ana sayfa yapısını etkilemez, yalnızca yeniden yorumlar.</p>
+                <h2 id="dynamic-menu">4. Menu and data-dynamic</h2>
+                <p>If <code>menu.html</code> contains <code>data-dynamic</code>, the system builds menu items dynamically.</p>
 
-                <hr>
+                <h2 id="module-model">5. Module Model</h2>
+                <p>Modules are loaded from module directories and inserted through shortcodes.</p>
 
-                <h2 id="menu-sablunu">5. Menü Şablonu ve <code>data-dynamic</code></h2>
-                <p><code>menu.html</code> içinde:</p>
-                <ul>
-                    <li><code>data-dynamic</code> varsa → <strong>dinamik menü</strong></li>
-                    <li>Yoksa → <strong>statik HTML</strong></li>
-                </ul>
-                <p>Tema geliştiriciye bilinçli özgürlük tanınır.</p>
-
-                <hr>
-
-                <h2 id="moduller-advanced">6. Modüller</h2>
-                <p>Modüller <code>php/modul/</code> altında yer alır ve kısa kod ile çağrılır. Silinirse veri kaybı
-                    yaşanabilir.</p>
-                <div class="code-header">Kısa Kod Örneği</div>
-                <pre><code>[al:modul:ornek]</code></pre>
-
-                <hr>
-
-                <h2 id="template-yapisi">7. Template Yapısı (Örnek)</h2>
+                <h2 id="template-syntax">6. Template Syntax</h2>
                 <div class="code-header">HTML Template Structure</div>
-                <pre><code>{{$:baslik}}
+                <pre><code>{{$:title}}
+{{__if %active% Active || Passive __endif}}
+{{__foreach %list% %item%}}
+&lt;div&gt;{{%item%.name%}}&lt;/div&gt;
+{{__endforeach}}</code></pre>
 
-                        {{__if %aktif% Aktif || Pasif __endif}}
-
-                        {{__foreach %liste% %item%}}
-                        &lt;div&gt;{{%item%.ad%}}&lt;/div&gt;
-                        {{__endforeach}}</code></pre>
                 <div class="warning">
-                    <div class="warning-title">Sözdizimi Uyarısı</div>
-                    <p>Değişken yazımında boşluk bırakmayın. Doğru: <code>{{$:degisken}}</code> - Yanlış: <code>{{$: degisken }}</code>.</p>
-                    <p>Bu bölüm <code>md/template_kullanim_rehberi.md</code> ile uyumludur: <code>{{__if ... __endif}}</code>, <code>{{__foreach ...}}</code>, <code>{{$:degisken}}</code>.</p>
+                    <div class="warning-title">Syntax Warning</div>
+                    <p>Do not add spaces inside variable placeholders. Correct: <code>{{$:variable}}</code>. Incorrect: <code>{{$: variable }}</code>.</p>
+                    <p>This matches <code>md/template_kullanim_rehberi.md</code> syntax conventions.</p>
                 </div>
-                <p>Bu yapı genişletilmek için değil, <strong>kullanılmak</strong> içindir.</p>
 
-                <hr>
+                <h2 id="translation-advanced">7. Translation Principle</h2>
+                <p>Primary rule: source text acts as the key.</p>
+                <div class="code-header">Example</div>
+                <pre><code>·Sign Up·
+echo yc("Sign Up");</code></pre>
 
-                <h2 id="ceviri-sistemi-advanced">8. Çeviri Sistemi (Advanced)</h2>
-                <p>Ana prensip: <strong>Gerçek metin = anahtar</strong></p>
-                <div class="code-header">HTML Usage</div>
-                <pre><code>·Kaydol·</code></pre>
-                <div class="code-header">PHP Usage</div>
-                <pre><code>echo yc("Kaydol");</code></pre>
-                <p>Case-sensitive yapı korunmalıdır.</p>
-
-                <hr>
-
-                <h2 id="bilincli-kisitlar">9. Bilinçli Kısıtlar</h2>
+                <h2 id="known-limits">8. Intentional Limits</h2>
                 <ul>
-                    <li>Geri alma yok</li>
-                    <li>Plugin sistemi yok</li>
-                    <li>Hook yapısı yok</li>
-                    <li>Otomatik rollback yok</li>
+                    <li>No rollback engine</li>
+                    <li>No plugin marketplace layer</li>
+                    <li>No hook framework in v1.0</li>
                 </ul>
-                <p>Bu, sistemin basit ve öngörülebilir kalması içindir.</p>
-
-                <hr>
-
-                <h2 id="son-soz">Son Söz</h2>
-                <p>Bu doküman sistemi <strong>anlamak</strong> için yeterlidir, ancak her detayı öğretmeyi hedeflemez.
-                    Daha
-                    fazlası için en iyi kaynak: <strong>kaynak kod</strong>.</p>
             </article>
         </main>
     </div>
