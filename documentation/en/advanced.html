@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced - Web Sistem Documentation</title>
-    <link rel="stylesheet" href="stil.css">
+    <link rel="stylesheet" href="../stil.css">
 </head>
 
 <body>
@@ -169,6 +169,11 @@
                         {{__foreach %liste% %item%}}
                         &lt;div&gt;{{%item%.ad%}}&lt;/div&gt;
                         {{__endforeach}}</code></pre>
+                <div class="warning">
+                    <div class="warning-title">Sözdizimi Uyarısı</div>
+                    <p>Değişken yazımında boşluk bırakmayın. Doğru: <code>{{$:degisken}}</code> - Yanlış: <code>{{$: degisken }}</code>.</p>
+                    <p>Bu bölüm <code>md/template_kullanim_rehberi.md</code> ile uyumludur: <code>{{__if ... __endif}}</code>, <code>{{__foreach ...}}</code>, <code>{{$:degisken}}</code>.</p>
+                </div>
                 <p>Bu yapı genişletilmek için değil, <strong>kullanılmak</strong> içindir.</p>
 
                 <hr>
@@ -202,7 +207,7 @@
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 
 </html>

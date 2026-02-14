@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog - Web Sistem Documentation</title>
+    <link rel="stylesheet" href="../stil.css">
+</head>
+
+<body>
+
+    <!-- Main Global Header -->
+    <header class="main-header">
+        <a href="./" class="logo">
+            <div class="logo-icon">W</div>
+            <span>Web Sistem</span>
+        </a>
+
+        <nav class="header-nav">
+            <!-- Dynamic header navigation logic in script.js -->
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Toggle -->
+    <header class="header">
+        <button class="menu-toggle" data-onclick-fn="toggleSidebar" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" data-onclick-fn="toggleSidebar"></div>
+
+    <div class="page-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <!-- Search -->
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Dokümantasyonda ara..."
+                        autocomplete="off">
+                    <button class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+
+            <nav id="nav">
+                <!-- Navigation will be populated by script.js auto-discovery -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <article id="content">
+                <h1 id="changelog-title">Changelog</h1>
+                <p>Projedeki tüm önemli değişiklikler bu sayfa üzerinden takip edilebilir.</p>
+
+                <hr>
+
+                <!-- v1.0.0 -->
+                <section class="version-item">
+                    <div class="version-header">
+                        <h2 class="version-number" id="v1-0-0">v1.0.0</h2>
+                        <span class="version-date"></span>
+                    </div>
+
+                    <span class="changelog-category category-added">Added</span>
+                    <ul>
+                        <li>Global translation (i18n) system</li>
+                        <li>Multi-language admin panel support</li>
+                        <li>Content-based translation architecture</li>
+                    </ul>
+
+                    <span class="changelog-category category-notes">Notes</span>
+                    <div class="tip">
+                        <ul>
+                            <li>This release marks the transition from v0.9 to the first stable version.</li>
+                            <li>Core system behavior remains unchanged.</li>
+                            <li>Focus of this release is internationalization and global usability.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- v0.9.x -->
+                <section class="version-item">
+                    <div class="version-header">
+                        <h2 class="version-number" id="v0-9-x">v0.9.x</h2>
+                        <span class="version-date">Pre-release</span>
+                    </div>
+
+                    <span class="changelog-category category-notes">Notes</span>
+                    <ul>
+                        <li>Internal development versions.</li>
+                        <li>No public changelog maintained for this stage.</li>
+                    </ul>
+                </section>
+
+            </article>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

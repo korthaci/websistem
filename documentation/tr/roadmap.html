@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap - Web Sistem Documentation</title>
+    <link rel="stylesheet" href="../stil.css">
+</head>
+
+<body>
+
+    <!-- Main Global Header -->
+    <header class="main-header">
+        <a href="./" class="logo">
+            <div class="logo-icon">W</div>
+            <span>Web Sistem</span>
+        </a>
+
+        <nav class="header-nav">
+            <!-- Dynamic header navigation logic in script.js -->
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Toggle -->
+    <header class="header">
+        <button class="menu-toggle" data-onclick-fn="toggleSidebar" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" data-onclick-fn="toggleSidebar"></div>
+
+    <div class="page-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <!-- Search -->
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Dokümantasyonda ara..."
+                        autocomplete="off">
+                    <button class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+
+            <nav id="nav">
+                <!-- Navigation will be populated by script.js auto-discovery -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <article id="content">
+                <h1 id="roadmap-title">Roadmap</h1>
+                <p class="roadmap-meta">
+                    Bu doküman Websistem projesinin planlanan yönünü ana hatlarıyla belirtir.
+
+                </p>
+
+                <div class="tip">
+                    Burada listelenen öğeler niyetleri temsil eder, garanti teşkil etmez.
+                </div>
+
+                <hr>
+
+                <section class="roadmap-section">
+                    <h2 id="planned-v1-x">Planned for v1.x</h2>
+
+                    <h3 id="i18n-improvements">Internationalization Improvements</h3>
+                    <ul>
+                        <li>Translation system stabilization</li>
+                        <li>Improved error handling for dynamic content translation</li>
+                        <li>Better language management experience in the admin panel</li>
+                        <li>New languages to be added: Español, Italiano, Português, Indonesia, Hindi, Japan</li>
+                    </ul>
+
+                    <h3 id="admin-panel-enhancements">Admin Panel Enhancements</h3>
+                    <ul>
+                        <li>UI/UX refinements</li>
+                        <li>Performance improvements on large datasets</li>
+                        <li>Minor usability improvements based on usage patterns</li>
+                    </ul>
+
+                    <h3 id="theme-layout">Theme & Layout</h3>
+                    <ul>
+                        <li>More flexible theme configuration options</li>
+                        <li>Cleaner separation between content and presentation</li>
+                        <li>Improved default theme examples</li>
+                    </ul>
+                </section>
+
+                <hr>
+
+                <section class="roadmap-section secondary-roadmap">
+                    <h2 id="under-consideration">Under Consideration</h2>
+
+                    <h3 id="module-ecosystem">Module Ecosystem</h3>
+                    <ul>
+                        <li>Optional new built-in modules</li>
+                        <li>Better module configuration experience</li>
+                        <li>Improved module documentation</li>
+                    </ul>
+
+                    <h3 id="developer-experience">Developer Experience</h3>
+                    <ul>
+                        <li>Clearer internal structure documentation</li>
+                        <li>Small quality-of-life improvements for contributors</li>
+                    </ul>
+                </section>
+
+                <hr>
+
+                <section class="roadmap-section secondary-roadmap">
+                    <h2 id="out-of-scope">Out of Scope (For Now)</h2>
+                    <div class="warning out-of-scope">
+                        <ul>
+                            <li>No plan for a full framework rewrite</li>
+                            <li>No plugin marketplace</li>
+                            <li>No enforced CLI-based workflow</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <hr>
+
+                <p class="roadmap-meta">
+                    Bu yol haritası bilinçli olarak ihtiyatlı tutulmuştur.
+                    Websistem; kararlılığa, basitliğe ve uzun vadeli sürdürülebilirliğe öncelik verir.
+                </p>
+
+            </article>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

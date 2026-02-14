@@ -1,16 +1,13 @@
 /* ============================================
     DOCUMENTATION SYSTEM JAVASCRIPT
-    ============================================ */
+   ============================================ */
 
-// Navigation logic will be determined on runtime (Auto-discovery or manual override via window.PAGE_NAV)
-
-// Initialize Documentation System
 document.addEventListener('DOMContentLoaded', function () {
-    // Check if there is a manual override, if not, auto-generate based on headings
     const currentNav = window.PAGE_NAV || autoGenerateNavStructure();
 
     initNavigation(currentNav);
     initGlobalHeader();
+    initLanguageSwitcher();
     initCopyButtons();
     initSearch();
     initScrollSpy();
@@ -61,25 +58,46 @@ function initGlobalHeader() {
     const headerNav = document.querySelector('.header-nav');
     if (!headerNav) return;
 
-    const menuItems = [
-        { title: 'Getting Started', href: 'getting-started.html' },
-        { title: 'Installation', href: 'installation.html' },
-        { title: 'Usage', href: 'usage.html' },
-        { title: 'Advanced', href: 'advanced.html' },
-        { title: 'Changelog', href: 'changelog.html' },
-        { title: 'Roadmap', href: 'roadmap.html' },
-        { title: 'FAQ', href: 'faq.html' }
-    ];
+    const isEnglish = /\/en\//i.test(window.location.pathname);
+
+    const menuItems = isEnglish
+        ? [
+            { title: 'Getting Started', href: 'getting-started.html' },
+            { title: 'Installation', href: 'installation.html' },
+            { title: 'Usage', href: 'usage.html' },
+            { title: 'Advanced', href: 'advanced.html' },
+            { title: 'Capabilities', href: 'capabilities.html' },
+            { title: 'Changelog', href: 'changelog.html' },
+            { title: 'Roadmap', href: 'roadmap.html' },
+            { title: 'FAQ', href: 'faq.html' }
+        ]
+        : [
+            { title: 'Başlangıç', href: 'getting-started.html' },
+            { title: 'Kurulum', href: 'installation.html' },
+            { title: 'Kullanım', href: 'usage.html' },
+            { title: 'Gelişmiş', href: 'advanced.html' },
+            { title: 'Neler Yapılabilir?', href: 'capabilities.html' },
+            { title: 'Değişiklikler', href: 'changelog.html' },
+            { title: 'Roadmap', href: 'roadmap.html' },
+            { title: 'SSS', href: 'faq.html' }
+        ];
 
     const path = window.location.pathname;
-    const page = path.split("/").pop() || 'index.html';
+    const page = path.split('/').pop() || 'index.html';
 
     headerNav.innerHTML = '';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'header-menu-close';
+    closeBtn.dataset.onclickFn = 'closeHeaderMenu';
+    closeBtn.textContent = isEnglish ? 'Close menu' : 'Menüyü kapat';
+    headerNav.appendChild(closeBtn);
+
     menuItems.forEach(item => {
         const a = document.createElement('a');
         a.href = item.href;
         a.className = 'header-nav-link';
-        // Simple match for active state
         if (page === item.href) {
             a.classList.add('active');
         }
@@ -135,29 +153,25 @@ function autoGenerateNavStructure() {
 function initSmartHeader() {
     let lastScrollTop = 0;
     const header = document.querySelector('.main-header');
-    const threshold = 10; // Minimum scroll miktarı
+    const threshold = 10;
 
     window.addEventListener('scroll', () => {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        // Çok küçük oynamalarda tepki verme
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (Math.abs(lastScrollTop - scrollTop) <= threshold) return;
 
         if (scrollTop > lastScrollTop && scrollTop > 100) {
-            // Aşağı kaydırıyor - Gizle
             header.classList.add('header-hidden');
         } else {
-            // Yukarı kaydırıyor - Göster
             header.classList.remove('header-hidden');
         }
 
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Negatif değerleri önle
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }, { passive: true });
 }
 
 /* ============================================
     EVENT DELEGATION
-    ============================================ */
+   ============================================ */
 
 function initEventDelegation() {
     document.addEventListener('click', (e) => {
@@ -173,15 +187,14 @@ function initEventDelegation() {
 
 /* ============================================
     NAVIGATION SYSTEM
-    ============================================ */
+   ============================================ */
 
 function initNavigation(structure) {
     const nav = document.getElementById('nav');
     if (!nav) return;
-    nav.innerHTML = ''; // Clear existing
+    nav.innerHTML = '';
 
     structure.forEach(item => {
-        // Handle section titles (items with children but no ID)
         if (!item.id && item.children && item.children.length > 0) {
             const sectionTitle = document.createElement('div');
             sectionTitle.className = 'nav-section-title';
@@ -205,7 +218,6 @@ function createNavLink(item, parent, depth) {
     link.dataset.target = item.id;
     link.dataset.depth = depth;
 
-    // Add click handler for smooth scroll
     link.addEventListener('click', (e) => {
         e.preventDefault();
         scrollToSection(item.id);
@@ -216,7 +228,6 @@ function createNavLink(item, parent, depth) {
 
     parent.appendChild(link);
 
-    // Handle nested children
     if (item.children && item.children.length > 0) {
         const childrenContainer = document.createElement('div');
         childrenContainer.className = 'nav-children';
@@ -228,7 +239,6 @@ function createNavLink(item, parent, depth) {
 
         parent.appendChild(childrenContainer);
 
-        // Make parent expandable
         link.style.fontWeight = '900';
         link.addEventListener('click', (e) => {
             if (item.children) {
@@ -243,7 +253,7 @@ function createNavLink(item, parent, depth) {
 
 /* ============================================
     SEARCH SYSTEM
-    ============================================ */
+   ============================================ */
 
 let searchIndex = [];
 
@@ -251,10 +261,10 @@ function initSearch() {
     buildSearchIndex();
 
     const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
     const clearBtn = document.getElementById('clearSearch');
+    const searchResults = document.getElementById('searchResults');
+    if (!searchInput || !clearBtn || !searchResults) return;
 
-    // Debounce search input
     let searchTimeout;
     searchInput.addEventListener('input', (e) => {
         clearTimeout(searchTimeout);
@@ -270,14 +280,12 @@ function initSearch() {
         }
     });
 
-    // Close search when clicking outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.search-container')) {
             hideSearchResults();
         }
     });
 
-    // Keyboard shortcut (Cmd/Ctrl + K)
     document.addEventListener('keydown', (e) => {
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
             e.preventDefault();
@@ -292,6 +300,8 @@ function initSearch() {
 
 function buildSearchIndex() {
     const content = document.getElementById('content');
+    if (!content) return;
+
     const headings = content.querySelectorAll('h1, h2, h3, h4, p, li, td');
 
     headings.forEach((element, index) => {
@@ -305,7 +315,6 @@ function buildSearchIndex() {
                 type: element.tagName.toLowerCase()
             });
 
-            // Ensure element has ID for linking
             if (!element.id) {
                 element.id = `result-${index}`;
             }
@@ -314,16 +323,14 @@ function buildSearchIndex() {
 }
 
 function performSearch(query) {
-    const results = searchIndex.filter(item =>
-        item.text.includes(query.toLowerCase())
-    ).slice(0, 8); // Limit to 8 results
-
+    const results = searchIndex.filter(item => item.text.includes(query.toLowerCase())).slice(0, 8);
     displaySearchResults(results, query);
     highlightMatches(query);
 }
 
 function displaySearchResults(results, query) {
     const container = document.getElementById('searchResults');
+    if (!container) return;
     container.innerHTML = '';
 
     if (results.length === 0) {
@@ -337,7 +344,6 @@ function displaySearchResults(results, query) {
                 ? result.text.substring(0, 60) + '...'
                 : result.text;
 
-            // Highlight query in preview
             const highlightedPreview = preview.replace(
                 new RegExp(`(${query})`, 'gi'),
                 '<mark style="background: var(--search-highlight); padding: 0 2px;">$1</mark>'
@@ -363,44 +369,42 @@ function displaySearchResults(results, query) {
 }
 
 function hideSearchResults() {
-    document.getElementById('searchResults').classList.remove('active');
+    const results = document.getElementById('searchResults');
+    if (results) results.classList.remove('active');
 }
 
 function clearSearch() {
-    document.getElementById('searchInput').value = '';
-    document.getElementById('clearSearch').classList.remove('visible');
+    const input = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearSearch');
+    if (input) input.value = '';
+    if (clearBtn) clearBtn.classList.remove('visible');
     hideSearchResults();
     clearHighlights();
 }
 
 function highlightMatches(query) {
     clearHighlights();
-
     if (!query) return;
 
     const content = document.getElementById('content');
-    const walker = document.createTreeWalker(
-        content,
-        NodeFilter.SHOW_TEXT,
-        null,
-        false
-    );
+    const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, null, false);
 
     const textNodes = [];
     let node;
-    while (node = walker.nextNode()) {
+    while ((node = walker.nextNode())) {
         if (node.nodeValue.toLowerCase().includes(query.toLowerCase())) {
             textNodes.push(node);
         }
     }
 
-    textNodes.forEach(node => {
+    textNodes.forEach(textNode => {
         const span = document.createElement('span');
         const regex = new RegExp(`(${query})`, 'gi');
-        span.innerHTML = node.nodeValue.replace(regex,
+        span.innerHTML = textNode.nodeValue.replace(
+            regex,
             '<mark class="search-highlight" style="background: var(--search-highlight); padding: 0 2px; border-radius: 2px;">$1</mark>'
         );
-        node.parentNode.replaceChild(span, node);
+        textNode.parentNode.replaceChild(span, textNode);
     });
 }
 
@@ -415,11 +419,10 @@ function clearHighlights() {
 
 /* ============================================
     SCROLL & NAVIGATION BEHAVIOR
-    ============================================ */
+   ============================================ */
 
 function initScrollSpy() {
     const headings = document.querySelectorAll('h1[id], h2[id], h3[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
 
     const observerOptions = {
         root: null,
@@ -444,7 +447,6 @@ function updateActiveNav(id) {
         link.classList.remove('active');
         if (link.dataset.target === id) {
             link.classList.add('active');
-            // Expand parent if exists
             const parent = link.closest('.nav-children');
             if (parent) {
                 parent.style.display = 'block';
@@ -454,7 +456,6 @@ function updateActiveNav(id) {
 }
 
 function initSmoothScroll() {
-    // Handled by CSS scroll-behavior, but ensure hash links work
     if (window.location.hash) {
         setTimeout(() => {
             scrollToSection(window.location.hash.substring(1));
@@ -473,32 +474,77 @@ function scrollToSection(id) {
             behavior: 'smooth'
         });
 
-        // Update URL without jumping
         history.pushState(null, null, `#${id}`);
         updateActiveNav(id);
     }
 }
 
 /* ============================================
+    LANGUAGE SWITCHER
+   ============================================ */
+
+function initLanguageSwitcher() {
+    const path = window.location.pathname;
+    const isTr = /\/tr\//i.test(path);
+    const isEn = /\/en\//i.test(path);
+    if (!isTr && !isEn) return;
+
+    const currentLang = isTr ? 'tr' : 'en';
+    localStorage.setItem('docsLang', currentLang);
+
+    const article = document.getElementById('content');
+    if (!article) return;
+
+    const page = path.split('/').pop() || 'index.html';
+    const hash = window.location.hash || '';
+    const targetTr = `../tr/${page}${hash}`;
+    const targetEn = `../en/${page}${hash}`;
+
+    const switcher = document.createElement('div');
+    switcher.className = 'lang-switcher';
+    switcher.innerHTML = currentLang === 'tr'
+        ? `<span class="lang-current">TR</span> · <a href="${targetEn}" data-lang="en">EN</a>`
+        : `<a href="${targetTr}" data-lang="tr">TR</a> · <span class="lang-current">EN</span>`;
+
+    switcher.querySelectorAll('a[data-lang]').forEach(link => {
+        link.addEventListener('click', () => {
+            localStorage.setItem('docsLang', link.dataset.lang);
+        });
+    });
+
+    article.appendChild(switcher);
+}
+
+/* ============================================
     MOBILE MENU
-    ============================================ */
+   ============================================ */
+
+function closeHeaderMenu() {
+    const header = document.querySelector('.main-header');
+    if (header) header.classList.remove('mobile-menu-open');
+}
 
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.querySelector('.overlay');
+    const header = document.querySelector('.main-header');
+    const willOpen = !sidebar.classList.contains('open');
 
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('active');
-
-    // Prevent body scroll when menu is open
-    document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+    sidebar.classList.toggle('open', willOpen);
+    overlay.classList.toggle('active', willOpen);
+    if (header) header.classList.toggle('mobile-menu-open', willOpen);
+    document.body.style.overflow = willOpen ? 'hidden' : '';
 }
 
-// Close sidebar on window resize if moving to desktop
 window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
-        document.getElementById('sidebar').classList.remove('open');
-        document.querySelector('.overlay').classList.remove('active');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.querySelector('.overlay');
+        const header = document.querySelector('.main-header');
+
+        if (sidebar) sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('active');
+        if (header) header.classList.remove('mobile-menu-open');
         document.body.style.overflow = '';
     }
 });

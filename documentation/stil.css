@@ -604,6 +604,27 @@ blockquote {
         display: none;
     }
 
+    .main-header.mobile-menu-open .header-nav {
+        display: flex;
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0.45rem;
+        padding: 0.85rem 1rem;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 8px 16px var(--shadow);
+        z-index: 1002;
+    }
+
+    .main-header.mobile-menu-open .header-menu-close {
+        display: inline-flex;
+        align-self: flex-end;
+        margin-bottom: 0.2rem;
+    }
+
     .header {
         display: flex;
     }
@@ -808,4 +829,34 @@ blockquote {
 .menu-toggle,
 .btn {
     transition: all 0.2s ease;
+}
+.lang-switcher {
+    margin-top: 1.25rem;
+    text-align: right;
+    font-size: 0.78rem;
+    color: var(--text-light);
+    opacity: 0.72;
+}
+
+.lang-switcher a {
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.lang-switcher a:hover {
+    color: var(--text);
+}
+
+.lang-current {
+    font-weight: 700;
+}
+.header-menu-close {
+    display: none;
+    border: 1px solid var(--border);
+    background: var(--bg-sidebar);
+    color: var(--text-light);
+    border-radius: 6px;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.8rem;
+    cursor: pointer;
 }

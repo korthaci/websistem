@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neler Yapılabilir? - Web Sistem Documentation</title>
+    <link rel="stylesheet" href="../stil.css">
+</head>
+
+<body>
+
+    <!-- Main Global Header -->
+    <header class="main-header">
+        <a href="./" class="logo">
+            <div class="logo-icon">W</div>
+            <span>Web Sistem</span>
+        </a>
+
+        <nav class="header-nav">
+            <!-- Dynamic header navigation logic in script.js -->
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Toggle -->
+    <header class="header">
+        <button class="menu-toggle" data-onclick-fn="toggleSidebar" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" data-onclick-fn="toggleSidebar"></div>
+
+    <div class="page-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <!-- Search -->
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Dokümantasyonda ara..."
+                        autocomplete="off">
+                    <button class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+
+            <nav id="nav">
+                <!-- Navigation will be populated by script.js auto-discovery -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <article id="content">
+                <h1 id="sistem-mimarisine-genel-bakis">Sistem Mimarisine Genel Bakış</h1>
+
+                <p>Bu motor, mantık ve sunum arasında katı bir ayrım üzerine yapılandırılmıştır.</p>
+                <p>Temalar yalnızca HTML'den oluşurken, çekirdek yönlendirme, işleme ve modül koordinasyonundan sorumludur.</p>
+                <p>Amaç, soyutlama katmanlarından ziyade yapısal netliktir.</p>
+
+                <hr>
+
+                <h2 id="cekirdek-motor">Çekirdek Motor</h2>
+                <p>Çekirdek, istekleri işlemek, rotaları çözümlemek ve işlemeyi düzenlemekten sorumludur.</p>
+                <p>Tüm dinamik davranışlar merkezi bir işleme hattından geçer.</p>
+
+                <h3 id="cekirdek-yetenekleri">Çekirdek Yetenekleri</h3>
+                <ul>
+                    <li>URL yönlendirme sistemi</li>
+                    <li>Merkezi işleme süreci</li>
+                    <li>Yönerge ayrıştırma motoru</li>
+                    <li>Yer tutucu değiştirme sistemi</li>
+                    <li>Şablon dahil etme çözümleyici</li>
+                    <li>Koşullu blok yorumlayıcı</li>
+                    <li>Modüler yürütme akışı</li>
+                    <li>Sürüm duyarlı yapı</li>
+                </ul>
+
+                <h3 id="isleme-sirasi">İşleme Sırası</h3>
+                <ol>
+                    <li>Rota çözümleme</li>
+                    <li>Modül başlatma</li>
+                    <li>Veri hazırlama</li>
+                    <li>Şablon ayrıştırma</li>
+                    <li>Yönerge işleme</li>
+                    <li>Çıktı oluşturma</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="tema-sistemi">Tema Sistemi</h2>
+                <p>Temalar, dosya sistemi tabanlı yapılardır.</p>
+                <p>Bir tema yalnızca HTML dosyalarından ve varlık dizinlerinden oluşur.</p>
+                <p>Şablonlara hiçbir PHP mantığı yerleştirilmez.</p>
+
+                <div class="code-header">Örnek Yapı</div>
+                <pre><code>/tema/minimal/
+header.html
+footer.html
+index.html
+assets/</code></pre>
+
+                <p>Temalar düzeni ve işaretlemeyi tanımlar. Motor, önceden tanımlanmış yer tutuculara veri ekler.</p>
+
+                <h3 id="desteklenen-ozellikler">Desteklenen Özellikler</h3>
+                <ul>
+                    <li>HTML öncelikli mimari</li>
+                    <li>Veri yer tutucuları (<code>{{$:variable}}</code>)</li>
+                    <li>Koşullu bloklar</li>
+                    <li>İç içe yönergeler</li>
+                    <li>Dahil etmeye dayalı şablon oluşturma</li>
+                    <li>Çoklu düzen şablonları (<code>_sayfa</code>, <code>_sekme</code>)</li>
+                    <li>Bağımsız varlık kapsamı</li>
+                    <li>Yönetici düzeyinde düzenleme</li>
+                    <li>Doğrudan dosya sistemi düzenleme</li>
+                </ul>
+
+                <p>Temalar taşınabilir ve kendi kendine yeterlidir.</p>
+
+                <hr>
+
+                <h2 id="yonerge-sistemi">Yönerge Sistemi</h2>
+                <p>Yönerge motoru, statik HTML şablonları içinde dinamik davranış sağlar.</p>
+
+                <ul>
+                    <li>Veri enjeksiyonu yer tutucuları</li>
+                    <li>Koşullu işleme blokları</li>
+                    <li>İç içe koşullu değerlendirme</li>
+                    <li>Dahil etme yönergeleri</li>
+                    <li>Dil duyarlı bölümler</li>
+                    <li>Dinamik içerik enjeksiyon noktaları</li>
+                </ul>
+
+                <p>Şablonlar, yapılandırılmış dinamik çıktıyı desteklerken okunabilir HTML olarak kalır.</p>
+
+                <hr>
+
+                <h2 id="modul-mimarisi">Modül Mimarisi</h2>
+                <p>Motor, modüler genişlemeyi destekler. Modüller, çekirdekle entegre olur ancak temalardan yapısal olarak izole kalır.</p>
+
+                <ul>
+                    <li>Etkinleştirme/devre dışı bırakma kontrolü</li>
+                    <li>Çekirdeğe bağımlı entegrasyon modeli</li>
+                    <li>Özellik tabanlı genişleme</li>
+                    <li>Sunum katmanından mantıksal ayrım</li>
+                    <li>Kontrollü yürütme akışı</li>
+                </ul>
+
+                <p>Bu, tema yapısını değiştirmeden sistem büyümesine olanak tanır.</p>
+
+                <hr>
+
+                <h2 id="icerik-yonetim-katmani">İçerik Yönetim Katmanı</h2>
+                <p>İçerik, sayfalar ve sekme tabanlı bölümler aracılığıyla yapılandırılır.</p>
+
+                <ul>
+                    <li>Sayfa oluşturma ve düzenleme</li>
+                    <li>Sekme tabanlı içerik bölümlendirme</li>
+                    <li>Başlık ve meta veri ekleme</li>
+                    <li>Galeri entegrasyonu</li>
+                    <li>Menü bağlama</li>
+                    <li>Yapılandırılmış düzen desteği</li>
+                </ul>
+
+                <p>Şablonlar düzeni belirlerken, içerik veri odaklı kalır.</p>
+
+                <hr>
+
+                <h2 id="yonetim-arayuzu">Yönetim Arayüzü</h2>
+                <p>Yönetim kontrolleri, görünüm mantığından ziyade yapıyı yönetir.</p>
+
+                <ul>
+                    <li>Tema seçimi</li>
+                    <li>Tema düzenleme</li>
+                    <li>Sayfa yönetimi</li>
+                    <li>Sekme yönetimi</li>
+                    <li>Menü yönetimi</li>
+                    <li>Modül etkinleştirme</li>
+                </ul>
+
+                <p>Değişiklikler, işleme hattı boyunca yayılır.</p>
+
+                <hr>
+
+                <h2 id="dil-ve-ceviri">Dil ve Çeviri</h2>
+                <p>Sistem, şablon ve içerik düzeyinde çok dilli yapıları destekler.</p>
+
+                <ul>
+                    <li>Dil duyarlı şablon blokları</li>
+                    <li>Çok dilli içerik yapısı</li>
+                    <li>Yapay zeka destekli çeviri iş akışı (manuel yapılandırma gereklidir)</li>
+                </ul>
+
+                <hr>
+
+                <h2 id="mimari-ozellikler">Mimari Özellikler</h2>
+                <ul>
+                    <li>Çerçeve bağımlılığı yok</li>
+                    <li>Temaların içinde gömülü PHP yok</li>
+                    <li>HTML öncelikli şablon modeli</li>
+                    <li>Yapılandırılmış yönerge ayrıştırma</li>
+                    <li>Modüler genişleme modeli</li>
+                    <li>Dosya tabanlı tema sistemi</li>
+                    <li>HTML/CSS/JS'ye aşina geliştiriciler için tasarlanmıştır</li>
+                </ul>
+
+                <p class="content-footer">Websistem v1.0 – Neler yapılabilir sayfası.</p>
+            </article>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

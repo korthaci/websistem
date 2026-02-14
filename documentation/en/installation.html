@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurulum Rehberi - Web Sistem Documentation</title>
+    <link rel="stylesheet" href="../stil.css">
+</head>
+
+<body>
+
+    <!-- Main Global Header -->
+    <header class="main-header">
+        <a href="./" class="logo">
+            <div class="logo-icon">W</div>
+            <span>Web Sistem</span>
+        </a>
+
+        <nav class="header-nav">
+            <!-- Dynamic header navigation logic in script.js -->
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Toggle -->
+    <header class="header">
+        <button class="menu-toggle" data-onclick-fn="toggleSidebar" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" data-onclick-fn="toggleSidebar"></div>
+
+    <div class="page-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <!-- Search -->
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Dokümantasyonda ara..."
+                        autocomplete="off">
+                    <button class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+
+            <nav id="nav">
+                <!-- Navigation will be populated by script.js auto-discovery -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <article id="content">
+                <h1 id="kurulum-dokumantasyonu">Websistem v1.0 – Kurulum (Installer) Dokümantasyonu</h1>
+
+                <p>
+                    Bu doküman, <strong>Websistem v1.0</strong> için geliştirilen kurulum sihirbazının
+                    (<strong>installer</strong>) ne yaptığını, hangi varsayımlarla çalıştığını ve hangi kullanıcı
+                    profiline hitap ettiğini açık ve net bir şekilde anlatır.
+                </p>
+
+                <div class="tip">
+                    <div class="tip-title">Hedef Profil</div>
+                    <p>Bu doküman kod bilmeyen son kullanıcıdan ziyade, en azından <strong>HTML / CSS / hosting
+                            paneli</strong> kavramlarına aşina olan kullanıcıları hedefler.</p>
+                </div>
+
+                <h2 id="installer-amaci">1. Installer’ın Amacı</h2>
+                <p>
+                    Installer (<code>install/index.php</code>) bir <em>sihirbaz</em> değil, <strong>kontrollü bir ilk
+                        kurulum aracıdır</strong>.
+                </p>
+                <ul>
+                    <li>Sistemi <strong>tek seferde</strong>, hatasız şekilde ayağa kaldırmak</li>
+                    <li>Manuel dosya düzenleme ihtiyacını minimuma indirmek</li>
+                    <li>v1.0 için <strong>stabil ve tekrar edilebilir</strong> bir kurulum süreci sunmak</li>
+                </ul>
+                <p>
+                    Installer tamamlandıktan sonra sistem artık çalışır durumdadır ve kurulum dosyaları <strong>bilinçli
+                        olarak devre dışı bırakılır</strong>.
+                </p>
+
+                <h2 id="kurulum-mantigi">2. Kurulum Akışının Genel Mantığı</h2>
+                <p>Installer aşağıdaki prensiplere göre çalışır:</p>
+                <ol>
+                    <li><strong>Önce kontrol, sonra yazma</strong></li>
+                    <li><strong>Tek yönlü işlem</strong> (geri alma yok)</li>
+                    <li><strong>Dosya tabanlı kilitleme</strong> (güvenlik için)</li>
+                    <li><strong>Minimum sihir, maksimum şeffaflık</strong></li>
+                </ol>
+                <p>
+                    Bu nedenle installer framework kullanmaz, harici bağımlılık içermez ve tüm işlemleri düz PHP ile
+                    yapar.
+                </p>
+
+                <h2 id="kurulum-adimlari">3. Kurulum Adımları (Detaylı)</h2>
+
+                <h3 id="gereksinimler">3.1 Sistem Gereksinimleri Kontrolü</h3>
+                <p>İlk adımda sistem ortamı doğrulanır.</p>
+                <ul>
+                    <li>PHP sürümü (<strong>>= 8.0</strong>)</li>
+                    <li>Gerekli PHP eklentileri (PDO vb.)</li>
+                    <li>Dosya yazma izinleri (root ve php dizinleri)</li>
+                </ul>
+                <div class="warning">
+                    <div class="warning-title">⚠️ Önemli</div>
+                    Bu adım başarısız olursa installer <strong>ilerlemez</strong>. Amaç, yarım kurulumların önüne
+                    geçmektir.
+                </div>
+
+                <h3 id="veritabani-yapilandirmasi">3.2 Veritabanı & Sunucu Yapılandırması</h3>
+                <p>Bu adım sistemin <em>çekirdeğini</em> oluşturur. Installer iki farklı kullanım senaryosunu destekler:
+                </p>
+                <ul>
+                    <li><strong>MySQL:</strong> Canlı projeler ve hosting panelleri (cPanel, Plesk) için.</li>
+                    <li><strong>SQLite:</strong> Demo, test ve küçük projeler için.</li>
+                </ul>
+                <blockquote>
+                    SQLite seçildiğinde sunucu üzerinde ek bir veritabanı kurulumu yapmanıza gerek kalmaz.
+                </blockquote>
+
+                <h4 id="sunucu-ayarlari">Sunucu Davranış Ayarları</h4>
+                <p>Bu ayarlar otomatik yönlendirme mantığını belirler:</p>
+                <ul>
+                    <li>HTTP / HTTPS tercihi</li>
+                    <li>www / non-www tercihi</li>
+                    <li>Alt dizin algılama</li>
+                </ul>
+
+                <h3 id="admin-hesabi">3.3 Yönetici (Admin) Hesabı</h3>
+                <p>Bu adımda sistemin <strong>ilk ve tek zorunlu kullanıcısı</strong> tanımlanır:</p>
+                <ul>
+                    <li>Site başlığı</li>
+                    <li>Admin e‑posta adresi</li>
+                    <li>Admin şifresi</li>
+                </ul>
+                <p>Bu hesap sistemdeki <strong>en yetkili hesaptır</strong>.</p>
+
+                <h3 id="onay-asamasi">3.4 Ön İzleme & Onay</h3>
+                <p>Bu adımda girilen tüm bilgiler özetlenir ve kullanıcıdan bilinçli onay alınır. Onay sonrası
+                    installer:</p>
+                <ul>
+                    <li>Veritabanı tablolarını oluşturur</li>
+                    <li>Yapılandırma dosyalarını (<code>rlv.php</code>, <code>.env</code> vb.) yazar</li>
+                    <li>Kilit dosyasını üretir</li>
+                </ul>
+
+                <h3 id="kurulum-kilidi">3.5 Kurulumun Kilitlenmesi</h3>
+                <p>
+                    Kurulum tamamlandığında <code>install/installed</code> dosyası oluşturulur ve installer tekrar
+                    çalıştırılamaz. Bu bilinçli bir güvenlik önlemidir.
+                </p>
+
+                <h2 id="olusacak-dosyalar">4. Kurulum Sonrası Oluşan Dosyalar</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dosya</th>
+                            <th>Amaç</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>rlv.php</code></td>
+                            <td>Veritabanı ve çekirdek ayarlar</td>
+                        </tr>
+                        <tr>
+                            <td><code>.env</code></td>
+                            <td>Güvenlik anahtarları</td>
+                        </tr>
+                        <tr>
+                            <td><code>.htaccess</code></td>
+                            <td>URL ve yönlendirme kuralları</td>
+                        </tr>
+                        <tr>
+                            <td><code>install/installed</code></td>
+                            <td>Kurulum kilidi</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="tip">NOT: Bu dosyalar ileri seviye kullanım hariç <strong>manuel düzenlenmemelidir</strong>.
+                </p>
+
+                <h2 id="bilincli-kisitlar">5. Bilinçli Kısıtlar (v1.0)</h2>
+                <p>Installer özellikle şunları yapmaz:</p>
+                <ul>
+                    <li>Çoklu ortam (stage / prod) ayrımı</li>
+                    <li>Geri alma (rollback)</li>
+                    <li>Gelişmiş kullanıcı oluşturma</li>
+                </ul>
+                <p>
+                    Bu özellikler v1.0 kapsamı dışındadır ve stabiliteyi korumak için bilinçli olarak eklenmemiştir.
+                </p>
+
+                <h2 id="sorun-giderme">6. Sık Karşılaşılan Sorular ve Çözümler</h2>
+
+                <h3 id="zaten-kurulu-hatasi">“Sistem zaten kurulu” uyarısı alıyorum</h3>
+                <p>
+                    Bu durum <code>install/installed</code> dosyasının var olduğu anlamına gelir. Yeniden kurmak için
+                    <code>install/installed</code> ve <code>rlv.php</code> dosyalarını silmeniz gerekir.
+                </p>
+
+                <h3 id="db-baglanti-hatasi">Veritabanı bağlantı hatası</h3>
+                <ul>
+                    <li>Hosting panelinden kullanıcı bilgilerini kontrol edin.</li>
+                    <li>MySQL servisinin aktif olduğundan emin olun.</li>
+                </ul>
+
+                <h3 id="yazma-hatasi">Dosya yazılamıyor</h3>
+                <ul>
+                    <li>Klasör izinlerini (CHMOD) kontrol edin.</li>
+                    <li>Sunucuda <code>open_basedir</code> kısıtı olup olmadığını kontrol edin.</li>
+                </ul>
+
+                <h2 id="son-not">7. Son Not</h2>
+                <p>
+                    Installer uzun vadeli bir yapı değil, <strong>bir defalık</strong> çalışacak şekilde tasarlanmıştır.
+                </p>
+                <blockquote>
+                    “Kurulumla uğraşmak değil, sistemi kullanmaya başlamak.”
+                </blockquote>
+            </article>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

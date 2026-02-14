@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Başlangıç Rehberi - Web Sistem Documentation</title>
+    <link rel="stylesheet" href="../stil.css">
+</head>
+
+<body>
+
+    <!-- Main Global Header -->
+    <header class="main-header">
+        <a href="./" class="logo">
+            <div class="logo-icon">W</div>
+            <span>Web Sistem</span>
+        </a>
+
+        <nav class="header-nav">
+            <!-- Dynamic header navigation logic in script.js -->
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Toggle -->
+    <header class="header">
+        <button class="menu-toggle" data-onclick-fn="toggleSidebar" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" data-onclick-fn="toggleSidebar"></div>
+
+    <div class="page-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <!-- Search -->
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Dokümantasyonda ara..."
+                        autocomplete="off">
+                    <button class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+
+            <nav id="nav">
+                <!-- Dynamic navigation by script.js -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <article id="content">
+                <h1 id="getting-started-title">Websistem v1.0 – Başlangıç Rehberi</h1>
+
+                <p>
+                    Websistem v1.0 dünyasına hoş geldiniz! Bu rehber, sistemi ilk kez inceleyen kullanıcılar için doğru
+                    beklentileri oluşturmak ve sizi yormadan en verimli şekilde yönlendirmek amacıyla hazırlanmıştır.
+                </p>
+
+                <h2 id="bu-sistem-nedir">1. Bu Sistem Nedir?</h2>
+                <p>
+                    Websistem v1.0, web projelerinizi <strong>hızlı, sade ve esnek</strong> bir şekilde geliştirmeniz
+                    için tasarlanmış hafif (lightweight) bir web çekirdeğidir.
+                </p>
+                <p>
+                    Genel amaçlı büyük içerik yönetim sistemlerinin (CMS) karmaşasından uzak, yalnızca gerçekten ihtiyaç
+                    duyulan temel özelliklere odaklanır. Temel amacımız, sizi geliştirme aşamasındaki gereksiz teknik
+                    detaylardan kurtararak tamamen <strong>tasarım ve içeriğe</strong> odaklanmanızı sağlamaktır.
+                </p>
+
+                <div class="tip">
+                    <div class="tip-title">💡 Vizyonumuz</div>
+                    <p>Karmaşıklığı azaltmak, hızı artırmak ve kontrolü tamamen geliştiriciye bırakmak.</p>
+                </div>
+
+                <h2 id="ne-degildir">2. Bu Sistem Ne DeĞİLDİR?</h2>
+                <p>Beklentilerinizi doğru yönetmek adına, Websistem v1.0'ın ne olmadığını bilmek önemlidir:</p>
+                <ul>
+                    <li>Haftalar süren bir öğrenme eğrisi gerektiren karmaşık bir framework değildir.</li>
+                    <li>Her ihtiyacı onlarca eklentiyle çözen, sistemi ağırlaştıran hantal bir yapı değildir.</li>
+                    <li>Sizi komut satırı (CLI) kullanmaya zorlayan bir terminal aracı değildir.</li>
+                    <li>Tamamen teknik bilgiden uzak, "sıfır bilgiyle" yönetilen bir kutu ürünü değildir.</li>
+                </ul>
+
+                <h2 id="kimin-icin">3. Bu Sistem Kimin İçin?</h2>
+                <p>Websistem v1.0 özellikle şu kullanıcı profilleri için idealdir:</p>
+                <ul>
+                    <li><strong>Web Tasarımcılar:</strong> HTML ve CSS bilen, tasarımlarını hızlıca dinamik bir yapıya
+                        bağlamak isteyenler.</li>
+                    <li><strong>Freelancer Geliştiriciler:</strong> Müşterilerine sade, hızlı ve kafa karıştırmayan
+                        yönetim panelleri sunmak isteyenler.</li>
+                    <li><strong>Hafif Çözüm Arayanlar:</strong> "Bana sadece kontrol edilebilir, temiz bir çekirdek
+                        lazım" diyen profesyoneller.</li>
+                </ul>
+
+                <h3 id="uygun-olmayanlar">Kimin İçin Uygun Değil?</h3>
+                <p>
+                    Eğer kurumsal ölçekte devasa yazılım mimarileri arıyorsanız, binlerce hazır eklentiyle ilerlemeyi
+                    tercih ediyorsanız veya sisteme hiç dokunmadan her şeyin tamamen otomatik olmasını bekliyorsanız, bu
+                    sistem sizin için fazla sade kalabilir.
+                </p>
+
+                <h2 id="teknik-bilgi">4. Ne Kadar Teknik Bilgi Gerekir?</h2>
+                <p>
+                    Websistem v1.0'ı kullanmak için ileri seviye programlama uzmanı olmanıza gerek yoktur. Ancak
+                    sistemden en iyi verimi alabilmeniz için şu temel becerilere sahip olmanız beklenir:
+                </p>
+                <ul>
+                    <li>Temalarda HTML düzenleyebilme</li>
+                    <li>CSS ile temel tasarım dokunuşları yapabilme</li>
+                    <li>Dosya ve klasör yapısı mantığını anlayabilme</li>
+                </ul>
+                <p>
+                    Eğer bu seviyede bir aşinalığınız varsa, Websistem v1.0 sizin için oldukça konforlu bir araç
+                    olacaktır.
+                </p>
+
+                <h2 id="neler-insa-edilebilir">5. Neler İnşa Edebilirsiniz?</h2>
+                <p>Sistemin esnek yapısı sayesinde şunları ve benzerlerini kolayca oluşturabilirsiniz:</p>
+                <ul>
+                    <li>Kurumsal tanıtım ve marka siteleri</li>
+                    <li>Şık portfolyo ve kişisel sayfalar</li>
+                    <li>Düzenli bloglar ve haber platformları</li>
+                    <li>Ürün katalogları ve butik vitrin siteleri</li>
+                </ul>
+
+                <h2 id="temel-bilesenler">6. Sistemin Temel Bileşenleri (Kavramsal)</h2>
+                <p>Sistemin çalışma mantığını bir bina gibi düşünebiliriz:</p>
+                <ul>
+                    <li><strong>Core (Çekirdek):</strong> Binanın sağlam temeli ve veri akışını yöneten mekanizma.</li>
+                    <li><strong>Admin Panel:</strong> İçerikleri yönettiğiniz konforlu yönetim merkezi.</li>
+                    <li><strong>Temalar:</strong> Ziyaretçilerin gördüğü, projenizin "yüzü" olan tasarımlar.</li>
+                    <li><strong>Modüller:</strong> İhtiyaca göre binaya eklenen ek özellikler ve fonksiyonlar.</li>
+                </ul>
+
+                <h2 id="calisma-akisi">7. Tipik Çalışma Akışı</h2>
+                <p>Başarılı bir başlangıç için genellikle şu adımları izleyeceksiniz:</p>
+                <ol>
+                    <li><strong>Kurulum:</strong> Sistemi sunucunuzda ayağa kaldırın.</li>
+                    <li><strong>Yapılandırma:</strong> Temel site ayarlarınızı belirleyin.</li>
+                    <li><strong>Tasarım:</strong> Mevcut temayı seçin veya kendi tasarımınızı entegre edin.</li>
+                    <li><strong>İçerik:</strong> Panel üzerinden bilgilerinizi girmeye başlayın.</li>
+                    <li><strong>Yayın:</strong> Projenizi dünyaya açın!</li>
+                </ol>
+
+                <h2 id="dokumantasyon-okuma">8. Dokümantasyonu Nasıl Okumalısınız?</h2>
+                <p>
+                    Rehberimiz üç ana bölümden oluşur. Yeni başlayanların sırasıyla ilerlemesi en sağlıklı yöntemdir:
+                </p>
+                <ul>
+                    <li><strong>Getting Started:</strong> Şu an bulunduğunuz genel bakış bölümü.</li>
+                    <li><strong>Usage:</strong> Sistemin günlük kullanımı ve yönetim paneli detayları.</li>
+                    <li><strong>Advanced:</strong> Tema geliştirme, modüller ve ileri yapılandırmalar.</li>
+                </ul>
+
+                <div class="warning">
+                    <div class="warning-title">🚀 Hazır mısınız?</div>
+                    <p>Bir sonraki adım olan kurulum aşamasına geçerek ilk projenizi başlatabilirsiniz.</p>
+                </div>
+
+                <div class="flx gap-2 mt-5">
+                    <a href="installation.html" class="btn btn-primary w-100">Kurulum Adımına Geç <i
+                            class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <p class="content-footer">
+                    Websistem v1.0 – Temiz, hızlı ve geliştirici dostu.
+                </p>
+            </article>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
