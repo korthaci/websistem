@@ -9,13 +9,24 @@
 </head>
 
 <body>
-    <header class="main-header"><a href="./" class="logo"><div class="logo-icon">W</div><span>Web Sistem</span></a><nav class="header-nav"></nav></header>
-    <header class="header"><button class="menu-toggle" data-onclick-fn="toggleSidebar" aria-label="Toggle menu"><span></span><span></span><span></span></button></header>
+    <header class="main-header"><a href="./" class="logo">
+            <div class="logo-icon">W</div><span>Web Sistem</span>
+        </a>
+        <nav class="header-nav"></nav>
+    </header>
+    <header class="header"><button class="menu-toggle" data-onclick-fn="toggleSidebar"
+            aria-label="Toggle menu"><span></span><span></span><span></span></button></header>
     <div class="overlay" data-onclick-fn="toggleSidebar"></div>
 
     <div class="page-wrapper">
         <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header"><div class="search-container"><span class="search-icon">🔍</span><input type="text" class="search-input" id="searchInput" placeholder="Search documentation..." autocomplete="off"><button class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button><div class="search-results" id="searchResults"></div></div></div>
+            <div class="sidebar-header">
+                <div class="search-container"><span class="search-icon">🔍</span><input type="text" class="search-input"
+                        id="searchInput" placeholder="Search documentation..." autocomplete="off"><button
+                        class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
             <nav id="nav"></nav>
         </aside>
 
@@ -49,8 +60,8 @@
 
                 <h2 id="database">4. Database & Server Configuration</h2>
                 <ul>
-                    <li><strong>MySQL:</strong> production/hosting use.</li>
-                    <li><strong>SQLite:</strong> local/demo/light deployments.</li>
+                    <li><strong>MySQL:</strong> production</li>
+                    <li><strong>SQLite:</strong> light deployments.</li>
                 </ul>
                 <p>Protocol and host behavior (HTTP/HTTPS, www/non-www, subdirectory) are configured here.</p>
 
@@ -59,12 +70,29 @@
 
                 <h2 id="generated-files">6. Generated Files</h2>
                 <table>
-                    <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td><code>rlv.php</code></td><td>Core/database settings</td></tr>
-                        <tr><td><code>.env</code></td><td>Secrets and runtime keys</td></tr>
-                        <tr><td><code>.htaccess</code></td><td>Routing/redirect rules</td></tr>
-                        <tr><td><code>install/installed</code></td><td>Installation lock</td></tr>
+                        <tr>
+                            <td><code>rlv.php</code></td>
+                            <td>Core/database settings</td>
+                        </tr>
+                        <tr>
+                            <td><code>.env</code></td>
+                            <td>Secrets and runtime keys</td>
+                        </tr>
+                        <tr>
+                            <td><code>.htaccess</code></td>
+                            <td>Routing/redirect rules</td>
+                        </tr>
+                        <tr>
+                            <td><code>install/installed</code></td>
+                            <td>Installation lock</td>
+                        </tr>
                     </tbody>
                 </table>
 

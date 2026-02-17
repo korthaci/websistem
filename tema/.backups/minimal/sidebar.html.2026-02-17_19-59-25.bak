@@ -1,0 +1,32 @@
+<!-- BE CAREFUL WHEN REWRITE THIS FILE -->
+
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <a href="./">
+      <span class="logo-img">
+        <img src="assets/img/logo/logo.png" alt="" height="30">
+      </span>
+      <span class="logo_yazi">{{$:site_adi}}</span>
+    </a>
+    <button class="pin-sidebar">
+      <i class="fas fa-thumbtack">
+      </i>
+    </button>
+  </div>
+  <div class="nav-menu">
+    <div class="sidebar_filtre">
+      <input type="text" class="sidebar_menu_filtre" placeholder="·Menüde ara·..." value="">
+      <span class="sidebar_filtre_reset">✕</span>
+    </div>
+    {{$:giris_link}}
+    {{$:yp_linkler_sayfa}}
+    {{$:yp_linkler_resim}}
+    {{$:yp_linkler_modul}}
+    {{$:yp_linkler_bilesen}}
+    {{$:yp_linkler_dil_ceviri}}
+    {{$:yp_linkler_uyeler}}
+    {{$:yp_linkler_tema}}
+    {{$:yp_linkler_ga}}
+    <hr>{{$:cikis_link}}
+  </div>
+</nav>

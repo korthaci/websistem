@@ -205,10 +205,76 @@ echo '
                 }
             }
 
+			/*değişkenleri tanımlama başlangıcı*/
+			$tema_degiskenleri = [];
+			$php_dosya = str_replace('.html', '.php', $secili_dosya);
+			
+			if ($secili_dosya === 'index.html') {
+				$php_dosya_yolu = R_PHP . '/index1.php';
+			} else {
+				$php_dosya_yolu = YONLENDIR_D . '/' . $php_dosya;
+			}
+
+			if (!empty($secili_dosya) && str_ends_with($secili_dosya, '.html')) {
+				if (!is_file($php_dosya_yolu)) {
+					$php_dosya_alt = ltrim($php_dosya, '_');
+					$php_dosya_yolu_alt = YONLENDIR_D . '/' . $php_dosya_alt;
+					if (is_file($php_dosya_yolu_alt)) {
+						$php_dosya_yolu = $php_dosya_yolu_alt;
+					}
+				}
+
+				if (is_file($php_dosya_yolu)) {
+					$php_kod = file_get_contents($php_dosya_yolu);
+					
+					$bolum_sinirlari = [];
+					$anahtar_kelimeler = ['__degisken', '__foreach', '__if'];
+					
+					foreach ($anahtar_kelimeler as $ak) {
+						if ($pos = strpos($php_kod, "'$ak'")) $bolum_sinirlari[$ak] = $pos;
+						elseif ($pos = strpos($php_kod, "\"$ak\"")) $bolum_sinirlari[$ak] = $pos;
+					}
+					asort($bolum_sinirlari);
+					
+					$aks = array_keys($bolum_sinirlari);
+					for ($i = 0; $i < count($aks); $i++) {
+						$bas = $bolum_sinirlari[$aks[$i]];
+						$son = isset($aks[$i+1]) ? $bolum_sinirlari[$aks[$i+1]] : strlen($php_kod);
+						$snippet = substr($php_kod, $bas, $son - $bas);
+						
+						$target = str_replace('__', '', $aks[$i]);
+						if (preg_match_all("/['\"]([^'\"]+)['\"]\s*=>/", $snippet, $vars_m)) {
+							foreach($vars_m[1] as $v) {
+								if ($v !== $aks[$i] && (!isset($tema_degiskenleri[$target]) || !in_array($v, $tema_degiskenleri[$target]))) {
+									$tema_degiskenleri[$target][] = $v;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			$tema_degiskenleri_yaz = '';
+			if (!empty($secili_dosya) && !empty($tema_degiskenleri)) {
+				$tema_degiskenleri_yaz .= '<div class="theme-variables-bar">';
+				$tema_degiskenleri_yaz .= '<b>' . yc("Değişkenler") . ':</b> ';
+				
+				foreach ($tema_degiskenleri as $tip => $liste) {
+					foreach ($liste as $dx) {
+						$prefix = ($tip == 'degisken' ? '{{$:' : ($tip == 'foreach' ? '{{__foreach %' : '{{__if%'));
+						$suffix = ($tip == 'degisken' ? '}}' : '% }}');
+						$tema_degiskenleri_yaz .= '<span class="theme-variable-badge panoya_kopyala" title="' . $tip . '">' . $prefix . $dx . $suffix . '</span>';
+					}
+				}
+				
+				$tema_degiskenleri_yaz .= '</div>';
+			}
+			/*değişkenleri tanımlama sonu*/
 echo '      </div>
         </div>
     </div>
     <div class="uis-col uis-col-lg-10">
+		' . $tema_degiskenleri_yaz . '
         <div class="uis-card uis-card-nopad overflow-hidden">
             <form action="' . href('index', 'ui=temaduzenle&tema=' . $tema_url . '&dosya=' . $secili_dosya) . '" method="POST">
                 <input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">

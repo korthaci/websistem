@@ -1,0 +1,31 @@
+{{__if%uyegiris%
+
+<div class="dropdown uye_kutu">
+    <div class="dropdown-toggle cursorp" id="userDropdown" role="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        {{__if_2%uye_foto_var%
+        <img src="{{$:uye_foto}}" class="g_20_ rounded-circle" alt="" />
+        ||
+        <i class="fas fa-user"></i>
+        __endif_2}}
+        {{$:uye_adi_str}}
+    </div>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" href="uis/uyegiris">·Giriş·</a></li>
+        <li><a class="dropdown-item" href="uis/bilgileriduzenle">·Profil Düzenle·</a></li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item uye_cikis" href="#">·Çıkış Yap·</a></li>
+    </ul>
+</div>
+
+||
+
+<div class="uye_giris_kutu">
+    <a class="nav-link" href="uis/uyegiris">
+        <i class="fas fa-user"></i> <span class="d-none d-md-inline-block">·Üye Girişi·</span>
+    </a>
+</div>
+
+__endif}}

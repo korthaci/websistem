@@ -9,13 +9,24 @@
 </head>
 
 <body>
-    <header class="main-header"><a href="./" class="logo"><div class="logo-icon">W</div><span>Web Sistem</span></a><nav class="header-nav"></nav></header>
-    <header class="header"><button class="menu-toggle" data-onclick-fn="toggleSidebar" aria-label="Toggle menu"><span></span><span></span><span></span></button></header>
+    <header class="main-header"><a href="./" class="logo">
+            <div class="logo-icon">W</div><span>Web Sistem</span>
+        </a>
+        <nav class="header-nav"></nav>
+    </header>
+    <header class="header"><button class="menu-toggle" data-onclick-fn="toggleSidebar"
+            aria-label="Toggle menu"><span></span><span></span><span></span></button></header>
     <div class="overlay" data-onclick-fn="toggleSidebar"></div>
 
     <div class="page-wrapper">
         <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header"><div class="search-container"><span class="search-icon">🔍</span><input type="text" class="search-input" id="searchInput" placeholder="Search documentation..." autocomplete="off"><button class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button><div class="search-results" id="searchResults"></div></div></div>
+            <div class="sidebar-header">
+                <div class="search-container"><span class="search-icon">🔍</span><input type="text" class="search-input"
+                        id="searchInput" placeholder="Search documentation..." autocomplete="off"><button
+                        class="clear-search" id="clearSearch" data-onclick-fn="clearSearch">×</button>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
             <nav id="nav"></nav>
         </aside>
 
@@ -39,7 +50,8 @@
                 <p>Theme switching changes visual rendering and layout mapping, not the content source itself.</p>
 
                 <h2 id="dynamic-menu">4. Menu and data-dynamic</h2>
-                <p>If <code>menu.html</code> contains <code>data-dynamic</code>, the system builds menu items dynamically.</p>
+                <p>If <code>menu.html</code> contains <code>data-dynamic</code>, the system builds menu items
+                    dynamically.</p>
 
                 <h2 id="module-model">5. Module Model</h2>
                 <p>Modules are loaded from module directories and inserted through shortcodes.</p>
@@ -47,14 +59,23 @@
                 <h2 id="template-syntax">6. Template Syntax</h2>
                 <div class="code-header">HTML Template Structure</div>
                 <pre><code>{{$:title}}
-{{__if %active% Active || Passive __endif}}
-{{__foreach %list% %item%}}
-&lt;div&gt;{{%item%.name%}}&lt;/div&gt;
-{{__endforeach}}</code></pre>
+                        {{__if%active%
+                        Content if active
+                        ||
+                        Content if passive
+                        __endif}}
+                        {{__foreach %key->%item}}
+                        &lt;div&gt;{{%item%.name%}}&lt;/div&gt;
+                        {{__endforeach}}</code></pre>
 
                 <div class="warning">
                     <div class="warning-title">Syntax Warning</div>
-                    <p>Do not add spaces inside variable placeholders. Correct: <code>{{$:variable}}</code>. Incorrect: <code>{{$: variable }}</code>.</p>
+                    <p>Do not add spaces inside variable placeholders. Correct: <code>{{$:variable}}</code>. Incorrect:
+                        <code>{{$: variable }}</code>.</p>
+                    <p><strong>If syntax:</strong> <code>{{__if%key% content || alternative __endif}}</code> (no spaces,
+                        multiline supported).</p>
+                    <p><strong>Foreach syntax:</strong> <code>{{__foreach %key->%item}}</code> (-> required, no spaces).
+                    </p>
                     <p>This matches <code>md/template_kullanim_rehberi.md</code> syntax conventions.</p>
                 </div>
 
@@ -62,7 +83,7 @@
                 <p>Primary rule: source text acts as the key.</p>
                 <div class="code-header">Example</div>
                 <pre><code>·Sign Up·
-echo yc("Sign Up");</code></pre>
+                        echo yc("Sign Up");</code></pre>
 
                 <h2 id="known-limits">8. Intentional Limits</h2>
                 <ul>

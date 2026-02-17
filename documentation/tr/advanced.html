@@ -164,15 +164,24 @@
                 <div class="code-header">HTML Template Structure</div>
                 <pre><code>{{$:baslik}}
 
-                        {{__if %aktif% Aktif || Pasif __endif}}
+                        {{__if%aktif%
+                        Aktif gösterilecek içerik
+                        ||
+                        Pasif gösterilecek içerik
+                        __endif}}
 
-                        {{__foreach %liste% %item%}}
-                        &lt;div&gt;{{%item%.ad%}}&lt;/div&gt;
+                        {{__foreach %anahtar->%item}}
+                        &lt;div&gt;{{%item%.ad}}&lt;/div&gt;
                         {{__endforeach}}</code></pre>
                 <div class="warning">
                     <div class="warning-title">Sözdizimi Uyarısı</div>
-                    <p>Değişken yazımında boşluk bırakmayın. Doğru: <code>{{$:degisken}}</code> - Yanlış: <code>{{$: degisken }}</code>.</p>
-                    <p>Bu bölüm <code>md/template_kullanim_rehberi.md</code> ile uyumludur: <code>{{__if ... __endif}}</code>, <code>{{__foreach ...}}</code>, <code>{{$:degisken}}</code>.</p>
+                    <p>Değişken yazımında boşluk bırakmayın. Doğru: <code>{{$:degisken}}</code> - Yanlış: <code>{{$:
+                            degisken }}</code>.</p>
+                    <p><strong>If syntax'ı:</strong> <code>{{__if%anahtar% içerik || alternatif __endif}}</code>
+                        (boşluksuz, multiline desteklenir).</p>
+                    <p><strong>Foreach syntax'ı:</strong> <code>{{__foreach %anahtar->%item}}</code> (-> zorunlu,
+                        boşluksuz).</p>
+                    <p>Bu bölüm <code>md/template_kullanim_rehberi.md</code> ile uyumludur.</p>
                 </div>
                 <p>Bu yapı genişletilmek için değil, <strong>kullanılmak</strong> içindir.</p>
 
