@@ -38,44 +38,89 @@
                     <li>General Settings</li>
                 </ul>
 
-                <h2 id="edit-menu">3. Edit Menu</h2>
-                <h3 id="pages">3.1 Pages</h3>
+                <h2 id="content-layer">3. Content Management Layer (Conceptual)</h2>
+                <p>
+                    Content is organized through <strong>pages</strong>, <strong>tab-based sections</strong> and
+                    <strong>homepage blocks</strong>.
+                </p>
+                <ul>
+                    <li>Pages hold main text, title, metadata and optional galleries.</li>
+                    <li>Tabs group related pages into segments or categories.</li>
+                    <li>Blocks build the homepage from top to bottom as ordered sections.</li>
+                    <li>Menus bind to pages and tabs to create navigation.</li>
+                </ul>
+                <p>
+                    With this structure you can easily build blogs, corporate sites, portfolios, news portals and
+                    product showcases on the same core.
+                </p>
+
+                <h2 id="edit-menu">4. Edit Menu</h2>
+                <h3 id="pages">4.1 Pages</h3>
                 <ul>
                     <li>Create, reorder, publish/unpublish pages</li>
                     <li>Attach pages to tabs if needed</li>
                     <li>Add title/content/gallery per page</li>
                 </ul>
+                <p>This section is where you publish and manage your main articles and content pages.</p>
 
-                <h3 id="tabs">3.2 Tabs</h3>
+                <h3 id="tabs">4.2 Tabs</h3>
                 <p>Tabs are used for grouping page sets.</p>
+                <p>They work well as category-like groupings for articles or sections.</p>
 
-                <h3 id="menus">3.3 Menus</h3>
+                <h3 id="menus">4.3 Menus</h3>
                 <p>Menu entries can come from pages, tabs, or custom title + URL.</p>
 
-                <h3 id="blocks">3.4 Homepage Blocks</h3>
+                <h3 id="blocks">4.4 Homepage Blocks</h3>
                 <p>Blocks are ordered homepage sections stored and managed from admin.</p>
+                <p>
+                    They control everything on the homepage between header and footer. Each block is HTML-based and
+                    requires basic HTML understanding for best results.
+                </p>
 
-                <h2 id="media">4. Images & Files</h2>
+                <h2 id="media">5. Images & Files</h2>
                 <p>System keeps uploaded images and file assets managed separately.</p>
 
-                <h2 id="modules">5. Modules</h2>
+                <h2 id="modules">6. Modules</h2>
                 <p>Modules can be enabled/disabled and embedded via shortcode.</p>
                 <div class="code-header">Shortcode</div>
                 <pre><code>[al:modul:module_name]</code></pre>
+                <p>
+                    In the admin panel, each module row includes a copy button. Clicking it copies the shortcode to your
+                    clipboard so you can paste it into any page or block content area.
+                </p>
+                <div class="code-header">Example: Contact Form</div>
+                <pre><code>[al:modul:contact-form]</code></pre>
 
-                <h2 id="members">6. Members</h2>
+                <h2 id="members">7. Members</h2>
                 <p>Create and edit members with role-based access permissions.</p>
+                <p>
+                    The system includes a built-in membership and authorization layer, allowing you to define different
+                    roles and control admin-panel access levels.
+                </p>
 
-                <h2 id="themes">7. Themes</h2>
+                <h2 id="themes">8. Themes</h2>
                 <p>Theme switching does not delete content; it changes rendering/layout behavior.</p>
+                <p>
+                    Themes can be edited, duplicated or created from scratch. Theme files are plain HTML, CSS and
+                    JavaScript; you can customize both homepage and inner page layouts through the theme editor.
+                </p>
+                <p>
+                    In the theme editor you have access to files such as <code>header.html</code>,
+                    <code>footer.html</code> and <code>index.html</code>, which define the global skeleton of the site.
+                </p>
 
-                <h2 id="translation">8. Translation System</h2>
+                <h2 id="translation">9. Translation System</h2>
                 <p>Language management supports manual and AI-assisted translation flows.</p>
+                <p>In templates, UI texts are marked using the middle-dot character:</p>
+                <div class="code-header">Example</div>
+                <pre><code>·Log out·
+&lt;div&gt;·Welcome to our site·&lt;/div&gt;</code></pre>
+                <p>These markers are converted to the active language while rendering.</p>
 
-                <h2 id="settings">9. General Settings</h2>
+                <h2 id="settings">10. General Settings</h2>
                 <p>Site title, admin email, and SEO metadata are configured here.</p>
 
-                <h2 id="warnings">10. Important Defaults</h2>
+                <h2 id="warnings">11. Important Defaults</h2>
                 <ul>
                     <li>Deleted items cannot be recovered.</li>
                     <li>Unpublish is not delete.</li>

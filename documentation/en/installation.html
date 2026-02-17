@@ -42,13 +42,31 @@
                     <li>Create consistent project bootstrap for v1.0.</li>
                 </ul>
 
+                <div class="code-header">Downloaded Package Contents (Overview)</div>
+                <ul>
+                    <li>Core PHP files and engine structure</li>
+                    <li>Documentation files</li>
+                    <li><code>install/</code> directory and installer scripts</li>
+                    <li>Folder structure for uploaded images and other files</li>
+                    <li><code>api/</code> endpoints for REST-style access</li>
+                    <li><code>theme/</code> directory with HTML, CSS and JS templates</li>
+                </ul>
+
                 <h2 id="flow">2. Installation Flow</h2>
+                <p>A typical first-time installation looks like this:</p>
                 <ol>
-                    <li>Environment checks</li>
-                    <li>Database and server settings</li>
-                    <li>Admin account creation</li>
-                    <li>Confirmation and write operations</li>
-                    <li>Installation lock activation</li>
+                    <li>Upload all files from the ZIP package to your server.</li>
+                    <li>Open <code>https://yourdomain.com/install</code> in a browser.</li>
+                    <li>Choose your database type:
+                        <ul>
+                            <li><strong>MySQL</strong> for long‑term, high‑traffic projects.</li>
+                            <li><strong>SQLite</strong> for small, lightweight deployments.</li>
+                        </ul>
+                    </li>
+                    <li>If you use MySQL, enter the database name, user and password from your hosting panel.</li>
+                    <li>If your server has no SSL yet, disable “force SSL” in advanced options.</li>
+                    <li>Define the site title, admin email and admin password.</li>
+                    <li>Review the summary and confirm to write config files and finalize installation.</li>
                 </ol>
 
                 <h2 id="requirements">3. Requirements Check</h2>

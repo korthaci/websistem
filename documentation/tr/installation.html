@@ -98,7 +98,34 @@
                     yapar.
                 </p>
 
+                <div class="code-header">İndirilen Paket İçeriği (Özet)</div>
+                <ul>
+                    <li>Çekirdek PHP dosyaları ve sistem yapısı</li>
+                    <li>Dokümantasyon dosyaları</li>
+                    <li><code>install/</code> dizini ve kurulum sihirbazı dosyaları</li>
+                    <li>Yüklenen resim ve diğer dosyalar için klasör yapısı</li>
+                    <li>REST API uç noktaları için <code>api/</code> yapısı</li>
+                    <li>Temalar için HTML, CSS ve JS dosyalarını içeren <code>tema/</code> dizini</li>
+                </ul>
+
                 <h2 id="kurulum-adimlari">3. Kurulum Adımları (Detaylı)</h2>
+                <p>Aşağıdaki özet, tipik bir ilk kurulum akışını gösterir:</p>
+                <ol>
+                    <li>İndirilen tüm dosyaları sunucunuza yükleyin.</li>
+                    <li>Tarayıcıdan <code>https://alanadiniz.com/install</code> adresine giderek sihirbazı başlatın.
+                    </li>
+                    <li>MySQL veya SQLite kurulum tipini seçin:
+                        <ul>
+                            <li>MySQL: büyük ve uzun ömürlü projeler için önerilir.</li>
+                            <li>SQLite: küçük projeler için pratik; yoğun trafikte performans düşebilir.</li>
+                        </ul>
+                    </li>
+                    <li>MySQL kullanıyorsanız, hosting panelinizden açtığınız veritabanının kullanıcı adı ve şifresini
+                        girin.</li>
+                    <li>Sunucuda SSL yoksa, gelişmiş ayarlardan “zorunlu SSL” seçeneğini pasif hâle getirin.</li>
+                    <li>Site başlığı, yönetici e‑posta adresi ve yönetici şifresini tanımlayın.</li>
+                    <li>Özet ekranında bilgileri onaylayarak kurulumu tamamlayın.</li>
+                </ol>
 
                 <h3 id="gereksinimler">3.1 Sistem Gereksinimleri Kontrolü</h3>
                 <p>İlk adımda sistem ortamı doğrulanır.</p>

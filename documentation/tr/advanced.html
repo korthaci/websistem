@@ -92,6 +92,11 @@
                     Sistem, büyük framework’lerin aksine <strong>“her ihtimale göre”</strong> değil, <strong>“gerçek
                         kullanım senaryolarına göre”</strong> şekillendirilmiştir.
                 </p>
+                <p>
+                    Çekirdek motor; yönlendirme, işleme sırası ve modül koordinasyonundan sorumludur. Temalar ise
+                    yalnızca HTML yapısını ve görünümü tanımlar, içlerinde PHP mantığı bulunmaz. Amaç, soyutlama
+                    katmanlarından çok, <strong>mantık ve sunum katmanının net şekilde ayrılmasıdır</strong>.
+                </p>
 
                 <hr>
 
@@ -113,6 +118,12 @@
                         ├── resim/ → Yüklenen görseller
                         ├── dosya/ → Yüklenen dosyalar
                         └── install/ → Kurulum sihirbazı</code></pre>
+                <p>
+                    Kurulum sihirbazı tamamlandığında <code>rlv_.php</code>, <code>.env</code> ve
+                    <code>.htaccess</code> gibi <strong>çekirdek yapılandırma dosyaları</strong> otomatik olarak
+                    oluşturulur. Bu dosyalar normal kullanımda manuel düzenlenmez; ileri seviye müdahaleler için
+                    <em>Installation</em> dokümanı referans alınmalıdır.
+                </p>
 
                 <hr>
 
@@ -129,6 +140,27 @@
                         aktif tema
                         ↓
                         HTML çıktı</code></pre>
+                <h3 id="cekirdek-yetenekleri">3.1 Çekirdek Yetenekleri (Özet)</h3>
+                <ul>
+                    <li>URL yönlendirme sistemi</li>
+                    <li>Merkezi işleme süreci</li>
+                    <li>Yönerge ayrıştırma motoru</li>
+                    <li>Yer tutucu değiştirme sistemi</li>
+                    <li>Şablon dahil etme çözümleyici</li>
+                    <li>Koşullu blok yorumlayıcı</li>
+                    <li>Modüler yürütme akışı</li>
+                    <li>Sürüm duyarlı yapı</li>
+                </ul>
+
+                <h3 id="isleme-sirasi-detay">3.2 İşleme Sırası (Detaylı)</h3>
+                <ol>
+                    <li>Rota çözümleme</li>
+                    <li>Modül başlatma</li>
+                    <li>Veri hazırlama</li>
+                    <li>Şablon ayrıştırma</li>
+                    <li>Yönerge işleme</li>
+                    <li>Çıktı oluşturma</li>
+                </ol>
 
                 <hr>
 
@@ -139,6 +171,16 @@
                     <li>Sadece görünüm değişir</li>
                 </ul>
                 <p>Tema değişimi blokları, menüyü ve ana sayfa yapısını etkilemez, yalnızca yeniden yorumlar.</p>
+                <div class="code-header">Örnek Tema Dizini</div>
+                <pre><code>/tema/minimal/
+header.html
+footer.html
+index.html
+assets/</code></pre>
+                <p>
+                    Temalar yalnızca HTML, CSS ve JavaScript dosyalarından oluşur; içlerine PHP mantığı eklenmez.
+                    Motor, önceden tanımlı yer tutuculara veri enjekte eder ve tema bu veriyi sadece görüntüler.
+                </p>
 
                 <hr>
 
@@ -155,12 +197,26 @@
                 <h2 id="moduller-advanced">6. Modüller</h2>
                 <p>Modüller <code>php/modul/</code> altında yer alır ve kısa kod ile çağrılır. Silinirse veri kaybı
                     yaşanabilir.</p>
+                <ul>
+                    <li>Etkinleştirme / devre dışı bırakma kontrolü</li>
+                    <li>Çekirdeğe bağımlı fakat temalardan yapısal olarak ayrık çalışma</li>
+                    <li>Özellik tabanlı genişleme</li>
+                    <li>Kontrollü yürütme akışı</li>
+                </ul>
                 <div class="code-header">Kısa Kod Örneği</div>
                 <pre><code>[al:modul:ornek]</code></pre>
 
                 <hr>
 
                 <h2 id="template-yapisi">7. Template Yapısı (Örnek)</h2>
+                <p>Template sistemi, statik HTML içinde dinamik davranışlar tanımlamanızı sağlar.</p>
+                <ul>
+                    <li>Veri enjeksiyonu için değişken yer tutucuları</li>
+                    <li>Koşullu işleme blokları</li>
+                    <li>İç içe koşullu değerlendirme desteği</li>
+                    <li>Dahil etme (include) yönergeleri</li>
+                    <li>Dil duyarlı bölgeler</li>
+                </ul>
                 <div class="code-header">HTML Template Structure</div>
                 <pre><code>{{$:baslik}}
 

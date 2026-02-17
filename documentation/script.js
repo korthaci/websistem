@@ -66,7 +66,6 @@ function initGlobalHeader() {
             { title: 'Installation', href: 'installation.html' },
             { title: 'Usage', href: 'usage.html' },
             { title: 'Advanced', href: 'advanced.html' },
-            { title: 'Capabilities', href: 'capabilities.html' },
             { title: 'Changelog', href: 'changelog.html' },
             { title: 'Roadmap', href: 'roadmap.html' },
             { title: 'FAQ', href: 'faq.html' }
@@ -76,7 +75,6 @@ function initGlobalHeader() {
             { title: 'Kurulum', href: 'installation.html' },
             { title: 'Kullanım', href: 'usage.html' },
             { title: 'Gelişmiş', href: 'advanced.html' },
-            { title: 'Neler Yapılabilir?', href: 'capabilities.html' },
             { title: 'Değişiklikler', href: 'changelog.html' },
             { title: 'Roadmap', href: 'roadmap.html' },
             { title: 'SSS', href: 'faq.html' }

@@ -41,13 +41,39 @@
                     <li>Clear separation between content and presentation</li>
                     <li>Admin panel and frontend kept isolated</li>
                 </ul>
+                <p>
+                    The core engine is responsible for routing, processing order, and module coordination. Themes
+                    stay HTML-only and define markup and layout; no PHP logic is embedded into template files. The
+                    goal is <strong>strict separation of logic and presentation</strong> rather than deep abstraction
+                    layers.
+                </p>
 
                 <h2 id="request-flow">2. Request Flow (High-Level)</h2>
                 <div class="code-header">Request Flow</div>
                 <pre><code>Request -> index.php -> core routing -> active theme -> HTML output</code></pre>
+                <h3 id="core-engine-capabilities">2.1 Core Engine Capabilities</h3>
+                <ul>
+                    <li>URL routing and resolution</li>
+                    <li>Central processing pipeline</li>
+                    <li>Directive parsing</li>
+                    <li>Placeholder replacement</li>
+                    <li>Conditional block evaluation</li>
+                    <li>Template include resolution</li>
+                    <li>Module execution flow</li>
+                </ul>
 
                 <h2 id="theme-behavior">3. Theme Behavior</h2>
                 <p>Theme switching changes visual rendering and layout mapping, not the content source itself.</p>
+                <div class="code-header">Example Theme Directory</div>
+                <pre><code>/theme/minimal/
+header.html
+footer.html
+index.html
+assets/</code></pre>
+                <p>
+                    Themes are file-system based and HTML-first. They consist of HTML, CSS and JavaScript assets,
+                    while the engine injects data into predefined placeholders during rendering.
+                </p>
 
                 <h2 id="dynamic-menu">4. Menu and data-dynamic</h2>
                 <p>If <code>menu.html</code> contains <code>data-dynamic</code>, the system builds menu items
@@ -55,8 +81,22 @@
 
                 <h2 id="module-model">5. Module Model</h2>
                 <p>Modules are loaded from module directories and inserted through shortcodes.</p>
+                <ul>
+                    <li>Enable/disable control per module</li>
+                    <li>Tight integration with the core, while staying separate from theme files</li>
+                    <li>Feature-based extension model</li>
+                    <li>Controlled execution flow</li>
+                </ul>
 
                 <h2 id="template-syntax">6. Template Syntax</h2>
+                <p>The template engine provides dynamic behavior inside otherwise static HTML templates.</p>
+                <ul>
+                    <li>Data injection placeholders</li>
+                    <li>Conditional rendering blocks</li>
+                    <li>Nested condition evaluation</li>
+                    <li>Include directives</li>
+                    <li>Language-aware regions</li>
+                </ul>
                 <div class="code-header">HTML Template Structure</div>
                 <pre><code>{{$:title}}
                         {{__if%active%

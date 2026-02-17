@@ -107,11 +107,28 @@
                     <li><strong>Çıkış</strong></li>
                 </ul>
 
+                <h2 id="icerik-yonetim-katmani">3. İçerik Yönetim Katmanı (Kavramsal)</h2>
+                <p>
+                    Sistem içeriği; <strong>sayfalar</strong>, <strong>sekme tabanlı bölümler</strong> ve
+                    <strong>anasayfa blokları</strong> üzerinden yapılandırır.
+                </p>
+                <ul>
+                    <li>İçerik, sayfalar ve sekmeler aracılığıyla düzenlenir.</li>
+                    <li>Bloklar ile anasayfayı baştan sonra dizayn edebilir, genişletebilir veya daraltabilirsiniz.</li>
+                    <li>Her sayfa başlık, içerik, meta bilgiler ve galeri alanlarına sahiptir.</li>
+                    <li>Sekmeler; sayfaları gruplamak ve kategori benzeri yapılar oluşturmak için kullanılır.</li>
+                    <li>Menüler, bu içerik yapılarına bağlanarak navigasyonu oluşturur.</li>
+                </ul>
+                <p>
+                    Bu katman sayesinde; blog, kurumsal site, portfolyo veya ürün kataloğu gibi farklı yapıdaki
+                    projeler aynı çekirdek üzerinde rahatça inşa edilebilir.
+                </p>
+
                 <hr>
 
-                <h2 id="düzenle-menüsü">3. Düzenle Menüsü</h2>
+                <h2 id="düzenle-menüsü">4. Düzenle Menüsü</h2>
 
-                <h3 id="sayfalar">3.1 Sayfalar</h3>
+                <h3 id="sayfalar">4.1 Sayfalar</h3>
                 <ul>
                     <li>Yeni sayfa oluşturulabilir.</li>
                     <li>Sayfalar sıralanabilir.</li>
@@ -120,16 +137,18 @@
                     <li>Sayfalar isteğe bağlı olarak bir <strong>sekmeye</strong> bağlanabilir.</li>
                     <li>Her sayfaya özel: içerik, başlık ve görsel galerisi eklenebilir.</li>
                 </ul>
+                <p>Bu bölüm, metin içeriklerinizi ve makalelerinizi yayınlamak için temel alandır.</p>
 
-                <h3 id="sekmeler">3.2 Sekmeler</h3>
+                <h3 id="sekmeler">4.2 Sekmeler</h3>
                 <p>Sekmeler, sayfaları gruplamak için kullanılır.</p>
                 <ul>
                     <li>Yeni sekme oluşturulabilir.</li>
                     <li>Sekmeler aktif/pasif yapılabilir veya silinebilir.</li>
                     <li>Tek sayfalık web siteleri için zorunlu değildir.</li>
                 </ul>
+                <p>Makaleleri veya sayfaları konuya göre kategorilere ayırmak için idealdir.</p>
 
-                <h3 id="menüler">3.3 Menüler</h3>
+                <h3 id="menüler">4.3 Menüler</h3>
                 <p>Menüler, sitenin üst (header) navigasyonunu yönetir. Menü öğeleri üç kaynaktan oluşturulabilir:</p>
                 <ul>
                     <li>Sayfalar</li>
@@ -153,11 +172,25 @@
                     <li>Eğer menü şablonunda <code>data-dynamic</code> tanımı varsa, menü dinamik olarak üretilir.</li>
                     <li>Aksi halde, <code>menu.html</code> içine yazılan HTML <strong>aynen kullanılır</strong>.</li>
                 </ul>
+                <div class="code-header">Örnek Kullanım</div>
+                <pre><code>&lt;nav data-dynamic="1"&gt;
+    &lt;!-- Menü elemanları yönetim panelinden gelir --&gt;
+&lt;/nav&gt;</code></pre>
+                <p>
+                    Statik menü kullanmak isterseniz, <code>menu.html</code> içine istediğiniz HTML yapısını
+                    yazabilirsiniz. Dinamik menü istiyorsanız, aynı şablonda en az bir kapsayıcıya
+                    <code>data-dynamic="1"</code> özelliğini eklemeniz yeterlidir; yapılandırmaya göre menü otomatik
+                    doldurulur.
+                </p>
 
-                <h3 id="bloklar">3.4 Bloklar (Anasayfa Yapısı)</h3>
+                <h3 id="bloklar">4.4 Bloklar (Anasayfa Yapısı)</h3>
                 <p>
                     Bloklar, <strong>anasayfayı oluşturan temel parçalardır</strong>. Her blok bir HTML içeriğidir,
                     veritabanına kaydedilir ve anasayfada sıralanabilir.
+                </p>
+                <p>
+                    Bloklar, ana sayfadaki header ve footer bölümleri hariç tüm orta alanın yapısını belirler.
+                    Tamamı HTML tabanlıdır; etkili kullanım için temel HTML bilgisi gerekir.
                 </p>
 
                 <h3 id="blok-durumları">Blok Durumları</h3>
@@ -171,12 +204,16 @@
 
                 <hr>
 
-                <h2 id="resimler-ve-dosyalar">4. Resimler ve Dosyalar</h2>
+                <h2 id="resimler-ve-dosyalar">5. Resimler ve Dosyalar</h2>
 
                 <h3 id="resimler">Resimler</h3>
                 <p>
                     Güvenli resim dosyaları bu alanda saklanır. Her resimde: "Yeni sekmede aç", "Dosya adını kopyala" ve
                     "Sil" ikonları bulunur. Sayfa ve profil görselleri bu alandan seçilir.
+                </p>
+                <p>
+                    JPG, PNG, WEBP ve GIF uzantılı görseller desteklenir. Liste üzerindeki bağlantıya tıkladığınızda,
+                    adres panoya kopyalanır ve doğrudan içerik alanına <kbd>Ctrl + V</kbd> ile yapıştırabilirsiniz.
                 </p>
 
                 <h3 id="dosyalar">Dosyalar</h3>
@@ -187,9 +224,9 @@
 
                 <hr>
 
-                <h2 id="modüller">5. Modüller</h2>
+                <h2 id="modüller">6. Modüller</h2>
 
-                <h3 id="modül-yönetimi">5.1 Modül Yönetimi</h3>
+                <h3 id="modül-yönetimi">6.1 Modül Yönetimi</h3>
                 <ul>
                     <li>Sisteme ekli tüm modüller listelenir.</li>
                     <li>Modüller aktif/pasif yapılabilir.</li>
@@ -197,15 +234,19 @@
                     <li>Modül şablonları düzenlenebilir.</li>
                 </ul>
 
-                <h3 id="modül-kullanımı">5.2 Modül Kullanımı</h3>
+                <h3 id="modül-kullanımı">6.2 Modül Kullanımı</h3>
                 <p>Modüller, sayfa veya blok içerisine kısa bir kod ile eklenir:</p>
                 <div class="code-header">Kısa Kod Örneği</div>
                 <pre><code>[al:modul:modul_adi]</code></pre>
                 <p>
-                    Bu kod tıklandığında panoya kopyalanır ve içeriğe yapıştırıldığında otomatik çalışır.
+                    Yönetim panelindeki Modüller bölümünde her modül için bir <strong>kopyala</strong> butonu bulunur.
+                    Bu butona tıkladığınızda kısa kod panoya kopyalanır ve sayfa ya da blok içeriğine yapıştırıldığında
+                    otomatik olarak çalışır.
                 </p>
+                <div class="code-header">Örnek: İletişim Formu</div>
+                <pre><code>[al:modul:contact-form]</code></pre>
 
-                <h3 id="modul-sablonlari">5.3 Modül Şablonları</h3>
+                <h3 id="modul-sablonlari">6.3 Modül Şablonları</h3>
 
                 <ul>
                     <li>Modül şablonları HTML ile düzenlenir.</li>
@@ -235,17 +276,21 @@
                     nedenle çoğu durumda yalnızca HTML düzenlemesi yeterlidir.</p>
                 <hr>
 
-                <h2 id="uyeler">6. Üyeler</h2>
+                <h2 id="uyeler">7. Üyeler</h2>
                 <ul>
                     <li>Üye listesi görüntülenebilir.</li>
                     <li>Yeni üye oluşturulabilir.</li>
                     <li>Mevcut üyeler düzenlenebilir.</li>
                     <li>Yetkilere göre erişim seviyesi belirlenir.</li>
                 </ul>
+                <p>
+                    Sistem içerisinde yerleşik bir üyelik ve yetkilendirme yapısı bulunur. Farklı rollerle yeni
+                    üyelikler tanımlayabilir, yönetim paneline erişim seviyesini kontrol edebilirsiniz.
+                </p>
 
                 <hr>
 
-                <h2 id="temalar">7. Temalar</h2>
+                <h2 id="temalar">8. Temalar</h2>
                 <p>Sisteme ekli temalar listelenir ve aktif tema değiştirilebilir.</p>
                 <h3 id="tema-degisikligi">Tema Değiştirildiğinde</h3>
                 <ul>
@@ -258,10 +303,19 @@
                     <div class="warning-title">⚠️ Önemli</div>
                     <p>Örnek bloklar yüklendiğinde, mevcut anasayfa blokları değiştirilir.</p>
                 </div>
+                <p>
+                    Temalar düzenlenebilir, kopyalanabilir veya sıfırdan oluşturulabilir. Tema dosyaları HTML, CSS ve
+                    JavaScript sayfalarından oluşur; hem anasayfa hem de iç sayfaların yapısını buradan
+                    özelleştirebilirsiniz.
+                </p>
+                <p>
+                    Tema düzenleme ekranında <code>header</code>, <code>footer</code> ve <code>index.html</code> gibi
+                    alanlara erişerek sitenin genel iskeletini yeniden tanımlayabilirsiniz.
+                </p>
 
                 <hr>
 
-                <h2 id="dil-ve-çeviri">8. Dil ve Çeviri Sistemi</h2>
+                <h2 id="dil-ve-çeviri">9. Dil ve Çeviri Sistemi</h2>
                 <p>Websistem, çoklu dil desteğine sahiptir.</p>
 
                 <h3 id="panel-çevirileri">Yönetim Paneli Çevirileri</h3>
@@ -273,12 +327,13 @@
                 <h3 id="şablonlarda-çeviri">Şablonlarda Çeviri Kullanımı</h3>
                 <p>Genel arayüz metinleri, <strong>orta nokta (middle-dot)</strong> kullanılarak işaretlenir:</p>
                 <div class="code-header">Örnek</div>
-                <pre><code>·Çıkış Yap·</code></pre>
+                <pre><code>·Çıkış Yap·
+&lt;div&gt;·Welcome to our site·&lt;/div&gt;</code></pre>
                 <p>Bu yapı aktif dile göre otomatik çevrilir.</p>
 
                 <hr>
 
-                <h2 id="genel-ayarlar">9. Genel Ayarlar</h2>
+                <h2 id="genel-ayarlar">10. Genel Ayarlar</h2>
                 <p>
                     Site adı, yönetici e-posta adresi, meta description ve keywords gibi temel bilgiler buradan
                     yönetilir.
@@ -286,7 +341,7 @@
 
                 <hr>
 
-                <h2 id="varsayılan-davranışlar">10. Varsayılan Davranışlar ve Uyarılar</h2>
+                <h2 id="varsayılan-davranışlar">11. Varsayılan Davranışlar ve Uyarılar</h2>
                 <ul>
                     <li>Silinen öğeler <strong>geri alınamaz</strong>.</li>
                     <li>Yayından kaldırma ≠ silme.</li>
