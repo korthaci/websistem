@@ -14,6 +14,7 @@ dosya/**
 resim/**
 !resim/**/
 documentation/md/
+documentation/py/
 __install_db_sample/*
 .backups/*
 !**/ .gitkeep
