@@ -6,7 +6,8 @@ $yeni_kayit = new yeni_kayit_insert($pdo, $do_, 'blok_html', 'yenikayit');
 $yeni_kayit->insert_alanlar = ['adi'];
 $yeni_kayit->ek_insert_alanlar = [
 	'hash' => url_duzenle($_POST['adi'] ?? ''),
-	'icerik' => '<div></div>'
+	'icerik' => '<div></div>',
+	'tema' => $so_->d('tema') ?? ''
 ];
 $yeni_kayit->debug = false;
 

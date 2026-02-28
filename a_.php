@@ -8,8 +8,11 @@ define('otoban', 'ROOT');
 $_SESSION['csrf_token'] ??= bin2hex(random_bytes(32));
 
 require_once __DIR__ . '/vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->safeLoad();
+// createUnsafeImmutable hem $_ENV hem getenv() doldurur.
+if (file_exists(__DIR__ . '/.env')) {
+    $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
+    $dotenv->safeLoad();
+}
 
 (file_exists(__DIR__ .'/rlv_.php')) ? require __DIR__ .'/rlv_.php' : exit('Site Bakımda.!');
 require_once R_CLASS_F . '/ini_set.php';
@@ -21,6 +24,7 @@ require_once R_CLASS_F . '/pdo_db_helper.php';
 require_once R_CLASS_F . '/form_c.php';
 require_once R_CLASS_F . '/class.dom_element_menu.php';
 require_once R_CLASS_F . '/PageMetadata.php';
+if (is_file(R_CLASS_F . '/lc.php')) require_once R_CLASS_F . '/lc.php';
 
 if (DB_TYPE === 'sqlite') {
     $sqlite_dir = R_PHP . "/sqlite_data";

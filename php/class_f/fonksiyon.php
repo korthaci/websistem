@@ -198,28 +198,45 @@ function dosya_yaz(string $dosya, string $icerik, int $chmod = 0755): bool {
 
 
 function dizin_listesi(string $dizin, array $exclude = []) {
-	if (!is_dir($dizin)) {
-		return false;
-	}
+    if (!is_dir($dizin)) {
+        return false;
+    }
 
-	$contents = scandir($dizin);
-	$dizinler = [];
+    $contents = scandir($dizin);
+    $dizinler = [];
 
-	foreach ($contents as $item) {
-		if ($item === '.' || $item === '..') {
-			continue;
-		}
+    foreach ($contents as $item) {
+        if ($item === '.' || $item === '..') {
+            continue;
+        }
 
-		if (in_array($item, $exclude, true)) {
-			continue;
-		}
+        if (is_excluded($item, $exclude)) {
+            continue;
+        }
 
-		if (is_dir($dizin . '/' . $item)) {
-			$dizinler[] = $item;
-		}
-	}
+        if (is_dir($dizin . '/' . $item)) {
+            $dizinler[] = $item;
+        }
+    }
 
-	return $dizinler;
+    return $dizinler;
+}
+
+function is_excluded(string $item, array $exclude): bool {
+    foreach ($exclude as $pattern) {
+        if (preg_match('/^(.)[^\\1]*\\1[gimsuy]*$/', $pattern) && @preg_match($pattern, '') !== false) {
+            if (preg_match($pattern, $item)) {
+                return true;
+            }
+        } elseif (str_contains($pattern, '*') || str_contains($pattern, '?') || str_contains($pattern, '[')) {
+            if (fnmatch($pattern, $item)) {
+                return true;
+            }
+        } elseif ($pattern === $item) {
+            return true;
+        }
+    }
+    return false;
 }
 
 
@@ -1041,7 +1058,7 @@ function sablon_include($html_) {	// Basit değişken yerleştirmeleri için: [[
 
 function html_modul($yazi) {
 	global $pdo, $db, $pdo_db, $do_, $so_, $bo_, $indexx, $u_no__, $n;
-	
+		
 	if (false === strpos($yazi, "[al:")) {
 		return $yazi;
 	}
@@ -1099,7 +1116,9 @@ function html_modul($yazi) {
 	return $yazi_son;
 }
 
-
+function degisken_duzenle($yazi){
+	return str_replace(['{{$:local}}', '{{$:img}}'], [LOCAL, IMG], $yazi);	
+}
 
 
 function n0_($n) {

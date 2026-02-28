@@ -58,14 +58,10 @@ switch ($islem_tip) {
             $config['deleted_at'] = date('Y-m-d H:i:s');
             
             file_put_contents($config_file, json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-
-            // Optional: Rename directory to mark as deleted but keep as backup
-            /*
+            
             $new_name = TEMA_DIR . '/.deleted_' . time() . '_' . $tema;
             rename($tema_yolu, $new_name);
-            */
 
-            // Hard delete code commented out for safety as per request
             // recursiveDelete($tema_yolu); 
 
             echo json_encode(['return' => 1, 'mesaj' => yc("Tema başarıyla arşive kaldırıldı.")]);

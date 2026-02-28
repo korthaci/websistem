@@ -46,6 +46,7 @@ if (isset($_POST['islem'])) {
 	
 		'uye_cikis'			=> ['adi' => 'cikis', 'php' => 'uye_cikis.php', 'header' => 'json'],
 		'uis_tema'			=> ['adi' => 'Tema İşlemleri', 'php' => 'uis/uis_tema.php', 'header' => 'json'],
+		'ai_generator'		=> ['adi' => 'AI Dönüştürücü', 'php' => 'ai_generator.php',  'header' => 'json'],
 		
 	];
 
@@ -53,6 +54,11 @@ if (isset($_POST['islem'])) {
 		
 		$dosya_bu = $include_dosya_dizi[$islem];
 		$php_dosya_yolu = __DIR__ . '/' . $dosya_bu['php'];
+		$php_dosya_yolu_dev = DEV_DIR . '/' . $dosya_bu['php'];
+
+		if (is_file($php_dosya_yolu_dev)) {
+			$php_dosya_yolu = $php_dosya_yolu_dev;
+		}
 
 		if (is_file($php_dosya_yolu)) {
 

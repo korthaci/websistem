@@ -74,15 +74,17 @@ if (isset($_POST['recreate_blocks'])) {
 
         $theme_sql = file_get_contents($theme_sql_file);
         
-        // Tabloyu temizle
-        $pdo->exec("DROP TABLE IF EXISTS {$db_prefix}blok_html");
+        // Tabloyu tamamen silmek yerine o temaya ait mevcut kayıtları temizle
+        try {
+            $pdo->prepare("DELETE FROM {$db_prefix}blok_html WHERE tema = :tema")->execute(['tema' => $tema_url]);
+        } catch (Exception $e) {
+            // Tabloda 'tema' sütunu yoksa veya geçersizse yoksay (güvenlik için)
+        }
         
         // SQLite dönüşümü
         if ($db_type === 'sqlite') {
             $theme_sql = mysqlToSqlite($theme_sql);
         }
-        
-        // Prefix yönetimi
         if ($db_prefix !== 'r_') {
             $theme_sql = str_replace(['`r_', ' r_'], ['`'.$db_prefix, ' '.$db_prefix], $theme_sql);
         }
@@ -91,11 +93,13 @@ if (isset($_POST['recreate_blocks'])) {
         $queries = splitSqlFile($theme_sql);
         
         foreach ($queries as $q) {
-            if (!empty(trim($q))) {
+            if (empty(trim($q))) continue;
+            // DROP ve CREATE komutlarını yoksayıp sadece INSERT komutlarını çalıştır
+            if (stripos($q, 'INSERT INTO') !== false) {
                 try {
                     $pdo->exec($q);
                 } catch (Exception $e) {
-                    // Hata durumunda devam et
+                    // Hata durumunda devam et (örneğin Duplicate entry no:32 vs)
                 }
             }
         }

@@ -1,7 +1,8 @@
 <?php if (!defined('otoban')) exit('vad.');
 
 $aktif_tema = $so_->d('tema');
-$tema_dizinleri = dizin_listesi(TEMA_DIR, ['.backups']);
+$tema_dizinleri = dizin_listesi(TEMA_DIR, ['.backups', '.sabitlenmis_tema', '*deleted*']);
+$tema_sayisi = count($tema_dizinleri);
 
 $activated_msg = '';
 if (isset($_GET['activated'])) {
@@ -17,7 +18,8 @@ echo '
 <div class="uis-page-header">
     <h1 class="uis-page-title"><i class="fa-solid fa-palette"></i> '. yc("Tema Yönetimi").'</h1>
     <div class="uis-action-bar">
-        <button class="uis-btn uis-btn-outline tema-tazele"><i class="fa-solid fa-sync"></i> '.yc("Listeyi Yenile").'</button>
+        <button class="uis-btn uis-btn-outline tema-tazele"><i class="fa-solid fa-sync"></i> '.yc("Listeyi Yenile").'</button>'.
+        (!empty($_ENV['LC_API_KEY']) && !empty($_ENV['LC_VERIFY_KEY']) ? '<a href="ui/ai_studio" class="uis-btn uis-btn-sm uis-btn-p">'.yc("AI Studio").'</a>' : '').'
     </div>
 </div>
 
@@ -47,11 +49,14 @@ foreach ($tema_dizinleri as $tema) {
         }
     }
     
+    $tema_sayi_uis_md_stil_dizi = [1 => '12', 2 => '6', 3 => '4', 4 => '3'];
+    $uis_col_md_stil = 'uis-col-md-' . $tema_sayi_uis_md_stil_dizi[$tema_sayisi] ?? '6';
+    
     $active_class = $is_active ? 'border-primary shadow-lg' : '';
     $active_badge = $is_active ? '<span class="uis-alert uis-alert-s uis-m-0 uis-w-auto uis-ms-2 uis-badge-active">'.yc("Aktif").'</span>' : '';
 
     echo '
-    <div class="uis-col uis-col-md-6 uis-col-lg-4">
+    <div class="uis-col ' . $uis_col_md_stil . ' uis-col-sm-12">
         <div class="uis-card h-100 ' . $active_class . '" data-tema="' . $tema . '">
             <div class="tema-thumbnail">
                 <img src="' . $img_url . '" alt="' . $tema . '">

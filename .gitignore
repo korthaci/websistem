@@ -8,6 +8,7 @@
 .htaccess
 rlv_.php
 vendor/
+**/_dev/
 api/oauth/google_certs.json
 dosya/**
 !dosya/**/

@@ -1149,6 +1149,55 @@ $(document).ready(function () {
 		}
 	});
 
+
+	$('input[data-typew]').each(function() {
+		let $input = $(this);
+		let phrases = ($input.data('typew') || "").split('|');
+		if (phrases.length === 0 || phrases[0] === "") return;
+
+		let phrase_index = 0;
+		let type_index = 0;
+		let typingInterval;
+		let timeoutRef;
+
+		function typePhrase() {
+			let text = phrases[phrase_index];
+			if (type_index < text.length) {
+				$input.attr('placeholder', text.substring(0, type_index + 1));
+				type_index++;
+			} else {
+				stopTyping();
+				timeoutRef = setTimeout(function() {
+					phrase_index = (phrase_index + 1) % phrases.length;
+					type_index = 0;
+					startTyping();
+				}, 5000);
+			}
+		}
+
+		function startTyping() {
+			stopTyping();
+			typingInterval = setInterval(typePhrase, 50);
+		}
+
+		function stopTyping() {
+			clearInterval(typingInterval);
+			clearTimeout(timeoutRef);
+		}
+
+		$input.on('focus', function() {
+			stopTyping();
+		});
+
+		$input.on('blur focusout', function() {
+			phrase_index = 0;
+			type_index = 0;
+			startTyping();
+		});
+
+		startTyping();
+	});
+
 	/*
 	document.querySelectorAll('.dropdown-kutu').forEach(kutu => {
 		const dropdownBaslik = kutu.querySelector('.dropdown-baslik');

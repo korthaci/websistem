@@ -31,6 +31,7 @@ if (isset($_GET['ui'])) {
 		'dashboard' =>			['php' => 'kontrolpaneli',		'yetki' => [2,3],		'_class' => 'container'],
 		'temalar' =>			['php' => 'temalar',			'yetki' => [2],		'_class' => ' g_98__ margin_a'],
 		'temaduzenle' =>		['php' => 'temaduzenle',		'yetki' => [2],		'_class' => ' g_98__ margin_a'],
+		'ai_studio' =>			['php' => 'ai_studio',			'yetki' => [2],		'_class' => 'container'],
 	];
 
 	if (array_key_exists($uis2_url, $case)) {
@@ -40,6 +41,8 @@ if (isset($_GET['ui'])) {
 			//echo '<h6 class="_ls-2">'.tum_harf_buyut(preg_replace("/\d/", "", $case[$uis2_url]['php'])) . '</h6>';
 			if (is_file(__DIR__ . '/' . $case[$uis2_url]['php'] . '.php')) {
 				include __DIR__ . '/' . $case[$uis2_url]['php'] . '.php';
+			} elseif (is_file(DEV_DIR . '/' . $case[$uis2_url]['php'] . '.php')) {
+				include DEV_DIR . '/' . $case[$uis2_url]['php'] . '.php';
 			}
 			echo '</div>';
 		} else {

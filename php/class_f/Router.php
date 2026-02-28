@@ -193,6 +193,12 @@ class Router {
 
 		// Add custom route handler for homepage
 		$this->addRoute('', function() {
+			if (isset($_GET['ara'])) {
+				return [
+					'file' => YONLENDIR_D.'/ara',
+					'params' => ['type' => 'ara']
+				];
+			}
 			return [
 				'file' => YONLENDIR_D.'/kolon1',
 				'params' => ['type' => '']//home
@@ -236,10 +242,6 @@ class Router {
 			$result = $this->routes[$routeKey]($param);
 			$this->params = array_merge($this->params, $result['params'] ?? []);
 			return $result['file'];
-		}
-
-		if ($routeKey === '') {
-			return YONLENDIR_D . '/kolon1';
 		}
 
 		if (

@@ -57,6 +57,9 @@ define ('MODUL_DIR', R_PHP.'/modul');
 // Components directory
 define ('BILESEN_DIR', R_PHP.'/bilesen');
 
+// Development directory
+define ('DEV_DIR', R_PHP.'/_dev');
+
 // Translation / language files directory
 define ('CEVIRI_D', R_PHP.'/ceviri');
 
