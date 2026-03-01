@@ -8,6 +8,12 @@ if (!is_dir($tema_yolu)) {
     return;
 }
 
+// Güvenlik kilidi: Sabitlenmiş fallback tema hiçbir koşulda düzenlenemez.
+if ($tema_url === '.sabitlenmis_tema') {
+    echo '<div class="uis-alert uis-alert-d"><b>' . yc("Erişim Engellendi") . ':</b> ' . yc("Sabitlenmiş fallback tema güvenlik nedeniyle düzenlenemez.") . '</div>';
+    return;
+}
+
 $dosyalar_raw = dosya_listele($tema_yolu, [
     'include' => ['*.html', '*.css', '*.js'],
     'exclude' => ['screenshot.*', '*__install_db_sample*'],

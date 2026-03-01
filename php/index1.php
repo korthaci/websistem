@@ -1,7 +1,16 @@
 <?php if (! defined('otoban')) exit('!vad');
 
+$tema_render = tema_render_kaynagi_sec($so_->d('tema'));
+if (!empty($tema_render['critical_fail'])) {
+	http_response_code(500);
+	echo tema_critical_fail_html();
+	return;
+}
+
+$GLOBALS['tema_render_dizin'] = $tema_render['tema_dir'];
+
 $index_html_yaz = new sablon_yaz;
-$index_html_yaz->dosya_icerik(TEMABU . '/index.html');
+$index_html_yaz->dosya_icerik($tema_render['index_path']);
 
 $modul_css_js = new modul_css_js($pdo, $do_);
 $bilesen_css_js = new bilesen_css_js($pdo, $do_);
@@ -55,5 +64,19 @@ $index_html_yaz->vars = [
 		'google_login_oauth' => (int)(!empty($so_->d('google_login_client_id')) && $u_no__ <= 0),
 	]
 ];
-echo $index_html_yaz->render();
+$html = $index_html_yaz->render();
+
+if (!empty($tema_render['used_fallback']) && syetki([2,3])) {
+	$fallback_reason = hs((string)($tema_render['reason'] ?? 'unknown'));
+	$notice = '<div style="background:#fff3cd;color:#5f4300;border:1px solid #ffe69c;padding:10px 14px;margin:0;text-align:center;font-size:13px;">Teknik Uyarı: Aktif tema doğrulamadan geçmedi. Bu istek <b>.sabitlenmis_tema</b> ile servis edildi. Sebep: <code>' . $fallback_reason . '</code></div>';
+
+	if (preg_match('/<body\b[^>]*>/i', $html)) {
+		$html = preg_replace('/<body\b[^>]*>/i', '$0' . $notice, $html, 1);
+	} else {
+		$html = $notice . $html;
+	}
+}
+
+echo $html;
+
 

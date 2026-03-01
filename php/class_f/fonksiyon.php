@@ -1004,7 +1004,7 @@ function sablon_include($html_) {	// Basit değişken yerleştirmeleri için: [[
 		//        Bu dosyalar genelde dinamik içerik veya sayfa parçaları içerir
 		// - varsayılan: Ana PHP dizini
 		if ($eslesme[1] === 'tema') {
-			$dosya_yolu_dizin = TEMA_DIR . '/' . $so_->d('tema');
+			$dosya_yolu_dizin = tema_render_dizin();
 		} elseif ($eslesme[1] === 'yon') {
 			$dosya_yolu_dizin = YONLENDIR_D;
 		} else {
@@ -3160,6 +3160,145 @@ function validate_layout_structure(string $content) {
 
 	return true;
 }
+
+/**
+ * Geçerli istek için aktif render tema dizinini döndürür.
+ * Fallback render devredeyse index1.php bu değeri global olarak set eder.
+ */
+function tema_render_dizin(): string {
+	if (!empty($GLOBALS['tema_render_dizin']) && is_string($GLOBALS['tema_render_dizin'])) {
+		return $GLOBALS['tema_render_dizin'];
+	}
+	return TEMABU;
+}
+
+/**
+ * Tema fallback olaylarını process log dosyasına yazar.
+ */
+function tema_fallback_log(string $event, array $context = []): void {
+	$payload = [
+		'event' => $event,
+		'time' => date('c'),
+		'ip' => $_SERVER['REMOTE_ADDR'] ?? '',
+		'url' => $_SERVER['REQUEST_URI'] ?? '',
+		'context' => $context
+	];
+
+	$line = '[tema_fallback] ' . json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+	if (defined('PROCESS_LOG_FILE')) {
+		@file_put_contents(PROCESS_LOG_FILE, $line, FILE_APPEND);
+	} else {
+		error_log(trim($line));
+	}
+}
+
+/**
+ * Bir temanın index.html dosyasını render için katı kurallarla doğrular.
+ */
+function tema_index_dogrula(string $tema_adi): array {
+	$index_path = TEMA_DIR . '/' . $tema_adi . '/index.html';
+
+	if (!is_file($index_path)) {
+		return ['ok' => false, 'reason' => 'index_file_missing', 'index_path' => $index_path];
+	}
+
+	if (!is_readable($index_path)) {
+		return ['ok' => false, 'reason' => 'index_file_not_readable', 'index_path' => $index_path];
+	}
+
+	$content = @file_get_contents($index_path);
+	if ($content === false) {
+		return ['ok' => false, 'reason' => 'index_file_read_failed', 'index_path' => $index_path];
+	}
+
+	$trimmed = trim($content);
+	if ($trimmed === '' || strlen($trimmed) < 200) {
+		return ['ok' => false, 'reason' => 'index_file_too_short_or_empty', 'index_path' => $index_path];
+	}
+
+	if (!preg_match('/<!DOCTYPE\s+html\b/i', $content)) {
+		return ['ok' => false, 'reason' => 'doctype_missing', 'index_path' => $index_path];
+	}
+
+	$required_tokens = [
+		'{{i:yon:header}}',
+		'{{i:yon:footer}}',
+		'{{i:yon:kolon1}}',
+		'{{$:local}}',
+		'{{$:title}}',
+	];
+
+	foreach ($required_tokens as $token) {
+		if (strpos($content, $token) === false) {
+			return ['ok' => false, 'reason' => 'required_token_missing:' . $token, 'index_path' => $index_path];
+		}
+	}
+
+	return ['ok' => true, 'reason' => 'ok', 'index_path' => $index_path];
+}
+
+/**
+ * Render için kullanılacak tema index kaynağını merkezi olarak seçer.
+ * Önce aktif tema, geçersizse .sabitlenmis_tema denenir.
+ */
+function tema_render_kaynagi_sec(string $aktif_tema, string $fallback_tema = '.sabitlenmis_tema'): array {
+	$aktif_kontrol = tema_index_dogrula($aktif_tema);
+	if ($aktif_kontrol['ok']) {
+		return [
+			'index_path' => $aktif_kontrol['index_path'],
+			'tema_dir' => dirname($aktif_kontrol['index_path']),
+			'used_fallback' => false,
+			'reason' => 'ok',
+			'critical_fail' => false,
+			'active_theme' => $aktif_tema,
+			'fallback_theme' => $fallback_tema
+		];
+	}
+
+	$fallback_kontrol = tema_index_dogrula($fallback_tema);
+	if ($fallback_kontrol['ok']) {
+		tema_fallback_log('fallback_used', [
+			'active_theme' => $aktif_tema,
+			'fallback_theme' => $fallback_tema,
+			'reason' => $aktif_kontrol['reason']
+		]);
+
+		return [
+			'index_path' => $fallback_kontrol['index_path'],
+			'tema_dir' => dirname($fallback_kontrol['index_path']),
+			'used_fallback' => true,
+			'reason' => $aktif_kontrol['reason'],
+			'critical_fail' => false,
+			'active_theme' => $aktif_tema,
+			'fallback_theme' => $fallback_tema
+		];
+	}
+
+	tema_fallback_log('critical_fail', [
+		'active_theme' => $aktif_tema,
+		'active_reason' => $aktif_kontrol['reason'],
+		'fallback_theme' => $fallback_tema,
+		'fallback_reason' => $fallback_kontrol['reason']
+	]);
+
+	return [
+		'index_path' => '',
+		'tema_dir' => '',
+		'used_fallback' => false,
+		'reason' => 'critical_fail:' . $aktif_kontrol['reason'] . '|' . $fallback_kontrol['reason'],
+		'critical_fail' => true,
+		'active_theme' => $aktif_tema,
+		'fallback_theme' => $fallback_tema
+	];
+}
+
+/**
+ * Hem aktif tema hem fallback tema bozulduğunda gösterilecek güvenli HTML.
+ */
+function tema_critical_fail_html(): string {
+	return '<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sistem Hatası</title><style>body{font-family:Arial,sans-serif;background:#f7f7f9;color:#222;margin:0;padding:24px}.box{max-width:780px;margin:40px auto;background:#fff;border:1px solid #ddd;border-radius:8px;padding:18px}h1{margin:0 0 10px;font-size:20px}p{line-height:1.5;margin:6px 0;color:#444}code{background:#f1f1f1;padding:2px 6px;border-radius:4px}</style></head><body><div class="box"><h1>Tema yüklenemedi</h1><p>Aktif tema ve sabitlenmiş fallback tema geçersiz görünüyor.</p><p>Lütfen tema dosyalarını kontrol edin ve <code>tema/.sabitlenmis_tema/index.html</code> dosyasının sağlam olduğundan emin olun.</p></div></body></html>';
+}
+
 
 /**
  * Split SQL file into individual queries

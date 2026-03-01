@@ -1,7 +1,7 @@
 <?php if (! defined('otoban')) exit('!vad');
 if (syetki([2, 3, 4])) {
 	$yaz_sidebar = new sablon_yaz;
-	$yaz_sidebar->dosya_icerik(TEMABU . '/sidebar.html');
+	$yaz_sidebar->dosya_icerik(tema_render_dizin() . '/sidebar.html');
 	
 	$yp_linkler_sayfa = syetki([2]) ?
 	'<div class="nav-item has-submenu">
@@ -153,3 +153,4 @@ if (syetki([2, 3, 4])) {
 	
 	echo $yaz_sidebar->render();
 }
+
