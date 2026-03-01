@@ -47,10 +47,8 @@
 .uis-container {
     width: 100%;
     padding: 0.2rem 1rem;
-    /*
     margin-right: auto;
     margin-left: auto;
-    */
 }
 
 .uis-container .uis-container {
