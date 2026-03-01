@@ -10,7 +10,7 @@ if (!is_dir($tema_yolu)) {
 
 // Güvenlik kilidi: Sabitlenmiş fallback tema hiçbir koşulda düzenlenemez.
 if ($tema_url === '.sabitlenmis_tema') {
-    echo '<div class="uis-alert uis-alert-d"><b>' . yc("Erişim Engellendi") . ':</b> ' . yc("Sabitlenmiş fallback tema güvenlik nedeniyle düzenlenemez.") . '</div>';
+    echo '<div class="uis-alert uis-alert-d"><b>' . yc("Erişim Engellendi") . ':</b> ' . yc("Sabitlenmiş  tema güvenlik nedeniyle düzenlenemez.") . '</div>';
     return;
 }
 
