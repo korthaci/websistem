@@ -3,7 +3,7 @@ if (syetki([2, 3, 4])) {
 	$yaz_sidebar = new sablon_yaz;
 	$yaz_sidebar->dosya_icerik(TEMABU . '/sidebar.html');
 	
-	$yp_linkler_sayfa = syetki([2]) ?
+	$yp_linkler_sayfa = syetki([2,3]) ?
 	'<div class="nav-item has-submenu">
 		<i class="fa fa-edit"></i> <span>'.yc("Düzenle").'</span>
 	</div>
@@ -12,7 +12,7 @@ if (syetki([2, 3, 4])) {
 		<a href="ui/sekmeler" class="nav-item"><i class="fa fa-th-list"></i> <span>'.yc("Sekmeler").'</span></a>
 		<a href="ui/sayfalar" class="nav-item"><i class="fa fa-list"></i> <span>'.yc("Sayfalar").'</span>
 		</a>' .
-		( isset($_GET['sayfa']) && syetki([2]) ? '
+		( isset($_GET['sayfa']) && syetki([2,3]) ? '
 		<a href="ui/sduzenle?n='.Global_::$routeParams['id'] .'" class="nav-item"><i class="fa fa-edit"></i> <span>'.yc("Bu sayfayı düzenle").'</span></a>' : '' )
 		.'
 		<a href="ui/menuduzenle" class="nav-item"> <i class="fas fa-project-diagram"></i> <span>'.yc("Menü yapısı").'</span></a>
@@ -30,7 +30,7 @@ if (syetki([2, 3, 4])) {
 	</div>' : '';
 	*/
 
-	$yp_linkler_resim = syetki([2]) ? '
+	$yp_linkler_resim = syetki([2,3]) ? '
 	<div class="nav-item has-submenu">
 		<i class="fa fa-image"></i> <span>'.yc("Resim&Dosya").'</span>
 	</div>
@@ -40,7 +40,7 @@ if (syetki([2, 3, 4])) {
 	</div>' : '';
 
 	$yp_linkler_modul = '';
-	if (syetki([2])){
+	if (syetki([2,3])){
 		$yp_linkler_modul .= '
 		<div class="nav-item has-submenu">
 			<i class="fa fa-kaaba"></i> <span>'.yc("Modüller").'</span>
@@ -80,7 +80,7 @@ if (syetki([2, 3, 4])) {
 	}
 
 	$yp_linkler_bilesen = '';
-	if (syetki([2]) && !empty($bilesen_dir)) {
+	if (syetki([2,3]) && !empty($bilesen_dir)) {
 		$yp_linkler_bilesen .= '
 		<a href="ui/bilesen" class="nav-item"><i class="fa fa-border-none"></i> <span>'.yc("Bileşenler").'</span></a>
 		';
@@ -97,7 +97,7 @@ if (syetki([2, 3, 4])) {
 	}
 
 
-	$yp_linkler_uyeler = syetki([2]) ? '
+	$yp_linkler_uyeler = syetki([2,3]) ? '
 	<a href="ui/uyeler" class="nav-item"><i class="fa fa-users"></i><span>'.yc("Üyeler").'</span></a>' : '';
 	//uye_yetkiler
 
@@ -112,14 +112,14 @@ if (syetki([2, 3, 4])) {
 	</div>' : '';
 	
 
-	$yp_linkler_ga = syetki([2]) ? '
+	$yp_linkler_ga = syetki([2,3]) ? '
 	<a href="ui/ga" class="nav-item"><i class="fa fa-cog"></i><span>'.yc("Genel ayarlar").'</span></a>' : '';
 
 	$yaz_sidebar->vars = [
 		'__degisken' => [
 			'site_adi' => $so_->d('site_adi'),
 
-			'giris_link' => (syetki([2]) ? '
+			'giris_link' => (syetki([2,3]) ? '
 			<a href="ui/dashboard" class="nav-item'. ($indexx ? ' active' : '') .'">
 				<i class="fas fa-tachometer-alt"></i>
 					<!--

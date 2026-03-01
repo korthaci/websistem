@@ -3,25 +3,29 @@
 if (n0_($u_no__)) {
 
 	if (set_dolu('yenikayit','p') && set_dolu('emailadresi', 'p')) {
+
 		$adi = (set_dolu('adi', 'p')) ? z($_POST['adi']) : '';
 		$emailadresi = email_duzenle($_POST['emailadresi']);
 		$tarih = date("Y-m-d H:i:s");
 		$sifre = password_hash($_POST['yenisifre'], PASSWORD_DEFAULT);
 
 		if (!empty($emailadresi)) {
-			$stmt = $pdo->prepare("INSERT INTO {$do_}uyeler (adi, email, k_adi, sifre, yetki_no, aktivasyon, tarih) 
-								VALUES (:adi, :email, :k_adi, :sifre, :yetki_no, NULL, :tarih)");
+			$stmt = $pdo->prepare("INSERT INTO {$do_}uyeler (adi, email, k_adi, sifre, yetki_no, aktivasyon, tarih, yayin) 
+								VALUES (:adi, :email, :k_adi, :sifre, :yetki_no, NULL, :tarih, :yayin)");
 			$stmt->execute([
 				'adi' => $adi,
 				'email' => $emailadresi,
 				'k_adi' => $emailadresi,
 				'sifre' => $sifre,
 				'yetki_no' => 5,
-				'tarih' => $tarih
+				'tarih' => $tarih,
+				'yayin' => 1
 			]);
 
 			header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
 			exit();
+		} else {
+			echo '<div class="uis-alert uis-alert-w">! '.yc("Geçersiz e-posta adresi.").'</div>';
 		}
 	}
 	$form_link = 'ui=uyeler';
@@ -46,7 +50,7 @@ if (n0_($u_no__)) {
 					<input type="text" name="adi" value="" class="uis-input uis-w-auto" maxlength="200" placeholder="'.yc("Adı Soyadı").'" required />
 					<input type="email" name="emailadresi" class="uis-input uis-w-auto" placeholder="'.yc("E-posta").'" required>
 					<input type="text" name="yenisifre" class="uis-input uis-w-auto" placeholder="'.yc("Şifre").'" required>
-					<button type="submit" name="yenikayit" class="uis-btn uis-btn-s">'.yc("Ekle").'</button> 
+					<input type="submit" name="yenikayit" class="uis-btn uis-btn-s" value="'.yc("Ekle").'" />
 				</form>
 			</div>
 		</div>
