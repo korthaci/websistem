@@ -3295,3 +3295,107 @@ function mysqlToSqlite($sql) {
     return $sql;
 }
 
+/**
+ * Tema index.html dosyasını kritik kurallarla doğrular.
+ */
+function tema_index_dogrula(string $tema_adi): array {
+    $index_path = TEMA_DIR . '/' . $tema_adi . '/index.html';
+
+    if (!is_file($index_path)) {
+        return ['ok' => false, 'reason' => 'index_file_missing', 'index_path' => $index_path];
+    }
+
+    if (!is_readable($index_path)) {
+        return ['ok' => false, 'reason' => 'index_file_not_readable', 'index_path' => $index_path];
+    }
+
+    $content = @file_get_contents($index_path);
+    if ($content === false) {
+        return ['ok' => false, 'reason' => 'index_file_read_failed', 'index_path' => $index_path];
+    }
+
+    $trimmed = trim($content);
+    if ($trimmed === '' || strlen($trimmed) < 200) {
+        return ['ok' => false, 'reason' => 'index_file_too_short_or_empty', 'index_path' => $index_path];
+    }
+
+    if (!preg_match('/<!DOCTYPE\s+html\b/i', $content)) {
+        return ['ok' => false, 'reason' => 'doctype_missing', 'index_path' => $index_path];
+    }
+
+    $required_tokens = [
+        '{{i:yon:header}}',
+        '{{i:yon:footer}}',
+        '{{i:yon:kolon1}}',
+        '{{$:local}}',
+        '{{$:title}}',
+    ];
+
+    foreach ($required_tokens as $token) {
+        if (strpos($content, $token) === false) {
+            return ['ok' => false, 'reason' => 'required_token_missing:' . $token, 'index_path' => $index_path];
+        }
+    }
+
+    return ['ok' => true, 'reason' => 'ok', 'index_path' => $index_path];
+}
+
+/**
+ * Tema fallback olaylarını error_log dosyasına yazar.
+ */
+function tema_fallback_log(string $event, array $context = []): void {
+    $payload = [
+        'event' => $event,
+        'time' => date('c'),
+        'ip' => $_SERVER['REMOTE_ADDR'] ?? '',
+        'url' => $_SERVER['REQUEST_URI'] ?? '',
+        'context' => $context
+    ];
+
+    $line = '[tema_fallback] ' . json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    error_log($line);
+}
+
+/**
+ * TEMABU için uygun bir tema yolu seçer: aktif tema veya fallback.
+ * Global_::$tema_fallback_uyari flag'ini set eder.
+ */
+function tema_dogrula_ve_fallback(string $aktif_tema): string {
+    $fallback_tema = '.sabitlenmis_tema';
+    
+    // Aktif temayı doğrula
+    $aktif_kontrol = tema_index_dogrula($aktif_tema);
+    
+    if ($aktif_kontrol['ok']) {
+        // Aktif tema geçerli
+        Global_::set('tema_fallback_uyari', false);
+        return TEMA_DIR . '/' . $aktif_tema;
+    }
+    
+    // Aktif tema başarısız, fallback'e düş
+    $fallback_kontrol = tema_index_dogrula($fallback_tema);
+    
+    if ($fallback_kontrol['ok']) {
+        // Fallback tema başarılı
+        tema_fallback_log('fallback_used', [
+            'active_theme' => $aktif_tema,
+            'fallback_theme' => $fallback_tema,
+            'reason' => $aktif_kontrol['reason']
+        ]);
+        Global_::set('tema_fallback_uyari', true);
+        return TEMA_DIR . '/' . $fallback_tema;
+    }
+    
+    // Critical fail: her iki tema da başarısız
+    tema_fallback_log('critical_fail', [
+        'active_theme' => $aktif_tema,
+        'active_reason' => $aktif_kontrol['reason'],
+        'fallback_theme' => $fallback_tema,
+        'fallback_reason' => $fallback_kontrol['reason']
+    ]);
+    Global_::set('tema_fallback_uyari', true);
+    
+    // Acil durumda minimal yazı dön (en azından HTTP 200 verelim)
+    return TEMA_DIR . '/' . $fallback_tema;
+}
+

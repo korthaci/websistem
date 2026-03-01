@@ -49,7 +49,7 @@ $pdo_db = new pdo_db_helper($pdo);
 $so_ = new genel_ayarlar($pdo, $do_);
 if (!$so_) exit('ga');
 
-define('TEMABU', TEMA_DIR . '/' . $so_->d('tema'));
+define('TEMABU', tema_dogrula_ve_fallback($so_->d('tema')));
 define('IMG', LOCAL . '/assets/img');
 
 Global_::$dil_yonlendir = new dil_yonlendir($pdo, $do_, $so_->d('yabanci_dil'), $so_->d('varsayilan_dil'));

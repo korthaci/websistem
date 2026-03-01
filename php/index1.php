@@ -1,5 +1,13 @@
 <?php if (! defined('otoban')) exit('!vad');
 
+if (Global_::has('tema_fallback_uyari') && Global_::get('tema_fallback_uyari')) {
+    echo '
+    <div id="tema_fallback_uyari" style="background:#fff3cd; border:1px solid #ffc107; color:#856404; padding:8px 16px; margin-bottom:16px;">
+        <strong>⚠️⚠️⚠️ Aktif tema yüklenemedi.</strong> Yedek tema kullanılıyor. Lütfen <a href="'.LOCAL.'/ui/temalar">tema dosyalarını</a> kontrol edin.
+    </div>
+    ';
+}
+
 $index_html_yaz = new sablon_yaz;
 $index_html_yaz->dosya_icerik(TEMABU . '/index.html');
 
