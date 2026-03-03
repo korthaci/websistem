@@ -21,7 +21,7 @@ try {
 if (!empty($db_bilesen)) {
 
 	echo '
-	<table id="ts_" class="tablesorter  uis-table"><thead>
+	<table id="ts_" class="tablesorter uis-table"><thead>
 	<tr>
 	<th>'.count($db_bilesen).' '.yc("Bileşen").'</th>
 	<th>[]</th>

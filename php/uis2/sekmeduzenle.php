@@ -50,10 +50,10 @@ $form = new form_c($pdo, $do_);
 
 if ($sb_) {
 
-	$form_satir1 .= '<a class="dib btn btn-sm btn-outline-secondary" href="'. $sb_->url . '" target="_blank">'.yc("Önizleme").'</a> &nbsp; &nbsp; 
-	<a class="dib btn btn-sm btn-outline-primary" href="'.href('index','ui=sekmeler').'">'.yc("Tüm sekmeler").'</a> &nbsp; &nbsp; ';
+	$form_satir1 .= '<a class="dib uis-btn uis-btn-sm uis-btn-outline-secondary" href="'. $sb_->url . '" target="_blank">'.yc("Önizleme").'</a> &nbsp; &nbsp; 
+	<a class="dib uis-btn uis-btn-sm uis-btn-outline-primary" href="'.href('index','ui=sekmeler').'">'.yc("Tüm sekmeler").'</a> &nbsp; &nbsp; ';
 	$form_satir1 .= '<span class="dib">' . yc("Yayın") . ' <span class="db01 ok'.$sb_->yayin.'" data-nta="'.sifrele($sb_->no.',,sekme,,yayin').'">'.$sb_->yayin.'</span></span> &nbsp; &nbsp; &nbsp; ';
-	$form_satir1 .= '<input name="kaydet_sekme" type="submit" value="'.yc("Kaydet").'" class="dib btn btn-sm btn-warning" />';
+	$form_satir1 .= '<input name="kaydet_sekme" type="submit" value="'.yc("Kaydet").'" class="dib uis-btn uis-btn-sm uis-btn-warning" />';
 
 	$form_eleman['adi'] = 
 	'<label class="form-label">'.yc("Sekme adı").'</label>' . 
@@ -115,19 +115,19 @@ if ($sb_) {
 
 	echo '
 	<form name="sekme" action="' . href('','ui=sekmeduzenle&n=' . $n) . '" method="POST" id="formtextsekme" class="form1"> 
-	<div class="container mt-4">
-		<div class="row">
-			<div class="col-12 d-flex">
+	<div class="uis-container uis-mt-4">
+		<div class="uis-row">
+			<div class="uis-col-12 uis-flex">
 				<div>' . $form_satir1 . '</div>
 				<div class="ms-auto">' . $form_eleman['manset'] . ' ' . $form_eleman['icerik_sayfada'] . '</div>
 			</div>
-			<div class="col-lg-9">
+			<div class="uis-col-lg-9">
 			' . $form_eleman['adi'] . '
 			</div>
-			<div class="col-lg-3">
+			<div class="uis-col-lg-3">
 			' . $form_eleman['hash'] . '
 			</div>
-			<div class="col-12">
+			<div class="uis-col-12">
 			' . $form_eleman['icerik'] . '
 			' . $form_eleman['aciklama'] . '
 			' . $form_eleman['etiket'] . '

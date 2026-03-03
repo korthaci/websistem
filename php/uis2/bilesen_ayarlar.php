@@ -43,7 +43,7 @@ if ($db_bilesen) {
 				echo ($degisiklik_var && file_put_contents($json_dosya, $yeni_json)) ? yc("Değişiklik kaydedildi") : yc("Değişiklik yapılmadı");
 			}
 			echo '<form action="" method="POST" autocomplete="off">';
-			echo '<table class=" yazi1"><thead><tr><td>·Özellik·</td><td class="g_350_">'.yc("Değer").'·</td><td><input class="f_r mr-1 btn btn-sm btn-warning" type="submit" name="kaydet" value="'.yc("Kaydet").'"/></td></tr></thead><tbody>';
+			echo '<table class="yazi1"><thead><tr><td>·Özellik·</td><td class="g_350_">'.yc("Değer").'·</td><td><input class="f_r uis-me-1 uis-btn uis-btn-sm uis-btn-warning" type="submit" name="kaydet" value="'.yc("Kaydet").'"/></td></tr></thead><tbody>';
 			
 			foreach ($json_decode as $key => $value) {
 				if (is_array($value)) {

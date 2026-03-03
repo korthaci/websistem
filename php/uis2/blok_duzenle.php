@@ -59,9 +59,9 @@ $form = new form_c($pdo, $do_);
 
 if ($sb_) {
 
-	$form_satir1 .= '<a class="dib btn btn-sm btn-outline-primary" href="'.href('index','ui=bloklar').'">'.yc("Tüm bloklar").'</a> &nbsp; &nbsp; ';
+	$form_satir1 .= '<a class="dib uis-btn uis-btn-sm uis-btn-outline-primary" href="'.href('index','ui=bloklar').'">'.yc("Tüm bloklar").'</a> &nbsp; &nbsp; ';
 	$form_satir1 .= '<span class="dib">' . yc("Yayın") . ' <span class="db01 ok'.$sb_->yayin.'" data-nta="'.sifrele($sb_->no.',,blok_html,,yayin').'">'.$sb_->yayin.'</span></span> &nbsp; &nbsp; &nbsp; ';
-	$form_satir1 .= '<input name="kaydet_blok" type="submit" value="'.yc("Kaydet").'" class="dib btn btn-sm btn-warning" />';
+	$form_satir1 .= '<input name="kaydet_blok" type="submit" value="'.yc("Kaydet").'" class="dib uis-btn uis-btn-sm uis-btn-warning" />';
 
 	$form_eleman['adi'] = 
 	'<label class="form-label">'.yc("Konu başlığı").'</label>' . 
@@ -98,16 +98,16 @@ if ($sb_) {
 
 	echo '
 	<form name="sayfa" action="' . href('','ui=blokduzenle&n=' . $n) . '" method="POST" id="formtextsayfa"> 
-	<div class="container mt-4">
-		<div class="row">
-			<div class="col-12">' . $form_satir1 . '</div>
-			<div class="col-lg-9">
+	<div class="uis-container uis-mt-4">
+		<div class="uis-row">
+			<div class="uis-col-12">' . $form_satir1 . '</div>
+			<div class="uis-col-lg-9">
 			' . $form_eleman['adi'] . '
 			</div>
-			<div class="col-lg-3">
+			<div class="uis-col-lg-3">
 			' . $form_eleman['hash'] . '
 			</div>
-			<div class="col-12">
+			<div class="uis-col-12">
 			' . $form_eleman['icerik'] . '
 			</div>
 		</div>

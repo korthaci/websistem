@@ -56,12 +56,12 @@ foreach ($tema_dizinleri as $tema) {
     $active_badge = $is_active ? '<span class="uis-alert uis-alert-s uis-m-0 uis-w-auto uis-ms-2 uis-badge-active">'.yc("Aktif").'</span>' : '';
 
     echo '
-    <div class="uis-col ' . $uis_col_md_stil . ' uis-col-sm-12">
-        <div class="uis-card h-100 ' . $active_class . '" data-tema="' . $tema . '">
+    <div class="uis-col ' . $uis_col_md_stil uis-col-sm-12">
+        <div class="uis-card h-100 ' . $active_class" data-tema="' . $tema . '">
             <div class="tema-thumbnail">
                 <img src="' . $img_url . '" alt="' . $tema . '">
             </div>
-            <div class="uis-flex uis-justify-between uis-align-center mb-3">
+            <div class="uis-flex uis-justify-between uis-align-center uis-mb-3">
                 <h3 class="tema-title">' . ucfirst($tema) . '</h3>
                 ' . $active_badge . '
             </div>

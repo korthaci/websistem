@@ -26,7 +26,7 @@ if ($menu_sayfalar) {
 		$yaz_s .= '<option value="'.$m1->no.'" data-sn="'.$menudeki_sayfa_no.'"'.$disabled.'>'.$m1->adi.'</option>';
 	}
 	$yaz_s .= '</select>
-	<button class="menu_ekle_buton btn btn-sm btn-success" data-t="sayfa">'.yc("Ekle").'</button>';
+	<button class="menu_ekle_buton uis-btn uis-btn-sm uis-btn-success" data-t="sayfa">'.yc("Ekle").'</button>';
 }
 
 $sekmeler_query = "SELECT no, adi FROM {$do_}sekme WHERE CHAR_LENGTH(adi) < 30 AND yayin=1";
@@ -44,7 +44,7 @@ if ($menu_sekmeler) {
 		$disabled = $menudeki_sekme_no ? ' disabled' : '';
 	$yaz_sekme .= '<option value="'.$m1->no.'" data-sn="'.$menudeki_sekme_no.'"'.$disabled.'>'.$m1->adi.'</option>';
 	}
-	$yaz_sekme .= '</select> <button class="menu_ekle_buton btn btn-sm btn-success" data-t="sekme">'.yc("Ekle").'</button>';
+	$yaz_sekme .= '</select> <button class="menu_ekle_buton uis-btn uis-btn-sm uis-btn-success" data-t="sekme">'.yc("Ekle").'</button>';
 }
 
 $bloklar_query = "SELECT no, adi FROM {$do_}blok_html WHERE CHAR_LENGTH(adi) < 30 AND yayin=1";
@@ -62,25 +62,25 @@ $yaz_b .= '<br/><br/>'.yc('Bloklar').' :<br/><select class="menu_blok_html_selec
 		$disabled = $menudeki_blok_no ? ' disabled' : '';
 	$yaz_b .= '<option value="'.$m1->no.'" data-sn="'.$menudeki_blok_no.'"'.$disabled.'>'.$m1->adi.'</option>';
 	}
-$yaz_b .= '</select> <button class="menu_ekle_buton btn btn-sm btn-success" data-t="blok_html">'.yc("Ekle").'</button>';
+$yaz_b .= '</select> <button class="menu_ekle_buton uis-btn uis-btn-sm uis-btn-success" data-t="blok_html">'.yc("Ekle").'</button>';
 }
 
 echo '
 <h4>'. yc("Menü maddeleri").'</h4>
-<div class="container">
-	<div class="row">
-		<div class="col-6">
+<div class="uis-container">
+	<div class="uis-row">
+		<div class="uis-col-6">
 			<h3>'. yc("Menü").'</h3>
 			<div class="n-dd" id="nestable3">
 			' . $nestable_menu->yaz() . '
 			</div>
 		</div>
-		<div class="col-6">
+		<div class="uis-col-6">
 		<h3>'. yc("Ekle").'</h3>
 		'.$yaz_s.'
 		'.$yaz_sekme.'
 		'.$yaz_b.'
-		<br/><br/><span class="btn btn-sm btn-primary menu_dis_link_duzenle" data-mno="yeni">'.yc("Link").' ✎</span><br/>
+		<br/><br/><span class="uis-btn uis-btn-sm uis-btn-primary menu_dis_link_duzenle" data-mno="yeni">'.yc("Link").' ✎</span><br/>
 		</div>
 	</div>
 </div>';

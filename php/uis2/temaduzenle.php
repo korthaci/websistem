@@ -45,7 +45,7 @@ if (isset($_GET['recreate_success'])) {
 $recreate_notice = '';
 if (isset($_GET['recreate_notice'])) {
     $recreate_notice = '
-    <div class="uis-alert uis-alert-i mb-3">
+    <div class="uis-alert uis-alert-i uis-mb-3">
         <b>[!]</b> 
         '.yc("Yeni bir temaya geçtiniz! Her temanın kendine has bir yapısı olduğu için anasayfa görünümünün tam oturması adına sağ üstteki").' <b>"·Blokları Yeniden Oluştur·"</b> '.yc("butonunu kullanarak temanın varsayılan bloklarını yüklemenizi öneririz.").'
     </div>';
@@ -180,8 +180,8 @@ if (!empty($secili_dosya)) {
 }
 
 echo '
-<div class="uis-page-header mb-1 p-0">
-    <h5 class="m-0 p-0">/ ' . ucfirst($tema_url) . ' ' . yc("Temasını Düzenle") .'</h5>
+<div class="uis-page-header uis-mb-1 uis-p-0">
+    <h5 class="uis-m-0 uis-p-0">/ ' . ucfirst($tema_url) . ' ' . yc("Temasını Düzenle") .'</h5>
     <div class="uis-action-bar">
         <form data-onsubmit-confirm="'. yc("Tüm bloklar silinecek ve temanın varsayılan blokları yüklenecektir. Emin misiniz").'?" method="POST" action="' . href('index', 'ui=temaduzenle&tema=' . $tema_url) . '" style="display:inline;">
             <input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">
@@ -211,7 +211,7 @@ echo '
                 echo '<div class="theme-file-group-label">> ' . $info['label'] . '</div>';
                 foreach ($dosyalar[$ext] as $dosya) {
                     $active_class = ($dosya === $secili_dosya) ? 'active' : '';
-                    echo '<a href="' . href('index', 'ui=temaduzenle&tema=' . $tema_url . '&dosya=' . $dosya) . '" class="theme-file-item ' . $active_class . '">📄 ' . basename($dosya) . '</a>';
+                    echo '<a href="' . href('index', 'ui=temaduzenle&tema=' . $tema_url . '&dosya=' . $dosya) . '" class="theme-file-item ' . $active_class">📄 ' . basename($dosya) . '</a>';
                 }
             }
 
@@ -298,7 +298,7 @@ echo '      </div>
 
                 <textarea
                     name="dosya_icerik"
-                    class="theme-editor-textarea' . (strpos($dosya_icerik, "{{") === false ? (str_ends_with($secili_dosya, '.css') ? ' format_css' : (str_ends_with($secili_dosya, '.js') ? ' format_js' : ' format_html')) : ' is-template') . '"
+                    class="theme-editor-textarea' . (strpos($dosya_icerik,"{{") === false ? (str_ends_with($secili_dosya, '.css') ? ' format_css' : (str_ends_with($secili_dosya, '.js') ? ' format_js' : ' format_html')) : ' is-template') . '"
                     spellcheck="false"
                     autocomplete="off"
                     autocapitalize="off"

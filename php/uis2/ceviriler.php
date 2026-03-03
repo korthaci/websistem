@@ -176,7 +176,7 @@ echo ((int)$n > 0 ? '
 <div class="rside_link">
 	<a class="uis-btn uis-btn-p uis-btn-sm uis-btn-outline text_ceviri_tumunu_cevir">'.yc("Tümünü çevir").'</a>
 	<a class="uis-btn uis-btn-d uis-btn-sm uis-btn-outline stopScrollingInputText dyok">'.yc("Durdur").'</a>
-	<a class="uis-btn uis-btn-s uis-btn-sm uis-btn-s form_submit_link dyok" data-formid="#text_ceviri_form">'.yc("Kaydet").'</a>
+	<a class="uis-btn uis-btn-s uis-btn-sm form_submit_link dyok" data-formid="#text_ceviri_form">'.yc("Kaydet").'</a>
 	<a class="uis-btn uis-btn-s uis-btn-sm uis-btn-i" data-textarea-ceviri-id="#form_text_ceviriler">'.yc("Kaydet").'</a>
 </div>' : '');
 if (empty($n) || $n == -1) {
@@ -290,7 +290,7 @@ if ($n == -1 || empty($n)) {
 		echo yc('Bulunan yeni kelimeler') . ' : ';
 		echo '<div class="textarea_ekle" data-textarea-name="yeni_text_ceviri">';
 		foreach ($txt_icinde_olmayan_kelimeler as $tiok) {
-			echo '<span class="uis-btn uis-btn-outline uis-btn-sm mt-1">' . $tiok . '</span> ';
+			echo '<span class="uis-btn uis-btn-outline uis-btn-sm uis-mt-1">' . $tiok . '</span> ';
 		}
 		echo '</div>';
 	}

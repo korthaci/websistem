@@ -56,7 +56,7 @@ if ($modul_url) {
 					$msd_yazi = strtr(trim($msd,"_"), ['.html'=>'']);
 					$is_active = ($msd === $md_dosya);
 					$active_class = $is_active ? 'uis-btn-p' : 'uis-btn-outline';
-					echo '<a href="' . href('index', 'ui=modulsablonlar&n='.$n.'&mddosya='.strtr($msd,['.html'=>''])) . '" class="uis-btn uis-btn-sm ' . $active_class . '">
+					echo '<a href="' . href('index', 'ui=modulsablonlar&n='.$n.'&mddosya='.strtr($msd,['.html'=>''])) . '" class="uis-btn uis-btn-sm ' . $active_class">
 						<i class="fa-regular fa-file-code"></i> ' . $msd_yazi . '
 					</a>';
 				}

@@ -26,7 +26,7 @@ if ($bilesen_url) {
 			$msd_yazi = strtr(trim($msd,"_"), ['.html'=>'','_'=>' ']);
 			$msd_href = href('index','ui=bilesensablonlar&n='.$n.'&mddosya='.strtr($msd,['.html'=>'']));
 			$msd_class = ($msd === $md_dosya) ? ' btn-primary' : ' btn-secondary';
-			$bilesen_d_yaz .= ' <a class="dib btn btn-sm '.$msd_class.'" href="'.$msd_href.'">'.$msd_yazi.'</a> ';
+			$bilesen_d_yaz .= ' <a class="dib uis-btn uis-btn-sm '.$msd_class.'" href="'.$msd_href.'">'.$msd_yazi.'</a> ';
 		}
 	}
 
@@ -41,18 +41,18 @@ if (!empty($md_dosya_url)) {
 	$dosya_icerik = strtr($dosya_icerik, ['textarea'=>'__textarea__']);
 	$form_action = href('index','ui=bilesensablonlar&n='.$n.'&mddosya='.$md_dosya_url);
 	$bilesen_d_yaz .= '
-	<div class="mt-4">
+	<div class="uis-mt-4">
 	<form name="" class="" action="'.$form_action.'" method="POST">		
-	<a class="dib btn btn-sm btn-light" data-jodit_ekle=".texticerik_textarea">wysiwyg editor</a>
-	<div class="f_r text-right"><input type="submit" class="btn btn-sm btn-info" name="mddosya_kaydet" value="'.yc("Kaydet").'" /> </div>
-	<textarea class="texticerik_textarea  g_1__ minw-400" name="mddosya_text">'.$dosya_icerik.'</textarea>
-	<div class="text-right"><input type="submit" class="btn btn-sm btn-primary" name="mddosya_kaydet" value="'.yc("Kaydet").'" /> </div>
+	<a class="dib uis-btn uis-btn-sm uis-btn-light" data-jodit_ekle=".texticerik_textarea">wysiwyg editor</a>
+	<div class="f_r uis-text-end"><input type="submit" class="uis-btn uis-btn-sm uis-btn-info" name="mddosya_kaydet" value="'.yc("Kaydet").'" /> </div>
+	<textarea class="texticerik_textarea g_1__ minw-400" name="mddosya_text">'.$dosya_icerik.'</textarea>
+	<div class="uis-text-end"><input type="submit" class="uis-btn uis-btn-sm uis-btn-primary" name="mddosya_kaydet" value="'.yc("Kaydet").'" /> </div>
 	</form>
 	</div>';
 }
 
 echo '
-<div class="container">
+<div class="uis-container">
 '.strtoupper($bilesen_url).' ·Bileşen şablonları.· <br/><a href="ui/bilesen">'. yc("Bileşenler").'</a>
 	<br/><br/>'.$bilesen_d_yaz.'
 </div>';

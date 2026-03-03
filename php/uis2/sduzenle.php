@@ -133,7 +133,7 @@ if ($sb_) {
 
 	echo '
 	<form name="sayfa" action="" method="POST" id="formtextsayfa"> 
-	<div class="uis-container ">
+	<div class="uis-container">
 		<div class="uis-row">
 			<div class="uis-col-12">' . $form_satir1 . '</div>
 			<div class="uis-col-lg-8">

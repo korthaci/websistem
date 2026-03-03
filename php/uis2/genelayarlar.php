@@ -31,7 +31,7 @@ $stmt = $pdo->query("SELECT no, adi, anahtar, deger, degistir FROM {$do_}genel_a
 $site_o__ = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 if ($site_o__) {
-	echo '<table class="yazi1  uis-table"><thead><tr><th class="g_20_">'.count($site_o__).'</th><th>'.yc("Başlık").'</th><th>'.yc("değer").'</th><th class="g_20_"></th></tr></thead><tbody>';
+	echo '<table class="yazi1 uis-table"><thead><tr><th class="g_20_">'.count($site_o__).'</th><th>'.yc("Başlık").'</th><th>'.yc("değer").'</th><th class="g_20_"></th></tr></thead><tbody>';
 	foreach ($site_o__ as $so__){
 		$sil_td = (syetki([1,2])) ? '<td><span class="sil" data-nt="'.sifrele($so__->no.',,genel_ayarlar').'">x</span></td>':'<td> </td>';
 		echo '<tr>';

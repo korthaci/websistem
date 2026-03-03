@@ -85,7 +85,7 @@ if (!empty($bloklar)) {
 		$thead_th .='<th class="'. ($th_[1] ?? '') .'"'. (isset($th_[2]) && $th_[2] ? ' title="'.$th_[2].'"':'') .'>'. ($th_[0] ?? '') .'</th>';
 	}
 
-	echo '<table class=" uis-table"><thead><tr>'.$thead_th.'</tr></thead>
+	echo '<table class="uis-table"><thead><tr>'.$thead_th.'</tr></thead>
 	<tbody class="sirala-liste" data-t="blok_html">';
 
 	//no  adi  icerik hash tema sira yayin 

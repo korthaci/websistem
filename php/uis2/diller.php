@@ -19,7 +19,7 @@ try {
 }
 
 echo '
-<table class=" uis-table"><thead><tr><th>'.count($ulkeler).'</th>
+<table class="uis-table"><thead><tr><th>'.count($ulkeler).'</th>
 <th>'.yc("Ülke Adı").'</th>
 <th>en</th>
 <th>'.yc("Orjinal").'</th>

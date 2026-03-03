@@ -5,18 +5,18 @@ if (isset($_GET['ui'])) {
 	$uis2_url = z($_GET['ui']);
 
 	$case = [
-		'ga' =>					['php' => 'genelayarlar',		'yetki' => [2,3],		'_class' => 'container'],
+		'ga' =>					['php' => 'genelayarlar',		'yetki' => [2,3],		'_class' => 'uis-container'],
 		'uyeler' => 			['php' => 'uyeler',				'yetki' => [2,3],		'_class' => ' g_98__ margin_a'],
 		'uyeduzenle' => 		['php' => 'uyeduzenle',			'yetki' => [2,3],		'_class' => ' g_98__ margin_a'],
-		'sayfalar' =>			['php' => 'sayfalar',			'yetki' => [2,3],		'_class' => 'container'],
-		'sduzenle' =>			['php' => 'sduzenle',			'yetki' => [2,3],		'_class' => 'container'],
-		'sekmeler' =>			['php' => 'sekmeler',			'yetki' => [2,3],		'_class' => 'container'],
-		'sekmeduzenle' =>		['php' => 'sekmeduzenle',		'yetki' => [2,3],		'_class' => 'container'],
-		'bloklar' =>			['php' => 'bloklar',			'yetki' => [2,3],		'_class' => 'container'],
+		'sayfalar' =>			['php' => 'sayfalar',			'yetki' => [2,3],		'_class' => 'uis-container'],
+		'sduzenle' =>			['php' => 'sduzenle',			'yetki' => [2,3],		'_class' => 'uis-container'],
+		'sekmeler' =>			['php' => 'sekmeler',			'yetki' => [2,3],		'_class' => 'uis-container'],
+		'sekmeduzenle' =>		['php' => 'sekmeduzenle',		'yetki' => [2,3],		'_class' => 'uis-container'],
+		'bloklar' =>			['php' => 'bloklar',			'yetki' => [2,3],		'_class' => 'uis-container'],
 		'blokduzenle' =>		['php' => 'blok_duzenle',		'yetki' => [2,3],		'_class' => ' g_98__ margin_a'],
-		'menuduzenle' =>		['php' => 'menuduzenle',		'yetki' => [2,3],		'_class' => 'container'],
-		'resimler' =>			['php' => 'resimler',			'yetki' => [2,3],		'_class' => 'container'],
-		'dosyalar' =>			['php' => 'dosyalar',			'yetki' => [2,3],		'_class' => 'container'],
+		'menuduzenle' =>		['php' => 'menuduzenle',		'yetki' => [2,3],		'_class' => 'uis-container'],
+		'resimler' =>			['php' => 'resimler',			'yetki' => [2,3],		'_class' => 'uis-container'],
+		'dosyalar' =>			['php' => 'dosyalar',			'yetki' => [2,3],		'_class' => 'uis-container'],
 		'ulkeler' =>			['php' => 'ulkeler',			'yetki' => [2],		'_class' => ' g_98__ margin_a'],
 		'sehirler' =>			['php' => 'sehirler',			'yetki' => [2],		'_class' => ' g_98__ margin_a'],
 		'diller' =>				['php' => 'diller',				'yetki' => [2],		'_class' => ' g_98__ margin_a'],
@@ -28,16 +28,16 @@ if (isset($_GET['ui'])) {
 		'bilesenduzenle' =>		['php' => 'bilesenduzenle',		'yetki' => [2],		'_class' => ' g_98__ margin_a'],
 		'bilesensablonlar' =>	['php' => 'bilesensablonlar',	'yetki' => [2],		'_class' => ' g_98__ margin_a'],
 		'bilesenayarlar' =>		['php' => 'bilesen_ayarlar',	'yetki' => [2],		'_class' => ' g_98__ margin_a'],
-		'dashboard' =>			['php' => 'kontrolpaneli',		'yetki' => [2,3],		'_class' => 'container'],
+		'dashboard' =>			['php' => 'kontrolpaneli',		'yetki' => [2,3],		'_class' => 'uis-container'],
 		'temalar' =>			['php' => 'temalar',			'yetki' => [2],		'_class' => ' g_98__ margin_a'],
 		'temaduzenle' =>		['php' => 'temaduzenle',		'yetki' => [2],		'_class' => ' g_98__ margin_a'],
-		'ai_studio' =>			['php' => 'ai_studio',			'yetki' => [2],		'_class' => 'container'],
+		'ai_studio' =>			['php' => 'ai_studio',			'yetki' => [2],		'_class' => 'uis-container'],
 	];
 
 	if (array_key_exists($uis2_url, $case)) {
 
 		if ( syetki( $case[$uis2_url]['yetki'] )) {
-			echo '<div class="' . str_replace('container', 'uis-container', $case[$uis2_url]['_class']) . '  uis-mb-4">';
+			echo '<div class="' . $case[$uis2_url]['_class'] . ' uis-mb-4">';
 			//echo '<h6 class="_ls-2">'.tum_harf_buyut(preg_replace("/\d/", "", $case[$uis2_url]['php'])) . '</h6>';
 			if (is_file(__DIR__ . '/' . $case[$uis2_url]['php'] . '.php')) {
 				include __DIR__ . '/' . $case[$uis2_url]['php'] . '.php';

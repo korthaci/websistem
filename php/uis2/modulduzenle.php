@@ -42,7 +42,7 @@ if ($modul_b) {
 					$is_active = ($dosya_basename == $active_islem);
 					$active_class = $is_active ? 'active' : '';
 					
-					$sidebar_links .= '<a href="' . href('index', 'ui=modulduzenle&n=' . $modul_no . '&islem=' . $dosya_basename) . '" class="theme-file-item ' . $active_class . '">
+					$sidebar_links .= '<a href="' . href('index', 'ui=modulduzenle&n=' . $modul_no . '&islem=' . $dosya_basename) . '" class="theme-file-item ' . $active_class">
 						<i class="fa-solid fa-file-code"></i> ' . $dosya_isim . '
 					</a>';
 					
@@ -83,7 +83,7 @@ if ($modul_b) {
 						$active_class = $is_active ? 'uis-btn-p' : 'uis-btn-outline';
 						$dosya_isim = ucfirst_utf8(str_replace("_"," ",trim($f['name'],"_")));
 						
-						echo '<a href="' . href('index', 'ui=modulduzenle&n=' . $modul_no . '&islem=' . $f['name']) . '" class="uis-btn uis-btn-sm ' . $active_class . '">
+						echo '<a href="' . href('index', 'ui=modulduzenle&n=' . $modul_no . '&islem=' . $f['name']) . '" class="uis-btn uis-btn-sm ' . $active_class">
 							<i class="fa-solid fa-file-code"></i> ' . $dosya_isim . '
 						</a>';
 					}

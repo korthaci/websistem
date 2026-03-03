@@ -90,7 +90,7 @@ if (n0_($u_no__)) {
 
 	if ($uyeler) {
 		echo '
-		<div class=" uis-table">
+		<div class="uis-table">
 			<table class="uis-table uis-w-100">
 				<thead>
 					<tr>
@@ -113,7 +113,7 @@ if (n0_($u_no__)) {
 					<td>'.$uye->email.'</td>
 					<td class="yazi1">'.format_tarih($uye->son_giris, "d.m.y H:i").'</td>
 					<td>'.$uye->yetki_no.'</td>
-					<td><span class="db01 ok' . $uye->yayin . '" data-nta="'.sifrele($uye->no.',,uyeler,,yayin').'" >' . $uye->yayin . '</span></td>
+					<td><span class="db01 ok' . $uye->yayin '" data-nta="'.sifrele($uye->no.',,uyeler,,yayin').'" >' . $uye->yayin . '</span></td>
 					<td><span class="sil" data-nt="'.sifrele($uye->no.',,uyeler').'"></span></td>
 				</tr>';
 		}
