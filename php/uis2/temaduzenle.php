@@ -211,7 +211,7 @@ echo '
                 echo '<div class="theme-file-group-label">> ' . $info['label'] . '</div>';
                 foreach ($dosyalar[$ext] as $dosya) {
                     $active_class = ($dosya === $secili_dosya) ? 'active' : '';
-                    echo '<a href="' . href('index', 'ui=temaduzenle&tema=' . $tema_url . '&dosya=' . $dosya) . '" class="theme-file-item ' . $active_class">📄 ' . basename($dosya) . '</a>';
+                    echo '<a href="' . href('index', 'ui=temaduzenle&tema=' . $tema_url . '&dosya=' . $dosya) . '" class="theme-file-item ' . $active_class .'">📄 ' . basename($dosya) . '</a>';
                 }
             }
 
