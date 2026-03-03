@@ -18,6 +18,7 @@ class LC {
 
     /** Cache süresi (saniye) — remote'a her sorguda gitme */
     private static int $cache_ttl = 3600;
+    private static bool $debug = false;
 
     /**
      * Verilen feature için lisansı doğrula.
@@ -31,7 +32,7 @@ class LC {
         if (empty($domain)) {
             $domain = $_SERVER['HTTP_HOST'] ?? 'localhost';
         }
-        error_log("LC DEBUG: verify called for $feature on $domain");
+        if(self::$debug) error_log("LC DEBUG: verify called for $feature on $domain");
 
         // 1. Önce cache'e bak
         $cached = self::cache_get($feature, $domain);
@@ -43,14 +44,14 @@ class LC {
         // 2. Remote'a sor
         $token = self::remote_ask($feature, $domain);
         if ($token === null) {
-            error_log("LC DEBUG: remote_ask returned null for $feature");
+            if(self::$debug) error_log("LC DEBUG: remote_ask returned null for $feature");
             return false;
         }
 
         // 3. Token'ı doğrula
         $valid = self::token_verify($token, $feature, $domain);
         if (!$valid) {
-            error_log("LC DEBUG: token_verify FAILED for $feature. Token: " . substr($token, 0, 20) . "...");
+            if(self::$debug) error_log("LC DEBUG: token_verify FAILED for $feature. Token: " . substr($token, 0, 20) . "...");
         }
 
         // 4. Cache'e yaz
@@ -69,7 +70,7 @@ class LC {
         $api_key    = getenv('LC_API_KEY') ?: '';
 
         if (empty($remote_url) || empty($api_key)) {
-            error_log("LC DEBUG: Missing config. URL: '$remote_url', Key: '$api_key'");
+            if(self::$debug) error_log("LC DEBUG: Missing config. URL: '$remote_url', Key: '$api_key'");
             return null;
         }
 
@@ -94,17 +95,17 @@ class LC {
         curl_close($ch);
 
         if ($err || $response === false) {
-            error_log('LC DEBUG: Remote connection error — ' . $err);
+            if(self::$debug) error_log('LC DEBUG: Remote connection error — ' . $err);
             return null;
         }
 
         if ($http_code !== 200) {
-            error_log("LC DEBUG: Remote server returned HTTP $http_code. Response: " . substr($response, 0, 100));
+            if(self::$debug) error_log("LC DEBUG: Remote server returned HTTP $http_code. Response: " . substr($response, 0, 100));
         }
 
         $data = json_decode($response, true);
         if (!($data['token'] ?? null)) {
-            error_log("LC DEBUG: No token in response. Data: " . print_r($data, true));
+            if(self::$debug) error_log("LC DEBUG: No token in response. Data: " . print_r($data, true));
         }
         return $data['token'] ?? null;
     }
@@ -117,7 +118,7 @@ class LC {
     {
         $verify_key = getenv('LC_VERIFY_KEY') ?: '';
         if (empty($verify_key)) {
-            error_log('LC: LC_VERIFY_KEY tanımlı değil.');
+            if(self::$debug) error_log('LC: LC_VERIFY_KEY tanımlı değil.');
             return false;
         }
 
@@ -132,6 +133,7 @@ class LC {
         // İmzayı doğrula
         $expected = hash_hmac('sha256', $payload, $verify_key, true);
         if (!hash_equals($expected, $signature)) {
+            if(self::$debug) error_log('LC DEBUG: Signature verification FAILED for ' . $feature);
             return false;
         }
 
@@ -189,7 +191,7 @@ class LC {
     {
         $key  = self::cache_key($feature, $domain);
         $file = sys_get_temp_dir() . '/' . $key . '.cache';
-        error_log("LC DEBUG: flushing cache for $feature on $domain. File: $file");
+        if(self::$debug) error_log("LC DEBUG: flushing cache for $feature on $domain. File: $file");
         @unlink($file);
     }
 }
