@@ -1,21 +1,49 @@
+### --- SİSTEM & IDE DOSYALARI ---
 .env
 .vscode/
 .github/
 .agent/
-/*.sql
-*.code-workspace
-*.log
 .htaccess
+*.code-workspace
+**/.backups/*
+
+### --- LOGLAR & VERİTABANI ---
+*.log
+/*.sql
 rlv_.php
+__install_db_sample/*
+
+### --- BAĞIMLILIKLAR ---
 vendor/
 **/_dev/
 api/oauth/google_certs.json
+
+### --- MEDYA VE DOSYA YÖNETİMİ ---
+# Klasörlerin içini boşalt ama klasör yapısını (varsa .gitkeep ile) koru
 dosya/**
 !dosya/**/
 resim/**
 !resim/**/
+!**/ .gitkeep
+
+### --- DOKÜMANTASYON ---
 documentation/md/
 documentation/py/
-__install_db_sample/*
-.backups/*
-!**/ .gitkeep
+
+### --- ÖZEL MODÜL İZİNLERİ (BEYAZ LİSTE) ---
+# php/modul: Sadece belirli klasörlere izin ver
+php/modul/*
+!php/modul/google_map/
+!php/modul/kvkk/
+!php/modul/email_listesi/
+!php/modul/iletisim_formu/
+!php/modul/manset_sayfa_listesi/
+!php/modul/tawkto/
+!php/modul/yorumlar_form/
+!php/modul/yorumlar_genel/
+
+# tema: Sadece belirli temalara izin ver
+tema/*
+!tema/.sabitlenmis_tema/
+!tema/minimal/
+!tema/bulma/
