@@ -53,11 +53,11 @@ foreach ($tema_dizinleri as $tema) {
     $uis_col_md_stil = 'uis-col-md-' . $tema_sayi_uis_md_stil_dizi[$tema_sayisi] ?? '6';
     
     $active_class = $is_active ? 'border-primary shadow-lg' : '';
-    $active_badge = $is_active ? '<span class="uis-alert uis-alert-s uis-m-0 uis-w-auto uis-ms-2 uis-badge-active">'.yc("Aktif").'</span>' : '';
+    $active_badge = $is_active ? '<span class="uis-status-live">'.yc("Aktif").'</span>' : '';
 
     echo '
     <div class="uis-col ' . $uis_col_md_stil .' uis-col-sm-12">
-        <div class="uis-card h-100 ' . $active_class . '" data-tema="' . $tema . '">
+        <div class="uis-card uis-h-100 ' . $active_class . '" data-tema="' . $tema . '">
             <div class="tema-thumbnail">
                 <img src="' . $img_url . '" alt="' . $tema . '">
             </div>
