@@ -59,7 +59,7 @@ switch ($islem_tip) {
             
             file_put_contents($config_file, json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
             
-            $new_name = TEMA_DIR . '/.deleted_' . time() . '_' . $tema;
+            $new_name = TEMA_DIR . '/.backups/.deleted_' . time() . '_' . $tema;
             rename($tema_yolu, $new_name);
 
             // recursiveDelete($tema_yolu); 
