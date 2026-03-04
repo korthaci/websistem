@@ -114,6 +114,32 @@ switch ($islem_tip) {
         }
         break;
 
+    case 'blok_yedek_al':
+        if (tema_blok_yedek_al($tema)) {
+            echo json_encode(['return' => 1, 'mesaj' => yc("Bloklar başarıyla yedeklendi.")]);
+        } else {
+            echo json_encode(['return' => 0, 'mesaj' => yc("Yedek alınırken bir hata oluştu.")]);
+        }
+        break;
+
+    case 'blok_yedek_listesi':
+        $yedekler = tema_blok_yedek_listesi($tema);
+        echo json_encode(['return' => 1, 'yedekler' => $yedekler]);
+        break;
+
+    case 'blok_yedek_geri_yukle':
+        $yedek_ad = isset($_POST['yedek_ad']) ? z($_POST['yedek_ad']) : '';
+        if (empty($yedek_ad)) {
+            echo json_encode(['return' => 0, 'mesaj' => yc("Yedek dosyası belirtilmedi.")]);
+            exit;
+        }
+        if (tema_blok_yedek_geri_yukle($tema, $yedek_ad)) {
+            echo json_encode(['return' => 1, 'mesaj' => yc("Bloklar başarıyla geri yüklendi.")]);
+        } else {
+            echo json_encode(['return' => 0, 'mesaj' => yc("Bloklar geri yüklenirken hata oluştu.")]);
+        }
+        break;
+
     default:
         echo json_encode(['return' => 0, 'mesaj' => yc("Geçersiz işlem tipi.")]);
         break;

@@ -183,10 +183,12 @@ echo '
 <div class="uis-page-header uis-mb-1 uis-p-0">
     <h5 class="uis-m-0 uis-p-0">/ ' . ucfirst($tema_url) . ' ' . yc("Temasını Düzenle") .'</h5>
     <div class="uis-action-bar">
-        <form data-onsubmit-confirm="'. yc("Tüm bloklar silinecek ve temanın varsayılan blokları yüklenecektir. Emin misiniz").'?" method="POST" action="' . href('index', 'ui=temaduzenle&tema=' . $tema_url) . '" style="display:inline;">
-            <input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">
-            <button type="submit" name="recreate_blocks" class="uis-btn uis-btn-sm uis-btn-primary uis-btn-light" data-tooltip="' . yc("Anasayfada gösterilen bloklar") . '">' . yc("Blokları Yeniden Oluştur") .'</button>
-        </form>
+        <button type="button" class="uis-btn uis-btn-sm uis-btn-primary uis-btn-light tema-blok-yedek-al" data-tema="' . hs($tema_url) . '">
+            <i class="fa-solid fa-cloud-upload"></i> ' . yc("Blokları Yedekle") . '
+        </button>
+        <button type="button" class="uis-btn uis-btn-sm uis-btn-outline tema-blok-listesi-btn" data-tema="' . hs($tema_url) . '">
+            <i class="fa-solid fa-history"></i> ' . yc("Blokları Yapılandır") . '
+        </button>
         <a href="' . href('index', 'ui=temalar') . '" class="uis-btn uis-btn-sm uis-btn-outline">< ' . yc("Temalara Dön") .'</a>
     </div>
 </div>
@@ -307,6 +309,42 @@ echo '      </div>
                 >' . hs($dosya_icerik) . '</textarea>
 
             </form>
+        </div>
+
+        <!-- Blok Yedekleri Paneli -->
+        <div class="uis-card uis-mt-3" id="blok-yedek-listesi-panel" style="display: none;">
+            <div class="uis-card-header uis-flex uis-justify-between uis-align-center">
+                <h3 class="uis-card-title">** ' . yc("Blok Yapılandırma & Yedekleri") .'</h3>
+                <small style="color:var(--uis-muted)">' . yc("JSON formatında saklanan anasayfa blokları") . '</small>
+            </div>
+            <div class="uis-card-body">
+                <div class="uis-table-responsive">
+                    <table class="uis-table">
+                        <thead>
+                            <tr>
+                                <th>' . yc("Yedek Adı / Tipi") .'</th>
+                                <th>' . yc("Tarih") .'</th>
+                                <th>' . yc("İşlem") .'</th>
+                            </tr>
+                        </thead>
+                        <tbody id="blok-yedek-liste-body">
+                            <!-- Orijinal blok_html.sql -->
+                            <tr>
+                                <td><b>blok_html.sql</b> <span class="uis-badge uis-badge-info uis-ms-2">' . yc("Fabrika Verisi") . '</span></td>
+                                <td>-</td>
+                                <td>
+                                    <form data-onsubmit-confirm="'. yc("Tüm bloklar silinecek ve temanın orijinal blokları yüklenecektir. Emin misiniz").'?" method="POST" action="' . href('index', 'ui=temaduzenle&tema=' . $tema_url) . '">
+                                        <input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">
+                                        <button type="submit" name="recreate_blocks" class="uis-btn uis-btn-sm uis-btn-p">
+                                            ' . yc("Orijinali Yükle") . '
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         
         ' . (!empty($secili_dosya) && !empty($yedek_listesi) ? '

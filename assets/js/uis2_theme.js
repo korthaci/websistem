@@ -1,6 +1,33 @@
 $(function () {
     const API_URL = js_vars.local___ + '/api/index.php';
 
+    // ── Theme Management ──
+    const currentTheme = localStorage.getItem('uis-theme') || 'uis-light';
+    $('body').addClass(currentTheme);
+    updateThemeIcon(currentTheme);
+
+    $(document).on('click', '.uis-theme-toggle', function () {
+        if ($('body').hasClass('uis-dark')) {
+            $('body').removeClass('uis-dark').addClass('uis-light');
+            localStorage.setItem('uis-theme', 'uis-light');
+            updateThemeIcon('uis-light');
+        } else {
+            $('body').removeClass('uis-light').addClass('uis-dark');
+            localStorage.setItem('uis-theme', 'uis-dark');
+            updateThemeIcon('uis-dark');
+        }
+    });
+
+    function updateThemeIcon(theme) {
+        const icon = $('.uis-theme-toggle i');
+        if (theme === 'uis-dark') {
+            icon.removeClass('fa-moon').addClass('fa-sun');
+        } else {
+            icon.removeClass('fa-sun').addClass('fa-moon');
+        }
+    }
+
+
     // Etkinleştirme
     $(document).on('click', '.tema-etkinlestir', function () {
         const _this = $(this);
@@ -182,6 +209,103 @@ $(function () {
                 _this.closest('tr').fadeOut(function () { $(this).remove(); });
             } else {
                 iziToast.error({ title: 'Hata', message: response.mesaj });
+            }
+        }, 'json');
+    });
+
+    // ── Blok Yedekleme & Geri Yükleme (SNAPSHOT) ──
+
+    // Blok Yedekle
+    $(document).on('click', '.tema-blok-yedek-al', function() {
+        const _this = $(this);
+        const tema = _this.data('tema');
+
+        _this.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin"></i> Yedekleniyor...');
+
+        $.post(API_URL, {
+            islem: 'uis_tema',
+            islem_tip: 'blok_yedek_al',
+            tema: tema
+        }, function(response) {
+            if (response.return == 1) {
+                iziToast.success({ title: 'Başarılı', message: response.mesaj });
+                // Eğer panel açıksa listeyi güncelle
+                if ($('#blok-yedek-listesi-panel').is(':visible')) loadBlockBackups(tema);
+            } else {
+                iziToast.error({ title: 'Hata', message: response.mesaj });
+            }
+            _this.prop('disabled', false).html('<i class="fa-solid fa-cloud-upload"></i> Blokları Yedekle');
+        }, 'json');
+    });
+
+    // Blok Yedek Listesini Göster
+    $(document).on('click', '.tema-blok-listesi-btn', function() {
+        const panel = $('#blok-yedek-listesi-panel');
+        const tema = $(this).data('tema');
+
+        if (panel.is(':visible')) {
+            panel.slideUp();
+        } else {
+            loadBlockBackups(tema);
+            panel.slideDown();
+        }
+    });
+
+    function loadBlockBackups(tema) {
+        const body = $('#blok-yedek-liste-body');
+        // Orijinal satırını sakla, diğerlerini temizle
+        const originalRow = body.find('tr:first').prop('outerHTML');
+        body.html(originalRow + '<tr><td colspan="3" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Yükleniyor...</td></tr>');
+
+        $.post(API_URL, {
+            islem: 'uis_tema',
+            islem_tip: 'blok_yedek_listesi',
+            tema: tema
+        }, function(response) {
+            body.find('tr:not(:first)').remove(); // Yükleniyor yazısını sil
+            if (response.return == 1 && response.yedekler.length > 0) {
+                response.yedekler.forEach(yedek => {
+                    body.append(`
+                        <tr>
+                            <td><b>${yedek.ad}</b></td>
+                            <td>${yedek.tarih_okunabilir}</td>
+                            <td>
+                                <button type="button" class="uis-btn uis-btn-sm uis-btn-outline tema-blok-yedek-yukle" 
+                                        data-tema="${tema}" data-yedek="${yedek.ad}">
+                                    Geri Yükle
+                                </button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            } else if (response.return == 1) {
+                body.append('<tr><td colspan="3" class="text-center">Henüz manuel yedek alınmamış.</td></tr>');
+            }
+        }, 'json');
+    }
+
+    // Blok Yedeği Geri Yükle (Snapshot)
+    $(document).on('click', '.tema-blok-yedek-yukle', function() {
+        const _this = $(this);
+        const tema = _this.data('tema');
+        const yedek = _this.data('yedek');
+
+        if (!confirm('Bu blok yedeğini geri yüklemek istediğinize emin misiniz? Mevcut bloklar silinecektir.')) return;
+
+        _this.prop('disabled', true).text('Yükleniyor...');
+
+        $.post(API_URL, {
+            islem: 'uis_tema',
+            islem_tip: 'blok_yedek_geri_yukle',
+            tema: tema,
+            yedek_ad: yedek
+        }, function(response) {
+            if (response.return == 1) {
+                iziToast.success({ title: 'Başarılı', message: response.mesaj });
+                setTimeout(() => location.reload(), 1000);
+            } else {
+                iziToast.error({ title: 'Hata', message: response.mesaj });
+                _this.prop('disabled', false).text('Geri Yükle');
             }
         }, 'json');
     });

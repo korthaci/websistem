@@ -29,9 +29,9 @@ if (isset($_GET['ui'])) {
 		'bilesensablonlar' =>	['php' => 'bilesensablonlar',	'yetki' => [2],		'_class' => ' g_98__ margin_a'],
 		'bilesenayarlar' =>		['php' => 'bilesen_ayarlar',	'yetki' => [2],		'_class' => ' g_98__ margin_a'],
 		'dashboard' =>			['php' => 'kontrolpaneli',		'yetki' => [2,3],		'_class' => 'uis-container'],
-		'temalar' =>			['php' => 'temalar',			'yetki' => [2],		'_class' => ' g_98__ margin_a'],
-		'temaduzenle' =>		['php' => 'temaduzenle',		'yetki' => [2],		'_class' => ' g_98__ margin_a'],
-		'ai_studio' =>			['php' => 'ai_studio',			'yetki' => [2],		'_class' => 'uis-container'],
+		'temalar' =>			['php' => 'temalar',			'yetki' => [2],		'_class' => ' g_98__ margin_a uis-mt-4'],
+		'temaduzenle' =>		['php' => 'temaduzenle',		'yetki' => [2],		'_class' => ' g_98__ margin_a uis-mt-4'],
+		'ai_studio' =>			['php' => 'ai_studio',			'yetki' => [2],		'_class' => 'uis-container uis-mt-4'],
 	];
 
 	if (array_key_exists($uis2_url, $case)) {

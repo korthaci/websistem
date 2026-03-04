@@ -3047,6 +3047,112 @@ function tema_dosya_yedek_listesi($tema_adi, $dosya_adi) {
 }
 
 /**
+ * Mevcut tema bloklarını JSON formatında yedekler
+ * @param string $tema_adi Tema adı
+ * @return string|false Yedek dosya yolu veya false
+ */
+function tema_blok_yedek_al($tema_adi) {
+	global $pdo, $do_;
+	
+	try {
+		$stmt = $pdo->prepare("SELECT * FROM {$do_}blok_html WHERE tema = :tema");
+		$stmt->execute(['tema' => $tema_adi]);
+		$current_blocks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		if (empty($current_blocks)) return false;
+		
+		$backup_dir = TEMA_DIR . '/' . $tema_adi . '/.backups';
+		if (!is_dir($backup_dir)) mkdir($backup_dir, 0755, true);
+		
+		$tarih = date('Ymd_His');
+		$backup_file = $backup_dir . '/blocks_' . $tarih . '.json';
+		
+		if (file_put_contents($backup_file, json_encode($current_blocks, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) !== false) {
+			return $backup_file;
+		}
+	} catch (Exception $e) {
+		error_log("tema_blok_yedek_al error: " . $e->getMessage());
+	}
+	
+	return false;
+}
+
+/**
+ * Temaya ait blok yedeklerini (JSON) listeler
+ * @param string $tema_adi Tema adı
+ * @return array Yedek listesi
+ */
+function tema_blok_yedek_listesi($tema_adi) {
+	$backup_dir = TEMA_DIR . '/' . $tema_adi . '/.backups';
+	$yedekler = [];
+	
+	if (!is_dir($backup_dir)) return $yedekler;
+	
+	$dosyalar = glob($backup_dir . '/blocks_*.json');
+	foreach ($dosyalar as $dosya) {
+		$ad = basename($dosya);
+		// blocks_20250123_143045.json
+		if (preg_match('/blocks_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})\.json/', $ad, $m)) {
+			$tarih_okunabilir = "{$m[3]}.{$m[2]}.{$m[1]} {$m[4]}:{$m[5]}:{$m[6]}";
+			$yedekler[] = [
+				'ad' => $ad,
+				'tarih_okunabilir' => $tarih_okunabilir,
+				'dosya_yolu' => $dosya,
+				'boyut' => filesize($dosya)
+			];
+		}
+	}
+	
+	usort($yedekler, fn($a, $b) => strcmp($b['ad'], $a['ad']));
+	return $yedekler;
+}
+
+/**
+ * Blok yedeğini (JSON) geri yükler
+ * @param string $tema_adi Tema adı
+ * @param string $yedek_ad Yedek dosya adı (blocks_*.json)
+ * @return bool
+ */
+function tema_blok_yedek_geri_yukle($tema_adi, $yedek_ad) {
+	global $pdo, $do_;
+	
+	$yedek_yolu = TEMA_DIR . '/' . $tema_adi . '/.backups/' . $yedek_ad;
+	if (!file_exists($yedek_yolu)) return false;
+	
+	$icerik = file_get_contents($yedek_yolu);
+	$bloklar = json_decode($icerik, true);
+	if (empty($bloklar)) return false;
+	
+	try {
+		$pdo->beginTransaction();
+		
+		// Mevcut blokları sil
+		$stmt = $pdo->prepare("DELETE FROM {$do_}blok_html WHERE tema = :tema");
+		$stmt->execute(['tema' => $tema_adi]);
+		
+		// Yedekten ekle
+		foreach ($bloklar as $blok) {
+			// 'no' alanını auto-increment'e bırakmak için unset yapabiliriz veya mevcut no ile ekleyebiliriz
+			// Genelde ID çakışması olmaması için unset yapmak daha güvenli ama bloklar arası referans varsa korunmalı
+			unset($blok['no']); 
+			
+			$columns = implode(", ", array_keys($blok));
+			$placeholders = ":" . implode(", :", array_keys($blok));
+			$sql = "INSERT INTO {$do_}blok_html ({$columns}) VALUES ({$placeholders})";
+			
+			$pdo->prepare($sql)->execute($blok);
+		}
+		
+		$pdo->commit();
+		return true;
+	} catch (Exception $e) {
+		if ($pdo->inTransaction()) $pdo->rollBack();
+		error_log("tema_blok_yedek_geri_yukle error: " . $e->getMessage());
+		return false;
+	}
+}
+
+/**
  * Tema dosyası yedeğini geri yükler
  * @param string $tema_adi Tema adı
  * @param string $dosya_adi Dosya adı
