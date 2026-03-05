@@ -87,6 +87,11 @@ $(document).ready(function () {
 				afterInit: function (editor) {
 					window.unsavedChanges = false;
 
+					const parentForm = editor.element.closest('form');
+					if (parentForm) {
+						parentForm.setAttribute('novalidate', 'novalidate');
+					}
+
 					const doc = editor.iframe
 						? editor.iframe.contentDocument
 						: editor.editor.ownerDocument;

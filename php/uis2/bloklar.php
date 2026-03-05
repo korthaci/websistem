@@ -49,15 +49,16 @@ $arama_ = $arama_form->sql_where();
 		</form>
 	</div>';
 
+$db_tema_ek = $so_->d('tema') ? " AND tema = '{$so_->d('tema')}'" : '';
 $siralama = new siralama(200);
-$kayit_sayisi = $pdo_db->var("SELECT COUNT(no) FROM {$do_}blok_html WHERE no > 0 $arama_");
+$kayit_sayisi = $pdo_db->var("SELECT COUNT(no) FROM {$do_}blok_html WHERE no > 0 $db_tema_ek $arama_");
 $siralama->limit_sira_ = ceil($kayit_sayisi / $siralama->limit2_bu);
 
 try {
 	$limit1 = intval($siralama->limit1);
 	$limit2 = intval($siralama->limit2_bu);
 	$stmt = $pdo->prepare("SELECT * FROM {$do_}blok_html
-		WHERE no > 0 $arama_ ORDER BY sira ASC, no DESC LIMIT $limit1, $limit2");
+		WHERE no > 0 $db_tema_ek $arama_ ORDER BY sira ASC, no DESC LIMIT $limit1, $limit2");
 	$stmt->execute();
 	$bloklar = $stmt->fetchAll();
 } catch (PDOException $e) {

@@ -459,9 +459,9 @@ $(document).ready(function () {
 	});
 
 	$(document).on("click", ".__dd_copytoc, [data-kopyala], .panoya_kopyala", function () {
-		let dbt = $(this).text();
+		let dbt = $(this).attr('data-kopyala') || $(this).text().trim();
 		clipboard(dbt);
-		umesaj('İsim kopyalandı : ' + dbt);
+		umesaj('Kopyalandı : ' + dbt);
 	});
 
 	$(document).on('click', '[data-nta-input]', function () {

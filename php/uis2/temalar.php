@@ -50,7 +50,7 @@ foreach ($tema_dizinleri as $tema) {
     }
     
     $tema_sayi_uis_md_stil_dizi = [1 => '12', 2 => '6', 3 => '4', 4 => '3'];
-    $uis_col_md_stil = 'uis-col-md-' . $tema_sayi_uis_md_stil_dizi[$tema_sayisi] ?? '6';
+    $uis_col_md_stil = 'uis-col-md-' . ($tema_sayi_uis_md_stil_dizi[$tema_sayisi] ?? '3');
     
     $active_class = $is_active ? 'border-primary shadow-lg' : '';
     $active_badge = $is_active ? '<span class="uis-status-live">'.yc("Aktif").'</span>' : '';

@@ -626,27 +626,27 @@
     color: var(--uis-text-muted);
 }
 
-.text-primary {
+.uis-text-primary {
     color: var(--uis-primary) !important;
 }
 
-.text-info {
+.uis-text-info {
     color: var(--uis-info) !important;
 }
 
-.text-success {
+.uis-text-success {
     color: var(--uis-success) !important;
 }
 
-.text-warning {
+.uis-text-warning {
     color: var(--uis-warning) !important;
 }
 
-.text-danger {
+.uis-text-danger {
     color: var(--uis-danger) !important;
 }
 
-.text-secondary {
+.uis-text-secondary {
     color: var(--uis-text-light) !important;
 }
 

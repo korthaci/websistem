@@ -186,7 +186,7 @@ echo '
         <button type="button" class="uis-btn uis-btn-sm uis-btn-primary uis-btn-light tema-blok-yedek-al" data-tema="' . hs($tema_url) . '">
             <i class="fa-solid fa-cloud-upload"></i> ' . yc("Blokları Yedekle") . '
         </button>
-        <button type="button" class="uis-btn uis-btn-sm uis-btn-outline tema-blok-listesi-btn" data-tema="' . hs($tema_url) . '">
+        <button type="button" class="uis-btn uis-btn-sm uis-btn-primary tema-blok-listesi-btn" data-tema="' . hs($tema_url) . '">
             <i class="fa-solid fa-history"></i> ' . yc("Blokları Yapılandır") . '
         </button>
         <a href="' . href('index', 'ui=temalar') . '" class="uis-btn uis-btn-sm uis-btn-outline">< ' . yc("Temalara Dön") .'</a>

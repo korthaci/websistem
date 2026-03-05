@@ -247,7 +247,11 @@ $(function () {
             panel.slideUp();
         } else {
             loadBlockBackups(tema);
-            panel.slideDown();
+            panel.slideDown(400, function() {
+                $('html, body').animate({
+                    scrollTop: panel.offset().top - 100
+                }, 600);
+            });
         }
     });
 

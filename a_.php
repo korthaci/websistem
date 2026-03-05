@@ -38,7 +38,9 @@ if (DB_TYPE === 'sqlite') {
     $pdo->sqliteCreateFunction('NOW', function() { return date('Y-m-d H:i:s'); }, 0);
     $pdo->sqliteCreateFunction('MD5', function($s) { return md5($s); }, 1);
 } else {
-    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . VERITABANI . ";charset=utf8mb4", DB_KULLANICI, DB_SIFRE);
+    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . VERITABANI . ";charset=utf8mb4", DB_KULLANICI, DB_SIFRE, [
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci"
+    ]);
 }
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

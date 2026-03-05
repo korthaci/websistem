@@ -42,10 +42,10 @@ CREATE TABLE `r_bilesen` (
 
 CREATE TABLE `r_blok_html` (
   `no` int(11) NOT NULL,
-  `adi` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `icerik` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `hash` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tema` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `adi` varchar(255) DEFAULT NULL,
+  `icerik` longtext DEFAULT NULL,
+  `hash` varchar(40) DEFAULT NULL,
+  `tema` varchar(40) DEFAULT NULL,
   `sira` int(11) NOT NULL DEFAULT 200,
   `yayin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -394,7 +394,7 @@ CREATE TABLE `r_sayfa` (
   `tarih` date DEFAULT NULL,
   `aciklama` varchar(255) DEFAULT NULL,
   `etiket` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Tablo döküm verisi `r_sayfa`
