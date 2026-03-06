@@ -408,21 +408,41 @@ $(document).ready(function () {
 	});
 
 
-
-	$(document).on('click', '[data-confirm]', function (e) {
-		let message = $(this).attr('data-confirm');
-		if (message && message.length > 0) {
-			e.preventDefault();
-			if (window.confirm(message)) {
-				if (this.href) {
-					window.location.href = this.href;
-				} else if ($(this).is('button, input[type="submit"]')) {
-					$(this).closest('form').submit();
-				} else {
-					$(this).trigger('click');
-				}
+	$(document).on('click','[data-confirm]',function(e){
+		let el = $(this);
+		let raw = el.data('confirm');
+		if(!raw) return;
+		let parts = raw.split('|');
+		let msg = parts[0];
+		let okText = parts[1] || 'OK';
+		if(el.data('confirmed')){
+			el.data('confirmed', false);
+			return;
+		}
+		e.preventDefault();
+		if(confirm(msg)){
+			el.data('confirmed', true);
+			if(this.href){
+				window.location = this.href;
+			}else if(el.is('button, input[type="submit"]')){
+				el.closest('form').trigger('submit');
+			}else{
+				el.trigger('click');
 			}
 		}
+	});
+
+	$(document).on('click','[data-click2]',function(e){
+		let el = $(this);
+		if(!el.data('armed')){
+			e.preventDefault();
+			el.data('armed',true).addClass('confirming');
+			setTimeout(function(){
+				el.data('armed',false).removeClass('confirming');
+			},3000);
+			return;
+		}
+		el.data('armed',false).removeClass('confirming');
 	});
 
 	$(document).on('submit', 'form[data-submit-confirm], form[data-onsubmit-confirm]', function (e) {

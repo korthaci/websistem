@@ -91,99 +91,91 @@ if (n0_($u_no__)) {
 
 } elseif (!isset($_POST['yenikayit'])) {
 
+    echo '
+    <div class="ug-wrapper">
+        <div class="ug-grid">
 
-	echo '
-	<div class="container d-flex align-items-center pt-2">
-		<div class="row justify-content-center w-100">
+            <div class="ug-box loginForm">
+                <h2 class="ug-title">'.yc("Üye girişi").'</h2>
+                <form method="POST" action="uis/uyegiris">
+                ' . (set_dolu("redirect_uri","g") ? '<input type="hidden" class="ldevam" name="ldevam" value="'.urlencode($_GET["redirect_uri"]).'"/>' : '') . '
+                    <div class="ug-card">
+                        <div class="ug-card-body">
+                            <div class="ug-field">
+                                <label class="ug-label" for="kullaniciadi">'.yc("E-posta adresi").'</label>
+                                <input type="text" id="kullaniciadi" name="kullaniciadi" class="ug-input" placeholder="'.yc("E-posta adresi").'" required>
+                            </div>
+                            <div class="ug-field">
+                                <label class="ug-label" for="sifre">'.yc("Şifre").'</label>
+                                <input type="password" id="sifre" name="sifre" class="ug-input" placeholder="'.yc("Şifre").'" required>
+                            </div>
+                            <div class="ug-field ug-row-between">
+                                <div class="ug-check">
+                                    <input type="checkbox" name="beni_hatirla" class="ug-check-input" id="beni_hatirla">
+                                    <label class="ug-check-label" for="beni_hatirla">'.yc("Beni hatırla").'</label>
+                                </div>
+                                <a href="uis/sifrereset" class="ug-link">'.yc("Şifre resetle").'</a>
+                            </div>
+                            <input type="text" name="webunion" value="" class="ug-input dyok" maxlength="10" placeholder="Web *">
+                            <div class="ug-field">
+                                <input type="submit" name="gonder_uyegiris" value="'.yc("Giriş yap").'" class="ug-btn ug-btn--primary ug-btn--block" />
+                            </div>
+                            <p class="ug-text-center">
+                                <a href="#" class="goRegister ug-link">'.yc("Yeni üyelik oluştur").'</a>
+                            </p>
+                        </div>
 
-			<div class="col-lg-5 col-md-6 loginForm">
-				<h2 class="h2 text-uppercase mb-4">'.yc("Üye girişi").'</h2>
-				<form method="POST" action="uis/uyegiris">
-				' . (set_dolu("redirect_uri","g") ? '<input type="hidden" class="ldevam" name="ldevam" value="'.urlencode($_GET["redirect_uri"]).'"/>' : '') . '
-					<div class="card">    
-						<div class="card-body">
-							<div class="mb-3">
-								<label class="form-label" for="kullaniciadi">'.yc("E-posta adresi").'</label>
-								<input type="text" id="kullaniciadi" name="kullaniciadi" class="form-control" placeholder="'.yc("E-posta adresi").'" required>
-							</div>
-							<div class="mb-3">
-								<label class="form-label" for="sifre">'.yc("Şifre").'</label>
-								<input type="password" id="sifre" name="sifre" class="form-control" placeholder="'.yc("Şifre").'" required>
-							</div>
-							<div class="mb-3 d-flex justify-content-between align-items-center">
-								<div class="form-check">
-									<input type="checkbox" name="beni_hatirla" class="form-check-input" id="beni_hatirla">
-									<label class="form-check-label" for="beni_hatirla">'.yc("Beni hatırla").'</label>
-								</div>
-								<a href="uis/sifrereset" class="text-decoration-none">'.yc("Şifre resetle").'</a>
-							</div>
-							<input type="text" name="webunion" value="" class="form-control dyok" maxlength="10" placeholder="Web *">
-							<div class="d-grid mb-3">
-								<input type="submit" name="gonder_uyegiris" value="'.yc("Giriş yap").'" class="button is-primary" />
-							</div>
-							<p class="text-center mb-0">
-								<a href="#" class="goRegister text-decoration-none">'.yc("Yeni üyelik oluştur").'</a>
-							</p>
+                        <div id="hiddenGoogleBtn" class="dyok"></div>
+                        <div class="ug-google-wrapper">
+                            <a class="google_login_buton">'.yc("Google ile giriş yap").'</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-						</div>
+            <!-- Yeni Üyelik -->
+            <div class="ug-box registerForm dyok">
+                <h2 class="ug-title">'.yc("Yeni üyelik").'</h2>
+                <form method="POST" action="uis/uyegiris">
+                    <div class="ug-card">
+                        <div class="ug-card-body">
+                            <div class="ug-field">
+                                <label class="ug-label" for="adi">'.yc("Adınız Soyadınız").' *</label>
+                                <input type="text" id="adi" name="adi" class="ug-input" maxlength="110" placeholder="'.yc("Adınız Soyadınız").'" required>
+                            </div>
+                            <div class="ug-field">
+                                <label class="ug-label" for="emailadresi">'.yc("E-posta adresiniz").' *</label>
+                                <input type="email" id="emailadresi" name="emailadresi" class="ug-input" maxlength="100" placeholder="'.yc("E-posta adresiniz").'" required>
+                            </div>
+                            <div class="ug-field">
+                                <label class="ug-label" for="sifre_n">'.yc("Yeni şifre").' *</label>
+                                <input type="password" id="sifre_n" name="sifre" class="ug-input" maxlength="100" placeholder="'.yc("Yeni şifre").'" required>
+                            </div>
+                            <div class="ug-field">
+                                <label class="ug-label" for="sifre_tekrar">'.yc("Yeni Şifre Tekrar").' *</label>
+                                <input type="password" id="sifre_tekrar" name="sifretekrar" class="ug-input" maxlength="100" placeholder="'.yc("Yeni Şifre Tekrar").'" required>
+                            </div>
 
-						<div id="hiddenGoogleBtn" class="dyok"></div>
-						<div class="google-login-wrapper mt-5 mb-5">							
-							<a class="google_login_buton">'.yc("Google ile giriş yap").'</a>
-						</div>
+                            <input type="text" name="webunion" value="" class="ug-input dyok" maxlength="10" placeholder="Web *">
 
-					</div>
-					
-				</form>
-				
-			</div>
+                            <div class="ug-field">
+                                <input type="submit" name="yenikayit" value="'.yc("Kayıt ol").'" class="ug-btn ug-btn--danger ug-btn--block" />
+                            </div>
+                            <p class="ug-text-center">
+                                <a href="#" class="goLogin ug-link">'.yc("Zaten üye misiniz? Giriş yapın").'</a>
+                            </p>
+                        </div>
 
+                        <div class="ug-google-wrapper">
+                            <a class="google_login_buton">'.yc("Google ile kayıt ol").'</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-			<!-- Yeni Üyelik -->
-			<div class="col-lg-5 col-md-6 registerForm dyok">
-				<h2 class="h2 text-uppercase mb-4">'.yc("Yeni üyelik").'</h2>
-				<form method="POST" action="uis/uyegiris">
-					<div class="card">    
-						<div class="card-body">
-							<div class="mb-3">
-								<label class="form-label" for="adi">'.yc("Adınız Soyadınız").' *</label>
-								<input type="text" id="adi" name="adi" class="form-control" maxlength="110" placeholder="'.yc("Adınız Soyadınız").'" required>
-							</div>
-							<div class="mb-3">
-								<label class="form-label" for="emailadresi">'.yc("E-posta adresiniz").' *</label>
-								<input type="email" id="emailadresi" name="emailadresi" class="form-control" maxlength="100" placeholder="'.yc("E-posta adresiniz").'" required>
-							</div>
-							<div class="mb-3">
-								<label class="form-label" for="sifre_n">'.yc("Yeni şifre").' *</label>
-								<input type="password" id="sifre_n" name="sifre" class="form-control" maxlength="100" placeholder="'.yc("Yeni şifre").'" required>
-							</div>
-							<div class="mb-3">
-								<label class="form-label" for="sifre_tekrar">'.yc("Yeni Şifre Tekrar").' *</label>
-								<input type="password" id="sifre_tekrar" name="sifretekrar" class="form-control" maxlength="100" placeholder="'.yc("Yeni Şifre Tekrar").'" required>
-							</div>
-
-							<input type="text" name="webunion" value="" class="form-control dyok" maxlength="10" placeholder="Web *">
-
-							<div class="d-grid mb-3">
-								<input type="submit" name="yenikayit" value="'.yc("Kayıt ol").'" class="button is-danger" />
-							</div>
-
-							<p class="text-center mb-0">
-								<a href="#" class="goLogin text-decoration-none">'.yc("Zaten üye misiniz? Giriş yapın").'</a>
-							</p>
-						</div>
-
-						<div class="google-login-wrapper mt-5 mb-5">							
-							<a class="google_login_buton">'.yc("Google ile kayıt ol").'</a>
-						</div>
-
-					</div>
-				</form>
-			</div>
-
-		</div>
-	</div>
-	';
+        </div>
+    </div>
+    ';
 
 }
 

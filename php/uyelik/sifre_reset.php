@@ -48,20 +48,16 @@ if (isset($_POST['gonder_sifre_reset'])) {
 }
 
 echo ($form_yaz ? '
-<div class="box">
-    <form method="post">
-        <div class="field">
-            <label class="label">'.yc("Kullanıcı adı veya E-posta").'</label>
-            <div class="control has-icons-left">
-                <input type="text" name="kullaniciadi_email" required class="input g_99__ is-medium" placeholder="' . yc("E-posta veya kullanıcı adı girin") . '" />                
-            </div>
-        </div>
-        <div class="field">
-            <div class="control">                
-                <button type="submit" name="gonder_sifre_reset" class="button is-primary is-medium">
-                    <span class="dib icon is-small is-left"> <i class="fas fa-envelope"></i> </span>  '.yc("Gönder").'
-                </button>
-            </div>
-        </div>
-    </form>
+<div class="ug-field">
+    <label class="ug-label">'.yc("Kullanıcı adı veya E-posta").'</label>
+    <div class="ug-control">
+        <input type="text" name="kullaniciadi_email" required class="ug-input g_99__" placeholder="' . yc("E-posta veya kullanıcı adı girin") . '" />
+    </div>
+</div>
+<div class="ug-field">
+    <div class="ug-control">
+        <button type="submit" name="gonder_sifre_reset" class="ug-btn ug-btn--primary">
+            <i class="fas fa-envelope"></i> '.yc("Gönder").'
+        </button>
+    </div>
 </div>' : '');
