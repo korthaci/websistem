@@ -925,6 +925,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    margin-top: 2px;
     padding: 0.25rem 0.75rem;
     background: rgba(34, 197, 94, 0.1);
     color: #166534;

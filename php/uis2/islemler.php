@@ -32,6 +32,7 @@ if (isset($_GET['ui'])) {
 		'temalar' =>			['php' => 'temalar',			'yetki' => [2],		'_class' => ' g_98__ margin_a uis-mt-4'],
 		'temaduzenle' =>		['php' => 'temaduzenle',		'yetki' => [2],		'_class' => ' g_98__ margin_a uis-mt-4'],
 		'ai_studio' =>			['php' => 'ai_studio',			'yetki' => [2],		'_class' => 'uis-container uis-mt-4'],
+		'sistem_guncelle' =>	['php' => 'update/sistem_guncelle',			'yetki' => [2],		'_class' => 'uis-container uis-mt-4'],
 	];
 
 	if (array_key_exists($uis2_url, $case)) {

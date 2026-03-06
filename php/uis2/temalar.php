@@ -53,7 +53,7 @@ foreach ($tema_dizinleri as $tema) {
     $uis_col_md_stil = 'uis-col-md-' . ($tema_sayi_uis_md_stil_dizi[$tema_sayisi] ?? '3');
     
     $active_class = $is_active ? 'border-primary shadow-lg' : '';
-    $active_badge = $is_active ? '<span class="uis-status-live">'.yc("Aktif").'</span>' : '';
+    $active_badge = $is_active ? '<span class="uis-status-live"> 🎗️ <i class="fa-solid fa-circle-check"></i> '.yc("Aktif").'</span>' : '';
 
     echo '
     <div class="uis-col ' . $uis_col_md_stil .' uis-col-sm-12">
@@ -68,7 +68,7 @@ foreach ($tema_dizinleri as $tema) {
             
             <div class="uis-flex uis-gap-1 uis-mt-4">
                 ' . (!$is_active ? '<button class="uis-btn uis-btn-sm uis-btn-p tema-etkinlestir" data-tema="' . $tema . '">'.yc("Etkinleştir").'</button>' : '') . '
-                <a href="' . href('index', 'ui=temaduzenle&tema=' . $tema) . '" class="uis-btn uis-btn-sm uis-btn-outline uis-btn-danger">'.yc("Düzenle").'</a>
+                <a href="' . href('index', 'ui=temaduzenle&tema=' . $tema) . '" class="uis-btn uis-btn-sm uis-btn-outline uis-btn-danger"'.(!$is_active ? 'data-confirm="Bu tema aktif tema değildir. Yine de düzenle?"':'').'>'.yc("Düzenle").'</a>
                 <button class="uis-btn uis-btn-sm uis-btn-outline tema-kopyala" data-tema="' . $tema . '" title="'.yc("Kopyala").'"><i class="fa-solid fa-copy"></i></button>
                 ' . (!$is_active ? '<button class="uis-btn uis-btn-sm uis-btn-outline uis-btn-d tema-sil" data-tema="' . $tema . '" title="'.yc("Sil").'"><i class="fa-solid fa-trash"></i></button>' : '') . '
             </div>

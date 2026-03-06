@@ -386,6 +386,16 @@ function recursiveCopy($source, $dest) {
     }
 }
 
+function rrmdir($dir) {
+	if (!is_dir($dir)) return;
+	foreach (scandir($dir) as $file) {
+		if ($file === '.' || $file === '..') continue;
+		$path = $dir . '/' . $file;
+		is_dir($path) ? rrmdir($path) : unlink($path);
+	}
+	rmdir($dir);
+}
+
 function ucfirst_utf8($string, $lowerRest = false) {
 	if ($lowerRest) {
 		$string = mb_strtolower($string);
