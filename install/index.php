@@ -389,7 +389,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                              . "MICROSOFT_TRANSLATOR_KEY=\n"
                              . "MICROSOFT_TRANSLATOR_REGION=\n"
                              . "DEEPL_API_KEY=\n"
-                             . "APP_ENV=production\n";
+                             . "APP_ENV=production\n"
+                             . "UPDATE_PATH=\n";
                 file_put_contents($root_dir . '/.env', $env_content);
 
                 // 5. Write rlv_.php
