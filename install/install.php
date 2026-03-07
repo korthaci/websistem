@@ -28,14 +28,40 @@ if (isset($_GET['action'])) {
                 throw new Exception('PHP ZipArchive eklentisi yüklü değil.');
             }
 
-            // Download Zip
+            // Download Zip - Attempt 1: file_get_contents
             $content = @file_get_contents($remote_zip_url);
+            
+            // Attempt 2: cURL Fallback
+            if ($content === false && function_exists('curl_init')) {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $remote_zip_url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_USERAGENT, 'Websistem Installer');
+                $content = curl_exec($ch);
+                $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                curl_close($ch);
+                
+                if ($http_code !== 200) {
+                    throw new Exception('Uzak sunucu hata döndürdü: HTTP ' . $http_code);
+                }
+            }
+
             if ($content === false) {
-                throw new Exception('Uzak sunucudan dosya indirilemedi. (URL: ' . $remote_zip_url . ')');
+                $error_detail = "";
+                if (!ini_get('allow_url_fopen')) $error_detail .= " (allow_url_fopen kapalı)";
+                if (!function_exists('curl_init')) $error_detail .= " (cURL yüklü değil)";
+                throw new Exception('Uzak sunucudan dosya indirilemedi.' . $error_detail);
+            }
+
+            // Dosya boyutu kontrolü (Örn: 10KB altındaysa muhtemelen hata sayfasıdır)
+            if (strlen($content) < 10240) {
+                throw new Exception('İndirilen dosya çok küçük (' . round(strlen($content)/1024, 2) . ' KB). Muhtemelen bir hata sayfası indirildi. Lütfen URL\'yi kontrol edin.');
             }
             
             if (file_put_contents($local_zip_file, $content) === false) {
-                throw new Exception('Zip dosyası sunucuya yazılamadı. Klasör izinlerini kontrol edin.');
+                throw new Exception('Zip dosyası sunucuya yazılamadı. Klasör yazma izinlerini (CHMOD 755/777) kontrol edin.');
             }
 
             echo json_encode(['status' => 'success', 'message' => 'Dosya başarıyla indirildi.']);
