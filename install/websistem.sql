@@ -270,6 +270,8 @@ INSERT INTO `r_diller` (`no`, `dkod`, `dyon`, `adi`, `adie`, `adio`, `ltr`, `sir
 CREATE TABLE `r_genel_ayarlar` (
   `no` int(11) NOT NULL,
   `adi` varchar(255) DEFAULT NULL,
+  `aciklama` varchar(255) DEFAULT NULL,
+  `grup` varchar(50) DEFAULT NULL,
   `anahtar` varchar(255) DEFAULT NULL,
   `deger` mediumtext DEFAULT NULL,
   `degistir` tinyint(1) NOT NULL DEFAULT 1
@@ -279,17 +281,31 @@ CREATE TABLE `r_genel_ayarlar` (
 -- Tablo döküm verisi `r_genel_ayarlar`
 --
 
-INSERT INTO `r_genel_ayarlar` (`no`, `adi`, `anahtar`, `deger`, `degistir`) VALUES
-(2, 'Site Adı', 'site_adi', 'Websistem v1', 1),
-(3, 'Domain', 'www_site', 'http://localhost/site/ws2', 1),
-(4, 'Email adresi', 'email_adresi', 'korthaci@gmail.com', 1),
-(5, 'Yabancı dil()', 'yabanci_dil', '1', 1),
-(6, 'Varsayılan dil', 'varsayilan_dil', 'tr', 1),
-(16, 'Tema', 'tema', 'minimal', 0),
-(17, 'Permalink', 'permalink', '1', 0),
-(18, 'aciklama', 'aciklama', NULL, 1),
-(19, 'etiket', 'etiket', NULL, 1),
-(20, 'Google Login Client Id', 'google_login_client_id', NULL, 1);
+
+INSERT INTO `r_genel_ayarlar` (`no`, `adi`, `aciklama`, `grup`, `anahtar`, `deger`, `degistir`) VALUES
+(2, 'Site Adı', 'Web sitesinin ana başlığı', 'Site', 'site_adi', 'Websistem v1', 1),
+(3, 'Domain', 'Sitenin tam URL adresi (http/https dahil)', 'Site', 'www_site', 'https://n0n1.tr', 1),
+(4, 'Email adresi', 'Sistem bildirimlerinin gönderileceği ana eposta', 'Site', 'email_adresi', 'mail@n0n1.tr', 1),
+(5, 'Yabancı dil()', 'Sitede çoklu dil desteği aktif mi? (0: Hayır, 1: Evet)', 'Sistem', 'yabanci_dil', '1', 1),
+(6, 'Varsayılan dil', 'Sitenin başlangıç dili (tr, en vb.)', 'Sistem', 'varsayilan_dil', 'tr', 1),
+(16, 'Tema', 'Kullanılan aktif tema klasörü adı', 'Sistem', 'tema', 'minimal', 0),
+(17, 'Permalink', NULL, 'Sistem', 'permalink', '1', 0),
+(18, 'aciklama', 'Sayfanın ne hakkında olduğunu özetleyen kısa tanıtım cümlesi. (SEO)', 'Site', 'aciklama', NULL, 1),
+(19, 'etiket', NULL, 'Site', 'etiket', NULL, 1),
+(20, 'Google Login Client Id', 'Google Login Auth Client Id', 'API', 'google_login_client_id', NULL, 1),
+(21, 'Google Map Key', 'Google Map Key', 'API', 'GOOGLE_MAP_KEY', NULL, 1),
+(23, 'Mail Sistemi', 'Varsayılan mail kütüphanesi (local, amazon, sendgrid, mailgun vb.)', 'Mail', 'smtp_varsayilan', 'local', 1),
+(24, 'SMTP Host', 'SMTP sunucu adresi', 'Mail', 'smtp_host', 'mail.localhost', 1),
+(25, 'SMTP Port', 'SMTP port numarası (TLS: 587, SSL: 465)', 'Mail', 'smtp_port', '587', 1),
+(26, 'SMTP Kullanıcı', 'SMTP kullanıcı adı / Email adresi', 'Mail', 'smtp_k_adi', 'mail@localhost', 1),
+(27, 'SMTP Şifre', 'SMTP kullanıcı şifresi', 'Mail', 'smtp_sifre', NULL, 1),
+(28, 'AWS Access Key', 'Amazon SES Access Key ID', 'Mail', 'smtp_aws_k_adi', '', 1),
+(29, 'AWS Secret Key', 'Amazon SES Secret Access Key', 'Mail', 'smtp_aws_sifre', '', 1),
+(30, 'AWS Region Host', 'Amazon SES SMTP sunucu adresi', 'Mail', 'smtp_aws_host', 'email-smtp.us-east-1.amazonaws.com', 1),
+(31, 'Sendgrid API Key', 'Sendgrid API anahtarı', 'Mail', 'smtp_sendgrid_sifre', 'SG.XXXX', 1),
+(32, 'Mailgun User', 'Mailgun SMTP kullanıcı adı', 'Mail', 'smtp_mailgun_k_adi', 'postmaster@mg.abc.com', 1),
+(33, 'Mailgun Password', 'Mailgun SMTP şifresi', 'Mail', 'smtp_mailgun_sifre', 'XXXX', 1),
+(35, 'noindex follow', 'Arama motorlarında gösterilmeyecek parametreler', 'Sistem', 'meta_noindex_follow', NULL, 1);
 
 -- --------------------------------------------------------
 

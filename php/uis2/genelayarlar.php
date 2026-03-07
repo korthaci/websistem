@@ -27,17 +27,27 @@ if (isset($_POST['yenikayit']) && set_dolu('adi','p')) {
 	</div>';
 
 
-$stmt = $pdo->query("SELECT no, adi, anahtar, deger, degistir FROM {$do_}genel_ayarlar ORDER BY degistir DESC, no ASC");
+$stmt = $pdo->query("SELECT no, adi, anahtar, deger, aciklama, grup, degistir FROM {$do_}genel_ayarlar ORDER BY (CASE WHEN grup = 'Site' THEN 1 WHEN grup = 'Sistem' THEN 2 WHEN grup = 'Mail' THEN 3 ELSE 4 END), no ASC");
 $site_o__ = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 if ($site_o__) {
 	echo '<table class="yazi1 uis-table"><thead><tr><th class="g_20_">'.count($site_o__).'</th><th>'.yc("Başlık").'</th><th>'.yc("değer").'</th><th class="g_20_"></th></tr></thead><tbody>';
+	$current_group = '';
 	foreach ($site_o__ as $so__){
+		if ($current_group !== $so__->grup) {
+			$current_group = $so__->grup;
+			echo '<tr class="uis-group-row"><td colspan="4" class="uis-table-group-header"><i class="fa fa-folder-open uis-me-2"></i> '.yc($current_group ?: "Genel").'</td></tr>';
+		}
 		$sil_td = (syetki([1,2])) ? '<td><span class="sil" data-nt="'.sifrele($so__->no.',,genel_ayarlar').'">x</span></td>':'<td> </td>';
 		echo '<tr>';
 		if ($so__->degistir == "1" || syetki([1,2])) {
-			echo '<td>'.$so__->no.'</td>';
-			echo '<td>'.$so__->adi.'</td>';
+			echo '<td class="g_20_">'.$so__->no.'</td>';
+			echo '<td class="g_350_">
+				<span class="fw-700" title="'.$so__->aciklama.'">'.mb_ucfirst($so__->adi).'</span>
+				<div class="uis-mt-1">
+					<div class="i1 uis-text-light uis-input-xs" style="font-size:10px; cursor:pointer;" data-nta-input="'.sifrele($so__->no.',,genel_ayarlar,,aciklama').'" data-nta-class="dbtext uis-input uis-input-xs p-05">'.($so__->aciklama ?: yc("Açıklama ekle...")).'</div>
+				</div>
+			</td>';
 			echo '<td>';
 			
 			$datatipi = (strpos($so__->anahtar ?? '', 'email') !== false) ? ' data-datatipi="email"' : '';

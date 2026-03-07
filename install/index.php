@@ -382,15 +382,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $encryption_key = bin2hex(random_bytes(32));
                 $env_content = "S4_AES_ENCRYPTION_KEY=$encryption_key\n"
                              . "DB_KULLANICI={$_SESSION['db_user']}\n"
-                             . "DB_SIFRE={$_SESSION['db_pass']}\n"
+                             . "DB_SIFRE={$_SESSION['db_pass']}\n\n"
+                             . "# ─── Mail Ayarları (Fallback) ──────────\n"
+                             . "# NOT: Mail ayarları öncelikle Admin Paneli > Genel Ayarlar üzerinden yönetilir.\n"
                              . "SMTP_SIFRE=\n"
                              . "SMTP_AWS_K_ADI=\n"
-                             . "SMTP_AWS_SIFRE=\n"
+                             . "SMTP_AWS_SIFRE=\n\n"
                              . "MICROSOFT_TRANSLATOR_KEY=\n"
                              . "MICROSOFT_TRANSLATOR_REGION=\n"
                              . "DEEPL_API_KEY=\n"
                              . "APP_ENV=production\n"
-                             . "UPDATE_PATH=\n";
+                             . "UPDATE_PATH=\n\n"
+                             . "# ─── PREMIUM / LICENSE OPTIONS ───────────────────\n"
+                             . "LC_REMOTE_URL=\n"
+                             . "# Ajans lisans API Anahtarı\n"
+                             . "LC_API_KEY=\n"
+                             . "# İmza Doğrulama (Verify) Anahtarı\n"
+                             . "LC_VERIFY_KEY=\n";
                 file_put_contents($root_dir . '/.env', $env_content);
 
                 // 5. Write rlv_.php

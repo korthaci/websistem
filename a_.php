@@ -69,15 +69,40 @@ foreach ($bilesenler as $b__) {
 }
 
 $smtp_dizi = array(
-	'varsayilan' => 'local',
+	'varsayilan' => $so_->d('smtp_varsayilan') ?? 'local',
 	/*
+    //driver varsayılan olarak phpmailer. symfony'ye çevirmek için aşağıdaki iki satır açılabilir.
 	'driver' => 'phpmailer',  // symfony
     'method' => 'smtp',       // api
 	*/
-	'local'	=> ['port' => SMTP_PORT_TLS, 'from' => false, 'host' => SMTP_HOST, 'k_adi' => SMTP_K_ADI, 'sifre' => SMTP_SIFRE],
-	'amazon'=> ['port' => SMTP_PORT_TLS, 'from' => SMTP_K_ADI, 'host' => 'email-smtp.us-east-1.amazonaws.com', 'k_adi' => SMTP_AWS_K_ADI, 'sifre' => SMTP_AWS_SIFRE],
-	'sendgrid' => ['port' => SMTP_PORT_TLS, 'from' => SMTP_K_ADI, 'host' => 'smtp.sendgrid.net',      'k_adi' => 'apikey', 'sifre' => 'SG.XXXX'],
-    'mailgun' => ['port' => SMTP_PORT_TLS, 'from' => SMTP_K_ADI, 'host' => 'smtp.mailgun.org', 'k_adi' => 'postmaster@mg.abc.com', 'sifre' => 'XXXX']
+	'local'	=> [
+		'port' => $so_->d('smtp_port') ?? SMTP_PORT_TLS, 
+		'from' => false, 
+		'host' => $so_->d('smtp_host') ?? SMTP_HOST, 
+		'k_adi' => $so_->d('smtp_k_adi') ?? SMTP_K_ADI, 
+		'sifre' => $so_->d('smtp_sifre') ?? SMTP_SIFRE
+	],
+	'amazon'=> [
+		'port' => $so_->d('smtp_aws_port') ?? SMTP_PORT_TLS, 
+		'from' => $so_->d('smtp_k_adi') ?? SMTP_K_ADI, 
+		'host' => $so_->d('smtp_aws_host') ?? 'email-smtp.us-east-1.amazonaws.com', 
+		'k_adi' => $so_->d('smtp_aws_k_adi') ?? SMTP_AWS_K_ADI, 
+		'sifre' => $so_->d('smtp_aws_sifre') ?? SMTP_AWS_SIFRE
+	],
+	'sendgrid' => [
+		'port' => SMTP_PORT_TLS, 
+		'from' => $so_->d('smtp_k_adi') ?? SMTP_K_ADI, 
+		'host' => 'smtp.sendgrid.net', 
+		'k_adi' => 'apikey', 
+		'sifre' => $so_->d('smtp_sendgrid_sifre') ?? 'SG.XXXX'
+	],
+    'mailgun' => [
+		'port' => SMTP_PORT_TLS, 
+		'from' => $so_->d('smtp_k_adi') ?? SMTP_K_ADI, 
+		'host' => 'smtp.mailgun.org', //eu lokasyonu için : smtp.eu.mailgun.org
+		'k_adi' => $so_->d('smtp_mailgun_k_adi') ?? 'postmaster@mg.abc.com', 
+		'sifre' => $so_->d('smtp_mailgun_sifre') ?? 'XXXX'
+	]
 );
 Global_::$phpmailer = new phpmailer_mail($smtp_dizi, 0); //debug:0
 

@@ -77,7 +77,7 @@ class genel_ayarlar {
 		$this->options = new stdClass();
 		
 		try {
-			$stmt = $pdo->prepare("SELECT no, anahtar, deger FROM {$do_}genel_ayarlar");
+			$stmt = $pdo->prepare("SELECT no, anahtar, deger, aciklama FROM {$do_}genel_ayarlar");
 			$stmt->execute();
 			$results = $stmt->fetchAll();
 
@@ -88,7 +88,8 @@ class genel_ayarlar {
 			foreach ($results as $row) {
 				$this->options->{$row->anahtar} = array(
 					'no' => $row->no,
-					'deger' => $row->deger
+					'deger' => $row->deger,
+					'aciklama' => $row->aciklama
 				);
 			}
 		} catch (PDOException $e) {
@@ -99,6 +100,10 @@ class genel_ayarlar {
 
 	public function d($anahtar) {
 		return isset($this->options->{$anahtar}) ? $this->options->{$anahtar}['deger'] : null;
+	}
+
+	public function a($anahtar) {
+		return isset($this->options->{$anahtar}) ? $this->options->{$anahtar}['aciklama'] : null;
 	}
 
 	public function no($anahtar) {

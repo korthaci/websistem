@@ -3515,3 +3515,10 @@ function tema_dogrula_ve_fallback(string $aktif_tema): string {
     return TEMA_DIR . '/' . $fallback_tema;
 }
 
+
+if (!function_exists('mb_ucfirst')) {
+    function mb_ucfirst($string, $encoding = 'UTF-8') {
+        $first = mb_substr($string, 0, 1, $encoding);
+        return mb_convert_case($first, MB_CASE_UPPER, $encoding) . mb_substr($string, 1, null, $encoding);
+    }
+}

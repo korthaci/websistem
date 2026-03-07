@@ -47,7 +47,6 @@ $index_html_yaz->vars = [
 		'bilesen_js_yp' => $bilesen_css_js->js_yaz('yp'),
 		'script_var' => $script_var,
 		'google_login_client_id' => $so_->d('google_login_client_id') && $u_no__ == 0 ? $so_->d('google_login_client_id') : '',
-		'meta_index_follow' => !isset($_GET['bolge1']) && isset($_GET['t1']) ? '<meta name="robots" content="noindex, follow">' : '',
 	],
 	'__if' => [
 		'indexx1' => (int)$indexx,
@@ -63,5 +62,16 @@ $index_html_yaz->vars = [
 		'google_login_oauth' => (int)(!empty($so_->d('google_login_client_id')) && $u_no__ <= 0),
 	]
 ];
+
+$meta_noindex_follow = explode(',', $so_->d('meta_noindex_follow') ?? '');
+if (!empty($meta_noindex_follow)) {
+	foreach ($meta_noindex_follow as $param) {
+		if (isset($_GET[$param])) {
+			$index_html_yaz->vars['__degisken']['meta_noindex_follow'] = '<meta name="robots" content="noindex, follow">';
+			break;
+		}
+	}
+}
+
 echo $index_html_yaz->render();
 
