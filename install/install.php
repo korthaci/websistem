@@ -53,14 +53,50 @@ if (isset($_GET['action'])) {
 
             $zip = new ZipArchive;
             if ($zip->open($local_zip_file) === TRUE) {
-                $zip->extractTo($extract_path);
+                
+                // 1. Kök dizin tespiti (Leading Directory)
+                $first_entry = $zip->getNameIndex(0);
+                $root_folder = '';
+                
+                // Eğer ilk giriş bir dizinse ve diğer tüm dosyalar bu dizinle başlıyorsa
+                if (substr($first_entry, -1) === '/') {
+                    $is_nested = true;
+                    $root_folder = $first_entry;
+                    for ($i = 0; $i < $zip->numFiles; $i++) {
+                        if (strpos($zip->getNameIndex($i), $root_folder) !== 0) {
+                            $is_nested = false;
+                            break;
+                        }
+                    }
+                    if (!$is_nested) $root_folder = '';
+                }
+
+                // 2. Çıkartma İşlemi
+                for ($i = 0; $i < $zip->numFiles; $i++) {
+                    $filename = $zip->getNameIndex($i);
+                    $file_info = $zip->statIndex($i);
+                    
+                    // Eğer iç içe klasör varsa onu kırp
+                    $new_filename = ($root_folder !== '') ? substr($filename, strlen($root_folder)) : $filename;
+                    if (empty($new_filename)) continue;
+
+                    $target = $extract_path . $new_filename;
+
+                    if ($file_info['size'] == 0 && substr($filename, -1) === '/') {
+                        // Klasör oluştur
+                        if (!is_dir($target)) @mkdir($target, 0755, true);
+                    } else {
+                        // Dosya çıkart
+                        $parent_dir = dirname($target);
+                        if (!is_dir($parent_dir)) @mkdir($parent_dir, 0755, true);
+                        copy("zip://" . $local_zip_file . "#" . $filename, $target);
+                    }
+                }
+
                 $zip->close();
                 
                 // Success - Clean up
                 @unlink($local_zip_file);
-                
-                // Self-destruct flag for the final step
-                // Note: We don't delete install.php here yet to avoid race condition with the response
                 
                 echo json_encode(['status' => 'success', 'message' => 'Dosyalar başarıyla çıkartıldı.']);
             } else {
