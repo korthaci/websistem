@@ -569,7 +569,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div id="mysql_fields">
                         <div class="form-group">
-                            <label class="form-label"><?= t('db_host') ?></label>
+                            <label class="form-label"><?= t('db_host') ?> <small class="text-muted">(<?= t('db_host_desc') ?>)</small></label>
                             <input type="text" name="db_host" class="inp" value="localhost">
                         </div>
                         <div class="form-group">
@@ -577,7 +577,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="text" name="db_name" id="db_name_input" class="inp" placeholder="<?= t('placeholder_db') ?>" required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label"><?= t('db_user_pass') ?></label>
+                            <label class="form-label"><?= t('db_user_pass') ?> <small class="text-muted">(<?= t('db_user_pass_desc') ?>)</small></label>
                             <div class="flx gap-2">
                                 <div style="position: relative; flex: 1;">
                                     <input type="text" name="db_user" class="inp" placeholder="root">
