@@ -13,7 +13,7 @@ if (file_exists(__DIR__ . '/websistem.sql') || file_exists(__DIR__ . '/installed
     exit;
 }
 
-$remote_zip_url = 'https://n0n1.net/websistem/websistem.zip';
+$remote_zip_url = 'https://n0n1.net/websistem/websistem_dosyalar.zip';
 $local_zip_file = __DIR__ . '/websistem_temp.zip';
 $extract_path = dirname(__DIR__) . '/'; // Parent directory (root)
 
