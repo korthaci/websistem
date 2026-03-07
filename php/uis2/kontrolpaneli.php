@@ -86,7 +86,7 @@ $dashboard_content = '
                         <p>'.yc("Sistem Sürümü").'</p>
                     </div>
                     <div class="stat-icon orange">
-                        <i class="fa fa-code-branch"></i>
+                        ' . (syetki([2]) && is_file(R_PHP.'/_dev/update/sistem_guncelle.php') ? '<a href="ui/sistem_guncelle"><i class="fa fa-code-branch"></i></a>': '<i class="fa fa-code-branch"></i>') . '
                     </div>
                 </div>
             </div>
