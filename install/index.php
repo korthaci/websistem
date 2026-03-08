@@ -414,37 +414,84 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ];
                 file_put_contents($root_dir . '/rlv_.php', strtr($sample_content, $replacements));
 
-                // 6. Write .htaccess (Only for Apache)
-                if ($_SESSION['server_type'] === 'apache') {
-                    $ht = "RewriteEngine On\n\n";
-                    $ht .= "<FilesMatch \"^\\.\">\n    Require all denied\n</FilesMatch>\n\n";
-                    $ht .= "<FilesMatch \"\\.sql$\">\n    Require all denied\n</FilesMatch>\n\n";
-                    $ht .= "# Block . directories, allow acme-challenge\n"; 
-                    $ht .= "RewriteRule ^\\.well-known/acme-challenge - [L]\n";
-                    $ht .= "RewriteRule \"(^|/)\\.\" - [F]\n\n";
-                    $ht .= "RewriteRule ^php/sqlite_data/.*$ - [F,L]\n\n";
-                    $ht .= "RewriteBase $sub_dir_slash\n";
-                    $ht .= "ErrorDocument 404 {$sub_dir_slash}404.html\n\n";
+                // 6. Write .htaccess (Recommended for all, required for Apache)
+                // Always write .htaccess as a fallback (some setups like Nginx + Apache/Litespeed support it)
+                $ht = "RewriteEngine On\n\n";
+                $ht .= "<FilesMatch \"^\\.\">\n    Require all denied\n</FilesMatch>\n\n";
+                $ht .= "<FilesMatch \"\\.sql$\">\n    Require all denied\n</FilesMatch>\n\n";
+                $ht .= "# Block . directories, allow acme-challenge\n"; 
+                $ht .= "RewriteRule ^\\.well-known/acme-challenge - [L]\n";
+                $ht .= "RewriteRule \"(^|/)\\.\" - [F]\n\n";
+                $ht .= "RewriteRule ^php/sqlite_data/.*$ - [F,L]\n\n";
 
-                    // HTTPS Redirect
+                $ht .= "<FilesMatch \"^(composer\\.(json|lock)|package\\.json)$\">\n";
+                $ht .= "Require all denied\n";
+                $ht .= "</FilesMatch>\n\n";
+
+                $ht .= "<FilesMatch \"\\.(env|ini|log|conf|sql|bak|sh|yaml|yml)$\">\n";
+                $ht .= "Require all denied\n";
+                $ht .= "</FilesMatch>\n\n";
+
+                $ht .= "RewriteBase $sub_dir_slash\n";
+                $ht .= "ErrorDocument 404 {$sub_dir_slash}404.html\n\n";
+
+                // HTTPS Redirect
+                if ($_SESSION['use_https']) {
+                    $ht .= "RewriteCond %{HTTPS} off\nRewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n\n";
+                } else if ($_SERVER['HTTP_HOST'] === 'localhost') {
+                     // Local environment usually prefers http
+                     $ht .= "RewriteCond %{HTTPS} on\nRewriteRule .* http://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n\n";
+                }
+
+                // WWW Redirect
+                if ($_SESSION['www_pref'] === 'www') {
+                    $ht .= "RewriteCond %{HTTP_HOST} !^www\\. [NC]\nRewriteRule ^(.*)$ http" . ($_SESSION['use_https'] ? 's' : '') . "://www.%{HTTP_HOST}/$1 [R=301,L]\n\n";
+                } else if ($_SESSION['www_pref'] === 'non-www') {
+                    $ht .= "RewriteCond %{HTTP_HOST} ^www\\.(.*)$ [NC]\nRewriteRule ^(.*)$ http" . ($_SESSION['use_https'] ? 's' : '') . "://%1/$1 [R=301,L]\n\n";
+                }
+
+                $ht .= "RewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_FILENAME} !-d\n";
+                $ht .= "RewriteRule ^([^/]+)/?([^/]*)$ index.php?$1=$2 [QSA,L]\n\n";
+                $ht .= "AddDefaultCharset UTF-8\n";
+                file_put_contents($root_dir . '/.htaccess', $ht);
+
+                $nginx_conf = "";
+                if ($_SESSION['server_type'] === 'nginx') {
+                    $nginx_conf .= "location / {\n";
+                    $nginx_conf .= "    try_files \$uri \$uri/ /index.php?\$args;\n";
+                    $nginx_conf .= "}\n\n";
+                    
+                    $nginx_conf .= "location ~ /\\.(?!well-known) {\n";
+                    $nginx_conf .= "    deny all;\n";
+                    $nginx_conf .= "}\n\n";
+                    
+                    $nginx_conf .= "location ~* \\.(env|ini|log|conf|sql|bak|sh|yaml|yml)$ {\n";
+                    $nginx_conf .= "    deny all;\n";
+                    $nginx_conf .= "}\n\n";
+                    
+                    $nginx_conf .= "location ^~ /php/sqlite_data/ {\n";
+                    $nginx_conf .= "    deny all;\n";
+                    $nginx_conf .= "}\n\n";
+                    
                     if ($_SESSION['use_https']) {
-                        $ht .= "RewriteCond %{HTTPS} off\nRewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n\n";
-                    } else if ($_SERVER['HTTP_HOST'] === 'localhost') {
-                         // Local environment usually prefers http
-                         $ht .= "RewriteCond %{HTTPS} on\nRewriteRule .* http://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n\n";
+                        $nginx_conf .= "# Enforce HTTPS\n";
+                        $nginx_conf .= "if (\$scheme != \"https\") {\n";
+                        $nginx_conf .= "    return 301 https://\$host\$request_uri;\n";
+                        $nginx_conf .= "}\n\n";
                     }
-
-                    // WWW Redirect
+                    
                     if ($_SESSION['www_pref'] === 'www') {
-                        $ht .= "RewriteCond %{HTTP_HOST} !^www\\. [NC]\nRewriteRule ^(.*)$ http" . ($_SESSION['use_https'] ? 's' : '') . "://www.%{HTTP_HOST}/$1 [R=301,L]\n\n";
+                        $nginx_conf .= "# Force WWW\n";
+                        $nginx_conf .= "if (\$host !~* ^www\\.) {\n";
+                        $nginx_conf .= "    return 301 \$scheme://www.\$host\$request_uri;\n";
+                        $nginx_conf .= "}\n\n";
                     } else if ($_SESSION['www_pref'] === 'non-www') {
-                        $ht .= "RewriteCond %{HTTP_HOST} ^www\\.(.*)$ [NC]\nRewriteRule ^(.*)$ http" . ($_SESSION['use_https'] ? 's' : '') . "://%1/$1 [R=301,L]\n\n";
+                        $nginx_conf .= "# Force Non-WWW\n";
+                        $nginx_conf .= "if (\$host ~* ^www\\.(.*)) {\n";
+                        $nginx_conf .= "    set \$non_www \$1;\n";
+                        $nginx_conf .= "    return 301 \$scheme://\$non_www\$request_uri;\n";
+                        $nginx_conf .= "}\n\n";
                     }
-
-                    $ht .= "RewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_FILENAME} !-d\n";
-                    $ht .= "RewriteRule ^([^/]+)/?([^/]*)$ index.php?$1=$2 [QSA,L]\n\n";
-                    $ht .= "AddDefaultCharset UTF-8\n";
-                    file_put_contents($root_dir . '/.htaccess', $ht);
                 }
 
                 // Create installed file to prevent reinstallation
@@ -458,7 +505,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Save session data before destroying
                 $saved_session = [
                     'use_https' => $_SESSION['use_https'] ?? 0,
-                    'sub_dir' => $_SESSION['sub_dir'] ?? ''
+                    'sub_dir' => $_SESSION['sub_dir'] ?? '',
+                    'nginx_conf' => $nginx_conf ?? ''
                 ];
 
                 session_destroy();
@@ -750,6 +798,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <a href="<?= $site_url ?>/uis/uyegiris" class="btn btn-primary w-100"><?= t('go_to_site') ?> <i class="fa-solid fa-right-to-bracket"></i></a>
+
+                    <?php if (!empty($install_data['nginx_conf'])): ?>
+                        <div class="mt-5" style="text-align: left;">
+                            <h4 class="mb-2" style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-server" style="color: #6366f1;"></i>
+                                <?= t('nginx_config_title') ?>
+                            </h4>
+                            <p class="text-muted small mb-3"><?= t('nginx_config_desc') ?></p>
+                            
+                            <div class="alert alert-info py-2 mb-3" style="font-size: 0.85rem; border: none; background: #e0f2fe; color: #0369a1;">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <?= t('nginx_htaccess_note') ?>
+                            </div>
+                            
+                            <div style="position: relative; background: #0f172a; border-radius: 12px; padding: 20px; border: 1px solid #1e293b; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+                                <pre id="nginxCode" style="margin: 0; color: #e2e8f0; font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto;"><?= htmlspecialchars($install_data['nginx_conf']) ?></pre>
+                                <button onclick="copyNginxConfig()" class="btn btn-sm" style="position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(4px);">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <script>
+                            function copyNginxConfig() {
+                                const code = document.getElementById('nginxCode').innerText;
+                                navigator.clipboard.writeText(code).then(() => {
+                                    const btn = event.currentTarget;
+                                    const icon = btn.querySelector('i');
+                                    icon.className = 'fa-solid fa-check';
+                                    setTimeout(() => { icon.className = 'fa-regular fa-copy'; }, 2000);
+                                });
+                            }
+                            </script>
+                        </div>
+                    <?php endif; ?>
                 </div>
             <?php endif; ?>
         </div>

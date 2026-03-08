@@ -55,7 +55,11 @@ $texts = [
         'placeholder_pass' => '****',
         'placeholder_admin_pass' => '••••••••',
         'placeholder_db' => 'websistem_db',
-        'placeholder_email' => 'admin@site.com'
+        'placeholder_email' => 'admin@site.com',
+        'nginx_config_title' => 'Nginx Yapılandırması',
+        'nginx_config_desc' => 'Nginx kullandığınız için SEO URL ve güvenlik kurallarını manuel eklemelisiniz. Aşağıdaki kodları sunucu blok (server block) ayarlarınıza yapıştırın:',
+        'nginx_config_copy' => 'Yapılandırmayı Kopyala',
+        'nginx_htaccess_note' => 'Not: Bazı sunucular Nginx kullansa da arka planda Apache/Litespeed desteği sunar. Eğer sunucunuzda .htaccess çalışıyorsa aşağıdaki manuel ayarlara ihtiyacınız olmayabilir.'
     ],
     'en' => [
         'title' => 'Websistem v1 - Installation Wizard',
@@ -111,6 +115,10 @@ $texts = [
         'placeholder_pass' => '****',
         'placeholder_admin_pass' => '••••••••',
         'placeholder_db' => 'websistem_db',
-        'placeholder_email' => 'admin@site.com'
+        'placeholder_email' => 'admin@site.com',
+        'nginx_config_title' => 'Nginx Configuration',
+        'nginx_config_desc' => 'Since you are using Nginx, you must manually add SEO URL and security rules. Paste the following codes into your server block settings:',
+        'nginx_config_copy' => 'Copy Configuration',
+        'nginx_htaccess_note' => 'Note: Some servers use Nginx as a frontend but still support Apache/Litespeed in the background. If .htaccess is supported on your server, you may not need the manual settings below.'
     ]
 ];
