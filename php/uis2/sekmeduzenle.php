@@ -3,39 +3,29 @@
 if (! n0_($u_no__)) {
 	return;
 }
-
 if (isset($_POST['kaydet_sekme'])) {
-
-	$_icerik			= html_d($_POST['icerik']);
-
-	try {
-		$stmt = $pdo->prepare("UPDATE {$do_}sekme SET 
-								icerik = :icerik, 
-								WHERE no = :no");
-		
-		$kayit_guncelle = $stmt->execute([
-			':icerik' => $_icerik,
-			':no' => $n
-		]);
-		
-		if ($kayit_guncelle) {
-			echo '✓ ' . yc("Kaydedildi.");
-			//echo '<div class="url_reset" data-delay="1000" data-reset-exclude=""></div>';
-			header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-			exit();
-		} else {
+	$_icerik	= isset($_POST['icerik']) ? html_d($_POST['icerik']) : '';
+	if (!empty($_POST['icerik'])) {
+		try {
+			$stmt = $pdo->prepare("UPDATE {$do_}sekme SET icerik = :icerik WHERE no = :no");			
+			$kayit_guncelle = $stmt->execute([':icerik' => $_icerik,':no' => $n]);			
+			if ($kayit_guncelle) {
+				echo '✓ ' . yc("Kaydedildi.");
+				//echo '<div class="url_reset" data-delay="1000" data-reset-exclude=""></div>';
+				header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+				exit();
+			} else {
+				echo '! ' . yc("Kayıt değiştirilmedi");
+			}
+		} catch (PDOException $e) {
+			error_log("Update error: " . $e->getMessage());
 			echo '! ' . yc("Kayıt değiştirilmedi");
-		}
-		
-	} catch (PDOException $e) {
-		error_log("Update error: " . $e->getMessage());
-		echo '! ' . yc("Kayıt değiştirilmedi");
+		}	
 	}
 }
 
 try {
 	//no,url,hash,adi,icerik,manset,sira,yayin,aciklama,etiket
-
 	$stmt = $pdo->prepare("SELECT * FROM {$do_}sekme WHERE no = :no");
 	$stmt->execute([':no' => $n]);
 	$sb_ = $stmt->fetch();
@@ -95,6 +85,8 @@ if ($sb_) {
 		'placeholder' => yc("Etiketler"),
 	]);
 
+	$form_eleman['icerik'] = '';
+	/*
 	$form_eleman['icerik'] = 
 	'<label class="form-label">'.yc("İçerik yazıları").'</label>' . 
 	$form->textarea(html_a($sb_->icerik), [
@@ -107,6 +99,7 @@ if ($sb_) {
 		'data-inline' => '1',
 		'data-ceviridil' => 'icerik,sekme,' . $sb_->no,
 	]);
+	*/
 
 	$form_eleman['manset'] = yc("Manşet") . ' : <span class="db01 var'.$sb_->manset.'" data-nta="' . sifrele($sb_->no . ',,sekme,,manset').'">'.$sb_->manset.'</span>';
 
@@ -119,7 +112,7 @@ if ($sb_) {
 		<div class="uis-row">
 			<div class="uis-col-12 uis-flex">
 				<div>' . $form_satir1 . '</div>
-				<div class="ms-auto">' . $form_eleman['manset'] . ' ' . $form_eleman['icerik_sayfada'] . '</div>
+				<div class="ms-auto">' . $form_eleman['manset'] . '</div>
 			</div>
 			<div class="uis-col-lg-9">
 			' . $form_eleman['adi'] . '

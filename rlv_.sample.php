@@ -1,7 +1,7 @@
 <?php
 // Show all PHP errors (development mode) | Set to 0 in production
 error_reporting(E_ALL);
-ini_set("display_errors", 1);
+ini_set("display_errors", 0);
 
 // Application version
 define ('VERSION', '1.0');
