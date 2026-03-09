@@ -53,6 +53,7 @@ class isbankPOS {
 	public $api_username_test	= '700669830929api';//'isbankapi';
 	public $api_password_test	= 'TESTtest1234.';//'isbankapi2020';
 	
+	private $log_file;
 	public $session_ajax = false;//ajax ile kullanımlarda, true olarak ayarlanmalı
 
 	/*
@@ -75,7 +76,7 @@ class isbankPOS {
 	gecis_form_key_sil: Geçiş formunda bankaya gönderilmeyecek POST anahtarları.
 	Bu anahtarlar hem form inputlarına eklenmez hem de hash hesaplamasına dahil edilmez.
 	*/
-	public $gecis_form_key_sil = ['b', 'b_islem', '_get'];
+	public $gecis_form_key_sil = [];//'b', 'b_islem', '_get' // ajax işlemlerinde kulanılabilecek opsiyonel ayar
 
 
 	function __construct($site_url, $strMode) {
@@ -83,6 +84,7 @@ class isbankPOS {
 		$this->site_url = $site_url;
 		$this->domain = preg_replace('/https?:\/\/(www\.)?/', '', $this->site_url);
 		$this->localhost__ = (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false);
+		$this->log_file = __DIR__ . '/isbank_pos.log';
 
 		if ($strMode === 'TEST') {
             $this->banka_sp_url = $this->banka_sp_url_test;
@@ -151,12 +153,12 @@ class isbankPOS {
 		usleep(500000);
 
 		// Tüm POST parametrelerini logla
-		process_log("Callback POST parameters: " . json_encode($_POST, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . PHP_EOL);
+		$this->log("Callback POST parameters: " . json_encode($_POST, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
 		if ($this->debug_mail){
 			$parametreler_yaz = [];
 			foreach ($_POST as $key1 => $value1){
-				$parametreler_yaz[] = $key1 .':' . z($value1) . "\n";
+				$parametreler_yaz[] = $key1 .':' . $this->sanitize($value1) . "\n";
 			}			
 			$this->debug_mail_icerik = $this->domain.' parametreler.' . $this->debug_yaz . "\n" . ( !empty($parametreler_yaz) ? implode($parametreler_yaz) : '' );
 		}
@@ -167,27 +169,27 @@ class isbankPOS {
 		// v4 ile eklendi: Hash kontrol ayarı
 		if (!$this->hash_kontrol) {
 			if ($this->hash_kontrol_log) {
-				process_log("⚠️ WARNING: Hash control disabled - proceeding without verification" . PHP_EOL);
+				$this->log("WARNING: Hash control disabled - proceeding without verification");
 			}
 			$hashResult['valid'] = true;
 		}
 		
-		process_log("Hash Validation: " . json_encode([
+		$this->log("Hash Validation: " . json_encode([
 			'timestamp' => date('Y-m-d H:i:s'),
 			'order_id' => isset($_POST['oid']) ? $_POST['oid'] : 'N/A',
 			'calculated_hash' => $hashResult['calculated'],
 			'retrieved_hash' => $hashResult['received'],
 			'hash_match' => $hashResult['valid'],
 			'hashval_string' => $hashResult['hashval_string'],
-		]) . PHP_EOL);
+		]));
 
 		if ($hashResult['valid']) {
 			$mdStatus = intval($_POST["mdStatus"]);
 			$ProcReturnCode = isset($_POST["ProcReturnCode"]) ? $_POST["ProcReturnCode"] : '';
-			$Response = isset($_POST["Response"]) ? z($_POST["Response"]) : '';
+			$Response = isset($_POST["Response"]) ? $this->sanitize($_POST["Response"]) : '';
 
-			$this->ErrMsg .= (isset($_POST["ErrMsg"])) ? z($_POST["ErrMsg"]) : '';
-			process_log("ErrMsg: " . $this->ErrMsg . PHP_EOL);
+			$this->ErrMsg .= (isset($_POST["ErrMsg"])) ? $this->sanitize($_POST["ErrMsg"]) : '';
+			$this->log("ErrMsg: " . $this->ErrMsg);
 
 			if (in_array($mdStatus, [1,2,3,4])) {
 				if ($Response == "Approved" || $ProcReturnCode == "00") {
@@ -199,31 +201,31 @@ class isbankPOS {
 					}
 
 				} else {
-					process_log("Payment Failed - Response: $Response, ProcReturnCode: $ProcReturnCode, mdStatus: $mdStatus, Order: " . (isset($_POST['oid']) ? $_POST['oid'] : 'N/A') . PHP_EOL);
+					$this->log("Payment Failed - Response: $Response, ProcReturnCode: $ProcReturnCode, mdStatus: $mdStatus, Order: " . (isset($_POST['oid']) ? $_POST['oid'] : 'N/A'));
 				}
 			} else {
 				$this->ErrMsg .= $this->md_status_mesaj($mdStatus);
 
-				process_log("Invalid mdStatus: $mdStatus, Order: " . (isset($_POST['oid']) ? $_POST['oid'] : 'N/A') . PHP_EOL);
+				$this->log("Invalid mdStatus: $mdStatus, Order: " . (isset($_POST['oid']) ? $_POST['oid'] : 'N/A'));
 			}
             
-            process_log(json_encode([
+            $this->log(json_encode([
                 'timestamp' => date('Y-m-d H:i:s'),
                 'order_id' => isset($_POST['oid']) ? $_POST['oid'] : '',
                 'mdStatus' => $mdStatus,
                 'ProcReturnCode' => $ProcReturnCode,
                 'Response' => $Response,
                 'payment_status' => $this->odeme_yapildi ? 'SUCCESS' : 'FAIL'
-            ]) . PHP_EOL);
+            ]));
 		} else {
 			if ($this->hash_kontrol_log) {
-				process_log("❌ Hash Validation Failed: " . json_encode([
+				$this->log("❌ Hash Validation Failed: " . json_encode([
 					'timestamp' => date('Y-m-d H:i:s'),
 					'order_id' => isset($_POST['oid']) ? $_POST['oid'] : 'N/A',
 					'error' => 'Hash validation failed',
 					'calculated_hash' => $hashResult['calculated'],
 					'retrieved_hash' => $hashResult['received']
-				]) . PHP_EOL);
+				]));
 			}
 		}
 	}
@@ -295,7 +297,7 @@ class isbankPOS {
 	function gecis_form_olustur_yaz($banka_sp_url, $storekey) {
 		usleep(200000);
 		
-		$this->log_yaz("Form URLs - okUrl: " . (isset($_POST['okUrl']) ? $_POST['okUrl'] : 'N/A') . 
+		$this->log("Form URLs - okUrl: " . (isset($_POST['okUrl']) ? $_POST['okUrl'] : 'N/A') . 
 				  ", failUrl: " . (isset($_POST['failUrl']) ? $_POST['failUrl'] : 'N/A'));
 		
 		$yaz = '';
@@ -334,7 +336,7 @@ class isbankPOS {
 		$yaz .= '</form>';
 
 		if ($this->debug) {
-			$this->log_yaz($yaz);
+			$this->log($yaz);
 		}
 		
 		$yaz .= '<script>document.addEventListener(\'DOMContentLoaded\', function() {setTimeout(function() {document.pay_form.submit();}, 1600);});</script>';
@@ -342,12 +344,28 @@ class isbankPOS {
 	}
 
 	//v4 ile eklendi
-	private function log_yaz($mesaj) {
-		$root = defined('ROOT') ? ROOT : __DIR__;
-		$log_dosya = $root . '/php_banka.log';
-		$tarih = date('Y-m-d H:i:s');
-		$log_icerik = "[{$tarih}] {$mesaj}" . PHP_EOL;
-		error_log($log_icerik, 3, $log_dosya);	
+	private function log(string $text): void {
+		$timestamp = date('[Y-m-d H:i:s]');
+		$message = "{$timestamp} {$text}" . PHP_EOL;
+		error_log($message, 3, $this->log_file);
+	}
+
+	private function sanitize($yazi) {
+		if (trim($yazi) === '') {
+			return '';
+		}
+
+		$html_degistir = [
+			'<?' => '&#60;&#63;',
+			'?>' => '&#63;&#62;',
+			'\\' => '&#92;',
+			'\'' => '&#39;',
+			'`'  => '&#96;',
+		];
+
+		$yazi = strtr($yazi, $html_degistir);
+
+		return trim($yazi);
 	}
 
 	public function md_status_mesaj($mdstatus_no) {

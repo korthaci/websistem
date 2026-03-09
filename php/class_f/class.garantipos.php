@@ -4,8 +4,8 @@ class GarantiPos {
 
 	public $sanal_pos_url, $strHostAddress, $strXML, $results, $strReasonCodeValue;
 	public $parametre				= [];
+	private $log_file;
 	public $sanal_pos_url_prod		= 'https://sanalposprov.garanti.com.tr/servlet/gt3dengine';
-	//public $sanal_pos_url_test		= 'https://sanalposprovtest.garanti.com.tr/servlet/gt3dengine';
 	public $sanal_pos_url_test		= 'https://sanalposprovtest.garantibbva.com.tr/servlet/gt3dengine';
 	public $strTerminalUserID		= '********';
 	public $strcustomeremailaddress	= '*****@*****.**';
@@ -15,7 +15,6 @@ class GarantiPos {
 	public $strStoreKey				= '12345678901234567890123456789012********'; //3D Secure şifresi key
 	public $strProvisionPassword	= '123qweASD/'; //3D Secure provizyon şifresi
 	public $strHostAddress_prod		= 'https://sanalposprov.garanti.com.tr/VPServlet';
-	//public $strHostAddress_test		= 'https://sanalposprovtest.garanti.com.tr/VPServlet';
 	public $strHostAddress_test		= 'https://sanalposprovtest.garantibbva.com.tr/VPServlet';
 
 	public $site_url				= 'https://siteurl';
@@ -74,6 +73,7 @@ class GarantiPos {
 		$this->site_url = $site_url;
 		$this->strMode = $strMode;
 		$this->strCustomeripaddress = $this->getIP();
+		$this->log_file = __DIR__ . '/garanti_pos.log';
 
 		$this->parametre_test_kontrol();
 	}
@@ -95,54 +95,7 @@ class GarantiPos {
 
 	}
 	
-	public function parametre_duzenle_0(){
-		
-		$this->parametre_test_kontrol();
-
-		if (!empty($this->parametre)){
-
-			foreach ($this->parametre as $pk => $pv) {
-				if (property_exists($this, $pk)) {
-					$this->{$pk} = $pv;
-				}
-			}
-/*
-			$this->sanal_pos_url = $this->strMode === 'TEST' ? $this->sanal_pos_url_test : $this->sanal_pos_url_prod;
-			$this->strHostAddress = $this->strMode === 'TEST' ? $this->strHostAddress_test : $this->strHostAddress_prod;
-*/
-			$this->strTerminalID = ltrim($this->strTerminalID,"0");
-			$this->strTerminalID_ = str_pad($this->strTerminalID, 9, "0", STR_PAD_LEFT);
-			$this->site_url = trim($this->site_url, '/');
-			$this->strSuccessURL = strpos($this->strSuccessURL, $this->site_url) !== false ? $this->strSuccessURL : $this->site_url . $this->strSuccessURL;//lo0cal linkin https başlığı olup olmadığını kontrol ediyor. tamamen dış link verilmesi durumunu da ekle
-			$this->strErrorURL = strpos($this->strErrorURL, $this->site_url) !== false ? $this->strErrorURL : $this->site_url . $this->strErrorURL;//
-
-			if (array_key_exists('taksit', $this->parametre)) {
-				$this->strInstallmentCount = isset($this->parametre['taksit']) ? (int) $this->parametre['taksit'] : (int) $this->strInstallmentCount;
-			}
-			$this->strInstallmentCount = $this->strInstallmentCount > 1 ? $this->strInstallmentCount : "";
-
-			$this->SecurityData = strtoupper(sha1($this->strProvisionPassword.$this->strTerminalID_));
-			$this->HashData = strtoupper(
-				sha1($this->strTerminalID.$this->strOrderID.$this->strAmount.$this->strSuccessURL.$this->strErrorURL.$this->strType.$this->strInstallmentCount.$this->strStoreKey.$this->SecurityData)
-			);
-			
-			// Form gönderimi öncesi hash hesaplama kontrolü
-			$hashLogData = [
-				'SecurityData_Input' => $this->strProvisionPassword . $this->strTerminalID_,
-				'SecurityData_Hash' => $this->SecurityData,
-				'HashData_Input' => $this->strTerminalID . $this->strOrderID . $this->strAmount . $this->strSuccessURL . $this->strErrorURL . $this->strType . $this->strInstallmentCount . $this->strStoreKey . $this->SecurityData,
-				'HashData_Hash' => $this->HashData,
-				'SecurityData_Length' => strlen($this->SecurityData),
-				'HashData_Length' => strlen($this->HashData),
-				'SecurityData_IsUppercase' => $this->SecurityData === strtoupper($this->SecurityData) ? 'EVET' : 'HAYIR',
-				'HashData_IsUppercase' => $this->HashData === strtoupper($this->HashData) ? 'EVET' : 'HAYIR'
-			];
-			process_log('GarantiPOS Hash Hesaplama (Form Hazırlama): ' . print_r($hashLogData, true));
-		}
-	}
-
-
-	public function parametre_duzenle(){ ////////////////////////////////////////////////////////////
+	public function parametre_duzenle(){ //////
 
 		$this->parametre_test_kontrol();
 
@@ -177,14 +130,6 @@ class GarantiPos {
 			}
 			$this->strInstallmentCount = $this->strInstallmentCount > 1 ? $this->strInstallmentCount : "";
 
-			/*
-			*************************************
-			*  🔥 ÖNEMLİ DÜZELTME - HASH FORMÜLÜ
-			*  Form Hash = SHA1(TID + OID + Amount + SuccessURL + ErrorURL + StoreKey)
-			*  SecurityData ve diğer alanlar dahil edilmez!
-			*************************************
-			*/
-
 			$hash_input = 
 				$this->strTerminalID .
 				$this->strOrderID .
@@ -218,7 +163,7 @@ class GarantiPos {
 				'SecurityData_Input' => $this->strProvisionPassword . $this->strTerminalID_,
 				'SecurityData_Hash'  => $this->SecurityData
 			];
-			process_log('GarantiPOS Hash Hesaplama (Form Hazırlama - FIX): ' . print_r($hashLogData, true));
+			$this->log('GarantiPOS Hash Hesaplama (Form Hazırlama - FIX): ' . print_r($hashLogData, true));
 		}
 	}
 
@@ -236,7 +181,7 @@ class GarantiPos {
 
 	public function callback($strPpassword = '') {
 		try {
-			process_log("GarantiPOS Callback Başladı. POST: " . print_r($_POST, true));
+			$this->log("GarantiPOS Callback Başladı. POST: " . print_r($_POST, true));
 
 			if (!empty($strPpassword)) {
 				$this->strProvisionPassword = $strPpassword;
@@ -246,12 +191,12 @@ class GarantiPos {
 			if (!isset($_POST["mdstatus"])) {
 				$this->odeme_yapildi = false;
 				$this->aciklama = "Banka yanıtı alınamadı. mdstatus değeri bulunamadı.";
-				process_log("GarantiPOS Hata: " . $this->aciklama);
+				$this->log("GarantiPOS Hata: " . $this->aciklama);
 				return;
 			}
 			
 			$strMDStatus = intval($_POST["mdstatus"]);
-			process_log("GarantiPOS MDStatus: " . $strMDStatus . " | Açıklama=" . ($this->md_status_aciklama["$strMDStatus"] ?? 'bilinmiyor'));
+			$this->log("GarantiPOS MDStatus: " . $strMDStatus . " | Açıklama=" . ($this->md_status_aciklama["$strMDStatus"] ?? 'bilinmiyor'));
 			$this->logBankHashCheck();
 
 			if ($strMDStatus == 1) {
@@ -261,27 +206,27 @@ class GarantiPos {
 					return;
 				}
 
-				$strTerminalID				= html_d($_POST['clientid']);
+				$strTerminalID				= $this->sanitize($_POST['clientid']);
 				$strTerminalID_				= str_pad($strTerminalID, 9, "0", STR_PAD_LEFT);
-				$strProvUserID				= html_d($_POST['terminalprovuserid']);
-				$strUserID					= html_d($_POST['terminaluserid']);
-				$strMerchantID				= html_d($_POST['terminalmerchantid']);
-				$strIPAddress				= html_d($_POST['customeripaddress']);
-				$strEmailAddress			= html_d($_POST['customeremailaddress']);
-				$strOrderID					= html_d($_POST['orderid']);
+				$strProvUserID				= $this->sanitize($_POST['terminalprovuserid']);
+				$strUserID					= $this->sanitize($_POST['terminaluserid']);
+				$strMerchantID				= $this->sanitize($_POST['terminalmerchantid']);
+				$strIPAddress				= $this->sanitize($_POST['customeripaddress']);
+				$strEmailAddress			= $this->sanitize($_POST['customeremailaddress']);
+				$strOrderID					= $this->sanitize($_POST['orderid']);
 				$strNumber					= ""; //Kart bilgilerinin boş gitmesi gerekiyor
 				$strExpireDate				= ""; //Kart bilgilerinin boş gitmesi gerekiyor
 				$strCVV2					= ""; //Kart bilgilerinin boş gitmesi gerekiyor
-				$strAmount					= html_d($_POST['txnamount']);
-				$strCurrencyCode			= html_d($_POST['txncurrencycode']);
-				$strInstallmentCount		= html_d($_POST['txninstallmentcount']);
+				$strAmount					= $this->sanitize($_POST['txnamount']);
+				$strCurrencyCode			= $this->sanitize($_POST['txncurrencycode']);
+				$strInstallmentCount		= $this->sanitize($_POST['txninstallmentcount']);
 				$strCardholderPresentCode	= "13"; //3D Model işemde bu değer 13 olmalı
-				$strType					= html_d($_POST['txntype']);
+				$strType					= $this->sanitize($_POST['txntype']);
 				$strMotoInd					= "N";
-				$strAuthenticationCode		= html_d($_POST['cavv']);
-				$strSecurityLevel			= html_d($_POST['eci']);
-				$strTxnID					= html_d($_POST['xid']);
-				$strMD						= html_d($_POST['md']);
+				$strAuthenticationCode		= $this->sanitize($_POST['cavv']);
+				$strSecurityLevel			= $this->sanitize($_POST['eci']);
+				$strTxnID					= $this->sanitize($_POST['xid']);
+				$strMD						= $this->sanitize($_POST['md']);
 				$SecurityData				= strtoupper(sha1($this->strProvisionPassword.$strTerminalID_));
 				$HashData					= strtoupper(sha1($strOrderID.$strTerminalID.$strAmount.$SecurityData)); //Daha kısıtlı bilgileri HASH ediyoruz.
 
@@ -299,7 +244,7 @@ class GarantiPos {
 					'TerminalID' => $strTerminalID,
 					'Amount' => $strAmount
 				];
-				process_log('GarantiPOS Hash Hesaplama (Callback Provizyon): ' . print_r($callbackHashLogData, true));
+				$this->log('GarantiPOS Hash Hesaplama (Callback Provizyon): ' . print_r($callbackHashLogData, true));
 
 				$strXML = '<?xml version="1.0" encoding="UTF-8"?>
 				<GVPSRequest>
@@ -339,7 +284,7 @@ class GarantiPos {
 					</Transaction>
 				</GVPSRequest>';
 
-				process_log("GarantiPOS XML Request: " . $strXML);
+				$this->log("GarantiPOS XML Request: " . $strXML);
 
 				$ch=curl_init();
 				curl_setopt($ch, CURLOPT_URL, $this->strHostAddress);
@@ -352,13 +297,13 @@ class GarantiPos {
 				$curl_error = curl_errno($ch);
 				curl_close($ch);
 				
-				process_log("GarantiPOS XML Response: " . $results);
+				$this->log("GarantiPOS XML Response: " . $results);
 
 				// CURL hata kontrolü
 				if ($curl_error) {
 					$this->odeme_yapildi = false;
 					$this->aciklama = "CURL hatası: " . $curl_error;
-					process_log("GarantiPOS CURL Hatası: " . $curl_error);
+					$this->log("GarantiPOS CURL Hatası: " . $curl_error);
 					return;
 				}
 				
@@ -366,7 +311,7 @@ class GarantiPos {
 				if (empty($results)) {
 					$this->odeme_yapildi = false;
 					$this->aciklama = "Boş yanıt alındı";
-					process_log("GarantiPOS Hata: Boş yanıt alındı");
+					$this->log("GarantiPOS Hata: Boş yanıt alındı");
 					return;
 				}
 
@@ -379,7 +324,7 @@ class GarantiPos {
 				if (!$parse_result || !isset($index['REASONCODE'][0])) {
 					$this->odeme_yapildi = false;
 					$this->aciklama = "XML yanıtı ayrıştırılamadı" . (!empty($xml_error) ? " (" . $xml_error . ")" : "");
-					process_log("GarantiPOS XML Parse Hatası: " . $this->aciklama);
+					$this->log("GarantiPOS XML Parse Hatası: " . $this->aciklama);
 					return;
 				}
 
@@ -391,21 +336,21 @@ class GarantiPos {
 				
 				$this->aciklama = ($this->odeme_yapildi) ? 'İşlem başarılı' : 'İşlem başarısız ! Hata kodu : '.$this->strReasonCodeValue;
 				
-				process_log("GarantiPOS Sonuç: ReasonCode=" . $this->strReasonCodeValue . " - Açıklama=" . $this->aciklama);
+				$this->log("GarantiPOS Sonuç: ReasonCode=" . $this->strReasonCodeValue . " - Açıklama=" . $this->aciklama);
 
 			} else {
 				$this->odeme_yapildi = false;
 				$this->aciklama = isset($this->md_status_aciklama["$strMDStatus"]) ? 
 					$this->md_status_aciklama["$strMDStatus"] : 
 					"Bilinmeyen mdstatus: $strMDStatus";
-				process_log("GarantiPOS MDStatus Başarısız: " . $this->aciklama);
+				$this->log("GarantiPOS MDStatus Başarısız: " . $this->aciklama);
 			}
 		} catch (Exception $e) {
 			$this->odeme_yapildi = false;
 			$this->aciklama = "Hata: " . $e->getMessage();
 			// Log hata bilgisi
 			error_log("GarantiPOS Hata: " . $e->getMessage());
-			process_log("GarantiPOS Exception: " . $e->getMessage());
+			$this->log("GarantiPOS Exception: " . $e->getMessage());
 		}
 	}
 	public function odeme_yapildi(){
@@ -550,8 +495,6 @@ class GarantiPos {
 
 	public function iptal_yap($orderId) {
 		$this->strOrderID = $orderId;
-		// Void işleminde genellikle tutar gönderilmez veya 0 olabilir ama hash hesaplamasında ne kullanıldığı kritiktir.
-		// Genellikle Void tüm işlemi iptal eder. Amount boş geçilir.
 		$this->strAmount = ''; 
 		$this->strType = 'void';
 		$this->strInstallmentCount = '';
@@ -640,7 +583,7 @@ class GarantiPos {
 	}
 
 	private function calculate_xml_hash() {
-		// API çağrıları için hash hesaplama (SecurityData önce hesaplanmalı)
+		// API çağrıları için hash hesaplama
 		$this->SecurityData = strtoupper(sha1($this->strProvisionPassword . $this->strTerminalID_));
 		
 		$hash_input = 
@@ -649,7 +592,7 @@ class GarantiPos {
 			$this->strAmount .
 			$this->SecurityData;
 /*
-        // Alternatif hash (Garanti bazen terminal id'yi başa ister)
+        // Alternatif hash
         if ($this->strType == 'orderhistoryinq') {
             $hash_input = $this->strTerminalID . $this->strOrderID . $this->strAmount . $this->SecurityData;
         }
@@ -663,11 +606,11 @@ class GarantiPos {
 			'Input' => $hash_input,
 			'Hash' => $this->HashData
 		];
-		process_log('GarantiPOS XML Hash: ' . print_r($hashLog, true));
+		$this->log('GarantiPOS XML Hash: ' . print_r($hashLog, true));
 	}
 
 	private function send_xml_request($xml) {
-		process_log("GarantiPOS XML Request ({$this->strType}): " . $xml);
+		$this->log("GarantiPOS XML Request ({$this->strType}): " . $xml);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $this->strHostAddress);
@@ -680,10 +623,10 @@ class GarantiPos {
 		$curl_error = curl_errno($ch);
 		curl_close($ch);
 
-		process_log("GarantiPOS XML Response ({$this->strType}): " . $results);
+		$this->log("GarantiPOS XML Response ({$this->strType}): " . $results);
 		
 		if ($curl_error) {
-			process_log("GarantiPOS CURL Error: " . $curl_error);
+			$this->log("GarantiPOS CURL Error: " . $curl_error);
 			return '';
 		}
 		
@@ -829,11 +772,11 @@ class GarantiPos {
 	}
 
 	private function logBankHashCheck() {
-		$hashParams = isset($_POST['hashparams']) ? html_d($_POST['hashparams']) : '';
-		$hashParamsVal = isset($_POST['hashparamsval']) ? html_d($_POST['hashparamsval']) : '';
-		$hashFromBank = isset($_POST['hash']) ? html_d($_POST['hash']) : '';
+		$hashParams = isset($_POST['hashparams']) ? $this->sanitize($_POST['hashparams']) : '';
+		$hashParamsVal = isset($_POST['hashparamsval']) ? $this->sanitize($_POST['hashparamsval']) : '';
+		$hashFromBank = isset($_POST['hash']) ? $this->sanitize($_POST['hash']) : '';
 		if ($hashParams === '' && $hashParamsVal === '' && $hashFromBank === '') {
-			process_log('GarantiPOS Callback Hash Bilgisi: Bankadan hash parametreleri gelmedi.');
+			$this->log('GarantiPOS Callback Hash Bilgisi: Bankadan hash parametreleri gelmedi.');
 			return;
 		}
 		$calculatedHash = base64_encode(pack('H*', sha1($hashParamsVal.$this->strStoreKey)));
@@ -851,8 +794,32 @@ class GarantiPos {
 			'hashMatch' => $hashMatch ? 'EVET (Eşleşti)' : 'HAYIR (Eşleşmedi)',
 			'storeKey' => substr($this->strStoreKey, 0, 8) . '...' // İlk 8 karakteri göster
 		];
-		process_log('GarantiPOS Hash Kontrol Sonucu: ' . print_r($logData, true));
+		$this->log('GarantiPOS Hash Kontrol Sonucu: ' . print_r($logData, true));
 		
+	}
+
+	private function sanitize($yazi) {
+		if (trim($yazi) === '') {
+			return '';
+		}
+
+		$html_degistir = [
+			'<?' => '&#60;&#63;',
+			'?>' => '&#63;&#62;',
+			'\\' => '&#92;',
+			'\'' => '&#39;',
+			'`'  => '&#96;',
+		];
+
+		$yazi = strtr($yazi, $html_degistir);
+
+		return trim($yazi);
+	}
+
+	private function log(string $text): void {
+		$timestamp = date('[Y-m-d H:i:s]');
+		$message = "{$timestamp} {$text}" . PHP_EOL;
+		error_log($message, 3, $this->log_file);
 	}
 	
 }
