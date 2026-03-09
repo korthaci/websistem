@@ -160,6 +160,7 @@ if ($sb_) {
 					data-nn="'.$sb_->no.'" 
 					data-t="sayfa" 
 					data-a="resim" 
+					data-img="1" 
 					data-yaz="#resimler_sayfa" 
 					data-sayi="20">'.yc("Son eklenen").'</a> 
 				<a class="uis-btn uis-btn-outline uis-btn-sm dosya_getir trigger_click" tabindex="2" 
@@ -167,6 +168,7 @@ if ($sb_) {
 					data-nn="'.$sb_->no.'" 
 					data-t="sayfa" 
 					data-a="resim" 
+					data-img="1" 
 					data-yaz="#resimler_sayfa" 
 					data-sayi="0">'.yc("Tümü").'</a> 
 				<input type="text" id="foto_filtrele" placeholder="'.yc("Filtrele").'..." class="uis-input uis-w-auto uis-btn-sm"/>
@@ -186,6 +188,9 @@ if ($sb_) {
 			data-c_dosya_getir="'.$resim_dizini.'"
 			data-c_dosya_gyaz="#resimler_sayfa"
 			data-nn="'.$sb_->no.'" 
+			data-t="sayfa" 
+			data-a="resim" 
+			data-img="1" 
 			data-nn_t="sayfa" 
 			data-nn_a="resim">
 			<input type="hidden" name="islem" value="dyukle" />
