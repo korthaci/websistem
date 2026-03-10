@@ -29,7 +29,7 @@ if ($modul_url) {
 
 	if (!empty($md_dosya_url) && is_file(MODUL_DIR . '/' . $modul_url . '/sablon/'. $md_dosya)) {
 		$dosya_icerik = file_get_contents(MODUL_DIR . '/' . $modul_url . '/sablon/'. $md_dosya);
-		$dosya_icerik = strtr($dosya_icerik, ['textarea'=>'__textarea__']);
+		$dosya_icerik = strtr($dosya_icerik, ['<textarea' => '<__textarea__','</textarea>' => '</__textarea__>']);
 	}
 
 	echo '
@@ -76,7 +76,7 @@ if ($modul_url) {
 					' . (!empty($md_dosya_url) ? '<button type="submit" name="mddosya_kaydet" class="uis-btn uis-btn-sm uis-btn-p"><i class="fa-solid fa-floppy-disk"></i> ' . yc("Kaydet") . '</button>' : '') . '
 				</div>
 			</div>
-			<textarea name="mddosya_text" 
+			<textarea name="mddosya_text textarea_tag_kontrol" 
 			class="theme-editor-textarea format_html" style="min-height: 500px;" spellcheck="false" autocomplete="off" autocapitalize="off" wrap="off" ' . (empty($md_dosya_url) ? 'disabled placeholder="'.yc("Lütfen düzenlemek için bir şablon seçin").'..." ' : '') . '>' . ($dosya_icerik) . '</textarea>
 		</form>
 	</div>
@@ -86,6 +86,3 @@ if ($modul_url) {
 	</div>';
 
 }
-
-echo '<script src="' . LOCAL . '/assets/js/uis2_theme.js" defer></script>';
-
