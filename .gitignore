@@ -29,6 +29,7 @@ resim/**
 ### --- DOKÜMANTASYON ---
 documentation/md/
 documentation/py/
+documentation/video/
 
 ### --- ÖZEL MODÜL İZİNLERİ (BEYAZ LİSTE) ---
 # php/modul: Sadece belirli klasörlere izin ver
