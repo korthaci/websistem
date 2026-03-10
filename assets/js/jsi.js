@@ -398,17 +398,11 @@ $(document).ready(function () {
 		$(this).val(formatHTML($(this).val()));
 	});
 
-	$('form').on('submit', function(){
-		let t = $(this).find('.textarea_tag_kontrol');
-		if(!t.length) return;
-		t.each(function(){
-			let v = this.value;
-			let yeni = v
+	$('form').on('submit', function() {
+		$(this).find('.textarea_tag_kontrol').each(function() {
+			this.value = this.value
 				.replace(/<\s*textarea\b/gi,'<__textarea__')
 				.replace(/<\s*\/\s*textarea\s*>/gi,'</__textarea__>');
-			if(v !== yeni){
-				this.value = yeni;
-			}
 		});
 	});
 
