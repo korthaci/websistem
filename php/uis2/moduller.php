@@ -121,5 +121,3 @@ if (!empty($filter_moduller_url)){
 	}
 	echo '</div></div>';
 }
-
-echo '<script src="' . LOCAL . '/assets/js/uis2_theme.js" defer></script>';

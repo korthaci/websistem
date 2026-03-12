@@ -9,7 +9,7 @@ $(function () {
     $(document).on('click', '.uis-theme-toggle', function () {
         if ($('body').hasClass('uis-dark')) {
             $('body').removeClass('uis-dark').addClass('uis-light');
-            localStorage.setItem('uis-theme', 'uis-light');
+            localStorage.setItem('uis-theme', 'uis-light');yedek-listesi-panel
             updateThemeIcon('uis-light');
         } else {
             $('body').removeClass('uis-light').addClass('uis-dark');
@@ -148,11 +148,8 @@ $(function () {
     // Yedek Listesi Göster/Gizle
     $(document).on('click', '.tema-yedek-listesi-btn', function () {
         const panel = $('#yedek-listesi-panel');
-        if (panel.is(':visible')) {
-            panel.slideUp();
-        } else {
-            panel.slideDown();
-        }
+        panel.slideDown();
+        $('html, body').animate({scrollTop: panel.offset().top - 150}, 500);
     });
 
     // Yedek Geri Yükle

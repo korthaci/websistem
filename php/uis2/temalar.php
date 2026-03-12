@@ -82,5 +82,3 @@ foreach ($tema_dizinleri as $tema) {
 }
 
 echo '</div>';
-
-echo '<script src="' . LOCAL . '/assets/js/uis2_theme.js" defer></script>';

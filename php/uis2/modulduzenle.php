@@ -115,5 +115,3 @@ if ($modul_b) {
 	}
 }
 
-echo '<script src="' . LOCAL . '/assets/js/uis2_theme.js" defer></script>';
-
