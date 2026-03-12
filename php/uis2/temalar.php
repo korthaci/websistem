@@ -2,6 +2,11 @@
 
 $aktif_tema = $so_->d('tema');
 $tema_dizinleri = dizin_listesi(TEMA_DIR, ['.backups', '.sabitlenmis_tema', '*deleted*']);
+usort($tema_dizinleri, function($a, $b) use ($aktif_tema) {
+    if ($a === $aktif_tema) return -1;
+    if ($b === $aktif_tema) return 1;
+    return 0;
+});
 $tema_sayisi = count($tema_dizinleri);
 
 $activated_msg = '';
