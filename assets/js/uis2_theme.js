@@ -30,7 +30,9 @@ $(function () {
 
 
     // Etkinleştirme
-    $(document).on('click', '.tema-etkinlestir', function () {
+    $(document).on('click', '.tema-etkinlestir', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         const _this = $(this);
         const tema = _this.data('tema');
 
@@ -54,7 +56,9 @@ $(function () {
     });
 
     // Kopyala
-    $(document).on('click', '.tema-kopyala', function () {
+    $(document).on('click', '.tema-kopyala', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         const tema = $(this).data('tema');
         const yeniAd = prompt(tema + ' temasını kopyalamak için yeni bir isim girin:', tema + '_kopya');
 
@@ -76,7 +80,9 @@ $(function () {
     });
 
     // Sil
-    $(document).on('click', '.tema-sil', function () {
+    $(document).on('click', '.tema-sil', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         const _this = $(this);
         const tema = _this.data('tema');
 
@@ -97,12 +103,16 @@ $(function () {
     });
 
     // Listeyi Yenile
-    $(document).on('click', '.tema-tazele, .uis-tazele', function () {
+    $(document).on('click', '.tema-tazele, .uis-tazele', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         location.reload();
     });
 
     // Kopyalama Aracı (Clipboard)
-    $(document).on('click', '.uis-kopyala', function () {
+    $(document).on('click', '.uis-kopyala', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         const text = $(this).data('kopyala');
         if (!text) return;
 
@@ -123,7 +133,9 @@ $(function () {
     });
 
     // Modül Kurulumu
-    $(document).on('click', '.modulkur', function () {
+    $(document).on('click', '.modulkur', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         const _this = $(this);
         const modul = _this.data('m');
 
@@ -149,13 +161,16 @@ $(function () {
     // Yedek Listesi Göster/Gizle
     $(document).on('click', '.tema-yedek-listesi-btn', function (e) {
         e.preventDefault();
+        e.stopPropagation();
         const panel = $('#yedek-listesi-panel');
         panel.slideDown().attr('data-uis-open', 'true');
         $('html, body').animate({scrollTop: panel.offset().top - 150}, 500);
     });
 
     // Yedek Geri Yükle
-    $(document).on('click', '.tema-yedek-geri-yukle', function () {
+    $(document).on('click', '.tema-yedek-geri-yukle', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         const _this = $(this);
         const tema = _this.data('tema');
         const dosya = _this.data('dosya');
@@ -186,7 +201,9 @@ $(function () {
     });
 
     // Yedek Sil
-    $(document).on('click', '.tema-yedek-sil', function () {
+    $(document).on('click', '.tema-yedek-sil', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         const _this = $(this);
         const tema = _this.data('tema');
         const dosya = _this.data('dosya');
@@ -215,7 +232,9 @@ $(function () {
     // ── Blok Yedekleme & Geri Yükleme (SNAPSHOT) ──
 
     // Blok Yedekle
-    $(document).on('click', '.tema-blok-yedek-al', function() {
+    $(document).on('click', '.tema-blok-yedek-al', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         const _this = $(this);
         const tema = _this.data('tema');
 
@@ -239,6 +258,7 @@ $(function () {
     // Blok Yedek Listesini Göster
     $(document).on('click', '.tema-blok-listesi-btn', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         const panel = $('#blok-yedek-listesi-panel');
         const tema = $(this).data('tema');
 
@@ -288,7 +308,9 @@ $(function () {
     }
 
     // Blok Yedeği Geri Yükle (Snapshot)
-    $(document).on('click', '.tema-blok-yedek-yukle', function() {
+    $(document).on('click', '.tema-blok-yedek-yukle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         const _this = $(this);
         const tema = _this.data('tema');
         const yedek = _this.data('yedek');
