@@ -129,24 +129,41 @@ function mysqlToSqlite($sql) {
     $sql = preg_replace('/\bdouble\b/i', 'REAL', $sql);
     $sql = preg_replace('/current_timestamp\(\)/i', 'CURRENT_TIMESTAMP', $sql);
 
-    // 3. Handle standalone PRIMARY KEY from ALTER TABLE
-    if (preg_match_all('/ALTER TABLE [`"]?(\w+)[`"]?\s+ADD PRIMARY KEY\s*\([`"]?(\w+)[`"]?\);/i', $sql, $pk_matches, PREG_SET_ORDER)) {
-        foreach ($pk_matches as $match) {
+    // 3. Handle standalone PRIMARY KEY and UNIQUE KEYs from ALTER TABLE
+    if (preg_match_all('/ALTER TABLE [`"]?(\w+)[`"]?\s+(.*?);/is', $sql, $alter_matches, PREG_SET_ORDER)) {
+        foreach ($alter_matches as $match) {
             $table = $match[1];
-            $col = $match[2];
+            $clauses = $match[2];
+            $new_sqls = [];
             
-            // Re-inject PK into CREATE TABLE if not already there
-            $sql = preg_replace_callback('/(CREATE TABLE (?:IF NOT EXISTS )?[`"]?'.$table.'[`"]?\s*\()(.*?)\);/is', function($m) use ($col) {
-                $content = $m[2];
-                // Check if Table already has an internal PRIMARY KEY
-                if (stripos($content, 'PRIMARY KEY') === false) {
-                    // Exact match for column name using word boundaries
-                    $content = preg_replace('/(\b[`"]?'.$col.'[`"]?\s+INTEGER)(\s+NOT NULL)?\b/i', '$1$2 PRIMARY KEY AUTOINCREMENT', $content);
+            // Clean clauses from MySQL specific stuff
+            $clauses = preg_replace('/\b(CHARACTER\s+SET|COLLATE)\s+[^, \n)]+/i', '', $clauses);
+            
+            // Split clauses by comma
+            $clause_parts = preg_split('/,\s*(?![^()]*\))/', $clauses);
+            
+            foreach ($clause_parts as $part) {
+                $part = trim($part);
+                if (preg_match('/ADD PRIMARY KEY\s*\([`"]?(\w+)[`"]?\)/i', $part, $pk_match)) {
+                    $col = $pk_match[1];
+                    // Inject PK into CREATE TABLE
+                    $sql = preg_replace_callback('/(CREATE TABLE (?:IF NOT EXISTS )?[`"]?'.$table.'[`"]?\s*\()(.*?)\);/is', function($m) use ($col) {
+                        $content = $m[2];
+                        if (stripos($content, 'PRIMARY KEY') === false) {
+                            // Exact match for column name: ensure INTEGER is followed by PRIMARY KEY for rowid alias
+                            $content = preg_replace('/(\b[`"]?'.$col.'[`"]?\s+INTEGER)\b/i', '$1 PRIMARY KEY AUTOINCREMENT', $content);
+                        }
+                        return $m[1] . $content . ');';
+                    }, $sql);
+                } elseif (preg_match('/ADD (UNIQUE\s+)?KEY\s+[`"]?(\w+)[`"]?\s*\((.*?)\)/i', $part, $idx_match)) {
+                    $is_unique = !empty($idx_match[1]);
+                    $idx_name = $idx_match[2];
+                    $idx_cols = $idx_match[3];
+                    $new_sqls[] = "CREATE " . ($is_unique ? "UNIQUE " : "") . "INDEX `{$idx_name}_{$table}` ON `{$table}` ({$idx_cols});";
                 }
-                return $m[1] . $content . ');';
-            }, $sql);
-            
-            $sql = str_replace($match[0], '', $sql);
+            }
+            // Replace the original ALTER TABLE with created index statements
+            $sql = str_replace($match[0], implode("\n", $new_sqls), $sql);
         }
     }
 
@@ -162,8 +179,8 @@ function mysqlToSqlite($sql) {
                     $pk_col = $pk_match[1];
                     // Inject only if not already injected by Step 3
                     if (strpos($table_sql, 'PRIMARY KEY AUTOINCREMENT') === false) {
-                        // Exact match for column name using word boundaries
-                        $new_table_sql = preg_replace('/(\b[`"]?'.$pk_col.'[`"]?\s+INTEGER)(\s+NOT NULL)?\b/i', '$1$2 PRIMARY KEY AUTOINCREMENT', $table_sql);
+                        // Exact match for column name: ensure INTEGER is followed by PRIMARY KEY for rowid alias
+                        $new_table_sql = preg_replace('/(\b[`"]?'.$pk_col.'[`"]?\s+INTEGER)\b/i', '$1 PRIMARY KEY AUTOINCREMENT', $table_sql);
                     } else {
                         $new_table_sql = $table_sql;
                     }
