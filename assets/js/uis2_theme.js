@@ -30,9 +30,7 @@ $(function () {
 
 
     // Etkinleştirme
-    $(document).on('click', '.tema-etkinlestir', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $(document).on('click', '.tema-etkinlestir', function () {
         const _this = $(this);
         const tema = _this.data('tema');
 
@@ -56,9 +54,7 @@ $(function () {
     });
 
     // Kopyala
-    $(document).on('click', '.tema-kopyala', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $(document).on('click', '.tema-kopyala', function () {
         const tema = $(this).data('tema');
         const yeniAd = prompt(tema + ' temasını kopyalamak için yeni bir isim girin:', tema + '_kopya');
 
@@ -80,9 +76,7 @@ $(function () {
     });
 
     // Sil
-    $(document).on('click', '.tema-sil', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $(document).on('click', '.tema-sil', function () {
         const _this = $(this);
         const tema = _this.data('tema');
 
@@ -103,16 +97,12 @@ $(function () {
     });
 
     // Listeyi Yenile
-    $(document).on('click', '.tema-tazele, .uis-tazele', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $(document).on('click', '.tema-tazele, .uis-tazele', function () {
         location.reload();
     });
 
     // Kopyalama Aracı (Clipboard)
-    $(document).on('click', '.uis-kopyala', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $(document).on('click', '.uis-kopyala', function () {
         const text = $(this).data('kopyala');
         if (!text) return;
 
@@ -133,9 +123,7 @@ $(function () {
     });
 
     // Modül Kurulumu
-    $(document).on('click', '.modulkur', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $(document).on('click', '.modulkur', function () {
         const _this = $(this);
         const modul = _this.data('m');
 
@@ -161,20 +149,13 @@ $(function () {
     // Yedek Listesi Göster/Gizle
     $(document).on('click', '.tema-yedek-listesi-btn', function (e) {
         e.preventDefault();
-        e.stopPropagation();
         const panel = $('#yedek-listesi-panel');
-        if (panel.is(':visible')) {
-            panel.slideUp();
-        } else {
-            panel.slideDown();
-            $('html, body').animate({ scrollTop: panel.offset().top - 150 }, 500);
-        }
+        panel.slideDown().attr('data-uis-open', 'true');
+        $('html, body').animate({scrollTop: panel.offset().top - 150}, 500);
     });
 
     // Yedek Geri Yükle
-    $(document).on('click', '.tema-yedek-geri-yukle', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $(document).on('click', '.tema-yedek-geri-yukle', function () {
         const _this = $(this);
         const tema = _this.data('tema');
         const dosya = _this.data('dosya');
@@ -205,17 +186,15 @@ $(function () {
     });
 
     // Yedek Sil
-    $(document).on('click', '.tema-yedek-sil', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $(document).on('click', '.tema-yedek-sil', function () {
         const _this = $(this);
         const tema = _this.data('tema');
         const dosya = _this.data('dosya');
         const tarih = _this.data('tarih');
 
-        /*if (!confirm('Bu yedeği silmek istediğinize emin misiniz?')) {
+        /* if (!confirm('Bu yedeği silmek istediğinize emin misiniz?')) {
             return;
-        }*/
+        } */
 
         $.post(API_URL, {
             islem: 'uis_tema',
@@ -236,9 +215,7 @@ $(function () {
     // ── Blok Yedekleme & Geri Yükleme (SNAPSHOT) ──
 
     // Blok Yedekle
-    $(document).on('click', '.tema-blok-yedek-al', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $(document).on('click', '.tema-blok-yedek-al', function() {
         const _this = $(this);
         const tema = _this.data('tema');
 
@@ -251,8 +228,7 @@ $(function () {
         }, function(response) {
             if (response.return == 1) {
                 iziToast.success({ title: 'Başarılı', message: response.mesaj });
-                // Eğer panel açıksa listeyi güncelle
-                if ($('#blok-yedek-listesi-panel').is(':visible')) loadBlockBackups(tema);
+                if ($('#blok-yedek-listesi-panel').attr('data-uis-open') === 'true') loadBlockBackups(tema);
             } else {
                 iziToast.error({ title: 'Hata', message: response.mesaj });
             }
@@ -263,15 +239,15 @@ $(function () {
     // Blok Yedek Listesini Göster
     $(document).on('click', '.tema-blok-listesi-btn', function(e) {
         e.preventDefault();
-        e.stopPropagation();
         const panel = $('#blok-yedek-listesi-panel');
         const tema = $(this).data('tema');
 
-        if (panel.is(':visible')) {
-            panel.slideUp();
+        if (panel.attr('data-uis-open') === 'true') {
+            panel.slideUp().attr('data-uis-open', 'false');
         } else {
             loadBlockBackups(tema);
             panel.slideDown(400, function() {
+                panel.attr('data-uis-open', 'true');
                 $('html, body').animate({
                     scrollTop: panel.offset().top - 100
                 }, 600);
@@ -281,7 +257,6 @@ $(function () {
 
     function loadBlockBackups(tema) {
         const body = $('#blok-yedek-liste-body');
-        // Orijinal satırını sakla, diğerlerini temizle
         const originalRow = body.find('tr:first').prop('outerHTML');
         body.html(originalRow + '<tr><td colspan="3" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Yükleniyor...</td></tr>');
 
@@ -290,7 +265,7 @@ $(function () {
             islem_tip: 'blok_yedek_listesi',
             tema: tema
         }, function(response) {
-            body.find('tr:not(:first)').remove(); // Yükleniyor yazısını sil
+            body.find('tr:not(:first)').remove();
             if (response.return == 1 && response.yedekler.length > 0) {
                 response.yedekler.forEach(yedek => {
                     body.append(`
@@ -313,9 +288,7 @@ $(function () {
     }
 
     // Blok Yedeği Geri Yükle (Snapshot)
-    $(document).on('click', '.tema-blok-yedek-yukle', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $(document).on('click', '.tema-blok-yedek-yukle', function() {
         const _this = $(this);
         const tema = _this.data('tema');
         const yedek = _this.data('yedek');
