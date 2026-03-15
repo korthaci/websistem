@@ -91,7 +91,7 @@ if (n0_($u_no__)) {
 
 		foreach ($sayfalar as $s) {
 			$resim_dizin = 'resim/_sayfa/'.$s->no.'_'. nd_md5($s->no);
-			$dosya_sayisi = dosya_sayisi("$resim_dizin/k", '/(jpe?g|gif|png|webp)$/i');
+			$dosya_sayisi = dosya_sayisi("$resim_dizin/k", '/(jpe?g|gif|png|webp)$/i') ?: 0;
 			$sekme_adi = db_adi::get($pdo, $do_, 'sekme', $s->ms_no);
 			$nt = $s->no.',,sayfa';
 
