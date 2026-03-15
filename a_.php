@@ -1,6 +1,6 @@
 <?php
 if (is_file('./webunion.php')){include_once './webunion.php';}
-
+session_name('PS' . md5(__DIR__));
 session_start();
 
 define('otoban', 'ROOT');
