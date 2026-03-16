@@ -2053,8 +2053,7 @@ thead.sticky.scrolled th {
     }
 }
 
-
-
+/*WS Dropdown*/
 .ws_dropdown-kutu {
 	position: relative;
 	display: inline-block;
@@ -2093,7 +2092,7 @@ thead.sticky.scrolled th {
 
 .ws_dropdown-kutu .ws_dropdown-baslik:hover,
 .ws_dropdown-acik .ws_dropdown-baslik {
-	border-color: #587ac30c;
+	border-color: #5879c3;
 }
 
 .ws_dropdown-kutu .ws_dropdown-icerik {
@@ -2101,6 +2100,8 @@ thead.sticky.scrolled th {
 	top: 100%;
 	right: 0;
 	min-width: 100%;
+	width: max-content;
+	max-width: 280px;
 	display: none;
 	background-color: #ffffff;
 	max-height: 200px;
@@ -2108,6 +2109,16 @@ thead.sticky.scrolled th {
 	z-index: 101;
 	border-radius: 4px;
 	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.ws_dropdown-kutu.ws_left .ws_dropdown-icerik {
+	left: 0;
+	right: auto;
+}
+
+.ws_dropdown-kutu.ws_right .ws_dropdown-icerik {
+	right: 0;
+	left: auto;
 }
 
 .ws_dropdown-acik .ws_dropdown-icerik {
@@ -2120,6 +2131,9 @@ thead.sticky.scrolled th {
 	cursor: pointer;
 	transition: background-color 0.2s ease;
 	color: #222;
+	white-space: nowrap;
+	display: block;
+	text-decoration: none;
 }
 
 .ws_dropdown-kutu .ws_dropdown-secenek:hover,
@@ -2144,6 +2158,30 @@ thead.sticky.scrolled th {
 	margin: 8px 0;
 	overflow: hidden;
 	border-top: 1px solid #e9ecef;
+}
+
+
+.ws_dropdown-kutu.ws_dil-tipi .ws_dropdown-baslik,
+.ws_dropdown-kutu.ws_dil-tipi .ws_dropdown-secenek {
+	text-transform: uppercase;
+}
+
+.ws_dropdown-baslik.ws_dilbu {
+	text-transform: uppercase;
+}
+
+.ws_dropdown-kutu.ws_rezervasyon_kutu .ws_dropdown-baslik {
+	background: rgba(255, 255, 255, 0.15);
+	color: #ffffff;
+	border-radius: 4px;
+}
+
+.ws_dropdown-kutu.ws_rezervasyon_kutu .ws_dropdown-baslik a {
+	color: #ffffff;
+}
+.ws_diger_diller,
+.ws_diger_pblar {
+	color: #222;
 }
 
 
