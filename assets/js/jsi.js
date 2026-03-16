@@ -361,7 +361,7 @@ function formatHTML(html) {
 
 $(document).ready(function () {
 
-	$('.uye_cikis').on('click', function (e) {
+	$('.ws_uye_cikis, .uye_cikis').on('click', function (e) {
 		e.preventDefault();
 
 		$.ajax({
