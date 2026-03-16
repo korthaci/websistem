@@ -6,64 +6,40 @@ $nestable_menu->menu();
 $yaz_s = '';
 $yaz_sekme = '';
 $yaz_b = '';
+$where_char_length = DB_TYPE == 'mysql' ? "CHAR_LENGTH" : "LENGTH";
 
-//no 	tablo 	tablo_no 	ust_menu_no 	sira 	
-$sayfalar_query = "SELECT no, adi FROM {$do_}sayfa WHERE CHAR_LENGTH(adi) < 30 AND yayin=1";
-$stmt = $pdo->prepare($sayfalar_query);
-$stmt->execute();
-$menu_sayfalar = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-if ($menu_sayfalar) {
-	$yaz_s .= yc("Sayfalar") . ' :<br/>';
-	$yaz_s .= '<select class="menu_sayfa_select chosen" data-placeholder="'.yc("Sayfa seç").'" multiple>';
-	foreach ($menu_sayfalar as $m1){
-		$menu_sayfa_query = "SELECT no FROM {$do_}menu WHERE tablo='sayfa' AND tablo_no=?";
-		$stmt_sayfa = $pdo->prepare($menu_sayfa_query);
-		$stmt_sayfa->execute([$m1->no]);
-		$menudeki_sayfa_no = $stmt_sayfa->fetchColumn();
-		$disabled = $menudeki_sayfa_no ? ' disabled' : '';
-		
-		$yaz_s .= '<option value="'.$m1->no.'" data-sn="'.$menudeki_sayfa_no.'"'.$disabled.'>'.$m1->adi.'</option>';
-	}
-	$yaz_s .= '</select>
-	<button class="menu_ekle_buton uis-btn uis-btn-sm uis-btn-success" data-t="sayfa">'.yc("Ekle").'</button>';
+// Ortak menü öğesi oluşturma fonksiyonu
+function menu_ogesi_olustur($pdo, $do_, $tablo, $tablo_adi, $where_char_length) {
+    $query = "SELECT no, adi FROM {$do_}{$tablo} WHERE " . $where_char_length . "(adi) < 30 AND yayin=1";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $items = $stmt->fetchAll(PDO::FETCH_OBJ);
+    
+    $output = '';
+    if ($items) {
+        $output .= ($tablo === 'sayfa' ? '' : '<br/><br/>') . yc($tablo_adi) . ' :<br/>';
+        $output .= '<select class="menu_' . $tablo . '_select chosen" data-placeholder="' . yc($tablo_adi . " seç") . '" multiple>';
+        
+        foreach ($items as $item) {
+            $menu_query = "SELECT no FROM {$do_}menu WHERE tablo=? AND tablo_no=?";
+            $stmt_menu = $pdo->prepare($menu_query);
+            $stmt_menu->execute([$tablo, $item->no]);
+            $menudeki_no = $stmt_menu->fetchColumn();
+            $disabled = $menudeki_no ? ' disabled' : '';
+            
+            $output .= '<option value="' . $item->no . '" data-sn="' . $menudeki_no . '"' . $disabled . '>' . $item->adi . '</option>';
+        }
+        
+        $output .= '</select> <button class="menu_ekle_buton uis-btn uis-btn-sm uis-btn-success" data-t="' . $tablo . '">' . yc("Ekle") . '</button>';
+    }
+    
+    return $output;
 }
 
-$sekmeler_query = "SELECT no, adi FROM {$do_}sekme WHERE CHAR_LENGTH(adi) < 30 AND yayin=1";
-$stmt_sekme = $pdo->prepare($sekmeler_query);
-$stmt_sekme->execute();
-$menu_sekmeler = $stmt_sekme->fetchAll(PDO::FETCH_OBJ);
-
-if ($menu_sekmeler) {
-	$yaz_sekme .= '<br/><br/>'.yc("Sekmeler").' :<br/><select class="menu_sekme_select chosen" data-placeholder="'.yc("Sekme seç").'" multiple>';
-	foreach ($menu_sekmeler as $m1){
-		$menu_sekme_query = "SELECT no FROM {$do_}menu WHERE tablo='sekme' AND tablo_no=?";
-		$stmt_sekme_no = $pdo->prepare($menu_sekme_query);
-		$stmt_sekme_no->execute([$m1->no]);
-		$menudeki_sekme_no = $stmt_sekme_no->fetchColumn();
-		$disabled = $menudeki_sekme_no ? ' disabled' : '';
-	$yaz_sekme .= '<option value="'.$m1->no.'" data-sn="'.$menudeki_sekme_no.'"'.$disabled.'>'.$m1->adi.'</option>';
-	}
-	$yaz_sekme .= '</select> <button class="menu_ekle_buton uis-btn uis-btn-sm uis-btn-success" data-t="sekme">'.yc("Ekle").'</button>';
-}
-
-$bloklar_query = "SELECT no, adi FROM {$do_}blok_html WHERE CHAR_LENGTH(adi) < 30 AND yayin=1";
-$stmt_blok = $pdo->prepare($bloklar_query);
-$stmt_blok->execute();
-$menu_bloklar = $stmt_blok->fetchAll(PDO::FETCH_OBJ);
-
-if ($menu_bloklar) {
-$yaz_b .= '<br/><br/>'.yc('Bloklar').' :<br/><select class="menu_blok_html_select chosen" data-placeholder="'.yc("Blok seç").'" multiple>';
-	foreach ($menu_bloklar as $m1){
-		$menu_blok_query = "SELECT no FROM {$do_}menu WHERE tablo='blok_html' AND tablo_no=?";
-		$stmt_blok_no = $pdo->prepare($menu_blok_query);
-		$stmt_blok_no->execute([$m1->no]);
-		$menudeki_blok_no = $stmt_blok_no->fetchColumn();
-		$disabled = $menudeki_blok_no ? ' disabled' : '';
-	$yaz_b .= '<option value="'.$m1->no.'" data-sn="'.$menudeki_blok_no.'"'.$disabled.'>'.$m1->adi.'</option>';
-	}
-$yaz_b .= '</select> <button class="menu_ekle_buton uis-btn uis-btn-sm uis-btn-success" data-t="blok_html">'.yc("Ekle").'</button>';
-}
+// Sayfalar, Sekmeler ve Bloklar için menü öğelerini oluştur
+$yaz_s = menu_ogesi_olustur($pdo, $do_, 'sayfa', 'Sayfalar', $where_char_length);
+$yaz_sekme = menu_ogesi_olustur($pdo, $do_, 'sekme', 'Sekmeler', $where_char_length);
+$yaz_b = menu_ogesi_olustur($pdo, $do_, 'blok_html', 'Bloklar', $where_char_length);
 
 echo '
 <h4>'. yc("Menü maddeleri").'</h4>
