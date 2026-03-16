@@ -1225,126 +1225,123 @@ $(document).ready(function () {
 		startTyping();
 	});
 
-	/*
-	document.querySelectorAll('.dropdown-kutu').forEach(kutu => {
-		const dropdownBaslik = kutu.querySelector('.dropdown-baslik');
-		const dropdownIcerik = kutu.querySelector('.dropdown-icerik');
+});
 
-		let hiddenInput = null;
-		if (kutu.dataset.inputName) {
-			hiddenInput = document.createElement('input');
-			hiddenInput.type = 'hidden';
-			hiddenInput.name = kutu.dataset.inputName;
-			hiddenInput.value = kutu.dataset.defaultValue || '';
-			kutu.appendChild(hiddenInput);
-		}
 
-		// Başlangıçta içeriği gizle
-		if (dropdownIcerik) {
-			//dropdownIcerik.style.display = 'none';
-		}
+/*WS Dropdown*/
+(function() {
+	'use strict';
 
-		const seciliSecenek = kutu.querySelector('.dropdown-secenek.secili');
-		if (seciliSecenek && dropdownBaslik) {
-			dropdownBaslik.innerHTML = seciliSecenek.innerHTML;
+	function initWSDropdowns() {
+		document.querySelectorAll('.ws_dropdown-kutu').forEach(kutu => {
+			const dropdownBaslik = kutu.querySelector('.ws_dropdown-baslik');
+			const dropdownIcerik = kutu.querySelector('.ws_dropdown-icerik');
 
-			if (hiddenInput) {
-				hiddenInput.value = seciliSecenek.dataset.value || seciliSecenek.textContent.trim();
+			if (!dropdownBaslik || !dropdownIcerik) return;
+
+			let hiddenInput = null;
+			if (kutu.dataset.inputName) {
+				hiddenInput = document.createElement('input');
+				hiddenInput.type = 'hidden';
+				hiddenInput.name = kutu.dataset.inputName;
+				hiddenInput.value = kutu.dataset.defaultValue || '';
+				kutu.appendChild(hiddenInput);
 			}
-		}
 
-		if (dropdownBaslik) {
-			dropdownBaslik.addEventListener('click', function (e) {
-				if (dropdownBaslik.classList.contains("pd_")) {
+			const seciliSecenek = kutu.querySelector('.ws_dropdown-secenek.ws_secili');
+			if (seciliSecenek) {
+				dropdownBaslik.innerHTML = seciliSecenek.innerHTML;
+				if (hiddenInput) {
+					hiddenInput.value = seciliSecenek.dataset.value || seciliSecenek.textContent.trim();
+				}
+			}
+
+			dropdownBaslik.addEventListener('click', function(e) {
+				if (dropdownBaslik.classList.contains("ws_pd_")) {
 					e.preventDefault();
 				}
 				e.stopPropagation();
 
-				const isOpen = kutu.classList.contains('dropdown-acik');
+				const isOpen = kutu.classList.contains('ws_dropdown-acik');
 
-				if (isOpen) {
-					kutu.classList.remove('dropdown-acik');
-				} else {
-					document.querySelectorAll('.dropdown-acik').forEach(dk => {
+				if (!isOpen) {
+					document.querySelectorAll('.ws_dropdown-acik').forEach(dk => {
 						if (dk !== kutu) {
-							dk.classList.remove('dropdown-acik');
+							dk.classList.remove('ws_dropdown-acik');
 						}
 					});
-
-					kutu.classList.add('dropdown-acik');
 				}
+
+				kutu.classList.toggle('ws_dropdown-acik');
 			});
-		}
 
-		// Seçeneklere tıklama işlemi
-		kutu.querySelectorAll('.dropdown-secenek').forEach(el => {
-			el.addEventListener('click', function (e) {
-				e.preventDefault();
-				e.stopPropagation();
+			kutu.querySelectorAll('.ws_dropdown-secenek').forEach(el => {
+				el.addEventListener('click', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
 
-				const value = this.dataset.value || this.textContent.trim();
+					const value = this.dataset.value || this.textContent.trim();
 
-				// Seçili sınıfını güncelle
-				kutu.querySelectorAll('.dropdown-secenek').forEach(option => {
-					option.classList.remove('secili');
-				});
-				this.classList.add('secili');
+					kutu.querySelectorAll('.ws_dropdown-secenek').forEach(option => {
+						option.classList.remove('ws_secili');
+					});
+					this.classList.add('ws_secili');
 
-				// Görünür metni güncelle
-				if (dropdownBaslik) {
 					dropdownBaslik.innerHTML = this.innerHTML;
-				}
 
-				// Gizli input değerini güncelle
-				if (hiddenInput) {
-					hiddenInput.value = value;
-				}
+					if (hiddenInput) {
+						hiddenInput.value = value;
+					}
 
-				// Dropdown'ı kapat
-				kutu.classList.remove('dropdown-acik');
+					kutu.classList.remove('ws_dropdown-acik');
 
-				// Özel işlemler - cookie, URL, reload (data-* ile kontrol)
-				if (this.dataset.cookieName) {
-					document.cookie = `${this.dataset.cookieName}=${this.dataset.cookieValue || value}; path=/; max-age=86400`;
-				}
+					if (this.dataset.cookieName) {
+						const cookieValue = this.dataset.cookieValue || value;
+						document.cookie = `${this.dataset.cookieName}=${cookieValue}; path=/; max-age=86400`;
+					}
 
-				if (this.dataset.updateUrl) {
-					const url = new URL(window.location.href);
-					url.searchParams.set(this.dataset.updateUrl, this.dataset.value || value);
-					window.history.replaceState({}, '', url);
-				}
+					if (this.dataset.updateUrl) {
+						const url = new URL(window.location.href);
+						url.searchParams.set(this.dataset.updateUrl, this.dataset.value || value);
+						window.history.replaceState({}, '', url);
+					}
 
-				if (this.dataset.reload === 'true') {
-					window.location.reload();
-				}
+					if (this.dataset.reload === 'true') {
+						window.location.reload();
+						return;
+					}
 
-				// Değişiklik olayı tetikle
-				const changeEvent = new CustomEvent('dropdown-change', {
-					detail: {
-						element: kutu,
-						value: value,
-						option: this
-					},
-					bubbles: true
+					const changeEvent = new CustomEvent('ws-dropdown-change', {
+						detail: {
+							element: kutu,
+							value: value,
+							option: this
+						},
+						bubbles: true
+					});
+					kutu.dispatchEvent(changeEvent);
+
+					if (kutu.dataset.onchange && typeof window[kutu.dataset.onchange] === 'function') {
+						window[kutu.dataset.onchange](value, kutu);
+					}
 				});
-				kutu.dispatchEvent(changeEvent);
-
-				// onChange callback'i varsa çağır
-				if (typeof window[kutu.dataset.onchange] === 'function') {
-					window[kutu.dataset.onchange](value, kutu);
-				}
 			});
 		});
 
-		// Dropdown dışına tıklandığında kapat
-		document.addEventListener('click', function (e) {
-			if (!kutu.contains(e.target)) {
-				kutu.classList.remove('dropdown-acik');
+		document.addEventListener('click', function(e) {
+			if (!e.target.closest('.ws_dropdown-kutu')) {
+				document.querySelectorAll('.ws_dropdown-acik').forEach(dd => {
+					dd.classList.remove('ws_dropdown-acik');
+				});
 			}
 		});
-	});
-	*/
+	}
 
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initWSDropdowns);
+	} else {
+		initWSDropdowns();
+	}
 
-
-});
+	window.wsDropdownRefresh = initWSDropdowns;
+})();

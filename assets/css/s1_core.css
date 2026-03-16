@@ -2054,6 +2054,92 @@ thead.sticky.scrolled th {
 }
 
 
+
+.ws_dropdown-kutu {
+	position: relative;
+	display: inline-block;
+	font-size: 14px;
+	user-select: none;
+	z-index: 100;
+	transition: all 0.3s ease;
+}
+
+.ws_dropdown-acik {
+	z-index: 102;
+}
+
+.ws_dropdown-kutu .ws_dropdown-baslik {
+	padding: 6px 12px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border: 1px solid transparent;
+}
+
+.ws_dropdown-acik .ws_dropdown-baslik {
+	font-weight: 500;
+}
+
+.ws_dropdown-kutu .ws_dropdown-baslik.ws_dropdown-arrow::after {
+	content: "▼";
+	font-size: 10px;
+	margin-left: 8px;
+	color: #777;
+	transition: transform 0.2s ease;
+}
+
+.ws_dropdown-acik .ws_dropdown-baslik.ws_dropdown-arrow::after {
+	transform: rotate(180deg);
+}
+
+.ws_dropdown-kutu .ws_dropdown-baslik:hover,
+.ws_dropdown-acik .ws_dropdown-baslik {
+	border-color: #587ac30c;
+}
+
+.ws_dropdown-kutu .ws_dropdown-icerik {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	min-width: 100%;
+	display: none;
+	background-color: #ffffff;
+	max-height: 200px;
+	overflow-y: auto;
+	z-index: 101;
+	border-radius: 4px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.ws_dropdown-acik .ws_dropdown-icerik {
+	display: block;
+}
+
+.ws_dropdown-kutu .ws_dropdown-secenek,
+.ws_dropdown-secenek_link {
+	padding: 8px 14px;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	color: #222;
+}
+
+.ws_dropdown-kutu .ws_dropdown-secenek:hover,
+.ws_dropdown-secenek_link:hover {
+	background-color: #f5f5f5;
+	color: #5879c3;
+}
+
+.ws_dropdown-kutu .ws_dropdown-secenek.ws_secili,
+.ws_dropdown-secenek_link.ws_secili {
+	background-color: #5879c3;
+	color: white;
+}
+
+.ws_dropdown-baslik i {
+	margin-right: 8px;
+	font-size: 12px;
+}
+
+
 .iti {
 	display: block;
 	margin-bottom: 4px;
