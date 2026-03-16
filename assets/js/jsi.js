@@ -1263,7 +1263,6 @@ $(document).ready(function () {
 				e.stopPropagation();
 
 				const isOpen = kutu.classList.contains('ws_dropdown-acik');
-
 				if (!isOpen) {
 					document.querySelectorAll('.ws_dropdown-acik').forEach(dk => {
 						if (dk !== kutu) {
@@ -1277,6 +1276,13 @@ $(document).ready(function () {
 
 			kutu.querySelectorAll('.ws_dropdown-secenek').forEach(el => {
 				el.addEventListener('click', function(e) {
+					const isLink = this.tagName === 'A' && this.getAttribute('href') && this.getAttribute('href') !== '#';
+					const hasDataAttributes = this.dataset.value || this.dataset.cookieName || this.dataset.updateUrl || this.dataset.reload;
+					if (isLink && !hasDataAttributes) {
+						kutu.classList.remove('ws_dropdown-acik');
+						return;
+					}
+
 					e.preventDefault();
 					e.stopPropagation();
 
@@ -1292,7 +1298,6 @@ $(document).ready(function () {
 					if (hiddenInput) {
 						hiddenInput.value = value;
 					}
-
 					kutu.classList.remove('ws_dropdown-acik');
 
 					if (this.dataset.cookieName) {
