@@ -1,8 +1,7 @@
 {{__if%uyegiris%
 
-<div class="dropdown uye_kutu">
-    <div class="dropdown-toggle cursorp" id="userDropdown" role="button" data-bs-toggle="dropdown"
-        aria-expanded="false">
+<div class="ws_dropdown-kutu ws_uye_kutu">
+    <div class="ws_dropdown-baslik ws_dropdown-arrow cursorp">
         {{__if_2%uye_foto_var%
         <img src="{{$:uye_foto}}" class="g_20_ rounded-circle" alt="" />
         ||
@@ -10,19 +9,17 @@
         __endif_2}}
         {{$:uye_adi_str}}
     </div>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-        <li><a class="dropdown-item" href="uis/uyegiris">·Giriş·</a></li>
-        <li><a class="dropdown-item" href="uis/bilgileriduzenle">·Profil Düzenle·</a></li>
-        <li>
-            <hr class="dropdown-divider">
-        </li>
-        <li><a class="dropdown-item uye_cikis" href="#">·Çıkış Yap·</a></li>
-    </ul>
+    <div class="ws_dropdown-icerik">
+        <a href="uis/uyegiris" class="ws_dropdown-secenek">·Giriş·</a>
+        <a href="uis/bilgileriduzenle" class="ws_dropdown-secenek">·Profil Düzenle·</a>
+        <div class="ws_dropdown-divider"></div>
+        <a href="#" class="ws_dropdown-secenek ws_uye_cikis">·Çıkış Yap·</a>
+    </div>
 </div>
 
 ||
 
-<div class="uye_giris_kutu">
+<div class="ws_uye_giris_kutu">
     <a class="nav-link" href="uis/uyegiris">
         <i class="fas fa-user"></i> <span class="d-none d-md-inline-block">·Üye Girişi·</span>
     </a>

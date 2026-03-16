@@ -2139,6 +2139,13 @@ thead.sticky.scrolled th {
 	font-size: 12px;
 }
 
+.ws_dropdown-divider {
+	height: 0;
+	margin: 8px 0;
+	overflow: hidden;
+	border-top: 1px solid #e9ecef;
+}
+
 
 .iti {
 	display: block;
