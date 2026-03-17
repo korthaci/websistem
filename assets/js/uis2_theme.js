@@ -356,7 +356,7 @@ $(function () {
         const showSwitch = () => {
             if ($('#ws-ui-pos-switch').length) return;
             const $switch = $(`
-                <div id="ws-ui-pos-switch" title="UI Ayarlayıcıyı Aç" style="position:absolute; bottom:60px; left:14px; z-index:9999; cursor:pointer; color:#8994a1; font-size:14px; opacity:0.5; transition:all 0.3s; display:flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:4px; background:rgba(255,255,255,0.05);" onmouseover="this.style.opacity='1'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.opacity='0.5'; this.style.background='rgba(255,255,255,0.05)';">
+                <div id="ws-ui-pos-switch" title="UI Ayarlayıcıyı Aç" style="position:absolute; bottom:60px; left:12px; z-index:9999; cursor:pointer; color:#8994a1; font-size:14px; opacity:0.5; transition:all 0.3s; display:flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:4px; background:rgba(255,255,255,0.05);" onmouseover="this.style.opacity='1'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.opacity='0.5'; this.style.background='rgba(255,255,255,0.05)';">
                     ↕
                 </div>
             `);
@@ -370,7 +370,7 @@ $(function () {
         const showAdjuster = () => {
             if ($('#ws-ui-pos-adjuster').length) return;
             const $adjuster = $(`
-                <div id="ws-ui-pos-adjuster" style="position:absolute; bottom:60px; left:14px; z-index:9999; display:flex; flex-direction:column; gap:4px; background:rgba(15,23,42,0.9); backdrop-filter:blur(8px); padding:6px 4px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                <div id="ws-ui-pos-adjuster" style="position:absolute; bottom:60px; left:12px; z-index:9999; display:flex; flex-direction:column; gap:4px; background:rgba(15,23,42,0.9); backdrop-filter:blur(8px); padding:6px 4px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
                     <button class="adj-btn up" aria-label="Yukarı" title="Yukarı (+Shift+Alt+Up)" style="background:rgba(255,255,255,0.05); border:0; color:#cbd5e1; width:22px; height:22px; border-radius:4px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; outline:none;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
                         <i class="fas fa-chevron-up" style="font-size: 10px;"></i>
                     </button>
