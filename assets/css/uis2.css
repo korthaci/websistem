@@ -982,8 +982,9 @@
 
 .uis-theme-toggle {
     position: absolute;
-    bottom: 30px;
-    left: 15px;
+    bottom: 10px;
+    left: 18px;
+    color: #0000006e;
 }
 
 
