@@ -10,7 +10,7 @@
 	backdrop-filter: blur(10px);
 	display: inline-block !important;
 	top: -20px;
-	padding-top: 20px;
+	padding: 20px 0px 0px 0px!important;
 }
 
 .ws_sidebar:hover,
