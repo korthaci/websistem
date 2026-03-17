@@ -1225,53 +1225,6 @@ $(document).ready(function () {
 		startTyping();
 	});
 
-	/* Dynamic UI Position Adjuster *//*
-	const $uiMain = $('.__ui [data-main], .__ui main#main');
-	if ($uiMain.length) {
-		const storedOffset = localStorage.getItem('uis_main_offset') || 0;
-		if (storedOffset != 0) {
-			$uiMain.css('margin-top', storedOffset + 'px');
-		}
-
-		const $adjuster = $(`
-			<div id="ws-ui-pos-adjuster" style="position:fixed; right:0; top:50%; transform:translateY(-50%); z-index:9999; display:flex; flex-direction:column; gap:4px; background:rgba(15,23,42,0.8); backdrop-filter:blur(8px); padding:6px 4px; border-radius:8px 0 0 8px; border:1px solid rgba(255,255,255,0.1); border-right:0; box-shadow: 0 4px 15px rgba(0,0,0,0.3); opacity:0.3; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.3'">
-				<button class="adj-btn up" aria-label="Yukarı Kaydır" title="Yukarı (+Shift+Alt+Up)" style="background:rgba(255,255,255,0.05); border:0; color:#cbd5e1; width:22px; height:22px; border-radius:4px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; outline:none;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-					<i class="fas fa-chevron-up" style="font-size: 10px;"></i>
-				</button>
-				<button class="adj-btn reset" aria-label="Pozisyonu Sıfırla" title="Sıfırla" style="background:rgba(255,255,255,0.05); border:0; color:#cbd5e1; width:22px; height:22px; border-radius:4px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; outline:none;" onmouseover="this.style.background='rgba(15,118,110,0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-					<i class="fas fa-undo-alt" style="font-size: 9px;"></i>
-				</button>
-				<button class="adj-btn down" aria-label="Aşağı Kaydır" title="Aşağı (+Shift+Alt+Down)" style="background:rgba(255,255,255,0.05); border:0; color:#cbd5e1; width:22px; height:22px; border-radius:4px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; outline:none;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-					<i class="fas fa-chevron-down" style="font-size: 10px;"></i>
-				</button>
-			</div>
-		`);
-
-		$('body').append($adjuster);
-
-		const updatePos = (delta) => {
-			let current = parseInt($uiMain.css('margin-top')) || 0;
-			let newVal = current + delta;
-			$uiMain.css('margin-top', newVal + 'px');
-			localStorage.setItem('uis_main_offset', newVal);
-		};
-
-		$adjuster.find('.up').on('click', () => updatePos(-25));
-		$adjuster.find('.down').on('click', () => updatePos(25));
-		$adjuster.find('.reset').on('click', () => {
-			$uiMain.css('margin-top', '');
-			localStorage.removeItem('uis_main_offset');
-		});
-
-		// Keyboard shortcut support (Shift + Alt + Arrows)
-		$(document).on('keydown', function(e) {
-			if (e.altKey && e.shiftKey) {
-				if (e.key === 'ArrowUp') { e.preventDefault(); updatePos(-25); }
-				if (e.key === 'ArrowDown') { e.preventDefault(); updatePos(25); }
-			}
-		});
-	}
-	*/
 });
 
 
