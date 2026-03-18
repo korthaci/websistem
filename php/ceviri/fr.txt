@@ -1,3 +1,27 @@
+Bloklar başarıyla yedeklendi.:::Les blocs ont été sauvegardés avec succès.
+Yedek alınırken bir hata oluştu.:::Une erreur s&#39;est produite lors de la sauvegarde.
+Yedek dosyası belirtilmedi.:::Aucun fichier de sauvegarde n&#39;a été spécifié.
+Bloklar başarıyla geri yüklendi.:::Les blocs ont été restaurés avec succès.
+Bloklar geri yüklenirken hata oluştu.:::Une erreur s&#39;est produite lors du chargement des blocs.
+Erişim Engellendi:::Accès bloqué
+Sabitlenmiş  tema güvenlik nedeniyle düzenlenemez.:::Le thème épinglé ne peut pas être modifié pour des raisons de sécurité.
+Blokları Yedekle:::Sauvegarder les blocs
+Değişkenler:::Variables
+Blok Yapılandırma & Yedekleri:::Configuration des blocs et sauvegardes
+JSON formatında saklanan anasayfa blokları:::Blocs de page d&#39;accueil enregistrés au format JSON
+Yedek Adı / Tipi:::Nom / Type de pièce de rechange
+Fabrika Verisi:::Données d&#39;usine
+Tüm bloklar silinecek ve temanın orijinal blokları yüklenecektir. Emin misiniz:::Tous les blocs seront supprimés et les blocs d&#39;origine du thème seront chargés. Êtes-vous sûr ?
+Orijinali Yükle:::Télécharger l&#39;original
+AI Studio:::AI Studio
+Admin Site yöneticisi:::Admin Administrateur du site
+Site Yöneticisi:::Administrateur du site
+Özel bölümler yöneticisi:::Responsable des sections spécialisées
+Normal üyelik:::Abonnement standard
+Geçersiz e-posta adresi.:::Adresse e-mail non valide.
+Eşleşen sonuç bulunamadı.:::Aucun résultat correspondant n&#39;a été trouvé.
+Açıklama ekle...:::Ajouter une description...
+Lütfen bir arama kelimesi giriniz.:::Veuillez saisir un mot-clé.
 Sistem v%s sürümünde çalışmaktadır.:::Le système fonctionne sur la version v%s.
 Menüde ara:::Rechercher dans le menu
 Tema Yönetimi:::Gestion des thèmes

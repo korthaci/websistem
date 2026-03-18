@@ -1,3 +1,27 @@
+Bloklar başarıyla yedeklendi.:::The blocks have been successfully backed up.
+Yedek alınırken bir hata oluştu.:::An error occurred while creating the backup.
+Yedek dosyası belirtilmedi.:::No backup file was specified.
+Bloklar başarıyla geri yüklendi.:::The blocks have been successfully restored.
+Bloklar geri yüklenirken hata oluştu.:::An error occurred while reloading the blocks.
+Erişim Engellendi:::Access Blocked
+Sabitlenmiş  tema güvenlik nedeniyle düzenlenemez.:::The pinned theme cannot be edited for security reasons.
+Blokları Yedekle:::Back Up Blocks
+Değişkenler:::Variables
+Blok Yapılandırma & Yedekleri:::Block Configuration & Backups
+JSON formatında saklanan anasayfa blokları:::Homepage blocks stored in JSON format
+Yedek Adı / Tipi:::Spare Part Name / Type
+Fabrika Verisi:::Factory Data
+Tüm bloklar silinecek ve temanın orijinal blokları yüklenecektir. Emin misiniz:::All blocks will be deleted and the theme&#39;s original blocks will be loaded. Are you sure?
+Orijinali Yükle:::Upload Original
+AI Studio:::AI Studio
+Admin Site yöneticisi:::Admin Site Administrator
+Site Yöneticisi:::Site Administrator
+Özel bölümler yöneticisi:::Manager of Special Sections
+Normal üyelik:::Standard membership
+Geçersiz e-posta adresi.:::Invalid email address.
+Eşleşen sonuç bulunamadı.:::No matching results were found.
+Açıklama ekle...:::Add a description...
+Lütfen bir arama kelimesi giriniz.:::Please enter a search term.
 Sistem v%s sürümünde çalışmaktadır.:::The system runs on v%s version.
 Menüde ara:::Search in menu
 Tema Yönetimi:::Theme Management

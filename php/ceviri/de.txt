@@ -1,3 +1,27 @@
+Bloklar başarıyla yedeklendi.:::Die Blöcke wurden erfolgreich gesichert.
+Yedek alınırken bir hata oluştu.:::Beim Erstellen der Sicherungskopie ist ein Fehler aufgetreten.
+Yedek dosyası belirtilmedi.:::Es wurde keine Sicherungsdatei angegeben.
+Bloklar başarıyla geri yüklendi.:::Die Blöcke wurden erfolgreich wiederhergestellt.
+Bloklar geri yüklenirken hata oluştu.:::Beim Laden der Blöcke ist ein Fehler aufgetreten.
+Erişim Engellendi:::Zugriff gesperrt
+Sabitlenmiş  tema güvenlik nedeniyle düzenlenemez.:::Das angeheftete Thema kann aus Sicherheitsgründen nicht bearbeitet werden.
+Blokları Yedekle:::Blöcke sichern
+Değişkenler:::Variablen
+Blok Yapılandırma & Yedekleri:::Blockkonfiguration & Backups
+JSON formatında saklanan anasayfa blokları:::Im JSON-Format gespeicherte Startseitenblöcke
+Yedek Adı / Tipi:::Ersatzteilbezeichnung / Typ
+Fabrika Verisi:::Werkseinstellung
+Tüm bloklar silinecek ve temanın orijinal blokları yüklenecektir. Emin misiniz:::Alle Blöcke werden gelöscht und die Originalblöcke des Themes werden geladen. Sind Sie sicher?
+Orijinali Yükle:::Original hochladen
+AI Studio:::AI Studio
+Admin Site yöneticisi:::Admin – Website-Administrator
+Site Yöneticisi:::Webmaster
+Özel bölümler yöneticisi:::Leiter der Sonderabteilungen
+Normal üyelik:::Standardmitgliedschaft
+Geçersiz e-posta adresi.:::Ungültige E-Mail-Adresse.
+Eşleşen sonuç bulunamadı.:::Es wurden keine passenden Ergebnisse gefunden.
+Açıklama ekle...:::Beschreibung hinzufügen...
+Lütfen bir arama kelimesi giriniz.:::Bitte geben Sie einen Suchbegriff ein.
 Sistem v%s sürümünde çalışmaktadır.:::Das System läuft auf der v%s -Version.
 Menüde ara:::Im Menü suchen
 Tema Yönetimi:::Themenverwaltung

@@ -1,18 +1,20 @@
-·İletişim formu aracılığıyla istek ve önerilerinizi bildirebilirsiniz·.<br/>
-<form id="iletisim_formu" method="post" action="#">
-	<input type="hidden" name="m_islem" value="mailgonder" />
-	<input type="hidden" name="m" value="iletisim_formu" />
-	<div class="form-group my-2">
-		<input type="text" name="adisoyadi" id="adisoyadi" class="form-control gerekli " placeholder="·Adınız Soyadınız·" required>
-	</div>
-	<div class="form-group my-2">
-		<input  type="text" name="emailadresi" class="form-control gerekli" placeholder="·E posta adresiniz·" required>
-	</div>
-	<div class="form-group my-2">
-		<input  type="text" name="telefon" id="telefon" class="form-control gerekli" placeholder="·Telefon·" required>
-	</div>
-	<div class="form-group my-2">
-		<textarea name="mesaj" rows="4" id="text" class="form-control gerekli g_99__" placeholder="·Mesajınız·" required></textarea>
-	</div>
-	<button type="submit" id="iletisimformgonder" class="btn btn-primary mt-3"><span class="text-white pr-3"><i class="fa fa-paper-plane"></i> </span>·Gönder·</button>
-</form>
+ <form id="iletisim_formu" method="post" action="#">
+        <input type="hidden" name="m_islem" value="mailgonder" />
+        <input type="hidden" name="m" value="iletisim_formu" />
+        <div class="cf-group">
+          <input type="text" name="adisoyadi" id="adisoyadi" class="cf-input gerekli" placeholder="·Adınız Soyadınız·" required>
+        </div>
+        <div class="cf-group">
+          <input type="email" name="emailadresi" class="cf-input gerekli" placeholder="·E-posta adresiniz·" required>
+        </div>
+        <div class="cf-group">
+          <input type="tel" name="telefon" id="telefon" class="cf-input gerekli" placeholder="·Telefon·" required>
+        </div>
+        <div class="cf-group">
+          <textarea name="mesaj" rows="5" id="text" class="cf-input gerekli g_99__" placeholder="·Mesajınız·" required></textarea>
+        </div>
+        <button type="submit" id="iletisimformgonder" class="cf-btn">
+          <span>Gönder</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 4l5 4-5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>

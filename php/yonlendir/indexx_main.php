@@ -4,10 +4,11 @@ $stmt = $pdo->prepare("SELECT no, adi, icerik, hash FROM {$do_}blok_html WHERE y
 $stmt->execute([':tema' => $so_->d('tema')]);
 
 foreach ($stmt->fetchAll() as $blok) {
+
+	echo '<a class="cb_" id="blok_' . $blok->hash . '"></a>';
 	echo degisken_duzenle(
 		html_modul(
 			html_a(cc($blok->icerik, $blok->no, 'blok_html', 'icerik'))
 		)
 	);
-	echo '<a class="cb_" id="blok_' . $blok->hash . '"></a>';
 }

@@ -1,3 +1,27 @@
+Bloklar başarıyla yedeklendi.:::
+Yedek alınırken bir hata oluştu.:::
+Yedek dosyası belirtilmedi.:::
+Bloklar başarıyla geri yüklendi.:::
+Bloklar geri yüklenirken hata oluştu.:::
+Erişim Engellendi:::
+Sabitlenmiş  tema güvenlik nedeniyle düzenlenemez.:::
+Blokları Yedekle:::
+Değişkenler:::
+Blok Yapılandırma & Yedekleri:::
+JSON formatında saklanan anasayfa blokları:::
+Yedek Adı / Tipi:::
+Fabrika Verisi:::
+Tüm bloklar silinecek ve temanın orijinal blokları yüklenecektir. Emin misiniz:::
+Orijinali Yükle:::
+AI Studio:::
+Admin Site yöneticisi:::
+Site Yöneticisi:::
+Özel bölümler yöneticisi:::
+Normal üyelik:::
+Geçersiz e-posta adresi.:::
+Eşleşen sonuç bulunamadı.:::
+Açıklama ekle...:::
+Lütfen bir arama kelimesi giriniz.:::
 Sistem v%s sürümünde çalışmaktadır.:::
 Menüde ara:::
 Tema Yönetimi:::

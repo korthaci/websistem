@@ -1,3 +1,27 @@
+Bloklar başarıyla yedeklendi.:::Bloklar başarıyla yedeklendi.
+Yedek alınırken bir hata oluştu.:::Yedek alınırken bir hata oluştu.
+Yedek dosyası belirtilmedi.:::Yedek dosyası belirtilmedi.
+Bloklar başarıyla geri yüklendi.:::Bloklar başarıyla geri yüklendi.
+Bloklar geri yüklenirken hata oluştu.:::Bloklar geri yüklenirken hata oluştu.
+Erişim Engellendi:::Erişim Engellendi
+Sabitlenmiş  tema güvenlik nedeniyle düzenlenemez.:::Sabitlenmiş tema güvenlik nedeniyle düzenlenemez.
+Blokları Yedekle:::Blokları Yedekle
+Değişkenler:::Değişkenler
+Blok Yapılandırma & Yedekleri:::Blok Yapılandırma & Yedekleri
+JSON formatında saklanan anasayfa blokları:::JSON formatında saklanan anasayfa blokları
+Yedek Adı / Tipi:::Yedek Adı / Tipi
+Fabrika Verisi:::Fabrika Verisi
+Tüm bloklar silinecek ve temanın orijinal blokları yüklenecektir. Emin misiniz:::Tüm bloklar silinecek ve temanın orijinal blokları yüklenecektir. Emin misiniz
+Orijinali Yükle:::Orijinali Yükle
+AI Studio:::AI Studio
+Admin Site yöneticisi:::Admin Site yöneticisi
+Site Yöneticisi:::Site Yöneticisi
+Özel bölümler yöneticisi:::Özel bölümler yöneticisi
+Normal üyelik:::Normal üyelik
+Geçersiz e-posta adresi.:::Geçersiz e-posta adresi.
+Eşleşen sonuç bulunamadı.:::Eşleşen sonuç bulunamadı.
+Açıklama ekle...:::Açıklama ekle...
+Lütfen bir arama kelimesi giriniz.:::Lütfen bir arama kelimesi giriniz.
 Sistem v%s sürümünde çalışmaktadır.:::Sistem v%s sürümünde çalışmaktadır.
 Menüde ara:::Menüde ara
 Tema Yönetimi:::Tema Yönetimi

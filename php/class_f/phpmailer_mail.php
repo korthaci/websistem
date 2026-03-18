@@ -9,7 +9,7 @@ class phpmailer_mail {
     private int $smtp_debug;
     private bool $local_test = false;
     public bool $gonderildi;
-    public string $bcc_mail;
+    public string $bcc_mail = '';
 
     public function __construct(array $smtp_dizi, int $smtp_debug = 0) {
         $this->smtp_dizi = $smtp_dizi;
@@ -67,7 +67,8 @@ class phpmailer_mail {
         $this->gonderildi = false;
         $mail = new PHPMailer(true);
 
-        $subject_domain = strtoupper(preg_replace('/[^a-zA-Z0-9]+/i', '.', $_SERVER['SERVER_NAME']));
+        $serverName = $_SERVER['SERVER_NAME'] ?? 'localhost';
+        $subject_domain = strtoupper(preg_replace('/[^a-zA-Z0-9]+/i', '.', $serverName));
         $set_from_mail = $this->smtp_dizi[$this->server]['from'] ?: $this->smtp_dizi[$this->server]['k_adi'];
 
         try {
@@ -144,11 +145,12 @@ class phpmailer_mail {
         $serverConfig = $this->smtp_dizi[$this->server];
 
         if ($method === 'smtp' || $this->server === 'local') {
-            $dsn = match($serverConfig['port']) {
-                defined('SMTP_PORT_SSL') && SMTP_PORT_SSL => 'smtps://' . $serverConfig['k_adi'] . ':' . $serverConfig['sifre'] . '@' . $serverConfig['host'] . ':' . $serverConfig['port'],
-                defined('SMTP_PORT_TLS') && SMTP_PORT_TLS => 'smtp://' . $serverConfig['k_adi'] . ':' . $serverConfig['sifre'] . '@' . $serverConfig['host'] . ':' . $serverConfig['port'],
-                default => 'smtp://' . $serverConfig['k_adi'] . ':' . $serverConfig['sifre'] . '@' . $serverConfig['host'] . ':' . $serverConfig['port'],
-            };
+            $port = $serverConfig['port'] ?? 587;
+            $protocol = 'smtp';
+            if ($port == 465 || (defined('SMTP_PORT_SSL') && $port == SMTP_PORT_SSL)) {
+                $protocol = 'smtps';
+            }
+            $dsn = "{$protocol}://{$serverConfig['k_adi']}:{$serverConfig['sifre']}@{$serverConfig['host']}:{$port}";
         } else {
             $dsn = $serverConfig['dsn'] ?? '';
         }

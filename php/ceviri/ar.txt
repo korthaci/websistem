@@ -1,3 +1,27 @@
+Bloklar başarıyla yedeklendi.:::تم نسخ الكتل احتياطيًا بنجاح.
+Yedek alınırken bir hata oluştu.:::حدث خطأ أثناء النسخ الاحتياطي.
+Yedek dosyası belirtilmedi.:::لم يتم تحديد ملف النسخة الاحتياطية.
+Bloklar başarıyla geri yüklendi.:::تمت إعادة تحميل الكتل بنجاح.
+Bloklar geri yüklenirken hata oluştu.:::حدث خطأ أثناء إعادة تحميل الكتل.
+Erişim Engellendi:::تم حظر الوصول
+Sabitlenmiş  tema güvenlik nedeniyle düzenlenemez.:::لا يمكن تعديل السمة الثابتة لأسباب أمنية.
+Blokları Yedekle:::نسخ الكتل احتياطيًا
+Değişkenler:::المتغيرات
+Blok Yapılandırma & Yedekleri:::تكوين الكتل والنسخ الاحتياطية
+JSON formatında saklanan anasayfa blokları:::كتل الصفحة الرئيسية المخزنة بتنسيق JSON
+Yedek Adı / Tipi:::الاسم الاحتياطي / النوع
+Fabrika Verisi:::بيانات المصنع
+Tüm bloklar silinecek ve temanın orijinal blokları yüklenecektir. Emin misiniz:::سيتم حذف جميع الكتل وتحميل الكتل الأصلية للقالب. هل أنت متأكد؟
+Orijinali Yükle:::تحميل النسخة الأصلية
+AI Studio:::AI Studio
+Admin Site yöneticisi:::المسؤول مسؤول الموقع
+Site Yöneticisi:::مدير الموقع
+Özel bölümler yöneticisi:::مدير الأقسام الخاصة
+Normal üyelik:::عضوية عادية
+Geçersiz e-posta adresi.:::عنوان بريد إلكتروني غير صالح.
+Eşleşen sonuç bulunamadı.:::لم يتم العثور على نتائج مطابقة.
+Açıklama ekle...:::أضف تعليقًا...
+Lütfen bir arama kelimesi giriniz.:::يرجى إدخال كلمة بحث.
 Sistem v%s sürümünde çalışmaktadır.:::يعمل النظام على الإصدار v%s.
 Menüde ara:::البحث في القائمة
 Tema Yönetimi:::إدارة الموضوعات

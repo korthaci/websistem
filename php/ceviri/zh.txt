@@ -1,3 +1,27 @@
+Bloklar başarıyla yedeklendi.:::区块已成功备份。
+Yedek alınırken bir hata oluştu.:::备份过程中发生错误。
+Yedek dosyası belirtilmedi.:::未指定备份文件。
+Bloklar başarıyla geri yüklendi.:::区块已成功恢复。
+Bloklar geri yüklenirken hata oluştu.:::在恢复区块时发生错误。
+Erişim Engellendi:::访问被阻止
+Sabitlenmiş  tema güvenlik nedeniyle düzenlenemez.:::出于安全考虑，固定主题无法进行编辑。
+Blokları Yedekle:::备份区块
+Değişkenler:::变量
+Blok Yapılandırma & Yedekleri:::区块配置与备份
+JSON formatında saklanan anasayfa blokları:::以JSON格式存储的首页模块
+Yedek Adı / Tipi:::备用名称 / 类型
+Fabrika Verisi:::出厂数据
+Tüm bloklar silinecek ve temanın orijinal blokları yüklenecektir. Emin misiniz:::所有模块都将被删除，并加载主题的原始模块。您确定吗？
+Orijinali Yükle:::上传原文件
+AI Studio:::AI Studio
+Admin Site yöneticisi:::管理员 网站管理员
+Site Yöneticisi:::网站管理员
+Özel bölümler yöneticisi:::特别栏目主管
+Normal üyelik:::普通会员
+Geçersiz e-posta adresi.:::电子邮件地址无效。
+Eşleşen sonuç bulunamadı.:::未找到匹配结果。
+Açıklama ekle...:::添加说明...
+Lütfen bir arama kelimesi giriniz.:::请输入搜索词。
 Sistem v%s sürümünde çalışmaktadır.:::系统运行在 v%s 版本上。
 Menüde ara:::在菜单中搜索
 Tema Yönetimi:::主题管理

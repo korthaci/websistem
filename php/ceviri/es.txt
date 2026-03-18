@@ -1,3 +1,27 @@
+Bloklar başarıyla yedeklendi.:::Los bloques se han copiado correctamente.
+Yedek alınırken bir hata oluştu.:::Se ha producido un error al realizar la copia de seguridad.
+Yedek dosyası belirtilmedi.:::No se ha especificado ningún archivo de copia de seguridad.
+Bloklar başarıyla geri yüklendi.:::Los bloques se han restaurado correctamente.
+Bloklar geri yüklenirken hata oluştu.:::Se ha producido un error al cargar los bloques.
+Erişim Engellendi:::Acceso bloqueado
+Sabitlenmiş  tema güvenlik nedeniyle düzenlenemez.:::El tema fijado no se puede modificar por motivos de seguridad.
+Blokları Yedekle:::Hacer una copia de seguridad de los bloques
+Değişkenler:::Variables
+Blok Yapılandırma & Yedekleri:::Configuración de bloques y copias de seguridad
+JSON formatında saklanan anasayfa blokları:::Bloques de la página de inicio almacenados en formato JSON
+Yedek Adı / Tipi:::Nombre / Tipo de repuesto
+Fabrika Verisi:::Datos de fábrica
+Tüm bloklar silinecek ve temanın orijinal blokları yüklenecektir. Emin misiniz:::Se borrarán todos los bloques y se cargarán los bloques originales del tema. ¿Estás seguro?
+Orijinali Yükle:::Subir el original
+AI Studio:::AI Studio
+Admin Site yöneticisi:::Administrador del sitio
+Site Yöneticisi:::Administrador del sitio
+Özel bölümler yöneticisi:::Responsable de secciones especiales
+Normal üyelik:::Suscripción estándar
+Geçersiz e-posta adresi.:::Dirección de correo electrónico no válida.
+Eşleşen sonuç bulunamadı.:::No se han encontrado resultados coincidentes.
+Açıklama ekle...:::Añadir una descripción...
+Lütfen bir arama kelimesi giriniz.:::Introduzca un término de búsqueda.
 Sistem v%s sürümünde çalışmaktadır.:::El sistema se ejecuta en la versión v%s.
 Menüde ara:::Buscar en el menú
 Tema Yönetimi:::Gestión de temas

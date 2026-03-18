@@ -1,3 +1,27 @@
+Bloklar başarıyla yedeklendi.:::Блоки успешно скопированы.
+Yedek alınırken bir hata oluştu.:::При создании резервной копии произошла ошибка.
+Yedek dosyası belirtilmedi.:::Файл резервной копии не указан.
+Bloklar başarıyla geri yüklendi.:::Блоки успешно восстановлены.
+Bloklar geri yüklenirken hata oluştu.:::При восстановлении блоков произошла ошибка.
+Erişim Engellendi:::Доступ заблокирован
+Sabitlenmiş  tema güvenlik nedeniyle düzenlenemez.:::Из соображений безопасности эту закрепленную тему нельзя редактировать.
+Blokları Yedekle:::Резервное копирование блоков
+Değişkenler:::Переменные
+Blok Yapılandırma & Yedekleri:::Настройка блоков и резервные копии
+JSON formatında saklanan anasayfa blokları:::Блоки главной страницы, сохраненные в формате JSON
+Yedek Adı / Tipi:::Название / Тип запасной части
+Fabrika Verisi:::Данные с завода
+Tüm bloklar silinecek ve temanın orijinal blokları yüklenecektir. Emin misiniz:::Все блоки будут удалены, и будут загружены исходные блоки темы. Вы уверены?
+Orijinali Yükle:::Загрузить оригинал
+AI Studio:::AI Studio
+Admin Site yöneticisi:::Администратор сайта
+Site Yöneticisi:::Администратор сайта
+Özel bölümler yöneticisi:::Руководитель отдела специальных проектов
+Normal üyelik:::Стандартное членство
+Geçersiz e-posta adresi.:::Неверный адрес электронной почты.
+Eşleşen sonuç bulunamadı.:::Соответствующих результатов не найдено.
+Açıklama ekle...:::Добавить описание...
+Lütfen bir arama kelimesi giriniz.:::Введите, пожалуйста, ключевое слово.
 Sistem v%s sürümünde çalışmaktadır.:::Система работает на версии v%s.
 Menüde ara:::Поиск в меню
 Tema Yönetimi:::Управление темами
