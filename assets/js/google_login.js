@@ -28,7 +28,6 @@ $(window).on('load', function () {
         auto_select: false
     });
 
-    // Gizli Google butonu
     google.accounts.id.renderButton(
         document.getElementById("hiddenGoogleBtn"),
         { theme: "outline", size: "large" }

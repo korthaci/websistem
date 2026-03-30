@@ -48,3 +48,4 @@ tema/*
 !tema/.sabitlenmis_tema/
 !tema/minimal/
 !tema/bulma/
+.aider*

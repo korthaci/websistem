@@ -371,22 +371,26 @@ class sablon_yaz {
 
 
 
+
 class tablo_satir_kopyala {
 	private $from_tablo;
 	private $to_tablo;
 	public $from_id = [];
 	public $exclude_columns = [];
+	public $update_columns = [];
 	public $index_alanlar = [];
 	public $eklenecek_kolonlar = [];
 	public $unique_update = true;
 	private $pdo;
+	public $son_eklenen_id_dizi = [];
 
-	function __construct($pdo, $from_tablo, $to_tablo, $from_id, $exclude_columns) {
+	function __construct($pdo, $from_tablo, $to_tablo, $from_id, $exclude_columns = [], $update_columns = []) {
 		$this->pdo = $pdo;
 		$this->from_tablo = $from_tablo;
 		$this->to_tablo = $to_tablo;
 		$this->from_id = $from_id;
 		$this->exclude_columns = $exclude_columns;
+		$this->update_columns = $update_columns;
 
 		$this->index_alanlar();
 		$this->eklenecek_kolonlar();
@@ -422,13 +426,14 @@ class tablo_satir_kopyala {
 
 	public function kopyala() {
 		if (empty($this->eklenecek_kolonlar)) {
-			return;
+			return false;
 		}
 
 		try {
 			$this->pdo->beginTransaction();
 			
 			$insertColumns = implode(', ', $this->eklenecek_kolonlar);
+			$kopyalandi = false;
 			
 			foreach ($this->from_id as $from_id) {
 				$sql = "INSERT INTO $this->to_tablo ($insertColumns) 
@@ -436,24 +441,36 @@ class tablo_satir_kopyala {
 				$stmt = $this->pdo->prepare($sql);
 				$stmt->execute(['from_id' => $from_id]);
 				
-				if ($this->unique_update) {
+				if ($stmt->rowCount() > 0) {
+					$kopyalandi = true;
 					$lastId = $this->pdo->lastInsertId();
+					$this->son_eklenen_id_dizi[] = $lastId;
 					
-					foreach ($this->index_alanlar as $ia) {
-						$stmt = $this->pdo->prepare("SELECT $ia FROM $this->from_tablo WHERE no = :from_id");
-						$stmt->execute(['from_id' => $from_id]);
-						$value = $stmt->fetchColumn() . '_';
-						
-						$stmt = $this->pdo->prepare("UPDATE $this->to_tablo SET $ia = :value WHERE no = :last_id");
-						$stmt->execute([
-							'value' => $value,
-							'last_id' => $lastId
-						]);
+					if ($this->unique_update) {
+						foreach ($this->index_alanlar as $ia) {
+							$stmtSelect = $this->pdo->prepare("SELECT $ia FROM $this->from_tablo WHERE no = :from_id");
+							$stmtSelect->execute(['from_id' => $from_id]);
+							$value = $stmtSelect->fetchColumn() . '_';
+							
+							$stmtUpdate = $this->pdo->prepare("UPDATE $this->to_tablo SET $ia = :value WHERE no = :last_id");
+							$stmtUpdate->execute([
+								'value' => $value,
+								'last_id' => $lastId
+							]);
+						}
+					}
+
+					if (!empty($this->update_columns)) {
+						foreach ($this->update_columns as $col => $new_value) {
+							$stmtUpdateCol = $this->pdo->prepare("UPDATE $this->to_tablo SET $col = :val WHERE no = :last_id");
+							$stmtUpdateCol->execute(['val' => $new_value, 'last_id' => $lastId]);
+						}
 					}
 				}
 			}
 			
 			$this->pdo->commit();
+			return $kopyalandi;
 		} catch (PDOException $e) {
 			$this->pdo->rollBack();
 			throw new Exception('Copy operation failed: ' . $e->getMessage());
