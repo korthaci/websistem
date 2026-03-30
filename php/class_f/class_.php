@@ -370,8 +370,6 @@ class sablon_yaz {
 }
 
 
-
-
 class tablo_satir_kopyala {
 	private $from_tablo;
 	private $to_tablo;
