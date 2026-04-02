@@ -768,9 +768,7 @@ function middle_dot_yc($html, $yabanci_dil_acik = true, $exclude_get = []) {
         return $html;
     };
 
-    $html = preg_replace('/^\xEF\xBB\xBF+/', '', $html);
-    $html = preg_replace('/[\p{C}]+/u', '', $html);
-    $html = trim($html);
+    $html = trim(preg_replace('/^\xEF\xBB\xBF+|[\x{200E}\x{200F}]+/u', '', $html));
 
     if (!empty($exclude_get)) {
         foreach ($exclude_get as $eg) {
