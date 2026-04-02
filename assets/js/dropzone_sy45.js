@@ -220,19 +220,21 @@ $(function(){
 					} else {
 						if (imgyaz) {
 							let imgTarget = dropzoneElement.getAttribute('data-img-target');
+							let cacheBusterSrc = (json.dosya || response.dosya).split('?')[0] + '?v=' + new Date().getTime();
+							
 							if (imgTarget) {
 								let imgElement = document.querySelector(imgTarget);
 								if (imgElement && imgElement.tagName === 'IMG') {
-									imgElement.src = json.dosya || response.dosya;
+									imgElement.src = cacheBusterSrc;
 									imgElement.style.display = 'block';
 								}
 							} else if (isImgElement) {
 								// If the dropzone IS the img element, update its src directly
-								dropzoneElement.src = json.dosya || response.dosya;
+								dropzoneElement.src = cacheBusterSrc;
 								dropzoneElement.style.display = 'block';
 							} else {
 								// Fallback to old behavior if no target specified
-								dropzoneElement.setAttribute('src', json.dosya || response.dosya);
+								dropzoneElement.setAttribute('src', cacheBusterSrc);
 							}
 						}
 						iziToast.success({ 
