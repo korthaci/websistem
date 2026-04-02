@@ -723,14 +723,6 @@ function mb_str_replace($search, $replace, $subject, $encoding = 'UTF-8') {
 	return $subject;
 }
 
-
-function bosluklari_sil($yazi) {
-	$yazi = preg_replace('/[\t\r\n]+/', ' ', $yazi);
-	$yazi = preg_replace('/\s{2,}/', ' ', $yazi);
-	$yazi = preg_replace('/>\s+</', '><', $yazi);
-	return trim($yazi);
-}
-
 function str_replace_sil_array($yazi, $dizi){
 	foreach ($dizi as $d0) {
 		$yazi = str_replace($d0,'',$yazi);
@@ -745,105 +737,101 @@ function tr_strtolower($str) {
 	return $lowercase;
 }
 
+function bosluklari_sil($yazi) {
+    $yazi = preg_replace('/[\t\r\n]+/', ' ', $yazi);
+    $yazi = preg_replace('/ {2,}/', ' ', $yazi);
+    $yazi = preg_replace('/>\s+</', '><', $yazi);
+    return trim($yazi);
+}
+
 function yc($text_adi, ...$sprintf_args) {
     return Yc::get($text_adi, ...$sprintf_args);
 }
 
 function middle_dot_yc($html, $yabanci_dil_acik = true, $exclude_get = []) {
+    $__protected_map = [];
 
-	$__protected_map = [];
+    $html = preg_replace_callback(
+        '/(<(textarea|pre|code|script|style)\b[^>]*>[\s\S]*?<\/\2>)/i',
+        function ($m) use (&$__protected_map) {
+            $key = '___PROTECTED_BLOCK_' . count($__protected_map) . '___';
+            $__protected_map[$key] = $m[1];
+            return $key;
+        },
+        $html
+    );
 
-	$html = preg_replace_callback(
-		'/(<(textarea|pre|code|script|style)\b[^>]*>[\s\S]*?<\/\2>)/i',
-		function ($m) use (&$__protected_map) {
-			$key = '___PROTECTED_BLOCK_' . count($__protected_map) . '___';
-			$__protected_map[$key] = $m[1];
-			return $key;
-		},
-		$html
-	);
+    $restore = function ($html) use (&$__protected_map) {
+        if (!empty($__protected_map)) {
+            $html = str_replace(array_keys($__protected_map), array_values($__protected_map), $html);
+        }
+        return $html;
+    };
 
-	$restore = function ($html) use (&$__protected_map) {
-		if (!empty($__protected_map)) {
-			$html = str_replace(
-				array_keys($__protected_map),
-				array_values($__protected_map),
-				$html
-			);
-		}
-		return $html;
-	};
+    $html = preg_replace('/^\xEF\xBB\xBF+/', '', $html);
+    $html = preg_replace('/[\p{C}]+/u', '', $html);
+    $html = trim($html);
 
-	$html = preg_replace('/^\xEF\xBB\xBF+/', '', $html);
-	$html = preg_replace('/[\p{C}]+/u', '', $html);
-	$html = trim($html);
+    if (!empty($exclude_get)) {
+        foreach ($exclude_get as $eg) {
+            if (set_dolu($eg, "g")) {
+                return $restore($html);
+            }
+        }
+    }
 
-	if (!empty($exclude_get)) {
-		foreach ($exclude_get as $eg) {
-			if (set_dolu($eg, "g")) {
-				return $restore($html);
-			}
-		}
-	}
+    if ($yabanci_dil_acik === true && strpos($html, '·') !== false) {
+        $html = preg_replace_callback("/·([^·]+)·/", function ($matches) {
 
-	if ($yabanci_dil_acik === true && strpos($html, '·') !== false) {
+            $content = trim($matches[1]);
+            $content = preg_replace('/[\p{C}\x{200E}\x{200F}]+/u', '', $content);
 
-		$html = preg_replace_callback("/·([^·]+)·/", function ($matches) {
+            $degisken_1_sayisi = substr_count($content, '(.)');
+            $degisken_2_sayisi = substr_count($content, '(..)');
 
-			$content = trim($matches[1]);
-			$content = preg_replace('/[\p{C}\x{200E}\x{200F}]+/u', '', $content);
+            if ($degisken_2_sayisi > 1) {
 
-			$degisken_1_sayisi = substr_count($content, '(.)');
-			$degisken_2_sayisi = substr_count($content, '(..)');
+                preg_match("/\(\.\)(.+)\(\.\)/is", $content, $d1m);
+                preg_match("/\(\.\.\)(.+)\(\.\.\)/is", $content, $d2m);
 
-			if ($degisken_2_sayisi > 1) {
+                $degisken_1 = $d1m[1] ?? '';
+                $degisken_2 = $d2m[1] ?? '';
 
-				preg_match("/\(\.\)(.+)\(\.\)/is", $content, $d1m);
-				preg_match("/\(\.\.\)(.+)\(\.\.\)/is", $content, $d2m);
+                if ($degisken_2 === '') return yc($content);
 
-				$degisken_1 = $d1m[1] ?? '';
-				$degisken_2 = $d2m[1] ?? '';
+                return yc(
+                    str_replace([$d1m[0], $d2m[0]], ['%s', '%s'], $content),
+                    $degisken_1,
+                    $degisken_2
+                );
 
-				if ($degisken_2 === '') {
-					return yc($content);
-				}
+            } elseif ($degisken_1_sayisi > 1) {
 
-				return yc(
-					str_replace([$d1m[0], $d2m[0]], ['%s', '%s'], $content),
-					$degisken_1,
-					$degisken_2
-				);
+                preg_match("/\(\.\)(.+)\(\.\)/is", $content, $d1m);
+                $degisken_1 = $d1m[1] ?? '';
 
-			} elseif ($degisken_1_sayisi > 1) {
+                if ($degisken_1 === '') return yc($content);
 
-				preg_match("/\(\.\)(.+)\(\.\)/is", $content, $d1m);
-				$degisken_1 = $d1m[1] ?? '';
+                return yc(
+                    str_replace($d1m[0], '%s', $content),
+                    $degisken_1
+                );
 
-				if ($degisken_1 === '') {
-					return yc($content);
-				}
+            } else {
+                if (preg_match_all('/<([a-z1-6]+)\b[^>]*>.*?<\/\1>|<[a-z1-6]+\b[^>]*\/>/is', $content, $html_matches)) {
+                    $tags = $html_matches[0];
+                    $clean_key = preg_replace('/<([a-z1-6]+)\b[^>]*>.*?<\/\1>|<[a-z1-6]+\b[^>]*\/>/is', '%s', $content);
+                    return yc($clean_key, ...$tags);
+                }
+                return yc($content);
+            }
 
-				return yc(
-					str_replace($d1m[0], '%s', $content),
-					$degisken_1
-				);
+        }, $html);
+    }
 
-			} else {
-				// Automatic HTML tag detection as variables
-				if (preg_match_all('/<([a-z1-6]+)\b[^>]*>.*?<\/\1>|<[a-z1-6]+\b[^>]*\/>/is', $content, $html_matches)) {
-					$tags = $html_matches[0];
-					$clean_key = preg_replace('/<([a-z1-6]+)\b[^>]*>.*?<\/\1>|<[a-z1-6]+\b[^>]*\/>/is', '%s', $content);
-					return yc($clean_key, ...$tags);
-				}
-				return yc($content);
-			}
+    $html = str_replace(['(.)', '(..)', '·'], '', $html);
 
-		}, $html);
-	}
-
-	$html = str_replace(['(.)', '(..)', '·'], '', $html);
-
-	return $restore($html);
+    return $restore($html);
 }
 
 
@@ -3522,3 +3510,4 @@ if (!function_exists('mb_ucfirst')) {
         return mb_convert_case($first, MB_CASE_UPPER, $encoding) . mb_substr($string, 1, null, $encoding);
     }
 }
+
