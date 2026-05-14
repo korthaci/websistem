@@ -1883,8 +1883,14 @@ class modul_css_js {
 			
 			$js_dizin = $modul_dizin . '/js';
 			if (is_dir($js_dizin)) {
-				$this->js_dosyalarini_ekle($js_dizin, $modul->url . '/js');
+				$this->js_dosyalarini_ekle($js_dizin);
 			}
+
+			if (syetki([2,3]) && is_dir($modul_dizin . '/yp')) {
+				$this->css_dosyalarini_ekle($modul_dizin . '/yp');
+				$this->js_dosyalarini_ekle($modul_dizin . '/yp');
+			}
+
 		}
 		
 		$this->css_dosyalar = array_unique($this->css_dosyalar);
@@ -1912,7 +1918,7 @@ class modul_css_js {
 		}
 	}
 
-	private function css_dosyalarini_ekle(string $css_dizin, string $url_path): void {
+	private function css_dosyalarini_ekle(string $css_dizin, ?string $url_path = null): void {
 		$dosyalar = scandir($css_dizin);
 		if (!$dosyalar) return;
 		
@@ -1922,14 +1928,18 @@ class modul_css_js {
 			}
 			
 			$dosya_yolu = $css_dizin . '/' . $dosya;
+
 			if (is_file($dosya_yolu)) {
-				$url = str_replace(ROOT, LOCAL, $dosya_yolu);
+				$url = $url_path !== null
+					? rtrim($url_path, '/') . '/' . $dosya
+					: str_replace(ROOT, LOCAL, $dosya_yolu);
+
 				$this->css_dosyalar[] = $url;
 			}
 		}
 	}
 
-	private function js_dosyalarini_ekle(string $js_dizin, string $url_path): void {
+	private function js_dosyalarini_ekle(string $js_dizin, ?string $url_path = null): void {
 		$dosyalar = scandir($js_dizin);
 		if (!$dosyalar) return;
 		
@@ -1939,8 +1949,12 @@ class modul_css_js {
 			}
 			
 			$dosya_yolu = $js_dizin . '/' . $dosya;
+
 			if (is_file($dosya_yolu)) {
-				$url = str_replace(ROOT, LOCAL, $dosya_yolu);
+				$url = $url_path !== null
+					? rtrim($url_path, '/') . '/' . $dosya
+					: str_replace(ROOT, LOCAL, $dosya_yolu);
+
 				$this->js_dosyalar[] = $url;
 			}
 		}

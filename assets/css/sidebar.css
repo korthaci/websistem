@@ -180,31 +180,31 @@
 }
 
 /* Navigation Menu */
-.nav-menu {
+.ws_nav-menu {
 	padding: 0.5rem 0;
 	max-height: calc(100vh - 140px);
 	overflow: hidden;
 }
 
-.ws_sidebar:hover .nav-menu,
-.ws_sidebar.fixed .nav-menu {
+.ws_sidebar:hover .ws_nav-menu,
+.ws_sidebar.fixed .ws_nav-menu {
 	overflow-y: auto;
 }
 
-.nav-menu::-webkit-scrollbar {
+.ws_nav-menu::-webkit-scrollbar {
 	width: 4px;
 }
 
-.nav-menu::-webkit-scrollbar-track {
+.ws_nav-menu::-webkit-scrollbar-track {
 	background: transparent;
 }
 
-.nav-menu::-webkit-scrollbar-thumb {
+.nws_nav-menu::-webkit-scrollbar-thumb {
 	background: rgba(255, 255, 255, 0.2);
 	border-radius: 2px;
 }
 
-.nav-menu::-webkit-scrollbar-thumb:hover {
+.ws_nav-menu::-webkit-scrollbar-thumb:hover {
 	background: rgba(255, 255, 255, 0.3);
 }
 

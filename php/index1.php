@@ -23,7 +23,7 @@ $baslangic_js_const_dizi = [
     'u___'       => isset($u_no__) && n0_($u_no__),
     'ui___'      => isset($_GET['ui']) || isset($_GET['uis']),
     '__ceviri'   => $so_->d('yabanci_dil') == 1,
-	'gloginc'	 => $so_->d('google_login_client_id') && $u_no__ == 0 ? $so_->d('google_login_client_id') : '',
+	'gloginc'	 => $so_->d('google_login_client_id') && $u_no__ == 0 ? trim($so_->d('google_login_client_id')) : '',
 ];
 
 $script_var = 'const js_vars = ' . json_encode($baslangic_js_const_dizi, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . ';';
@@ -46,7 +46,7 @@ $index_html_yaz->vars = [
 		'bilesen_css_yp' => $bilesen_css_js->css_yaz('yp'),
 		'bilesen_js_yp' => $bilesen_css_js->js_yaz('yp'),
 		'script_var' => $script_var,
-		'google_login_client_id' => $so_->d('google_login_client_id') && $u_no__ == 0 ? $so_->d('google_login_client_id') : '',
+		'google_login_client_id' => $so_->d('google_login_client_id') && $u_no__ == 0 ? trim($so_->d('google_login_client_id')) : '',
 	],
 	'__if' => [
 		'indexx1' => (int)$indexx,

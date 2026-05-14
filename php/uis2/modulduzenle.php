@@ -36,28 +36,39 @@ if ($modul_b) {
 		if (!empty($dosyalar)) {
 			foreach ($dosyalar as $dosya) {
 				if (substr($dosya, 0, 1) == "_" && pathinfo($dosya, PATHINFO_EXTENSION) == "php") {
+					$dosya_yolu = $klasor . '/' . $dosya;
 					$dosya_basename = basename($dosya, ".php");
 					$dosya_isim = ucfirst_utf8(str_replace("_"," ",trim($dosya_basename,"_")));
+					$dosya_baslangic = file_get_contents($dosya_yolu, false, null, 0, 300);
+					$menude_gizle = is_string($dosya_baslangic) && preg_match('/^\s*<\?php\s*[\r\n]+\s*###\s*modul_duzenle\.php\s*->\s*panel_buton\s*:\s*0\s*###/u', $dosya_baslangic) === 1;
 					
 					$is_active = ($dosya_basename == $active_islem);
 					$active_class = $is_active ? 'active' : '';
 					
-					$sidebar_links .= '<a href="' . href('index', 'ui=modulduzenle&n=' . $modul_no . '&islem=' . $dosya_basename) . '" class="theme-file-item ' . $active_class. '">
-						<i class="fa-solid fa-file-code"></i> ' . $dosya_isim . '
-					</a>';
+					if (!$menude_gizle) {
+						$sidebar_links .= '<a href="' . href('index', 'ui=modulduzenle&n=' . $modul_no . '&islem=' . $dosya_basename) . '" class="theme-file-item ' . $active_class. '">
+							<i class="fa-solid fa-file-code"></i> ' . $dosya_isim . '
+						</a>';
+						$_php_dosya_sayisi++;
+					}
 					
 					$files_found[] = [
-						'path' => $klasor . '/' . $dosya,
-						'name' => $dosya_basename
+						'path' => $dosya_yolu,
+						'name' => $dosya_basename,
+						'hidden' => $menude_gizle
 					];
-					$_php_dosya_sayisi++;
 				}
 			}
 		}
 
 		// Otomatik yönlendirme: Eğer sadece 1 dosya varsa ve islem seçilmemişse
 		if ($_php_dosya_sayisi == 1 && empty($active_islem)) {
-			$active_islem = $files_found[0]['name'];
+			foreach ($files_found as $f) {
+				if (empty($f['hidden'])) {
+					$active_islem = $f['name'];
+					break;
+				}
+			}
 		}
 
 		if (!empty($active_islem)) {
@@ -79,6 +90,9 @@ if ($modul_b) {
 				
 				if (!empty($files_found)) {
 					foreach ($files_found as $f) {
+						if (!empty($f['hidden'])) {
+							continue;
+						}
 						$is_active = ($f['name'] == $active_islem);
 						$active_class = $is_active ? 'uis-btn-p' : 'uis-btn-outline';
 						$dosya_isim = ucfirst_utf8(str_replace("_"," ",trim($f['name'],"_")));
@@ -95,7 +109,6 @@ if ($modul_b) {
 			</div>
 		</div>';
 
-		// Content area
 		if ($include_dosya) {
 			echo '<div class="uis-card">';
 			include_once $include_dosya;

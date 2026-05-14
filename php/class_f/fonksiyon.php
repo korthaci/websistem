@@ -748,6 +748,7 @@ function yc($text_adi, ...$sprintf_args) {
     return Yc::get($text_adi, ...$sprintf_args);
 }
 
+
 function middle_dot_yc($html, $yabanci_dil_acik = true, $exclude_get = []) {
     $__protected_map = [];
 

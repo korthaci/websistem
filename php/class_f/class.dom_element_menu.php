@@ -64,7 +64,14 @@ class dom_element {
 		if (in_array($tag, ['ul', 'ol'])) {
 			return $dynamicNode;
 		}
-		return self::findFirstDescendantList($dynamicNode);
+		$listRoot = self::findFirstDescendantList($dynamicNode);
+		if ($listRoot) {
+			return $listRoot;
+		}
+		if (in_array($tag, ['div', 'nav'])) {
+			return $dynamicNode;
+		}
+		return null;
 	}
 
 	/**
@@ -112,8 +119,10 @@ class dom_element {
 			$structure[$depth] = [
 				'list_tag' => $listTag,
 				'list_class' => $listClass,
-				'item_tag' => 'li',
+				'item_tag' => '',
 				'item_class' => '',
+				'item_class_single' => '',
+				'item_class_has_submenu' => '',
 				'a_class_single' => '',
 				'a_class_has_submenu' => '',
 				'a_child_wrap_tag' => '',
@@ -126,8 +135,13 @@ class dom_element {
 			$itemTag = strtolower($item->tagName);
 			if (!in_array($itemTag, ['li', 'div'])) continue;
 
-			if (empty($structure[$depth]['item_class']) && $item->getAttribute('class')) {
-				$structure[$depth]['item_class'] = $item->getAttribute('class');
+			if (empty($structure[$depth]['item_tag'])) {
+				$structure[$depth]['item_tag'] = $itemTag;
+			}
+
+			$itemClass = $item->getAttribute('class') ?: '';
+			if (empty($structure[$depth]['item_class']) && $itemClass) {
+				$structure[$depth]['item_class'] = $itemClass;
 			}
 
 			$aNode = self::getFirstAnchor($item);
@@ -137,11 +151,17 @@ class dom_element {
 			$submenuList = self::getSubmenuListAfterAnchor($item, $aNode);
 
 			if ($submenuList) {
+				if (empty($structure[$depth]['item_class_has_submenu'])) {
+					$structure[$depth]['item_class_has_submenu'] = $itemClass;
+				}
 				if (empty($structure[$depth]['a_class_has_submenu'])) {
 					$structure[$depth]['a_class_has_submenu'] = $aClass;
 				}
 				self::extractStructureRecursive($submenuList, $depth + 1, $structure);
 			} else {
+				if (empty($structure[$depth]['item_class_single'])) {
+					$structure[$depth]['item_class_single'] = $itemClass;
+				}
 				if (empty($structure[$depth]['a_class_single'])) {
 					$structure[$depth]['a_class_single'] = $aClass;
 				}
@@ -181,7 +201,7 @@ class dom_element {
 			}
 			if ($found && $child instanceof DOMElement) {
 				$tag = strtolower($child->tagName);
-				if (in_array($tag, ['ul', 'ol'])) {
+				if (in_array($tag, ['ul', 'ol', 'div'])) {
 					return $child;
 				}
 			}
@@ -307,8 +327,7 @@ class dom_element {
 			return '';
 		}
 
-		$itemTag = $pattern['item_tag'] ?? 'li';
-		$itemClass = $pattern['item_class'] ?? '';
+		$itemTag = !empty($pattern['item_tag']) ? $pattern['item_tag'] : (in_array($listTag, ['div', 'nav']) ? 'div' : 'li');
 		$aChildWrapTag = $pattern['a_child_wrap_tag'] ?? '';
 		$aChildWrapClass = $pattern['a_child_wrap_class'] ?? '';
 
@@ -324,6 +343,12 @@ class dom_element {
 			$aClass = $hasSubmenu
 				? (strlen($aClassHas) ? $aClassHas : $aClassSingle)
 				: (strlen($aClassSingle) ? $aClassSingle : $aClassHas);
+			$itemClassHas = $pattern['item_class_has_submenu'] ?? '';
+			$itemClassSingle = $pattern['item_class_single'] ?? '';
+			$itemClassDefault = $pattern['item_class'] ?? '';
+			$itemClass = $hasSubmenu
+				? (strlen($itemClassHas) ? $itemClassHas : (strlen($itemClassDefault) ? $itemClassDefault : $itemClassSingle))
+				: (strlen($itemClassSingle) ? $itemClassSingle : (strlen($itemClassDefault) ? $itemClassDefault : $itemClassHas));
 			$itemAttrs = $itemClass ? ' class="'.htmlspecialchars($itemClass).'"' : '';
 			$aAttrs = $aClass ? ' class="'.htmlspecialchars($aClass).'"' : '';
 
@@ -348,6 +373,8 @@ class dom_element {
 			'list_class' => '',
 			'item_tag' => 'li',
 			'item_class' => '',
+			'item_class_single' => '',
+			'item_class_has_submenu' => '',
 			'a_class_single' => '',
 			'a_class_has_submenu' => '',
 			'a_child_wrap_tag' => '',

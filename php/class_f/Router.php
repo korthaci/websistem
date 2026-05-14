@@ -151,10 +151,13 @@ class Router {
 		});
 
 		// User related routes (kept from original)
-		$this->addRoute('uis', function() {
+		$this->addRoute('uis', function($id = null) {
+			if ($id !== null && $id !== '') {
+				$_GET['uis'] = $id;
+			}
 			return [
 				'file' => R_PHP.'/uyelik/islemler',
-				'params' => ['type' => 'uis']
+				'params' => ['type' => 'uis', 'islem' => $id]
 			];
 		});
 
@@ -329,4 +332,3 @@ class Router {
 		return $this->n;
 	}
 }
-?>
