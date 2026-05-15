@@ -123,10 +123,16 @@ class dom_element {
 				'item_class' => '',
 				'item_class_single' => '',
 				'item_class_has_submenu' => '',
+				'item_class_single_found' => false,
+				'item_class_has_submenu_found' => false,
 				'a_class_single' => '',
 				'a_class_has_submenu' => '',
+				'a_class_single_found' => false,
+				'a_class_has_submenu_found' => false,
 				'a_child_wrap_tag' => '',
 				'a_child_wrap_class' => '',
+				'a_suffix_tag' => '',
+				'a_suffix_class' => '',
 			];
 		}
 
@@ -151,27 +157,39 @@ class dom_element {
 			$submenuList = self::getSubmenuListAfterAnchor($item, $aNode);
 
 			if ($submenuList) {
-				if (empty($structure[$depth]['item_class_has_submenu'])) {
+				if (empty($structure[$depth]['item_class_has_submenu_found'])) {
 					$structure[$depth]['item_class_has_submenu'] = $itemClass;
+					$structure[$depth]['item_class_has_submenu_found'] = true;
 				}
-				if (empty($structure[$depth]['a_class_has_submenu'])) {
+				if (empty($structure[$depth]['a_class_has_submenu_found'])) {
 					$structure[$depth]['a_class_has_submenu'] = $aClass;
+					$structure[$depth]['a_class_has_submenu_found'] = true;
 				}
 				self::extractStructureRecursive($submenuList, $depth + 1, $structure);
 			} else {
-				if (empty($structure[$depth]['item_class_single'])) {
+				if (empty($structure[$depth]['item_class_single_found'])) {
 					$structure[$depth]['item_class_single'] = $itemClass;
+					$structure[$depth]['item_class_single_found'] = true;
 				}
-				if (empty($structure[$depth]['a_class_single'])) {
+				if (empty($structure[$depth]['a_class_single_found'])) {
 					$structure[$depth]['a_class_single'] = $aClass;
+					$structure[$depth]['a_class_single_found'] = true;
 				}
 			}
 
 			if (empty($structure[$depth]['a_child_wrap_tag'])) {
 				$firstChild = self::getFirstElementChild($aNode);
-				if ($firstChild && strtolower($firstChild->tagName) !== 'a') {
+				if ($firstChild && strtolower($firstChild->tagName) !== 'a' && !self::isIconElement($firstChild)) {
 					$structure[$depth]['a_child_wrap_tag'] = $firstChild->tagName;
 					$structure[$depth]['a_child_wrap_class'] = $firstChild->getAttribute('class') ?: '';
+				}
+			}
+
+			if ($submenuList && empty($structure[$depth]['a_suffix_tag'])) {
+				$iconChild = self::getFirstIconChild($aNode);
+				if ($iconChild) {
+					$structure[$depth]['a_suffix_tag'] = strtolower($iconChild->tagName);
+					$structure[$depth]['a_suffix_class'] = $iconChild->getAttribute('class') ?: '';
 				}
 			}
 		}
@@ -216,6 +234,30 @@ class dom_element {
 			}
 		}
 		return null;
+	}
+
+	private static function getFirstIconChild(DOMElement $node) {
+		foreach ($node->childNodes as $child) {
+			if ($child instanceof DOMElement && self::isIconElement($child)) {
+				return $child;
+			}
+		}
+		return null;
+	}
+
+	private static function isIconElement(DOMElement $node) {
+		$tag = strtolower($node->tagName);
+		$class = ' ' . strtolower($node->getAttribute('class') ?: '') . ' ';
+		if ($tag === 'i') {
+			return true;
+		}
+		return strpos($class, ' fa-') !== false
+			|| strpos($class, ' fas ') !== false
+			|| strpos($class, ' far ') !== false
+			|| strpos($class, ' fab ') !== false
+			|| strpos($class, ' bi-') !== false
+			|| strpos($class, ' icon') !== false
+			|| strpos($class, 'material-icons') !== false;
 	}
 
 	/**
@@ -313,9 +355,21 @@ class dom_element {
 	public function render($menuArray, array $structure, $depth = 1) {
 		$pattern = $structure[$depth] ?? $this->defaultPattern($depth);
 		$parentPattern = $structure[max(1, $depth - 1)] ?? null;
-		if ($parentPattern && empty($pattern['a_class_single']) && empty($pattern['a_class_has_submenu'])) {
+		$aClassSingleFound = array_key_exists('a_class_single_found', $pattern)
+			? (bool)$pattern['a_class_single_found']
+			: !empty($pattern['a_class_single']);
+		$aClassHasFound = array_key_exists('a_class_has_submenu_found', $pattern)
+			? (bool)$pattern['a_class_has_submenu_found']
+			: !empty($pattern['a_class_has_submenu']);
+		if ($parentPattern && !$aClassSingleFound && !$aClassHasFound) {
 			$pattern['a_class_single'] = $parentPattern['a_class_single'] ?? '';
 			$pattern['a_class_has_submenu'] = $parentPattern['a_class_has_submenu'] ?? '';
+			$pattern['a_class_single_found'] = array_key_exists('a_class_single_found', $parentPattern)
+				? (bool)$parentPattern['a_class_single_found']
+				: !empty($pattern['a_class_single']);
+			$pattern['a_class_has_submenu_found'] = array_key_exists('a_class_has_submenu_found', $parentPattern)
+				? (bool)$parentPattern['a_class_has_submenu_found']
+				: !empty($pattern['a_class_has_submenu']);
 		}
 		$listTag = $pattern['list_tag'] ?? 'ul';
 		$listClass = $pattern['list_class'] ?? '';
@@ -330,9 +384,12 @@ class dom_element {
 		$itemTag = !empty($pattern['item_tag']) ? $pattern['item_tag'] : (in_array($listTag, ['div', 'nav']) ? 'div' : 'li');
 		$aChildWrapTag = $pattern['a_child_wrap_tag'] ?? '';
 		$aChildWrapClass = $pattern['a_child_wrap_class'] ?? '';
+		$aSuffixTag = $pattern['a_suffix_tag'] ?? '';
+		$aSuffixClass = $pattern['a_suffix_class'] ?? '';
 
 		$aChildOpen = $aChildWrapTag ? '<'.$aChildWrapTag.($aChildWrapClass ? ' class="'.htmlspecialchars($aChildWrapClass).'"' : '').'>' : '';
 		$aChildClose = $aChildWrapTag ? '</'.$aChildWrapTag.'>' : '';
+		$aSuffixHtml = $aSuffixTag ? '<'.$aSuffixTag.($aSuffixClass ? ' class="'.htmlspecialchars($aSuffixClass).'"' : '').'></'.$aSuffixTag.'>' : '';
 
 		$html = '<'.$listTag.$listAttrs.'>' . PHP_EOL;
 
@@ -340,21 +397,36 @@ class dom_element {
 			$hasSubmenu = !empty($md['submenu']);
 			$aClassHas = $pattern['a_class_has_submenu'] ?? '';
 			$aClassSingle = $pattern['a_class_single'] ?? '';
+			$aClassHasFound = array_key_exists('a_class_has_submenu_found', $pattern)
+				? (bool)$pattern['a_class_has_submenu_found']
+				: strlen($aClassHas) > 0;
+			$aClassSingleFound = array_key_exists('a_class_single_found', $pattern)
+				? (bool)$pattern['a_class_single_found']
+				: strlen($aClassSingle) > 0;
 			$aClass = $hasSubmenu
-				? (strlen($aClassHas) ? $aClassHas : $aClassSingle)
-				: (strlen($aClassSingle) ? $aClassSingle : $aClassHas);
+				? ($aClassHasFound ? $aClassHas : $aClassSingle)
+				: ($aClassSingleFound ? $aClassSingle : $aClassHas);
 			$itemClassHas = $pattern['item_class_has_submenu'] ?? '';
 			$itemClassSingle = $pattern['item_class_single'] ?? '';
 			$itemClassDefault = $pattern['item_class'] ?? '';
+			$itemClassHasFound = array_key_exists('item_class_has_submenu_found', $pattern)
+				? (bool)$pattern['item_class_has_submenu_found']
+				: strlen($itemClassHas) > 0;
+			$itemClassSingleFound = array_key_exists('item_class_single_found', $pattern)
+				? (bool)$pattern['item_class_single_found']
+				: strlen($itemClassSingle) > 0;
 			$itemClass = $hasSubmenu
-				? (strlen($itemClassHas) ? $itemClassHas : (strlen($itemClassDefault) ? $itemClassDefault : $itemClassSingle))
-				: (strlen($itemClassSingle) ? $itemClassSingle : (strlen($itemClassDefault) ? $itemClassDefault : $itemClassHas));
+				? ($itemClassHasFound ? $itemClassHas : (strlen($itemClassDefault) ? $itemClassDefault : $itemClassSingle))
+				: ($itemClassSingleFound ? $itemClassSingle : (strlen($itemClassDefault) ? $itemClassDefault : $itemClassHas));
 			$itemAttrs = $itemClass ? ' class="'.htmlspecialchars($itemClass).'"' : '';
 			$aAttrs = $aClass ? ' class="'.htmlspecialchars($aClass).'"' : '';
 
 			$html .= "\t".'<'.$itemTag.$itemAttrs.'>';
 			$html .= '<a'.$aAttrs.' href="'.htmlspecialchars($md['href'] ?? '#').'">';
 			$html .= $aChildOpen . htmlspecialchars($md['adi'] ?? '') . $aChildClose;
+			if ($hasSubmenu) {
+				$html .= ($aSuffixHtml ? ' ' . $aSuffixHtml : '');
+			}
 			$html .= '</a>';
 
 			if ($hasSubmenu) {
@@ -375,10 +447,16 @@ class dom_element {
 			'item_class' => '',
 			'item_class_single' => '',
 			'item_class_has_submenu' => '',
+			'item_class_single_found' => false,
+			'item_class_has_submenu_found' => false,
 			'a_class_single' => '',
 			'a_class_has_submenu' => '',
+			'a_class_single_found' => false,
+			'a_class_has_submenu_found' => false,
 			'a_child_wrap_tag' => '',
 			'a_child_wrap_class' => '',
+			'a_suffix_tag' => '',
+			'a_suffix_class' => '',
 		];
 	}
 

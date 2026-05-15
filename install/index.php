@@ -410,6 +410,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                              . "DEEPL_API_KEY=\n"
                              . "APP_ENV=production\n"
                              . "UPDATE_PATH=\n\n"
+                             . "AI_GENERATOR_CSRF_MODE=enforce\n\n"
                              . "# ─── PREMIUM / LICENSE OPTIONS ───────────────────\n"
                              . "LC_REMOTE_URL=\n"
                              . "# Ajans lisans API Anahtarı\n"
