@@ -80,6 +80,8 @@ class LC {
             'feature' => $feature,
         ]);
 
+        $ssl_verify = !(function_exists('local_test') && local_test());
+
         $ch = curl_init($remote_url);
         curl_setopt_array($ch, [
             CURLOPT_POST           => true,
@@ -87,7 +89,8 @@ class LC {
             CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT        => 5,
-            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYPEER => $ssl_verify,
+            CURLOPT_SSL_VERIFYHOST => $ssl_verify ? 2 : 0,
         ]);
         $response = curl_exec($ch);
         $err      = curl_error($ch);
