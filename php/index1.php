@@ -45,6 +45,9 @@ $index_html_yaz->vars = [
 		'bilesen_js' => $bilesen_css_js->js_yaz(),
 		'bilesen_css_yp' => $bilesen_css_js->css_yaz('yp'),
 		'bilesen_js_yp' => $bilesen_css_js->js_yaz('yp'),
+		'csrf_token_meta' => (syetki([2,3]) && !empty($_SESSION['csrf_token']))
+			? '<meta name="csrf-token" content="' . hs($_SESSION['csrf_token']) . '">'
+			: '',
 		'script_var' => $script_var,
 		'google_login_client_id' => $so_->d('google_login_client_id') && $u_no__ == 0 ? trim($so_->d('google_login_client_id')) : '',
 	],

@@ -2185,6 +2185,318 @@ thead.sticky.scrolled th {
 }
 
 
+
+/*ws_form*/
+:root {
+	--ws-font: inherit;
+	--ws-bg: rgba(255,255,255,0.9);
+	--ws-border: rgba(0,0,0,0.15);
+	--ws-border-hover: rgba(0,0,0,0.3);
+	--ws-border-focus: rgba(0,0,0,0.35);
+	--ws-text: #222;
+	--ws-placeholder: rgba(0,0,0,0.4);
+	--ws-radius: 6px;
+	--ws-padding-y: 6px;
+	--ws-padding-x: 10px;
+	--ws-transition: 0.15s ease;
+}
+
+/* Genel form elemanlarÄ± */
+.ws_form input,
+.ws_form textarea,
+.ws_form select,
+.ws_form button,
+.ws_input,
+.ws_textarea,
+.ws_select,
+.ws_button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	font: var(--ws-font);
+	color: var(--ws-text);
+	background: var(--ws-bg);
+	border: 1px solid var(--ws-border);
+	border-radius: var(--ws-radius);
+	padding: var(--ws-padding-y) var(--ws-padding-x);
+	outline: none;
+	transition: var(--ws-transition);
+}
+
+/* placeholder */
+.ws_form input::placeholder,
+.ws_form textarea::placeholder,
+.ws_input::placeholder,
+.ws_textarea::placeholder {
+	color: var(--ws-placeholder);
+}
+
+/* hover */
+.ws_form input:hover,
+.ws_form textarea:hover,
+.ws_form select:hover,
+.ws_form button:hover,
+.ws_input:hover,
+.ws_textarea:hover,
+.ws_select:hover,
+.ws_button:hover {
+	border-color: var(--ws-border-hover);
+}
+
+/* focus */
+.ws_form input:focus,
+.ws_form textarea:focus,
+.ws_form select:focus,
+.ws_form button:focus,
+.ws_input:focus,
+.ws_textarea:focus,
+.ws_select:focus,
+.ws_button:focus {
+	border-color: var(--ws-border-focus);
+	box-shadow: 0 0 0 2px rgba(0,0,0,0.05);
+}
+
+/* textarea ayarÄ± */
+.ws_form textarea,
+.ws_textarea {
+	resize: vertical;
+	min-height: 80px;
+}
+
+/* select ok */
+.ws_form select,
+.ws_select {
+	cursor: pointer;
+	padding-right: 28px;
+	background-image: url("data:image/svg+xml;utf8,<svg fill='none' stroke='rgba(0,0,0,0.4)' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M6 9l6 6 6-6'/></svg>");
+	background-repeat: no-repeat;
+	background-position: right 8px center;
+	background-size: 14px;
+}
+
+/* checkbox & radio */
+.ws_form input[type="checkbox"],
+.ws_form input[type="radio"],
+.ws_input[type="checkbox"],
+.ws_input[type="radio"] {
+	-webkit-appearance: auto;
+	-moz-appearance: auto;
+	appearance: auto;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}
+
+/* varyantlar */
+.ws_input-primary,
+.ws_select-primary,
+.ws_textarea-primary {
+	--ws-border: rgba(62,142,208,0.6);
+	--ws-border-focus: rgba(62,142,208,1);
+}
+.ws_input-danger,
+.ws_select-danger,
+.ws_textarea-danger {
+	--ws-border: rgba(241,70,104,0.6);
+	--ws-border-focus: rgba(241,70,104,1);
+}
+.ws_input-success,
+.ws_select-success,
+.ws_textarea-success {
+	--ws-border: rgba(72,199,116,0.6);
+	--ws-border-focus: rgba(72,199,116,1);
+}
+.ws_input-warning,
+.ws_select-warning,
+.ws_textarea-warning {
+	--ws-border: rgba(255,221,87,0.7);
+	--ws-border-focus: rgba(255,221,87,1);
+}
+.ws_input-info,
+.ws_select-info,
+.ws_textarea-info {
+	--ws-border: rgba(50,152,220,0.6);
+	--ws-border-focus: rgba(50,152,220,1);
+}
+.ws_input-light,
+.ws_select-light,
+.ws_textarea-light {
+	--ws-border: rgba(240,240,240,0.6);
+	--ws-border-focus: rgba(240,240,240,1);
+}
+.ws_input-dark,
+.ws_select-dark,
+.ws_textarea-dark {
+	--ws-border: rgba(54,54,54,0.6);
+	--ws-border-focus: rgba(54,54,54,1);
+}
+
+/* button varyantlar */
+.ws_button-primary {
+	background: #3e8ed0;
+	color: white;
+	border-color: transparent;
+}
+.ws_button-primary:hover {
+	background: #3488ce;
+}
+.ws_button-danger {
+	background: #f14668;
+	color: white;
+	border-color: transparent;
+}
+.ws_button-ghost {
+	background: transparent;
+}
+
+/* boyutlar */
+.ws_sm {
+	font-size: 13px;
+	padding: 4px 8px;
+}
+.ws_lg {
+	font-size: 15px;
+	padding: 8px 14px;
+}
+
+/* block / inline */
+.ws_block {
+	display: block;
+	width: 100%;
+}
+.ws_inline {
+	display: inline-block;
+}
+
+/* checkbox & radio wrapper */
+.ws_check {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	cursor: pointer;
+	font: var(--ws-font);
+}
+.ws_check input {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+.ws_box {
+	width: 16px;
+	height: 16px;
+	border: 1px solid var(--ws-border);
+	border-radius: 4px;
+	background: white;
+	position: relative;
+	transition: var(--ws-transition);
+}
+.ws_check:hover .ws_box {
+	border-color: var(--ws-border-hover);
+}
+.ws_check input:checked + .ws_box {
+	background: #222;
+	border-color: #222;
+}
+.ws_box::after {
+	content: "";
+	position: absolute;
+	width: 8px;
+	height: 4px;
+	border: 2px solid white;
+	border-top: none;
+	border-right: none;
+	transform: rotate(-45deg);
+	top: 4px;
+	left: 3px;
+	opacity: 0;
+}
+.ws_check input:checked + .ws_box::after {
+	opacity: 1;
+}
+.ws_box--radio {
+	border-radius: 50%;
+}
+.ws_box--radio::after {
+	content: "";
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	background: white;
+	border-radius: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0);
+	transition: var(--ws-transition);
+}
+.ws_check input:checked + .ws_box--radio::after {
+	transform: translate(-50%, -50%) scale(1);
+}
+.ws_check input:focus-visible + .ws_box {
+	box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}
+/*ws_form sonu*/
+
+
+
+.ph-label {
+    position: relative;
+    display: inline-block;
+}
+
+.ph-label input,
+.ph-label select {
+    outline: none;
+    box-sizing: border-box;
+}
+
+.ph-label::after {
+    content: attr(data-placeholder);
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 16px;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    z-index: 1;
+    opacity: 0;
+    background-color: transparent;
+}
+
+.ph-label:has(input:focus)::after,
+.ph-label:has(input:not(:placeholder-shown))::after,
+.ph-label:has(select:focus)::after,
+.ph-label:has(select:valid)::after {
+    top: 0;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #2563eb;
+    font-weight: 500;
+    background-color: #fff;
+    opacity: 1;
+}
+
+.ph-label.top20 {
+    margin-top: 20px;
+}
+
+.ph-label.top20:has(input:focus)::after,
+.ph-label.top20:has(input:not(:placeholder-shown))::after,
+.ph-label.top20:has(select:focus)::after,
+.ph-label.top20:has(select:valid)::after {
+	left: 2px;
+	top: 0;
+	transform: translateY(-100%);
+	font-size: 16px;	
+}
+
+.ph-label:has(input:focus) input,
+.ph-label:has(select:focus) select {
+    border-color: #2563eb;
+}
+
+
 .iti {
 	display: block;
 	margin-bottom: 4px;

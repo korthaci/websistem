@@ -57,63 +57,63 @@ $form_eleman = [];
 $form_satir1 = '';
 $form = new form_c($pdo, $do_);
 
-if ($sb_) {
+if (!$sb_) {
+	echo '! Blok bilgileri alınamadı.';
+	return;
+}
 
-	$form_satir1 .= '<a class="dib uis-btn uis-btn-sm uis-btn-outline-primary" href="'.href('index','ui=bloklar').'">'.yc("Tüm bloklar").'</a> &nbsp; &nbsp; ';
-	$form_satir1 .= '<span class="dib">' . yc("Yayın") . ' <span class="db01 ok'.$sb_->yayin.'" data-nta="'.sifrele($sb_->no.',,blok_html,,yayin').'">'.$sb_->yayin.'</span></span> &nbsp; &nbsp; &nbsp; ';
-	$form_satir1 .= '<input name="kaydet_blok" type="submit" value="'.yc("Kaydet").'" class="dib uis-btn uis-btn-sm uis-btn-warning" />';
+$form_satir1 .= '<a class="dib uis-btn uis-btn-sm uis-btn-outline-primary" href="'.href('index','ui=bloklar').'">'.yc("Tüm bloklar").'</a> &nbsp; &nbsp; ';
+$form_satir1 .= '<span class="dib">' . yc("Yayın") . ' <span class="db01 ok'.$sb_->yayin.'" data-nta="'.sifrele($sb_->no.',,blok_html,,yayin').'">'.$sb_->yayin.'</span></span> &nbsp; &nbsp; &nbsp; ';
+$form_satir1 .= '<input name="kaydet_blok" type="submit" value="'.yc("Kaydet").'" class="dib uis-btn uis-btn-sm uis-btn-warning" />';
 
-	$form_eleman['adi'] = 
-	'<label class="form-label">'.yc("Konu başlığı").'</label>' . 
-	$form->input_text($sb_->adi, [
-		'name' => 'adi', 
-		'class' => 'dbtext g_1__ form-control ceviri',
-		'data-ceviridil' => $so_->d('yabanci_dil') ? 'adi,blok_html,' . $sb_->no : null,
-		'data-nta' => sifrele($sb_->no . ',,blok_html,,adi'),
-		'maxlength' => 140,
-		'placeholder' => yc("Adı"),
-	]);
+$form_eleman['adi'] = 
+'<label class="form-label">'.yc("Konu başlığı").'</label>' . 
+$form->input_text($sb_->adi, [
+	'name' => 'adi', 
+	'class' => 'dbtext g_1__ uis-input ceviri',
+	'data-ceviridil' => $so_->d('yabanci_dil') ? 'adi,blok_html,' . $sb_->no : null,
+	'data-nta' => sifrele($sb_->no . ',,blok_html,,adi'),
+	'maxlength' => 140,
+	'placeholder' => yc("Adı"),
+]);
 
-	$form_eleman['hash'] = 
-	'<label class="form-label">Hash</label>' . 
-	$form->input_text($sb_->hash, [
-		'name' => 'hash', 
-		'class' => 'dbtext g_1__ form-control',
-		'data-nta' => sifrele($sb_->no . ',,blok_html,,hash'),
-		'maxlength' => 140,
-		'placeholder' => 'Hash',
-	]);
+$form_eleman['hash'] = 
+'<label class="form-label">Hash</label>' . 
+$form->input_text($sb_->hash, [
+	'name' => 'hash', 
+	'class' => 'dbtext g_1__ uis-input',
+	'data-nta' => sifrele($sb_->no . ',,blok_html,,hash'),
+	'maxlength' => 140,
+	'placeholder' => 'Hash',
+]);
 
-	$form_eleman['icerik'] = 
-	'<label class="form-label">'.yc("İçerik yazıları").'</label>' . 
-	$form->textarea(html_a($sb_->icerik), [
-		'name' => 'icerik', 
-		'rows' => 4, 
-		'cols' => 40,
-		'class' => "jodit_editor dyok ceviri",
-		'id' => 'texticerik_'.rand(),
-		'style' => 'min-height:600px;',
-		'data-ceviridil' => 'icerik,blok_html,' . $sb_->no,
-	]);//'data-inline' => '1',
+$form_eleman['icerik'] = 
+'<label class="form-label">'.yc("İçerik yazıları").'</label>' . 
+$form->textarea(html_a($sb_->icerik), [
+	'name' => 'icerik', 
+	'rows' => 4, 
+	'cols' => 40,
+	'class' => "jodit_editor dyok ceviri",
+	'id' => 'texticerik_'.rand(),
+	'style' => 'min-height:600px;',
+	'data-ceviridil' => 'icerik,blok_html,' . $sb_->no,
+]);//'data-inline' => '1',
 
-	echo '
-	<form name="sayfa" action="' . href('','ui=blokduzenle&n=' . $n) . '" method="POST" id="formtextsayfa"> 
-	<div class="uis-container uis-mt-4">
-		<div class="uis-row">
-			<div class="uis-col-12">' . $form_satir1 . '</div>
-			<div class="uis-col-lg-9">
-			' . $form_eleman['adi'] . '
-			</div>
-			<div class="uis-col-lg-3">
-			' . $form_eleman['hash'] . '
-			</div>
-			<div class="uis-col-12">
-			' . $form_eleman['icerik'] . '
-			</div>
+echo '
+<form name="sayfa" action="' . href('','ui=blokduzenle&n=' . $n) . '" method="POST" id="formtextsayfa"> 
+<div class="uis-container uis-mt-4">
+	<div class="uis-row">
+		<div class="uis-col-12">' . $form_satir1 . '</div>
+		<div class="uis-col-lg-9">
+		' . $form_eleman['adi'] . '
+		</div>
+		<div class="uis-col-lg-3">
+		' . $form_eleman['hash'] . '
+		</div>
+		<div class="uis-col-12">
+		' . $form_eleman['icerik'] . '
 		</div>
 	</div>
-	</form>	
-	';
-} else {
-	
-}
+</div>
+</form>	
+';
