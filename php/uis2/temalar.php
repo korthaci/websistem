@@ -24,7 +24,8 @@ echo '
     <h1 class="uis-page-title"><i class="fa-solid fa-palette"></i> '. yc("Tema Yönetimi").'</h1>
     <div class="uis-action-bar">
         <button class="uis-btn uis-btn-outline tema-tazele"><i class="fa-solid fa-sync"></i> '.yc("Listeyi Yenile").'</button>'.
-        (!empty($_ENV['LC_API_KEY']) && !empty($_ENV['LC_VERIFY_KEY']) ? '<a href="ui/ai_studio" class="uis-btn uis-btn-sm uis-btn-p">'.yc("AI Studio").'</a>' : '').'
+        (!empty($_ENV['LC_API_KEY']) && !empty($_ENV['LC_VERIFY_KEY']) ? '<a href="ui/ai_studio" class="uis-btn uis-btn-sm uis-btn-p">'.yc("AI Studio").'</a>' : '').' ' .
+        (!empty($_ENV['LC_API_KEY']) && !empty($_ENV['LC_VERIFY_KEY']) ? '<a href="ui/ai_static_site_generator" class="uis-btn uis-btn-sm uis-btn-p">'.yc("AI Generator").'</a>' : '').'
     </div>
 </div>
 

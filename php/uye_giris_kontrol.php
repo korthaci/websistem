@@ -27,8 +27,8 @@ if (isset($_POST['gonder_uyegiris'])) {
             $stmt->execute(['kadi' => $k_adi_form]);
             $uye = $stmt->fetch(PDO::FETCH_OBJ);
 
-            if ($uye && password_verify($sifre_form, $uye->sifre)) {
-                $_SESSION['kullanici_no'] = $uye->no;
+            if ($uye && password_verify($sifre_form, $uye->sifre ?? '')) {
+                $_SESSION['kullanici_no'] = $uye->no ?? 0;
                 $_SESSION['kullanici_yetki_no'] = $uye->yetki_no;
                 $_SESSION['giris_yapildi'] = true;                
                 $stmt2 = $pdo->prepare("UPDATE {$do_}uyeler SET son_giris = :tarih WHERE no = :no");

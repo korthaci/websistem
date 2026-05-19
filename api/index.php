@@ -47,6 +47,7 @@ if (isset($_POST['islem'])) {
 		'uye_cikis'			=> ['adi' => 'cikis', 'php' => 'uye_cikis.php', 'header' => 'json'],
 		'uis_tema'			=> ['adi' => 'Tema İşlemleri', 'php' => 'uis/uis_tema.php', 'header' => 'json'],
 		'ai_generator'		=> ['adi' => 'AI Dönüştürücü', 'php' => 'ai_generator.php',  'header' => 'json'],
+		'ai_static_site_generator'	=> ['adi' => 'AI Static Site Generator', 'php' => 'ai_static_site_generator_api.php', 'header' => 'json'],
 		
 	];
 
