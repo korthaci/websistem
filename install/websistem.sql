@@ -31,6 +31,7 @@ CREATE TABLE `r_bilesen` (
   `no` int(11) NOT NULL,
   `url` varchar(200) DEFAULT NULL,
   `adi` varchar(255) DEFAULT NULL,
+  `saas` tinyint(1) DEFAULT 0,
   `yayin` tinyint(1) DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
