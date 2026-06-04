@@ -144,7 +144,7 @@ $(function () {
         _this.prop('disabled', true).text('Kuruluyor...');
 
         $.post(API_URL, {
-            islem: 'uis_modul',
+            islem: 'uis_modulkur',
             islem_tip: 'install',
             modul: modul
         }, function (response) {

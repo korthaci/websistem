@@ -21,7 +21,7 @@ if ($modul_b) {
 	<div class="uis-page-header">
 		<h1 class="uis-page-title"><i class="fa-solid fa-sliders"></i> ' . $modul_adi . ' ' . yc("Modül Yönetimi") . '</h1>
 		<div class="uis-action-bar">
-			<a href="' . href('index', 'ui=moduller') . '" class="uis-btn uis-btn-outline uis-btn-danger"><i class="fa-solid fa-arrow-left"></i> ' . yc("Modüllere Dön") . '</a>
+			<a href="ui/moduller" class="uis-btn uis-btn-outline uis-btn-danger"><i class="fa-solid fa-arrow-left"></i> ' . yc("Modüllere Dön") . '</a>
 		</div>
 	</div>';
 

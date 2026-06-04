@@ -35,10 +35,11 @@ if (!empty($db_bilesen)) {
 
 	foreach ($db_bilesen as $s) {
 		$b_al_modul_yaz = '';
-		$b_al_modul_dosya_dizi = scandir(BILESEN_DIR . '/' . $s->url . '/php/b_al_modul');
+		$b_al_modul_dizin = BILESEN_DIR . '/' . $s->url . '/php/b_al_modul';
+		$b_al_modul_dosya_dizi = is_dir($b_al_modul_dizin) ? scandir($b_al_modul_dizin) : [];
 		if (!empty($b_al_modul_dosya_dizi)) {
 			foreach ($b_al_modul_dosya_dizi as $b_al_dosya) {
-				$dosya_yolu_dosya = BILESEN_DIR . '/' . $s->url . '/php/b_al_modul/'.$b_al_dosya;
+				$dosya_yolu_dosya = $b_al_modul_dizin . '/' . $b_al_dosya;
 				if (is_file($dosya_yolu_dosya) && pathinfo($dosya_yolu_dosya, PATHINFO_EXTENSION) === 'php') {
 					$b_al_modul_yaz .= '<span data-kopyala="">[al:bilesen:'.$s->url.':'. pathinfo($b_al_dosya, PATHINFO_FILENAME) .']'.'</span><br/>';
 				}
