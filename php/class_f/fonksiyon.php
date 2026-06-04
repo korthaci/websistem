@@ -745,6 +745,9 @@ function bosluklari_sil($yazi) {
 }
 
 function yc($text_adi, ...$sprintf_args) {
+	if ($text_adi === null) {
+        return '';
+    }
     return Yc::get($text_adi, ...$sprintf_args);
 }
 
