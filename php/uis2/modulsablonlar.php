@@ -15,20 +15,62 @@ try {
 }
 
 if ($modul_url) {
-	$modul_sablon_dosyalar = dosya_listesi(MODUL_DIR . '/' . $modul_url . '/sablon', ['index.html', 'index1.html']);
+	$sablon_kok = MODUL_DIR . '/' . $modul_url . '/sablon';
+	$sablon_kok_real = realpath($sablon_kok);
+	$modul_sablon_dosyalar = dosya_listele($sablon_kok, [
+		'include' => ['*.html'],
+		'exclude' => ['index.html', 'index1.html', '*.yedek'],
+		'recursive' => true,
+	]);
+	$modul_sablon_dosyalar = is_array($modul_sablon_dosyalar) ? $modul_sablon_dosyalar : [];
+	sort($modul_sablon_dosyalar, SORT_STRING | SORT_FLAG_CASE);
+
 	$md_dosya_url = (isset($_GET['mddosya'])) ? z($_GET['mddosya']) : '';
-	$md_dosya = $md_dosya_url . '.html';
+	$md_dosya_url = trim(str_replace('\\', '/', $md_dosya_url), '/');
+	$md_dosya = '';
+	$md_dosya_yolu = '';
+	$md_dosya_gecerli = false;
 	$dosya_icerik = '';
 	$kayit_mesaj = '';
+	$gecersiz_dosya_mesaj = '';
 
-	if (isset($_POST['mddosya_text']) && !empty($md_dosya_url)) {
-		if (dosya_yaz(MODUL_DIR . '/' . $modul_url . '/sablon/'. $md_dosya, html_d(strtr($_POST['mddosya_text'], ['__textarea__'=>'textarea'])))) {
+	if ($md_dosya_url !== '') {
+		$md_dosya = str_ends_with($md_dosya_url, '.html') ? $md_dosya_url : $md_dosya_url . '.html';
+
+		if (strpos($md_dosya, '..') !== false) {
+			$gecersiz_dosya_mesaj = yc("Geçersiz dosya yolu.");
+		} elseif ($sablon_kok_real === false) {
+			$gecersiz_dosya_mesaj = yc("Şablon klasörü bulunamadı.");
+		} else {
+			$aday_dosya_yolu = $sablon_kok . '/' . $md_dosya;
+			$aday_real = realpath($aday_dosya_yolu);
+			$kok_kontrol = rtrim(strtolower(str_replace('\\', '/', $sablon_kok_real)), '/') . '/';
+			$dosya_kontrol = $aday_real ? strtolower(str_replace('\\', '/', $aday_real)) : '';
+
+			if ($aday_real && is_file($aday_real) && str_ends_with(strtolower($aday_real), '.html') && str_starts_with($dosya_kontrol, $kok_kontrol)) {
+				$md_dosya_yolu = $aday_real;
+				$md_dosya_gecerli = true;
+			} else {
+				$gecersiz_dosya_mesaj = yc("Seçilen dosya bulunamadı veya izin verilen klasör dışında.");
+			}
+		}
+	}
+
+	if (isset($_POST['mddosya_text']) && $md_dosya_gecerli) {
+		if (dosya_yaz($md_dosya_yolu, html_d(strtr($_POST['mddosya_text'], ['__textarea__'=>'textarea'])))) {
 			$kayit_mesaj = '<div class="uis-alert uis-alert-s">'.yc("Şablon başarıyla kaydedildi.").'</div>';
 		}
 	}
 
-	if (!empty($md_dosya_url) && is_file(MODUL_DIR . '/' . $modul_url . '/sablon/'. $md_dosya)) {
-		$dosya_icerik = file_get_contents(MODUL_DIR . '/' . $modul_url . '/sablon/'. $md_dosya);
+	if ($gecersiz_dosya_mesaj !== '') {
+		$kayit_mesaj = '<div class="uis-alert uis-alert-d">' . $gecersiz_dosya_mesaj . '</div>';
+		$md_dosya_url = '';
+		$md_dosya = '';
+		$md_dosya_gecerli = false;
+	}
+
+	if ($md_dosya_gecerli) {
+		$dosya_icerik = file_get_contents($md_dosya_yolu);
 		$dosya_icerik = strtr($dosya_icerik, ['<textarea' => '<__textarea__','</textarea>' => '</__textarea__>']);
 	}
 
@@ -51,13 +93,15 @@ if ($modul_url) {
 			<div class="uis-flex uis-wrap uis-gap-2">';
 			
 			if (!empty($modul_sablon_dosyalar)) {
-				sort($modul_sablon_dosyalar, SORT_STRING | SORT_FLAG_CASE);
 				foreach($modul_sablon_dosyalar as $msd) {
-					$msd_yazi = strtr(trim($msd,"_"), ['.html'=>'']);
+					$msd = str_replace('\\', '/', $msd);
+					$msd_yazi = strtr(trim(basename($msd),"_"), ['.html'=>'']);
 					$is_active = ($msd === $md_dosya);
 					$active_class = $is_active ? 'uis-btn-p' : 'uis-btn-outline';
-					echo '<a href="' . href('index', 'ui=modulsablonlar&n='.$n.'&mddosya='.strtr($msd,['.html'=>''])) . '" class="uis-btn uis-btn-sm ' . $active_class . '">
-						<i class="fa-regular fa-file-code"></i> ' . $msd_yazi . '
+					$msd_url = preg_replace('/\.html$/', '', $msd);
+					$msd_baslik = (strpos($msd, '/') !== false) ? $msd : $msd_yazi;
+					echo '<a href="' . href('index', 'ui=modulsablonlar&n='.$n.'&mddosya='.$msd_url) . '" class="uis-btn uis-btn-sm ' . $active_class . '" title="' . hs($msd) . '">
+						<i class="fa-regular fa-file-code"></i> ' . hs($msd_baslik) . '
 					</a>';
 				}
 			} else {
@@ -69,7 +113,7 @@ if ($modul_url) {
 	</div>
 
 	<div class="uis-card uis-card-nopad overflow-hidden">
-		<form action="' . href('index','ui=modulsablonlar&n='.$n.'&mddosya='.$md_dosya_url) . '" method="POST">
+		<form action="' . href('index','ui=modulsablonlar&n='.$n.'&mddosya='.preg_replace('/\.html$/', '', $md_dosya)) . '" method="POST">
 			<div class="uis-flex uis-justify-between uis-align-center theme-editor-header">
 				<span class="font-weight-bold">' . ($md_dosya_url ? $md_dosya : yc("Şablon Seçiniz")) . '</span>
 				<div class="uis-flex uis-gap-2">
