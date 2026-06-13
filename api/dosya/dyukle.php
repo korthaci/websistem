@@ -61,8 +61,15 @@ $forbidden = ['text/html','text/css','application/javascript','application/json'
 	'application/x-httpd-php','application/x-php','text/x-php','application/php'];
 
 $dosya = isset($_FILES['file']) ? $_FILES['file'] : null;
+$upload_error = $dosya['error'] ?? UPLOAD_ERR_NO_FILE;
+$tmp_name = $dosya['tmp_name'] ?? '';
 
 if (!$dosya) {
+	echo json_encode(['return' => 0, 'mesaj' => yc("Dosya yok veya yüklenemedi.")]);
+	exit;
+}
+
+if ($upload_error !== UPLOAD_ERR_OK || $tmp_name === '' || !is_uploaded_file($tmp_name)) {
 	echo json_encode(['return' => 0, 'mesaj' => yc("Dosya yok veya yüklenemedi.")]);
 	exit;
 }
@@ -79,12 +86,12 @@ if (in_array($file_extension, $dangerous_extensions)) {
 }
 
 // 2. Image dosyası için özel kontroller
-$is_image_claim = strpos($dosya['type'], 'image/') === 0;
+$is_image_claim = strpos((string)($dosya['type'] ?? ''), 'image/') === 0;
 
 if ($is_image_claim || $dosya_tip == 'resim') {
 	
 	// Gerçek resim kontrolü
-	$image_info = @getimagesize($dosya['tmp_name']);
+	$image_info = @getimagesize($tmp_name);
 	
 	if ($image_info === false) {
 		echo json_encode(['return' => 0, 'mesaj' => yc("Geçersiz resim dosyası. Dosya bozuk veya resim formatında değil.")]);
@@ -114,7 +121,12 @@ if ($is_image_claim || $dosya_tip == 'resim') {
 }
 
 // 3. Dosya içeriğinde zararlı kod kontrolü (ilk 2KB)
-$file_content = file_get_contents($dosya['tmp_name'], false, null, 0, 2048);
+$file_content = file_get_contents($tmp_name, false, null, 0, 2048);
+if ($file_content === false) {
+	echo json_encode(['return' => 0, 'mesaj' => yc("Dosya okunamadı.")]);
+	exit;
+}
+
 if (preg_match('/<\?php|<\?=|<script[\s>]/i', $file_content)) {
 	echo json_encode(['return' => 0, 'mesaj' => yc("Dosyada güvenlik ihlali tespit edildi.")]);
 	exit;

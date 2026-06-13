@@ -1425,7 +1425,16 @@ class Yc {
 			$translated = $text;
 		}
 
-		return empty($args) ? $translated : sprintf($translated, ...$args);
+		if (empty($args)) {
+			return $translated;
+		}
+
+		try {
+			return sprintf($translated, ...$args);
+		} catch (ValueError $e) {
+			error_log('Yc sprintf error: ' . $e->getMessage() . ' | text=' . $text . ' | translated=' . $translated);
+			return $translated;
+		}
 	}
 
 	public static function getTranslations(): array {
