@@ -902,12 +902,21 @@ function xss_sil($input) {
 }
 
 
-function rg_opendir($r_dizin_k, $r_dizin_b = '', $ust_yazi = '', $en_az_resim_sayisi = 2, $class = '', $a = 'href', $resimalt = ''): string|bool {
-	if (!is_dir($r_dizin_k) || !is_readable($r_dizin_k)) {
+function rg_opendir($r_dizin_k, $r_dizin_b = '', 
+					$ust_yazi = '', $en_az_resim_sayisi = 2, 
+					$class = '', $a = 'href', $resimalt = ''): string|bool {
+
+	$r_dizin_k_fs = $r_dizin_k;
+	if (defined('ROOT') && !preg_match('/^(?:[a-z]:[\/\\\\]|\/|\\\\\\\\)/i', $r_dizin_k_fs)) {
+		$r_dizin_k_fs = ROOT . '/' . ltrim($r_dizin_k_fs, '/\\');
+	}
+
+	if (!is_dir($r_dizin_k_fs) || !is_readable($r_dizin_k_fs)) {
 		return false;
 	}
+	
 	$resim_adi_dizi = [];
-	$d_k = opendir($r_dizin_k);
+	$d_k = opendir($r_dizin_k_fs);
 
 	if (!$d_k) {
 		return false;
