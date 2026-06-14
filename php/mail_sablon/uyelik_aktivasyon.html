@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
+	<title>Üyelik Aktivasyonu</title>
+</head>
+<body style="margin: 0; padding: 20px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; color: #333333; background-color: #f6f8fa;">
+	<table cellpadding="0" cellspacing="0" width="100%" style="background-color: #f6f8fa; width: 100%; height: 100%;">
+		<tr>
+			<td align="center">
+				<table cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background-color: #ffffff; border: 1px solid #e1e4e8; border-radius: 6px; overflow: hidden; margin: 20px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+					<tr>
+						<td style="padding: 40px 30px;">
+							{{__if %logo_var%
+							<table cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 30px;">
+								<tr>
+									<td align="center">
+										<img src="{{$:logo}}" alt="{{$:site_adi}}" style="max-width: 150px; height: auto; display: block; border: 0;">
+									</td>
+								</tr>
+							</table>
+							__endif}}
+
+							<h2 style="margin-top: 0; margin-bottom: 20px; font-size: 20px; font-weight: 600; color: #1f2328; text-align: center;">
+								{{__if %adi_var%
+								Merhaba {{$:adi}},
+								||
+								Merhaba,
+								__endif}}
+							</h2>
+
+							<p style="margin-top: 0; margin-bottom: 30px; font-size: 15px; line-height: 1.6; color: #444d56; text-align: center;">
+								Hesabınızı aktifleştirmek ve üyelik işlemini tamamlamak için lütfen aşağıdaki butona tıklayınız.
+							</p>
+
+							<table align="center" border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 30px;">
+								<tr>
+									<td bgcolor="#ed5153" style="border-radius: 4px; text-align: center;">
+										<a href="{{$:aktivasyon_link}}" target="_blank" style="display: inline-block; padding: 12px 24px; font-size: 15px; font-weight: 600; color: #ffffff; text-decoration: none; border: 1px solid #ed5153; border-radius: 4px;">Hesabı Aktifleştir</a>
+									</td>
+								</tr>
+							</table>
+
+							<hr style="border: 0; border-top: 1px solid #e1e4e8; margin: 30px 0;">
+
+							<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #6a737d; text-align: center;">
+								Bu işlemi siz gerçekleştirmediyseniz, lütfen bu e-postayı dikkate almayınız.
+							</p>
+						</td>
+					</tr>
+				</table>
+				<table cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 0 auto;">
+					<tr>
+						<td style="padding: 0 10px; font-size: 12px; color: #8c959f; text-align: center;">
+							&copy; {{$:site_adi}}. Tüm hakları saklıdır.
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

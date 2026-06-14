@@ -19,9 +19,8 @@ if (strlen($aktivasyon_kodu) > 8) {
                 echo '<div class="notification is-success">
                     <p>' . yc("Hesabınız başarıyla aktif edildi.") . '</p>
                     <p class="title is-4 mt-4">' . yc("Hoşgeldiniz") . '</p>
-                    <p class="subtitle is-6">' . yc("Giriş sayfasına yönlendiriliyorsunuz...") . '</p>
-                </div>
-                <script>setTimeout(() => { window.location.href = "./uis/uyegiris"; }, 1500);</script>';
+                    <p class="mt-4"><a href="uis/uyegiris" class="button is-success is-inverted">' . yc("Giriş yap") . '</a></p>
+                </div>';
             } else {
                 echo '<div class="notification is-danger">
                     <button class="delete"></button>

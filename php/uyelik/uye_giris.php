@@ -25,22 +25,39 @@ if (isset($_POST['yenikayit']) && set_dolu('emailadresi','p') && set_dolu('sifre
 
 		$yeni_kno = $pdo->lastInsertId();
 
-			$body = '<html><body><br/>' . yc("Hoşgeldiniz") . ' '. $adi.',<br/><br/><a href="'.LOCAL.'/uis/ua?akodu='.$aktivasyon_kodu.'">'.yc("Hesabını aktifleştir").'</a></body></html>';
-			$subject = $adi . ' ' . yc("Aktivasyon kodu").' - '.$so_->d('site_adi') . ' ' . date("Y-m-d H:i");
+			$logo_dosya = 'assets/img/logo/logo.png';
+			$logo = (defined('LOCAL') && is_file(ROOT . '/' . $logo_dosya)) ? LOCAL . '/' . $logo_dosya : '';
+
+			$sy = new sablon_yaz();
+			$sy->dosya_icerik(R_PHP . '/mail_sablon/uyelik_aktivasyon.html');
+			$sy->vars = [
+				'__degisken' => [
+					'adi' => $adi,
+					'aktivasyon_link' => LOCAL . '/uis/ua?akodu=' . $aktivasyon_kodu,
+					'site_adi' => $so_->d('site_adi'),
+					'logo' => $logo,
+				],
+				'__if' => [
+					'adi_var' => !empty($adi),
+					'logo_var' => !empty($logo),
+				]
+			];
+			$body = $sy->render();
+			$subject = yc("Hesabını aktifleştir") . ' — ' . $so_->d('site_adi');
 			Global_::$phpmailer->gonder([$emailadresi], $subject, $body, SMTP_K_ADI, 'bcc');
 			
-				if(Global_::$phpmailer->gonderildi == true) {
-					echo '<div class="umesaj __1">'.
-					yc("E-posta adresinize aktivasyon kodu gönderildi").'. ! ' . yc("Üyelik işlemi henüz tamamlanmadı"). '<br><br>'.
-					yc("Spam, Gereksiz, Gelen Kutusunu kontrol etmeyi unutmayın").
-					'</div><br/>';
-				} else {
-					if (!empty($aktivasyon_kodu)) { 
-						kayit_sil_($pdo, $do_.'uyeler', $yeni_kno);
-						autoi_fix($pdo, $do_.'uyeler');						
-					}
-					echo yc("Aktivasyon kodu gönderilemedi");
+			if(Global_::$phpmailer->gonderildi == true) {
+				echo '<div class="umesaj __1">'.
+				yc("E-posta adresinize aktivasyon kodu gönderildi").'. ! ' . yc("Üyelik işlemi henüz tamamlanmadı"). '<br><br>'.
+				yc("Spam, Gereksiz, Gelen Kutusunu kontrol etmeyi unutmayın").
+				'</div><br/>';
+			} else {
+				if (!empty($aktivasyon_kodu)) { 
+					kayit_sil_($pdo, $do_.'uyeler', $yeni_kno);
+					autoi_fix($pdo, $do_.'uyeler');						
 				}
+				echo yc("Aktivasyon kodu gönderilemedi");
+			}
 		} else {
 			echo '! '.yc("Kaydedilemedi").'. '.yc("Bir hata oluştu").'. '.yc("Lütfen daha sonra tekrar deneyin").'.';
 		}
