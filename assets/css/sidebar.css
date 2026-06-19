@@ -442,3 +442,87 @@
 .ws_sidebar .ws_nav-item.active:hover i {
 	transform: scale(1.2);
 }
+/* Mobil sidebar başlangıcı */
+@media (max-width: 768px) {
+	.main-content {
+		margin-left: 0 !important;
+	}
+
+	.ws_sidebar,
+	.ws_sidebar:hover,
+	.ws_sidebar.fixed {
+		width: 220px;
+		transform: translateX(-100%);
+		animation: none !important;
+		transition: transform 0.3s ease;
+	}
+
+	.ws_sidebar.open,
+	.ws_sidebar.open:hover,
+	.ws_sidebar.open.fixed {
+		transform: translateX(0);
+	}
+
+	.ws_sidebar .ws_nav-item span,
+	.ws_sidebar .ws_sidebar-logo .ws_logo-yazi {
+		opacity: 1;
+		max-width: 100px;
+	}
+
+	.ws_sidebar .ws_nav-menu,
+	.ws_sidebar.open .ws_nav-menu,
+	.ws_sidebar.open .ws_submenu.open {
+		overflow-y: auto;
+	}
+
+	.ws_sidebar .ws_pin-sidebar {
+		display: none !important;
+	}
+
+	.ws_sidebar.open .ws_has-submenu:after {
+		content: '';
+		position: absolute;
+		top: 40%;
+		right: 8px;
+		width: 8px;
+		height: 8px;
+		border-right: 2px solid #ddd;
+		border-top: 2px solid #ddd;
+		transform: rotate(45deg);
+		transition: transform .2s ease;
+	}
+
+	.ws_sidebar.open .ws_nav-item.ws_has-submenu.open:after {
+		transform: rotate(135deg);
+	}
+
+	.ws_overlay {
+		pointer-events: none;
+	}
+
+	.ws_overlay.active {
+		pointer-events: auto;
+	}
+
+	.ws_sidebar_edge_zone {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 16px;
+		height: 100vh;
+		height: 100dvh;
+		z-index: 1000;
+		background: transparent;
+		touch-action: pan-y;
+	}
+
+	body.ws_sidebar-mobile-open {
+		overflow: hidden;
+		overscroll-behavior: none;
+	}
+
+	body.ws_sidebar-mobile-open .ws_sidebar_edge_zone {
+		pointer-events: none;
+	}
+}
+/* Mobil sidebar sonu */
