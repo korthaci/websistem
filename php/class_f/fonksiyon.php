@@ -756,7 +756,17 @@ function middle_dot_yc($html, $yabanci_dil_acik = true, $exclude_get = []) {
     $__protected_map = [];
 
     $html = preg_replace_callback(
-        '/(<(textarea|pre|code|script|style)\b[^>]*>[\s\S]*?<\/\2>)/i',
+        '/(<textarea\b[^>]*>)([\s\S]*?)(<\/textarea>)/i',
+        function ($m) use (&$__protected_map) {
+            $key = '___PROTECTED_BLOCK_' . count($__protected_map) . '___';
+            $__protected_map[$key] = $m[2];
+            return $m[1] . $key . $m[3];
+        },
+        $html
+    );
+
+    $html = preg_replace_callback(
+        '/(<(pre|code|script|style)\b[^>]*>[\s\S]*?<\/\2>)/i',
         function ($m) use (&$__protected_map) {
             $key = '___PROTECTED_BLOCK_' . count($__protected_map) . '___';
             $__protected_map[$key] = $m[1];
@@ -799,7 +809,9 @@ function middle_dot_yc($html, $yabanci_dil_acik = true, $exclude_get = []) {
                 $degisken_1 = $d1m[1] ?? '';
                 $degisken_2 = $d2m[1] ?? '';
 
-                if ($degisken_2 === '') return yc($content);
+                if ($degisken_2 === '') {
+                    return yc($content);
+                }
 
                 return yc(
                     str_replace([$d1m[0], $d2m[0]], ['%s', '%s'], $content),
@@ -812,7 +824,9 @@ function middle_dot_yc($html, $yabanci_dil_acik = true, $exclude_get = []) {
                 preg_match("/\(\.\)(.+)\(\.\)/is", $content, $d1m);
                 $degisken_1 = $d1m[1] ?? '';
 
-                if ($degisken_1 === '') return yc($content);
+                if ($degisken_1 === '') {
+                    return yc($content);
+                }
 
                 return yc(
                     str_replace($d1m[0], '%s', $content),
@@ -820,11 +834,22 @@ function middle_dot_yc($html, $yabanci_dil_acik = true, $exclude_get = []) {
                 );
 
             } else {
-                if (preg_match_all('/<([a-z1-6]+)\b[^>]*>.*?<\/\1>|<[a-z1-6]+\b[^>]*\/>/is', $content, $html_matches)) {
-                    $tags = $html_matches[0];
-                    $clean_key = preg_replace('/<([a-z1-6]+)\b[^>]*>.*?<\/\1>|<[a-z1-6]+\b[^>]*\/>/is', '%s', $content);
+
+                $tags = [];
+
+                $clean_key = preg_replace_callback(
+                    '/<\/?[a-z1-6]+\b[^>]*>/i',
+                    function ($m) use (&$tags) {
+                        $tags[] = $m[0];
+                        return '%s';
+                    },
+                    $content
+                );
+
+                if (!empty($tags)) {
                     return yc($clean_key, ...$tags);
                 }
+
                 return yc($content);
             }
 

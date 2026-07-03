@@ -133,7 +133,10 @@ if (n0_($u_no__)) {
                                 </div>
                                 <a href="uis/sifrereset" class="ug-link">'.yc("Şifre resetle").'</a>
                             </div>
-                            <input type="text" name="webunion" value="" class="ug-input dyok" maxlength="10" placeholder="Web *">
+							
+                            <input type="text" name="webunion" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0;" maxlength="10">
+							<input type="hidden" name="webunion_time" value="' . time() . '">
+
                             <div class="ug-field">
                                 <input type="submit" name="gonder_uyegiris" value="'.yc("Giriş yap").'" class="ug-btn ug-btn--primary ug-btn--block" />
                             </div>
@@ -173,7 +176,8 @@ if (n0_($u_no__)) {
                                 <input type="password" id="sifre_tekrar" name="sifretekrar" class="ug-input" maxlength="100" placeholder="'.yc("Yeni Şifre Tekrar").'" required>
                             </div>
 
-                            <input type="text" name="webunion" value="" class="ug-input dyok" maxlength="10" placeholder="Web *">
+							<input type="text" name="webunion" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0;" maxlength="10">
+							<input type="hidden" name="webunion_time" value="' . time() . '">
 
                             <div class="ug-field">
                                 <input type="submit" name="yenikayit" value="'.yc("Kayıt ol").'" class="ug-btn ug-btn--danger ug-btn--block" />

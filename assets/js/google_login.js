@@ -8,22 +8,26 @@ function handleCredentialResponse(response) {
         dataType: 'json',
         success: function (res) {
             if (res.status === "success") {
-				location.reload();
-                console.log("Google login başarılı:", res);
-            } else {
-                console.log("Google login başarısız:", res.msg);
+                location.reload();
             }
         },
-        error: function () {
+        error: function (xhr, status, error) {
             console.log("AJAX error");
+            console.log({
+                http_status: xhr.status,
+                status: status,
+                error: error,
+                response: xhr.responseText
+            });
         }
     });
 
 }
 
 $(window).on('load', function () {
+
     google.accounts.id.initialize({
-        client_id: js_vars.gloginc,//"672040115870-qslv03u844ib3klqgk8cl4b78adg8f63.apps.googleusercontent.com",
+        client_id: js_vars.gloginc,
         callback: handleCredentialResponse,
         auto_select: false
     });
@@ -37,4 +41,5 @@ $(window).on('load', function () {
         e.preventDefault();
         $("#hiddenGoogleBtn").find('div[role="button"]').click();
     });
+
 });

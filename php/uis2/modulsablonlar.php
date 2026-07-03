@@ -120,8 +120,8 @@ if ($modul_url) {
 					' . (!empty($md_dosya_url) ? '<button type="submit" name="mddosya_kaydet" class="uis-btn uis-btn-sm uis-btn-p"><i class="fa-solid fa-floppy-disk"></i> ' . yc("Kaydet") . '</button>' : '') . '
 				</div>
 			</div>
-			<textarea name="mddosya_text textarea_tag_kontrol" 
-			class="theme-editor-textarea format_html" style="min-height: 500px;" spellcheck="false" autocomplete="off" autocapitalize="off" wrap="off" ' . (empty($md_dosya_url) ? 'disabled placeholder="'.yc("Lütfen düzenlemek için bir şablon seçin").'..." ' : '') . '>' . ($dosya_icerik) . '</textarea>
+			<textarea name="mddosya_text" 
+			class="theme-editor-textarea format_html textarea_tag_kontrol" style="min-height: 500px;" spellcheck="false" autocomplete="off" autocapitalize="off" wrap="off" ' . (empty($md_dosya_url) ? 'disabled placeholder="'.yc("Lütfen düzenlemek için bir şablon seçin").'..." ' : '') . '>' . ($dosya_icerik) . '</textarea>
 		</form>
 	</div>
 	
