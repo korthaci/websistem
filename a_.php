@@ -24,6 +24,8 @@ require_once R_CLASS_F . '/pdo_db_helper.php';
 require_once R_CLASS_F . '/form_c.php';
 require_once R_CLASS_F . '/class.dom_element_menu.php';
 require_once R_CLASS_F . '/PageMetadata.php';
+require_once R_CLASS_F . '/StructuredData/SchemaOrgMapper.php';
+require_once R_CLASS_F . '/StructuredData/StructuredData.php';
 if (is_file(R_CLASS_F . '/lc.php')) require_once R_CLASS_F . '/lc.php';
 
 if (DB_TYPE === 'sqlite') {
@@ -59,12 +61,17 @@ $d = Global_::$d = Global_::$dil_yonlendir->d();
 Global_::$dil_no = Global_::$dil_yonlendir->dil_no;
 $ceviri_dizi = Global_::$dil_yonlendir->ceviri_dizi;
 
+include_once R_PHP.'/uye_giris_kontrol.php';
+
 $bo_ = new bilesen_json_ayarlar($pdo, $do_);
 
 Global_::$bilesenler_url_dizi = [];
-$bilesenler = $pdo->query("SELECT url FROM {$do_}bilesen WHERE yayin = 1")->fetchAll() ?? [];
+$bilesenler = $pdo->query("SELECT url FROM {$do_}bilesen WHERE yayin = 1 ORDER BY saas DESC, no ASC")->fetchAll() ?? [];
 foreach ($bilesenler as $b__) {
     Global_::$bilesenler_url_dizi[] = $b__->url;
+	/*if (!empty($b__->saas) && (int)$so_->d('saas_modeli') !== 1) {
+        continue;
+    }*/
     is_file($f__ = BILESEN_DIR . "/{$b__->url}/php/classf/require_b.php") && require_once $f__;
 }
 
@@ -105,8 +112,6 @@ $smtp_dizi = array(
 	]
 );
 Global_::$phpmailer = new phpmailer_mail($smtp_dizi, 0); //debug:0
-
-include_once R_PHP.'/uye_giris_kontrol.php';
 
 if (defined('index_php')) {
 	include_once R_PHP.'/arama_ozellik.php';

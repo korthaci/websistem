@@ -27,5 +27,8 @@ Global_::$yonlendir_index_body_class[] = ' __indexx' . $indexx;
 $pageMetadata = PageMetadata::getInstance($pdo, $do_, $so_);
 Global_::$pageMetadata = $pageMetadata;
 
+$structuredData = StructuredData::getInstance($pdo, $do_, $so_);
+Global_::$structuredData = $structuredData;
+
 $kolon1 = $yonlendir_dosya.'.php';
 define('KOLON_1', $kolon1);

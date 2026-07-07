@@ -34,6 +34,7 @@ $index_html_yaz->vars = [
 		'description' => Global_::$pageMetadata->description,
 		'tags' => Global_::$pageMetadata->tags,
 		'image' => Global_::$pageMetadata->image,
+		'structured_data' => Global_::$structuredData->output ?? '',
 		'dil_kod' => Global_::$d,
 		'local' => LOCAL,
 		'yonlendir_index_body_class' => is_array(Global_::$yonlendir_index_body_class ?? null)
@@ -49,6 +50,9 @@ $index_html_yaz->vars = [
 			? '<meta name="csrf-token" content="' . hs($_SESSION['csrf_token']) . '">'
 			: '',
 		'script_var' => $script_var,
+		'html_ekle' => is_array(Global_::get('html_ekle'))
+			? implode('', Global_::get('html_ekle'))
+			: (Global_::get('html_ekle', '') ?? ''),
 		'google_login_client_id' => $so_->d('google_login_client_id') && $u_no__ == 0 ? trim($so_->d('google_login_client_id')) : '',
 	],
 	'__if' => [
@@ -63,6 +67,7 @@ $index_html_yaz->vars = [
 		'has_meta_image' => (int)!empty(Global_::$pageMetadata->image),
 		'has_meta_tags' => (int)!empty(Global_::$pageMetadata->tags),
 		'google_login_oauth' => (int)(!empty($so_->d('google_login_client_id')) && $u_no__ <= 0),
+		'onboarding_acik' => (int) (class_exists('OnboardingManager') && syetki([2,3,4])),
 	]
 ];
 
@@ -77,4 +82,3 @@ if (!empty($meta_noindex_follow)) {
 }
 
 echo $index_html_yaz->render();
-

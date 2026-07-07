@@ -12,6 +12,7 @@ class Global_ {
 	public static $arama_;
 	public static $bilesenler_url_dizi;
 	public static $pageMetadata;
+	public static $structuredData;
 
 	/*
 	üstteki değişkenlere direkt olarak ulaşılabilir. setter ve getter ile ilgili olanlar $data'nın birer elemanıdır ve her yerden her zaman oluşturulabilir.

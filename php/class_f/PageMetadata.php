@@ -71,7 +71,7 @@ class PageMetadata {
         $this->title = trim($this->title);
 
         if (empty($this->title)) {
-            $this->title = c(cc($this->so_->d('site_adi'), $this->so_->no('site_adi'), 'genel_ayarlar', 'site_adi'));
+            $this->title = $this->so_->d('site_adi');
         }
 
         $this->title = $this->sanitizeString($this->title);
@@ -84,7 +84,10 @@ class PageMetadata {
             $this->title = '';
 
             if (method_exists($this->so_, 'd') && method_exists($this->so_, 'no') && function_exists('cc')) {
-                $this->title = $this->getSafeValue('cc', $this->so_->d('site_adi'), $this->so_->no('site_adi'), 'genel_ayarlar', 'site_adi');
+                $site_adi = $this->so_->d('site_adi');
+                $site_title = $this->getSafeValue('cc', $this->so_->d('site_title'), $this->so_->no('site_title'), 'genel_ayarlar', 'site_title');
+                
+                $this->title = trim($site_title) !== '' ? $site_adi . ' | ' . trim($site_title) : $site_adi;
                 $this->description = $this->getSafeValue('cc', $this->so_->d('aciklama'), $this->so_->no('aciklama'), 'genel_ayarlar', 'aciklama');
                 $this->tags = $this->getSafeValue('cc', $this->so_->d('etiket'), $this->so_->no('etiket'), 'genel_ayarlar', 'etiket');
             } else {
