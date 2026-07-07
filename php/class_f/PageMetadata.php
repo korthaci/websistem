@@ -87,7 +87,7 @@ class PageMetadata {
                 $site_adi = $this->so_->d('site_adi');
                 $site_title = $this->getSafeValue('cc', $this->so_->d('site_title'), $this->so_->no('site_title'), 'genel_ayarlar', 'site_title');
                 
-                $this->title = trim($site_title) !== '' ? $site_adi . ' | ' . trim($site_title) : $site_adi;
+                $this->title = trim($site_title??'') !== '' ? $site_adi . ' | ' . trim($site_title) : $site_adi;
                 $this->description = $this->getSafeValue('cc', $this->so_->d('aciklama'), $this->so_->no('aciklama'), 'genel_ayarlar', 'aciklama');
                 $this->tags = $this->getSafeValue('cc', $this->so_->d('etiket'), $this->so_->no('etiket'), 'genel_ayarlar', 'etiket');
             } else {
