@@ -182,6 +182,71 @@ class siralama {
 
 
 
+/**
+ * sablon_yaz — HTML/PHP şablon dosyalarını işleyen render motoru.
+ *
+ * Şablon dosyası içinde kullanılabilecek etiketler:
+ *
+ * DEĞİŞKEN BASMA
+ *   {{$:isim}}
+ *     $this->vars['__degisken']['isim'] değerini basar.
+ *     Eşleşme yoksa boş string döner.
+ *
+ * KOŞUL (if / if_2 — iç içe kullanım için 2. seviye)
+ *   {{__if %isim% doğruysa_yazı || yanlışsa_yazı __endif}}
+ *   {{__if_2 %isim% doğruysa_yazı || yanlışsa_yazı __endif_2}}
+ *     $this->vars['__if']['isim'] truthy ise ilk kısım, değilse (varsa)
+ *     "||" sonrası kısım basılır. "||" yoksa false durumunda boş basılır.
+ *     Nested if gereken durumlarda dıştaki blok __if, içteki blok __if_2
+ *     kullanılmalı (iki seviyeden fazlası desteklenmiyor).
+ *
+ * DÖNGÜ (foreach)
+ *   {{__foreach %isim% item}}
+ *       {{ %item.alan% }}
+ *       [[__if %1_veya_0% doğruysa_yazı || yanlışsa_yazı __endif]]
+ *   {{__endforeach}}
+ *     $this->vars['__foreach']['isim'] dizisindeki her eleman için blok
+ *     tekrarlanır. "item" kısmı, blok içinde alan erişimi için kullanılan
+ *     serbest isimdir (örn. item.baslik, item.url). Eleman array veya
+ *     object olabilir. Döngü içindeki koşul için normal {{__if}} değil,
+ *     köşeli parantezli [[__if %1|0% ... __endif]] söz dizimi kullanılır
+ *     ve değer olarak alan adı değil doğrudan 1/0 beklenir.
+ *
+ * CDN
+ *   {:cdn:}
+ *     _CDN_ sabitiyle değiştirilir.
+ *
+ * MODÜL / BİLEŞEN DAHİL ETME (html_modul — dış fonksiyon, değişken/foreach
+ * substitution'undan SONRA çalışır)
+ *   [al:modul:modul_url]
+ *   [al:bilesen:bilesen_url:dosya_adi]
+ *     Veritabanında yayin=1 olan ilgili modül/bileşen dosyasını include eder.
+ *
+ * DOSYA DAHİL ETME / GLOBAL ERİŞİM (sablon_include — class metodu, en son
+ * çalışır)
+ *   [[$degisken]]
+ *     Global scope'taki $degisken değerini basar.
+ *   {{i:tema:dosya_adi}}   → TEMA_DIR/<aktif_tema>/dosya_adi.php dahil edilir
+ *   {{i:yon:dosya_adi}}    → YONLENDIR_D/dosya_adi.php dahil edilir
+ *   {{i:diger:dosya_adi}}  → R_PHP/dosya_adi.php dahil edilir
+ *   {{i:yon:kosul+:dosya_adi}} → global $kosul truthy ise dahil edilir
+ *   {{i:$:degisken}}      → $degisken içindeki tam dosya yolu dahil edilir
+ *   {{c:obje:metod}}      → global $obje->metod() çağrılır ve sonucu basılır
+ *     Dosya adı kısmı otomatik olarak [A-Za-z0-9._-] dışındaki karakterlerden
+ *     temizlenir (path traversal koruması). Bu etiketler yalnızca yetkili
+ *     kişilerin düzenlediği şablon dosyalarında kullanılmalıdır — kullanıcı
+ *     girdisinden gelen veri (örn. bir yorum metni) hiçbir zaman bu syntax'ı
+ *     üretebilecek şekilde şablona basılmamalıdır.
+ *
+ * ÖNEMLİ — İşlenme sırası (render metodunda):
+ *   render_cdn → render_foreach → render_degisken → render_if_2 → render_if
+ *   → html_modul → sablon_include
+ *   Kullanıcıdan/DB'den gelen veriler (__degisken, __foreach) DB'ye
+ *   yazılmadan önce z() ile sanitize edilmelidir; z() fonksiyonu
+ *   { } [ ] gibi karakterleri HTML entity'e çevirdiği için bu veriler
+ *   render sonrası aşamada (html_modul/sablon_include) kontrol etiketi
+ *   olarak yorumlanamaz.
+ */
 class sablon_yaz {
 	public $dizin_dosya = null;
 	public $yazi = '';
@@ -201,7 +266,7 @@ class sablon_yaz {
 			$this->dizin_dosya = $dizin_dosya;
 		}
 
-		if (file_exists($this->dizin_dosya) && empty($this->yazi)) {
+		if (is_file($this->dizin_dosya) && empty($this->yazi)) {
 			$this->yazi = file_get_contents($this->dizin_dosya);
 			$this->yazi = preg_replace('/<!--.*?-->/s', '', $this->yazi);
 		}
@@ -217,11 +282,14 @@ class sablon_yaz {
 		$this->yazi = $this->render_if();
 		
 		$this->yazi = html_modul($this->yazi);
-		$this->yazi = sablon_include($this->yazi);
+		$this->yazi = $this->sablon_include($this->yazi);
 		return $this->yazi;
 	}
 
 	public function render_cdn(){
+		if ($this->orjinal_text !== false) {
+			return;
+		}
 		return preg_replace('/{:cdn:}/i', _CDN_, $this->yazi);
 	}
 	public function render_degisken(){
@@ -309,33 +377,46 @@ class sablon_yaz {
 		$icerik_yaz = $this->yazi;
 		
 		if (!empty($this->vars) && isset($this->vars['__foreach'])) {
+
 			foreach ($this->vars['__foreach'] as $sablon_key => $key_dizi) {
+
 				$regex_d_foreach = '/{{ ?__foreach *%(' . preg_quote($sablon_key) . ')-?>?% *([^}]*)}}(.*?){{ ?__endforeach ?}}/si';
-				
 				while (preg_match($regex_d_foreach, $icerik_yaz)) {
+
 					if (empty($key_dizi)) {
 						$icerik_yaz = preg_replace($regex_d_foreach, '', $icerik_yaz);
 						continue;
 					}
-					
+
 					preg_match_all($regex_d_foreach, $icerik_yaz, $eslesenler, PREG_SET_ORDER);
 					$current_match = $eslesenler[0];
 					$e2 = z($current_match[2]);
 					$e3_template = q2_($current_match[3]);
-					
 					$e4 = [];
 					for ($i = 0; $i < count($key_dizi); $i++) {
 						$e3 = $e3_template;
-						$regex_foreach_item_html = '/{{ ?%(' . preg_quote($e2) . ')\.([^}]+) ?}}/si';
-						$e3 = preg_replace_callback($regex_foreach_item_html, function ($m3) use ($key_dizi, $i) {
-							return isset($key_dizi[$i]->{$m3[2]}) ? $key_dizi[$i]->{$m3[2]} : '';
-						}, $e3);
-	
+						$regex_foreach_item_html = '/{{\s*%(' . preg_quote($e2, '/') . ')\.([^}%\s]+)%?\s*}}/si';
+						$e3 = preg_replace_callback(
+							$regex_foreach_item_html,
+							function ($m3) use ($key_dizi, $i) {
+								$alan = $m3[2];
+								$deger = '';
+								if (is_object($key_dizi[$i]) && isset($key_dizi[$i]->{$alan})) {
+									$deger = $key_dizi[$i]->{$alan};
+								} elseif (is_array($key_dizi[$i]) && isset($key_dizi[$i][$alan])) {
+									$deger = $key_dizi[$i][$alan];
+								}
+								if (is_scalar($deger)) {
+									return (string)$deger;
+								}
+								return '';
+							},
+							$e3
+						);
 						$e3 = $this->render_foreach_if($e3);
-						
 						$e4[] = $e3;
 					}
-	
+
 					$e4 = implode('', $e4);
 					$icerik_yaz = str_replace($current_match[0], $e4, $icerik_yaz);
 				}
@@ -345,7 +426,7 @@ class sablon_yaz {
 	}
 	
 	private function render_foreach_if($icerik) {
-		$regex_d_e3 = '/\[\[__if\s*%([0|1])%((?:(?!__endif\]\]).)+)__endif\]\]/si';
+		$regex_d_e3 = '/\[\[__if\s*%([^%]+)%((?:(?!__endif\]\]).)+)__endif\]\]/si';
 		if (preg_match($regex_d_e3, $icerik, $matches_e3)) {
 			return preg_replace_callback($regex_d_e3, function ($matches_e3) {
 				$yazi_1_true = trim($matches_e3[2]);
@@ -355,10 +436,107 @@ class sablon_yaz {
 					$yazi_1_true = $yazi_dizi[0];
 					$yazi_0_false = $yazi_dizi[1];
 				}
-				return (intval($matches_e3[1]) === 1) ? $yazi_1_true : $yazi_0_false;
+				return !empty($matches_e3[1]) && (int)$matches_e3[1] === 1 ? $yazi_1_true : $yazi_0_false;
 			}, $icerik);
 		}
 		return $icerik;
+	}
+
+	/**
+	 * HTML içerisindeki özel etiketleri işleyerek PHP dosyalarını dahil eden metod.
+	 * İki tür etiket işler:
+	 * 1. [[$degisken]] -> Basit değişken değeri yerleştirme
+	 * 2. {{i:konum:dosya}} / {{c:obje:metod}} -> PHP dosyası dahil etme / metod çağırma
+	 *
+	 * NOT: Eskiden fonksiyon.php içinde dış fonksiyon (sablon_include) olarak
+	 * tanımlıydı. Sadece bu class tarafından kullanıldığı için class içine
+	 * taşındı ve dış fonksiyondan kaldırıldı.
+	 *
+	 * @param string $html_ İşlenecek HTML içeriği
+	 * @return string İşlenmiş HTML içeriği
+	 */
+	private function sablon_include($html_) {
+		// Basit değişken yerleştirmeleri için: [[$degisken]]
+		$html_ = preg_replace_callback('/\[\[\$([^\]]+)\]\]/', function($m_){
+			global ${$m_[1]}; // Değişkeni global scope'dan al
+			return ${$m_[1]}; // Değerini yerleştir
+		}, $html_);
+
+		// {{...}} formatındaki dahil etme etiketlerini işle
+		$desen = '/{{(.+)}}/';
+		$html_duzenle = preg_replace_callback($desen, function($m){
+			global $pdo, $db, $pdo_db, $do_, $so_, $bo_, $indexx, $u_no__, $n;
+
+			// Etiketi parçalara ayır (örn: i:tema:kolon1 -> ['i', 'tema', 'kolon1'])
+			$eslesme = explode(":", q_($m[1]));
+
+			// Son parça her zaman dosya adıdır
+			$m_dosya_adi_bu = $eslesme[count($eslesme) - 1];
+			// Dosya adı whitelist: sadece harf, rakam, nokta, tire, alt çizgi.
+			// path traversal (../) ve diğer özel karakterleri engeller.
+			$m_dosya_adi_bu = preg_replace('/[^A-Za-z0-9._-]/', '', $m_dosya_adi_bu);
+			$m_dosya_uzantisi_bu = 'php';
+
+			if (!isset($eslesme[1])) {
+				return; // Geçersiz format, işleme devam etme
+			}
+
+			// Dosyanın aranacağı dizini belirle:
+			// - tema: Tema dosyaları için (örn: header.php, footer.php)
+			// - yon: Yönlendirme dosyaları için (örn: kolon1.php, sayfa.php)
+			//        Bu dosyalar genelde dinamik içerik veya sayfa parçaları içerir
+			// - varsayılan: Ana PHP dizini
+			//{{i:yon:...}}
+			if ($eslesme[1] === 'tema') {
+				$dosya_yolu_dizin = TEMA_DIR . '/' . $so_->d('tema');
+			} elseif ($eslesme[1] === 'yon') {
+				$dosya_yolu_dizin = YONLENDIR_D;
+			} else {
+				$dosya_yolu_dizin = R_PHP;
+			}
+			$dosya_adi = $m_dosya_adi_bu . '.' . $m_dosya_uzantisi_bu;
+			$dosya_yolu_dosya = $dosya_yolu_dizin . '/' . $dosya_adi;
+
+			//process_log("Trying to include: " . $dosya_yolu_dosya);
+
+			if ($eslesme[0]==='i' || $eslesme[0]==='i1'){
+
+				if (strpos($eslesme[2], '+') !== false) {
+					$e2 = trim($eslesme[2],'+');
+					global ${$e2};
+
+					if (isset($$e2) && $$e2==true) {
+						ob_start();
+						if (is_file($dosya_yolu_dosya)){
+							//include_once dosya aynı anda iki defa kullanılamaz. çakışmalara veya döngülere girmemesi için. bu tekrar düzenlenebilir.
+							include_once ($dosya_yolu_dosya);
+						}
+						return ob_get_clean();
+					}
+
+				} elseif ($eslesme[1]==='$'){
+					global $$m_dosya_adi_bu;/**burada $kolon1 olarak kullanılıyor {{i:$:kolon1}} -> include_once $kolon1;*/
+					ob_start();
+						if (is_file($$m_dosya_adi_bu)){
+							include_once ($$m_dosya_adi_bu);
+						}
+					return ob_get_clean();
+				} elseif (is_file($dosya_yolu_dosya)) {
+					ob_start();
+					include_once ($dosya_yolu_dosya);
+					return ob_get_clean();
+				} else {
+					return $m[0];
+				}
+			} elseif ($eslesme[0]==='c') {
+				global ${$eslesme[1]};
+				$obje_ = ${$eslesme[1]};
+				$obje_fn_ = $eslesme[2];
+				return $obje_->$obje_fn_();
+			}
+
+		}, $html_);
+		return $html_duzenle;
 	}
 
 	public function xss_sil($input) {
@@ -1432,7 +1610,16 @@ class Yc {
 		try {
 			return sprintf($translated, ...$args);
 		} catch (ValueError $e) {
-			error_log('Yc sprintf error: ' . $e->getMessage() . ' | text=' . $text . ' | translated=' . $translated);
+			//error_log('Yc sprintf error: ' . $e->getMessage() . ' | text=' . $text . ' | translated=' . $translated);
+			error_log(print_r([
+				'TEXT' => $text,
+				'TRANSLATED' => $translated,
+				'ARGS' => $args,
+				'TEXT_HAS_URL' => str_contains($text, '%3A'),
+				'TRANSLATED_HAS_URL' => str_contains($translated, '%3A'),
+				'TEXT_HAS_HTML' => str_contains($text, '<a'),
+				'TRANSLATED_HAS_HTML' => str_contains($translated, '<a'),
+			], true));
 			return $translated;
 		}
 	}
@@ -2017,140 +2204,181 @@ class bilesen_css_js {
 	private PDO $pdo;
 	private string $do_;
 	private array $bilesen_db = [];
-	
+
 	private array $css_dosyalar = [];
 	private array $js_dosyalar = [];
 	private array $css_dosyalar_yp = [];
 	private array $js_dosyalar_yp = [];
 	private array $css_dosyalar_tumu = [];
 	private array $js_dosyalar_tumu = [];
-	
+
 	public bool $rand_v = false;
 
 	public function __construct(PDO $pdo, string $do_) {
 		$this->pdo = $pdo;
 		$this->do_ = $do_;
+
 		$this->bilesen_db_yukle();
 		$this->dosyalari_tara();
 		$this->tumu_dosyalari_birlestir();
 	}
 
 	private function bilesen_db_yukle(): void {
+		// aktif bileşenleri veritabanından yükler
 		$sql = "SELECT no, url FROM {$this->do_}bilesen WHERE yayin = 1";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute();
-		$this->bilesen_db = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+		$this->bilesen_db = $stmt->fetchAll(PDO::FETCH_OBJ) ?: [];
 	}
 
 	private function dosyalari_tara(): void {
+		// tüm bileşen dizinlerini tarar
 		foreach ($this->bilesen_db as $bilesen) {
+
 			$bilesen_dizin = BILESEN_DIR . '/' . $bilesen->url;
-			
+
 			if (!is_dir($bilesen_dizin)) {
 				continue;
 			}
 
-			$this->dizin_dosyalarini_ekle($bilesen_dizin, $bilesen->url);
+			$this->dizin_dosyalarini_ekle($bilesen_dizin);
 
-			$css_dizin = $bilesen_dizin . '/css';
-			if (is_dir($css_dizin)) {
-				$this->css_dosyalarini_ekle($css_dizin, $bilesen->url . '/css', false);
+			$css = $bilesen_dizin . '/css';
+			if (is_dir($css)) {
+				$this->css_dosyalarini_ekle($css, false);
 
-				$css_yp_dizin = $css_dizin . '/yp';
-				if (is_dir($css_yp_dizin)) {
-					$this->css_dosyalarini_ekle($css_yp_dizin, $bilesen->url . '/css/yp', true);
+				$css_yp = $css . '/yp';
+				if (is_dir($css_yp)) {
+					$this->css_dosyalarini_ekle($css_yp, true);
 				}
 			}
 
-			$js_dizin = $bilesen_dizin . '/js';
-			if (is_dir($js_dizin)) {
-				$this->js_dosyalarini_ekle($js_dizin, $bilesen->url . '/js', false);
+			$js = $bilesen_dizin . '/js';
+			if (is_dir($js)) {
+				$this->js_dosyalarini_ekle($js, false);
 
-				$js_yp_dizin = $js_dizin . '/yp';
-				if (is_dir($js_yp_dizin)) {
-					$this->js_dosyalarini_ekle($js_yp_dizin, $bilesen->url . '/js/yp', true);
+				$js_yp = $js . '/yp';
+				if (is_dir($js_yp)) {
+					$this->js_dosyalarini_ekle($js_yp, true);
 				}
 			}
 		}
 
-		$this->css_dosyalar = array_unique($this->css_dosyalar);
-		$this->js_dosyalar = array_unique($this->js_dosyalar);
-		$this->css_dosyalar_yp = array_unique($this->css_dosyalar_yp);
-		$this->js_dosyalar_yp = array_unique($this->js_dosyalar_yp);
+		// duplicate temizleme + index reset
+		$this->css_dosyalar = array_values(array_unique($this->css_dosyalar));
+		$this->js_dosyalar = array_values(array_unique($this->js_dosyalar));
+		$this->css_dosyalar_yp = array_values(array_unique($this->css_dosyalar_yp));
+		$this->js_dosyalar_yp = array_values(array_unique($this->js_dosyalar_yp));
+
+		// deterministik yükleme sırası (00-,10-,20- sistemi)
+		sort($this->css_dosyalar);
+		sort($this->js_dosyalar);
+		sort($this->css_dosyalar_yp);
+		sort($this->js_dosyalar_yp);
 	}
 
 	private function tumu_dosyalari_birlestir(): void {
-		$this->css_dosyalar_tumu = array_unique(array_merge($this->css_dosyalar, $this->css_dosyalar_yp));
-		$this->js_dosyalar_tumu = array_unique(array_merge($this->js_dosyalar, $this->js_dosyalar_yp));
+		// tüm dosyaları birleştirir
+		$this->css_dosyalar_tumu = array_values(array_unique(
+			array_merge($this->css_dosyalar, $this->css_dosyalar_yp)
+		));
+
+		$this->js_dosyalar_tumu = array_values(array_unique(
+			array_merge($this->js_dosyalar, $this->js_dosyalar_yp)
+		));
+
+		sort($this->css_dosyalar_tumu);
+		sort($this->js_dosyalar_tumu);
 	}
 
-	private function dizin_dosyalarini_ekle(string $dizin, string $url_path): void {
+	private function dizin_dosyalarini_ekle(string $dizin): void {
+		// root seviyesindeki css/js dosyalarını ekler
 		$dosyalar = scandir($dizin);
 		if (!$dosyalar) return;
-		
+
 		foreach ($dosyalar as $dosya) {
-			if ($dosya === '.' || $dosya === '..') continue;
-			
-			$dosya_yolu = $dizin . '/' . $dosya;
-			if (!is_file($dosya_yolu)) continue;
-			
-			$uzanti = pathinfo($dosya, PATHINFO_EXTENSION);
-			$url = str_replace(ROOT, LOCAL, $dosya_yolu);
-			
-			if ($uzanti === 'css') {
+
+			if ($dosya === '.' || $dosya === '..') {
+				continue;
+			}
+
+			$path = $dizin . '/' . $dosya;
+
+			if (!is_file($path)) {
+				continue;
+			}
+
+			$ext = strtolower(pathinfo($dosya, PATHINFO_EXTENSION));
+			$url = $this->pathToUrl($path);
+
+			if ($ext === 'css') {
 				$this->css_dosyalar[] = $url;
-			} elseif ($uzanti === 'js') {
+			} elseif ($ext === 'js') {
 				$this->js_dosyalar[] = $url;
 			}
 		}
 	}
 
-	private function css_dosyalarini_ekle(string $css_dizin, string $url_path, bool $yp_dosyasi = false): void {
-		$dosyalar = scandir($css_dizin);
+	private function css_dosyalarini_ekle(string $css_dizin, bool $yp): void {
+		// css dosyalarını ekler
+		$this->dosya_ekle($css_dizin, 'css', $yp);
+	}
+
+	private function js_dosyalarini_ekle(string $js_dizin, bool $yp): void {
+		// js dosyalarını ekler
+		$this->dosya_ekle($js_dizin, 'js', $yp);
+	}
+
+	private function dosya_ekle(string $dizin, string $ext_filter, bool $yp): void {
+		// ortak dosya ekleme işlemi
+		if (!is_dir($dizin)) {
+			return;
+		}
+
+		$dosyalar = scandir($dizin);
 		if (!$dosyalar) return;
-		
+
 		foreach ($dosyalar as $dosya) {
-			if ($dosya === '.' || $dosya === '..' || pathinfo($dosya, PATHINFO_EXTENSION) !== 'css') {
+
+			if ($dosya === '.' || $dosya === '..') {
 				continue;
 			}
-			
-			$dosya_yolu = $css_dizin . '/' . $dosya;
-			if (is_file($dosya_yolu)) {
-				$url = str_replace(ROOT, LOCAL, $dosya_yolu);
-				
-				if ($yp_dosyasi) {
-					$this->css_dosyalar_yp[] = $url;
-				} else {
-					$this->css_dosyalar[] = $url;
-				}
+
+			if (pathinfo($dosya, PATHINFO_EXTENSION) !== $ext_filter) {
+				continue;
+			}
+
+			$path = $dizin . '/' . $dosya;
+
+			if (!is_file($path)) {
+				continue;
+			}
+
+			$url = $this->pathToUrl($path);
+
+			if ($ext_filter === 'css') {
+				$yp ? $this->css_dosyalar_yp[] = $url : $this->css_dosyalar[] = $url;
+			} else {
+				$yp ? $this->js_dosyalar_yp[] = $url : $this->js_dosyalar[] = $url;
 			}
 		}
 	}
 
-	private function js_dosyalarini_ekle(string $js_dizin, string $url_path, bool $yp_dosyasi = false): void {
-		$dosyalar = scandir($js_dizin);
-		if (!$dosyalar) return;
-		
-		foreach ($dosyalar as $dosya) {
-			if ($dosya === '.' || $dosya === '..' || pathinfo($dosya, PATHINFO_EXTENSION) !== 'js') {
-				continue;
-			}
-			
-			$dosya_yolu = $js_dizin . '/' . $dosya;
-			if (is_file($dosya_yolu)) {
-				$url = str_replace(ROOT, LOCAL, $dosya_yolu);
-				
-				if ($yp_dosyasi) {
-					$this->js_dosyalar_yp[] = $url;
-				} else {
-					$this->js_dosyalar[] = $url;
-				}
-			}
-		}
+	private function pathToUrl(string $path): string {
+		// filesystem path -> public url dönüşümü
+		return str_replace(ROOT, LOCAL, $path);
+	}
+
+	private function urlToPath(string $url): string {
+		// public url -> filesystem path güvenli dönüşüm
+		$clean = parse_url($url, PHP_URL_PATH);
+		return ROOT . $clean;
 	}
 
 	public function css_liste(string $tip = ''): array {
-		switch($tip) {
+		// css liste döndürür
+		switch ($tip) {
 			case 'yp':
 				return $this->css_dosyalar_yp;
 			case 'tumu':
@@ -2161,7 +2389,8 @@ class bilesen_css_js {
 	}
 
 	public function js_liste(string $tip = ''): array {
-		switch($tip) {
+		// js liste döndürür
+		switch ($tip) {
 			case 'yp':
 				return $this->js_dosyalar_yp;
 			case 'tumu':
@@ -2172,46 +2401,73 @@ class bilesen_css_js {
 	}
 
 	public function css_yaz(string $tip = ''): string {
+		// css html çıktısı üretir
 		$dosyalar = $this->css_liste($tip);
 		$output = '';
-		
-		foreach ($dosyalar as $css_dosya) {
-			$output .= '<link rel="stylesheet" href="' . htmlspecialchars($css_dosya) . ($this->rand_v?'?v='.uniqid():'') . '" />' . PHP_EOL;
+
+		foreach ($dosyalar as $css) {
+
+			$ver = '';
+
+			if ($this->rand_v) {
+				$path = $this->urlToPath($css);
+
+				if (is_file($path)) {
+					$ver = '?v=' . filemtime($path);
+				}
+			}
+
+			$output .= '<link rel="stylesheet" href="' . htmlspecialchars($css . $ver) . '">' . PHP_EOL;
 		}
-		
+
 		return $output;
 	}
 
 	public function js_yaz(string $tip = ''): string {
+		// js html çıktısı üretir
 		$dosyalar = $this->js_liste($tip);
 		$output = '';
-		
-		foreach ($dosyalar as $js_dosya) {
-			$output .= '<script src="' . htmlspecialchars($js_dosya) . ($this->rand_v?'?v='.uniqid():'') . '" defer></script>' . PHP_EOL;
+
+		foreach ($dosyalar as $js) {
+
+			$ver = '';
+
+			if ($this->rand_v) {
+				$path = $this->urlToPath($js);
+
+				if (is_file($path)) {
+					$ver = '?v=' . filemtime($path);
+				}
+			}
+
+			$output .= '<script src="' . htmlspecialchars($js . $ver) . '" defer></script>' . PHP_EOL;
 		}
-		
+
 		return $output;
 	}
 
 	public function css_yaz_tumu(): string {
+		// tüm css çıktısını verir
 		return $this->css_yaz('tumu');
 	}
 
 	public function js_yaz_tumu(): string {
+		// tüm js çıktısını verir
 		return $this->js_yaz('tumu');
 	}
 
 	public function css_birlestir(string $hedef_dosya, bool $sikistir = false, string $tip = ''): bool {
-		$dosyalar = $this->css_liste($tip);
-		return dosyalari_birlestir_yaz($dosyalar, $hedef_dosya, $sikistir);
+		// css dosyalarını birleştirir
+		return dosyalari_birlestir_yaz($this->css_liste($tip), $hedef_dosya, $sikistir);
 	}
 
 	public function js_birlestir(string $hedef_dosya, bool $sikistir = false, string $tip = ''): bool {
-		$dosyalar = $this->js_liste($tip);
-		return dosyalari_birlestir_yaz($dosyalar, $hedef_dosya, $sikistir);
+		// js dosyalarını birleştirir
+		return dosyalari_birlestir_yaz($this->js_liste($tip), $hedef_dosya, $sikistir);
 	}
 
 	public function debug_info(): array {
+		// debug bilgisi döner
 		return [
 			'css_dosyalar' => $this->css_dosyalar,
 			'js_dosyalar' => $this->js_dosyalar,
@@ -2219,12 +2475,6 @@ class bilesen_css_js {
 			'js_dosyalar_yp' => $this->js_dosyalar_yp,
 			'css_dosyalar_tumu' => $this->css_dosyalar_tumu,
 			'js_dosyalar_tumu' => $this->js_dosyalar_tumu,
-			'toplam_css' => count($this->css_dosyalar),
-			'toplam_js' => count($this->js_dosyalar),
-			'toplam_css_yp' => count($this->css_dosyalar_yp),
-			'toplam_js_yp' => count($this->js_dosyalar_yp),
-			'toplam_css_tumu' => count($this->css_dosyalar_tumu),
-			'toplam_js_tumu' => count($this->js_dosyalar_tumu)
 		];
 	}
 }

@@ -15,7 +15,7 @@ class dom_element {
 	public $do_;
 	public $dbtablo_url_yonlendir = ['sayfa'=>'sayfa', 'sekme'=>'sekme', 'blok_html'=>'blok_html', 'menu'=>'menu'];
 
-	/** @var array Depth bazlı yapı: item_tag, item_class, a_class_single, a_class_has_submenu, list_tag, list_class, a_child_wrap_tag, a_child_wrap_class */
+	/** @var array Depth bazlı yapı: item_tag, item_class, a_class_single, a_class_has_submenu, list_tag, list_class, a_child_wrap_tag, a_child_wrap_class, submenu_wrapper_tag, submenu_wrapper_class */
 	private $structure = [];
 
 	/** @var DOMElement|null Wrapper (nav, div vb.) - liste kökünün parent'ı */
@@ -111,6 +111,30 @@ class dom_element {
 		];
 	}
 
+	/**
+	 * Find the actual list (ul/ol) inside a submenu wrapper (or return the node itself if it's a list)
+	 * @param DOMElement $node
+	 * @return array [$actualList, $wrapperInfo] where $wrapperInfo is ['tag' => string, 'class' => string] or null
+	 */
+	private static function findActualSubmenuList(DOMElement $node) {
+		$tag = strtolower($node->tagName);
+		if (in_array($tag, ['ul', 'ol'])) {
+			// Node itself is the list, no wrapper
+			return [$node, null];
+		}
+		// Look for a ul/ol inside this wrapper node
+		$list = self::findFirstDescendantList($node);
+		if ($list) {
+			$wrapperInfo = [
+				'tag' => $tag,
+				'class' => $node->getAttribute('class') ?: ''
+			];
+			return [$list, $wrapperInfo];
+		}
+		// No list found, return original node and null
+		return [$node, null];
+	}
+
 	private static function extractStructureRecursive(DOMElement $listNode, $depth, &$structure) {
 		$listTag = strtolower($listNode->tagName);
 		$listClass = $listNode->getAttribute('class') ?: '';
@@ -133,6 +157,9 @@ class dom_element {
 				'a_child_wrap_class' => '',
 				'a_suffix_tag' => '',
 				'a_suffix_class' => '',
+				'submenu_wrapper_tag' => '',
+				'submenu_wrapper_class' => '',
+				'submenu_wrapper_found' => false,
 			];
 		}
 
@@ -157,6 +184,14 @@ class dom_element {
 			$submenuList = self::getSubmenuListAfterAnchor($item, $aNode);
 
 			if ($submenuList) {
+				// Process submenu list and wrapper
+				list($actualSubmenuList, $wrapperInfo) = self::findActualSubmenuList($submenuList);
+				if ($wrapperInfo && empty($structure[$depth]['submenu_wrapper_found'])) {
+					$structure[$depth]['submenu_wrapper_tag'] = $wrapperInfo['tag'];
+					$structure[$depth]['submenu_wrapper_class'] = $wrapperInfo['class'];
+					$structure[$depth]['submenu_wrapper_found'] = true;
+				}
+
 				if (empty($structure[$depth]['item_class_has_submenu_found'])) {
 					$structure[$depth]['item_class_has_submenu'] = $itemClass;
 					$structure[$depth]['item_class_has_submenu_found'] = true;
@@ -165,7 +200,7 @@ class dom_element {
 					$structure[$depth]['a_class_has_submenu'] = $aClass;
 					$structure[$depth]['a_class_has_submenu_found'] = true;
 				}
-				self::extractStructureRecursive($submenuList, $depth + 1, $structure);
+				self::extractStructureRecursive($actualSubmenuList, $depth + 1, $structure);
 			} else {
 				if (empty($structure[$depth]['item_class_single_found'])) {
 					$structure[$depth]['item_class_single'] = $itemClass;
@@ -287,6 +322,10 @@ class dom_element {
 					'no' => $m->no,
 					'tablo' => $m->tablo,
 					'tablo_no' => $m->tablo_no,
+					// Çeviri anahtarı, hedef kayıt bulunamazsa menü satırının kendi adına düşer.
+					'ceviri_tablo' => 'menu',
+					'ceviri_tablo_no' => $m->no,
+					'ceviri_alan' => 'adi',
 					'dis_link' => $m->dis_link,
 					'adi' => $m->adi ?? '!?!',
 					'sira' => $sira,
@@ -330,7 +369,13 @@ class dom_element {
 						}
 					}
 
-					$menu_item['adi'] = $tablo_b ? ($tablo_b->adi ?? '!?!') : ($m->adi ?? '!?!');
+					if ($tablo_b) {
+						$menu_item['adi'] = $tablo_b->adi ?? '!?!';
+						$menu_item['ceviri_tablo'] = $m->tablo;
+						$menu_item['ceviri_tablo_no'] = $m->tablo_no;
+					} else {
+						$menu_item['adi'] = $m->adi ?? '!?!';
+					}
 					$menu_item['href'] = $href;
 
 					$submenu_depth = 0;
@@ -371,21 +416,23 @@ class dom_element {
 				? (bool)$parentPattern['a_class_has_submenu_found']
 				: !empty($pattern['a_class_has_submenu']);
 		}
-		$listTag = $pattern['list_tag'] ?? 'ul';
-		$listClass = $pattern['list_class'] ?? '';
-		$listAttrs = $listClass ? ' class="'.htmlspecialchars($listClass).'"' : '';
 
 		if (empty($menuArray)) {
 			// Menü yoksa hiçbir şey döndürme
-			//return '<'.$listTag.$listAttrs.'></'.$listTag.'>';
 			return '';
 		}
+
+		$listTag = $pattern['list_tag'] ?? 'ul';
+		$listClass = $pattern['list_class'] ?? '';
+		$listAttrs = $listClass ? ' class="'.htmlspecialchars($listClass).'"' : '';
 
 		$itemTag = !empty($pattern['item_tag']) ? $pattern['item_tag'] : (in_array($listTag, ['div', 'nav']) ? 'div' : 'li');
 		$aChildWrapTag = $pattern['a_child_wrap_tag'] ?? '';
 		$aChildWrapClass = $pattern['a_child_wrap_class'] ?? '';
 		$aSuffixTag = $pattern['a_suffix_tag'] ?? '';
 		$aSuffixClass = $pattern['a_suffix_class'] ?? '';
+		$submenuWrapperTag = $pattern['submenu_wrapper_tag'] ?? '';
+		$submenuWrapperClass = $pattern['submenu_wrapper_class'] ?? '';
 
 		$aChildOpen = $aChildWrapTag ? '<'.$aChildWrapTag.($aChildWrapClass ? ' class="'.htmlspecialchars($aChildWrapClass).'"' : '').'>' : '';
 		$aChildClose = $aChildWrapTag ? '</'.$aChildWrapTag.'>' : '';
@@ -406,6 +453,22 @@ class dom_element {
 			$aClass = $hasSubmenu
 				? ($aClassHasFound ? $aClassHas : $aClassSingle)
 				: ($aClassSingleFound ? $aClassSingle : $aClassHas);
+			
+			// Add trigger class to items with submenus
+			if ($hasSubmenu) {
+				if ($depth == 1) {
+					// Top level items: use nav-trigger
+					if (strpos($aClass, 'nav-trigger') === false) {
+						$aClass .= (trim($aClass) ? ' ' : '') . 'nav-trigger';
+					}
+				} else {
+					// Nested items: use submenu-trigger
+					if (strpos($aClass, 'submenu-trigger') === false) {
+						$aClass .= (trim($aClass) ? ' ' : '') . 'submenu-trigger';
+					}
+				}
+			}
+
 			$itemClassHas = $pattern['item_class_has_submenu'] ?? '';
 			$itemClassSingle = $pattern['item_class_single'] ?? '';
 			$itemClassDefault = $pattern['item_class'] ?? '';
@@ -422,15 +485,28 @@ class dom_element {
 			$aAttrs = $aClass ? ' class="'.htmlspecialchars($aClass).'"' : '';
 
 			$html .= "\t".'<'.$itemTag.$itemAttrs.'>';
-			$html .= '<a'.$aAttrs.' href="'.htmlspecialchars($md['href'] ?? '#').'">';
-			$html .= $aChildOpen . htmlspecialchars($md['adi'] ?? '') . $aChildClose;
+			$html .= '<a'.$aAttrs.' href="'.htmlspecialchars($md['href'] ?? '#').'" aria-expanded="false" aria-haspopup="true">';
+			$html .= $aChildOpen . htmlspecialchars(cc(
+				$md['adi'] ?? '',
+				$md['ceviri_tablo_no'] ?? ($md['tablo_no'] ?? 0),
+				$md['ceviri_tablo'] ?? ($md['tablo'] ?? 'menu'),
+				$md['ceviri_alan'] ?? 'adi'
+			)) . $aChildClose;
 			if ($hasSubmenu) {
 				$html .= ($aSuffixHtml ? ' ' . $aSuffixHtml : '');
 			}
 			$html .= '</a>';
 
 			if ($hasSubmenu) {
-				$html .= PHP_EOL . $this->render($md['submenu'], $structure, $depth + 1);
+				$submenuHtml = $this->render($md['submenu'], $structure, $depth + 1);
+				if ($submenuHtml && $submenuWrapperTag) {
+					// Wrap submenu in wrapper div
+					$html .= PHP_EOL . "\t" . '<' . $submenuWrapperTag . ($submenuWrapperClass ? ' class="'.htmlspecialchars($submenuWrapperClass).'"' : '') . '>' . PHP_EOL;
+					$html .= $submenuHtml;
+					$html .= "\t" . '</' . $submenuWrapperTag . '>' . PHP_EOL;
+				} else {
+					$html .= PHP_EOL . $submenuHtml;
+				}
 			}
 			$html .= '</'.$itemTag.'>' . PHP_EOL;
 		}
@@ -457,6 +533,9 @@ class dom_element {
 			'a_child_wrap_class' => '',
 			'a_suffix_tag' => '',
 			'a_suffix_class' => '',
+			'submenu_wrapper_tag' => '',
+			'submenu_wrapper_class' => '',
+			'submenu_wrapper_found' => false,
 		];
 	}
 

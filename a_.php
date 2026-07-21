@@ -24,6 +24,7 @@ require_once R_CLASS_F . '/pdo_db_helper.php';
 require_once R_CLASS_F . '/form_c.php';
 require_once R_CLASS_F . '/class.dom_element_menu.php';
 require_once R_CLASS_F . '/PageMetadata.php';
+require_once R_CLASS_F . '/class.breadcrumb.php';
 require_once R_CLASS_F . '/StructuredData/SchemaOrgMapper.php';
 require_once R_CLASS_F . '/StructuredData/StructuredData.php';
 if (is_file(R_CLASS_F . '/lc.php')) require_once R_CLASS_F . '/lc.php';

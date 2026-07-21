@@ -1,0 +1,11 @@
+<ul>
+{{__foreach%breadcrumb->%item}}
+<li>
+	[[__if%{{%item.url_var%}}%
+		<a href="{{%item.url}}">{{%item.title}}</a>
+	||
+		<span>{{%item.title}}</span>
+	__endif]]
+</li>
+{{__endforeach}}
+</ul>

@@ -494,15 +494,27 @@ function sifre_ac3 ($kelime) {
 		return false;
 	}
 }
+
+
+//php -r "echo substr(bin2hex(random_bytes(32)), 0, 32) . PHP_EOL;"
+//php -r "echo bin2hex(random_bytes(32)) . PHP_EOL;"
 function getAesKey(): string {
     static $key = null;
     if ($key !== null) {
         return $key;
     }
-    $envKey = $_ENV['S4_AES_ENCRYPTION_KEY'] ?? false;
-    if ($envKey !== false && $envKey !== '') {
-        return $key = $envKey;
+
+    $envKey = $_ENV['S4_AES_ENCRYPTION_KEY'] ?? '';
+
+    if ($envKey !== '') {
+        // Hex string'i binary'e çevir → 64 hex karakter = 32 byte
+        $decoded = hex2bin($envKey);
+        if ($decoded === false || strlen($decoded) < 32) {
+            throw new \RuntimeException('S4_AES_ENCRYPTION_KEY geçersiz veya çok kısa (min 64 hex karakter gerekli)');
+        }
+        return $key = substr($decoded, 0, 32); // Her zaman tam 32 byte
     }
+
     return $key = random_bytes(32);
 }
 
@@ -745,7 +757,7 @@ function bosluklari_sil($yazi) {
 }
 
 function yc($text_adi, ...$sprintf_args) {
-	if ($text_adi === null) {
+    if ($text_adi === null) {
         return '';
     }
     return Yc::get($text_adi, ...$sprintf_args);
@@ -998,97 +1010,6 @@ function rg_opendir($r_dizin_k, $r_dizin_b = '',
 	return $yaz;
 }
 
-
-
-
-/**
- * HTML içerisindeki özel etiketleri işleyerek PHP dosyalarını dahil eden fonksiyon
- * İki tür etiket işler:
- * 1. {$degisken} -> Basit değişken değeri yerleştirme
- * 2. {{i:konum:dosya}} -> PHP dosyası dahil etme
- * 
- * @param string $html_ İşlenecek HTML içeriği
- * @return string İşlenmiş HTML içeriği
- */
-function sablon_include($html_) {	// Basit değişken yerleştirmeleri için: [[$degisken]]
-	$html_ = preg_replace_callback('/\[\[\$([^\]]+)\]\]/', function($m_){
-		global ${$m_[1]}; // Değişkeni global scope'dan al
-		return ${$m_[1]}; // Değerini yerleştir
-	}, $html_);
-
-	// {{...}} formatındaki dahil etme etiketlerini işle
-	$desen = '/{{(.+)}}/';
-	$html_duzenle = preg_replace_callback($desen, function($m){
-		global $pdo, $db, $pdo_db, $do_, $so_, $bo_, $indexx, $u_no__, $n;
-
-		// Etiketi parçalara ayır (örn: i:tema:kolon1 -> ['i', 'tema', 'kolon1'])
-		$eslesme = explode(":", q_($m[1]));
-
-		// Son parça her zaman dosya adıdır
-		$m_dosya_adi_bu = $eslesme[count($eslesme) - 1];
-		$m_dosya_uzantisi_bu = 'php';
-		
-		if (!isset($eslesme[1])) {
-			return; // Geçersiz format, işleme devam etme
-		}
-
-		// Dosyanın aranacağı dizini belirle:
-		// - tema: Tema dosyaları için (örn: header.php, footer.php)
-		// - yon: Yönlendirme dosyaları için (örn: kolon1.php, sayfa.php)
-		//        Bu dosyalar genelde dinamik içerik veya sayfa parçaları içerir
-		// - varsayılan: Ana PHP dizini
-		if ($eslesme[1] === 'tema') {
-			$dosya_yolu_dizin = TEMA_DIR . '/' . $so_->d('tema');
-		} elseif ($eslesme[1] === 'yon') {
-			$dosya_yolu_dizin = YONLENDIR_D;
-		} else {
-			$dosya_yolu_dizin = R_PHP;
-		}
-		$dosya_adi = $m_dosya_adi_bu . '.' . $m_dosya_uzantisi_bu;
-		$dosya_yolu_dosya = $dosya_yolu_dizin . '/' . $dosya_adi;
-
-		//process_log("Trying to include: " . $dosya_yolu_dosya);
-
-
-		if ($eslesme[0]==='i' || $eslesme[0]==='i1'){
-			
-			if (strpos($eslesme[2], '+') !== false) {
-				$e2 = trim($eslesme[2],'+');
-				global ${$e2};
-	
-				if (isset($$e2) && $$e2==true) {
-					ob_start();
-					if (file_exists($dosya_yolu_dosya)){
-						//include_once dosya aynı anda iki defa kullanılamaz. çakışmalara veya döngülere girmemesi için. bu tekrar düzenlenebilir.
-						include_once ($dosya_yolu_dosya);
-					}
-					return ob_get_clean();
-				}
-
-			} elseif ($eslesme[1]==='$'){
-				global $$m_dosya_adi_bu;/**burada $kolon1 olarak kullanılıyor {{i:$:kolon1}} -> include_once $kolon1;*/
-				ob_start();
-					if (file_exists($$m_dosya_adi_bu)){
-						include_once ($$m_dosya_adi_bu);
-					}
-				return ob_get_clean();
-			} elseif (file_exists($dosya_yolu_dosya)) {
-				ob_start();
-				include_once ($dosya_yolu_dosya);
-				return ob_get_clean();
-			} else {
-				return $m[0];
-			}
-		} elseif ($eslesme[0]==='c') {
-			global ${$eslesme[1]};
-			$obje_ = ${$eslesme[1]};
-			$obje_fn_ = $eslesme[2];
-			return $obje_->$obje_fn_();
-		}
-		
-	}, $html_);
-	return $html_duzenle;
-}
 
 function html_modul($yazi) {
 	global $pdo, $db, $pdo_db, $do_, $so_, $bo_, $indexx, $u_no__, $n;
@@ -2853,8 +2774,9 @@ function tcmbkur(string $kurlar = 'USD EUR'): string|false {
  * @return bool Güncelleme yapıldıysa true, yapılmadıysa false
  */
 function doviz_kurlari_guncelle(): bool {
-	if (isset(Global_::$doviz_kur)) {
-		return Global_::$doviz_kur->kurlari_guncelle();
+	$doviz_kur = Global_::get('doviz_kur');
+	if ($doviz_kur) {
+		return $doviz_kur->kurlari_guncelle();
 	}
 	
 	error_log('DEPRECATED: doviz_kurlari_guncelle() kullanıldı ama Global_::$doviz_kur başlatılmamış!');
@@ -2869,8 +2791,9 @@ function doviz_kurlari_guncelle(): bool {
  * @return float|null Kur değeri veya bulunamadıysa null
  */
 function doviz_kuru_getir(string $pb = 'dolar'): ?float {
-	if (isset(Global_::$doviz_kur)) {
-		return Global_::$doviz_kur->kur($pb);
+	$doviz_kur = Global_::get('doviz_kur');
+	if ($doviz_kur) {
+		return $doviz_kur->kur($pb);
 	}
 	
 	error_log('DEPRECATED: doviz_kuru_getir() kullanıldı ama Global_::$doviz_kur başlatılmamış!');
@@ -2887,8 +2810,9 @@ function doviz_kuru_getir(string $pb = 'dolar'): ?float {
  * @return string Formatlanmış fiyat (2 ondalık basamak)
  */
 function fiyat_pb_cevir(float|int|string $fiyat, string $pb_from, string $pb_to): string {
-	if (isset(Global_::$doviz_kur)) {
-		return Global_::$doviz_kur->fiyat_pb_cevir($fiyat, $pb_from, $pb_to);
+	$doviz_kur = Global_::get('doviz_kur');
+	if ($doviz_kur) {
+		return $doviz_kur->fiyat_pb_cevir($fiyat, $pb_from, $pb_to);
 	}
 	
 	error_log('DEPRECATED: fiyat_pb_cevir() kullanıldı ama Global_::$doviz_kur başlatılmamış!');
@@ -2906,10 +2830,11 @@ function fiyat_pb_cevir(float|int|string $fiyat, string $pb_from, string $pb_to)
  * @return string Formatlanmış fiyat
  */
 function fiyat_pb_kullanici(float|int|string $fiyat, string $pb_from = 'tl', bool $simge_ekle = true): string {
-	$pb_to = Global_::$pb ?? 'tl'; // Kullanıcının seçtiği para birimi
+	$pb_to = Global_::get('pb', 'tl'); // Kullanıcının seçtiği para birimi
+	$doviz_kur = Global_::get('doviz_kur');
 	
-	if (isset(Global_::$doviz_kur)) {
-		$cevrilen_fiyat = Global_::$doviz_kur->fiyat_pb_cevir($fiyat, $pb_from, $pb_to);
+	if ($doviz_kur) {
+		$cevrilen_fiyat = $doviz_kur->fiyat_pb_cevir($fiyat, $pb_from, $pb_to);
 		
 		if ($simge_ekle) {
 			$simgeler = ['tl' => '₺', 'dolar' => '$', 'euro' => '€'];
@@ -2931,8 +2856,9 @@ function fiyat_pb_kullanici(float|int|string $fiyat, string $pb_from = 'tl', boo
  * @return string Para birimi simgesi
  */
 function pb_simge(?string $pb = null, bool $html = false): string {
-	$pb = $pb ?? Global_::$pb ?? 'tl';
-	return Global_::$pb_bilgi->simge($pb, $html);
+	$pb = $pb ?? Global_::get('pb', 'tl');
+	$pb_bilgi = Global_::get('pb_bilgi');
+	return $pb_bilgi ? $pb_bilgi->simge($pb, $html) : '';
 }
 
 /**
@@ -2942,8 +2868,9 @@ function pb_simge(?string $pb = null, bool $html = false): string {
  * @return string Para birimi ismi
  */
 function pb_isim(?string $pb = null, bool $ingilizce = false): string {
-	$pb = $pb ?? Global_::$pb ?? 'tl';
-	return Global_::$pb_bilgi->isim($pb, $ingilizce);
+	$pb = $pb ?? Global_::get('pb', 'tl');
+	$pb_bilgi = Global_::get('pb_bilgi');
+	return $pb_bilgi ? $pb_bilgi->isim($pb, $ingilizce) : '';
 }
 
 /**
@@ -2952,8 +2879,9 @@ function pb_isim(?string $pb = null, bool $ingilizce = false): string {
  * @return string ISO 4217 kodu
  */
 function pb_kod(?string $pb = null): string {
-	$pb = $pb ?? Global_::$pb ?? 'tl';
-	$pb_obj = Global_::$pb_bilgi->get($pb);
+	$pb = $pb ?? Global_::get('pb', 'tl');
+	$pb_bilgi = Global_::get('pb_bilgi');
+	$pb_obj = $pb_bilgi ? $pb_bilgi->get($pb) : null;
 	return $pb_obj->kod ?? 'TRY';
 }
 
@@ -2963,8 +2891,9 @@ function pb_kod(?string $pb = null): string {
  * @return string Font Awesome class (fas fa-lira-sign gibi)
  */
 function pb_fa_icon(?string $pb = null): string {
-	$pb = $pb ?? Global_::$pb ?? 'tl';
-	$pb_obj = Global_::$pb_bilgi->get($pb);
+	$pb = $pb ?? Global_::get('pb', 'tl');
+	$pb_bilgi = Global_::get('pb_bilgi');
+	$pb_obj = $pb_bilgi ? $pb_bilgi->get($pb) : null;
 	return $pb_obj->fa_icon ?? 'fas fa-lira-sign';
 }
 
@@ -2974,8 +2903,9 @@ function pb_fa_icon(?string $pb = null): string {
  * @return object|null Para birimi detaylı bilgisi
  */
 function pb_detay(?string $pb = null): ?object {
-	$pb = $pb ?? Global_::$pb ?? 'tl';
-	return Global_::$pb_bilgi->get($pb);
+	$pb = $pb ?? Global_::get('pb', 'tl');
+	$pb_bilgi = Global_::get('pb_bilgi');
+	return $pb_bilgi ? $pb_bilgi->get($pb) : null;
 }
 
 /**
@@ -3546,4 +3476,3 @@ if (!function_exists('mb_ucfirst')) {
         return mb_convert_case($first, MB_CASE_UPPER, $encoding) . mb_substr($string, 1, null, $encoding);
     }
 }
-

@@ -295,8 +295,11 @@ class PageMetadata {
                         }
                     }
                     
-                    // Add araba action (e.g., "Araba Kirala")
-                    $titleParts[] = 'Araba ' . $arabaTitle;
+                    // Add araba action (e.g., "Araba Kirala"). The passive detail page
+                    // keeps the vehicle name as the title.
+                    if ($araba !== 'goster') {
+                        $titleParts[] = 'Araba ' . $arabaTitle;
+                    }
                 }
             } else {
                 // If eo doesn't exist but t1 exists, still add city/region
