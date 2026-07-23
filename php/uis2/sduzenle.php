@@ -84,7 +84,8 @@ if ($sb_) {
 	'<label class="uis-label">'.yc("Bölüm").'</label>' . 
 	$form->select(
 		[0, yc("Bölüm Seç")],
-		['select_adi' => 'adi', 'esitlik_deger_no' => $sb_->ms_no, 'from_tablo' => 'sekme', 'value_column' => 'no', 'db_ek' => " AND yayin = 1 ORDER BY sira ASC"],
+		['select_adi' => 'adi', 'esitlik_deger_no' => $sb_->ms_no, 'from_tablo' => 'sekme', 'value_column' => 'no', 'db_ek' => " AND yayin = 1 ORDER BY sira ASC", 
+		'recursive_kolon' => 'ust_s_no', 'recursive_indent' => '— '],
 		[
 			'name' => 'ms_no', 
 			'class' => 'dbselect uis-select',//selectyaz

@@ -34,9 +34,72 @@ try {
 	$sb_ = false;
 }
 
+
+/* ust_sekme */
+
+$ust_sekme_select = '';
+if ($sb_) {
+	// Tüm hiyerarşiyi tek sorguda çek (breadcrumb'lı)
+	try {
+		$stmt_agac = $pdo->prepare("
+			WITH RECURSIVE agac AS (
+				SELECT no, adi, ust_s_no, CAST(adi AS CHAR(1000)) AS yol, 0 AS seviye
+				FROM {$do_}sekme
+				WHERE ust_s_no IS NULL OR ust_s_no = 0
+				UNION ALL
+				SELECT s.no, s.adi, s.ust_s_no, CONCAT(a.yol, ' › ', s.adi), a.seviye + 1
+				FROM {$do_}sekme s
+				INNER JOIN agac a ON s.ust_s_no = a.no
+			)
+			SELECT * FROM agac ORDER BY yol
+		");
+		$stmt_agac->execute();
+		$menu_listesi = $stmt_agac->fetchAll();
+	} catch (PDOException $e) {
+		error_log("Sekme agac error: " . $e->getMessage());
+		$menu_listesi = [];
+	}
+
+	// Mevcut kaydın TÜM alt zincirini bul (döngü engelleme için)
+	$disabled_no_listesi = [];
+	try {
+		$stmt_altlar = $pdo->prepare("
+			WITH RECURSIVE altlar AS (
+				SELECT no FROM {$do_}sekme WHERE ust_s_no = :no
+				UNION ALL
+				SELECT s.no FROM {$do_}sekme s
+				INNER JOIN altlar a ON s.ust_s_no = a.no
+			)
+			SELECT no FROM altlar
+		");
+		$stmt_altlar->execute([':no' => $sb_->no]);
+		$disabled_no_listesi = array_column($stmt_altlar->fetchAll(), 'no');
+	} catch (PDOException $e) {
+		error_log("Sekme altlar error: " . $e->getMessage());
+	}
+
+	$ust_sekme_select = '<label class="form-label">'.yc("Üst sekme").'</label><br/>';
+	$ust_sekme_select .= '<select name="ust_s_no" class="dbselect g_1__" data-nta="'.sifrele($sb_->no.',,sekme,,ust_s_no').'">';
+	$ust_sekme_select .= '<option value="0">'.yc("En Üst Basamak").'</option>';
+
+	foreach ($menu_listesi as $m) {
+		if ($m->no == $sb_->no) continue; // kendisini listeleme
+		$selected = ($sb_->ust_s_no == $m->no) ? ' selected="selected"' : '';
+		$disabled = in_array($m->no, $disabled_no_listesi) ? ' disabled="disabled"' : '';
+
+		$girinti = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $m->seviye);
+		$ust_sekme_select .= '<option value="'.$m->no.'"'.$selected.$disabled.'>'.$girinti.html_d($m->adi).'</option>';
+
+	}
+	$ust_sekme_select .= '</select>';
+}
+/*ust_sekme sonu*/
+
 $form_eleman = [];
 $form_satir1 = '';
 $form = new form_c($pdo, $do_);
+
+$form_eleman['ust_s_no'] = $ust_sekme_select;
 
 if ($sb_) {
 
@@ -57,7 +120,7 @@ if ($sb_) {
 	]);
 	$form_eleman['hash'] = 
 	'<label class="form-label">Hash</label>' . 
-	$form->input_text($sb_->adi, [
+	$form->input_text($sb_->hash, [
 		'name' => 'hash', 
 		'class' => 'dbtext g_1__ form-control',
 		'data-nta' => sifrele($sb_->no . ',,sekme,,hash'),
@@ -107,15 +170,18 @@ if ($sb_) {
 
 
 	echo '
-	<form name="sekme" action="' . href('','ui=sekmeduzenle&n=' . $n) . '" method="POST" id="formtextsekme" class="form1"> 
+	<form name="sekme" action="' . href('','ui=sekmeduzenle&n=' . $n) . '" method="POST" id="formtextsekme" class="ws_form"> 
 	<div class="uis-container uis-mt-4">
 		<div class="uis-row">
 			<div class="uis-col-12 uis-flex">
 				<div>' . $form_satir1 . '</div>
 				<div class="ms-auto">' . $form_eleman['manset'] . '</div>
 			</div>
-			<div class="uis-col-lg-9">
+			<div class="uis-col-lg-6">
 			' . $form_eleman['adi'] . '
+			</div>
+			<div class="uis-col-lg-3">
+			' . $form_eleman['ust_s_no'] . '
 			</div>
 			<div class="uis-col-lg-3">
 			' . $form_eleman['hash'] . '

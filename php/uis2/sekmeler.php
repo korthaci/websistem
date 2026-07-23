@@ -68,14 +68,15 @@ if (!empty($sekmeler)) {
 	$thead_th_dizi = [
 		[$kayit_sayisi, 'g_30_'],
 		[yc("Sekme adı"), ''],
-		[yc("Manşet"), 'g_20_'],
+		["Üst sekme adı", ''],
+		["M", 'g_20_', yc("Manşet")],
 		['⇵', 'g_20_'],
 		['🖉', 'g_20_',yc("Düzenle")],
 		['🏴', 'g_20_ yazi1', yc("Yayın")],
 		[yc("Sil"), 'g_40_'],
 	];
 	if ($so_->d('yabanci_dil') == 1) {
-		$thead_th_dizi = diziye_ara_eleman_ekle($thead_th_dizi, yc("Manşet"), ['文', 'g_40_', yc('Çeviri')]);
+		$thead_th_dizi = diziye_ara_eleman_ekle($thead_th_dizi, "M", ['文', 'g_40_', yc('Çeviri')]);
 	}
 	
 	$thead_th = '';
@@ -90,10 +91,13 @@ if (!empty($sekmeler)) {
 	foreach ($sekmeler as $s) {
 		$nt = $s->no.',,sekme';
 
+		$ust_sekme_adi = db_adi::get($pdo, $do_, 'sekme', $s->ust_s_no) ?? 'En üst basamak';
+
 		echo '
 		<tr id="sira_'.$s->no.'">
 		<td>'.$s->no.'</td>
 		<td class="yazi1"><input type="text" class="i2 dbtext uis-input"'.data_nta($nt, 'adi').' value="'.$s->adi.'"/></td>
+		<td class="yazi1">'.$ust_sekme_adi.'</td>
 		<td><span class="db01 var'.$s->manset.'" '.data_nta($nt, 'manset').'>'.$s->manset.'</span></td>' .
 		( $so_->d('yabanci_dil') == 1 ? '<td class="yazi1">'. strip_tags(vcdil('icerik', 'blok_html', $s->no)) .'</td>' : '' ) . '
 		<td class="stut bgcenter" title="'.$s->sira.'">&nbsp;</td>			

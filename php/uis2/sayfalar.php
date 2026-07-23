@@ -16,11 +16,25 @@ if (n0_($u_no__)) {
 		echo $yeni_kayit->islem_mesaj();
 	}
 
+	// ms_no select'i için sekme listesini PDO'dan çek (arama formu oluşturulmadan önce).
+	try {
+		$stmt_sekme_list = $pdo->query("SELECT no, adi FROM {$do_}sekme ORDER BY sira ASC, no DESC");
+		$sekme_options_raw = $stmt_sekme_list ? $stmt_sekme_list->fetchAll(PDO::FETCH_OBJ) : [];
+	} catch (PDOException $e) {
+		$sekme_options_raw = [];
+	}
+	$sekme_options = [];
+	foreach ($sekme_options_raw as $sk) {
+		$sekme_options[(string) $sk->no] = $sk->adi;
+	}
+
 	$arama_form = new arama_formu([
 		'yazi_arama' => ['type' => 'text', 'placeholder' => yc("Kelime ile ara"), 'class' => 'i1', 'db_kolon' => 'adi'],
 		//'tarih' => ['type' => 'daterange', 'placeholder' => yc("Tarih Aralığı"), 'class' => 'i1', 'db_kolon' => 'tarih'],
-		'yayin' => ['type' => 'select', 'placeholder' => yc("Yayın").'-'.yc("Tümü"), 'options' => ['1' => yc("Yayında"),'0' => yc("Yayında Değil")], 'class' => 'i1 g_130_'],
+		'ms_no' => ['type' => 'select', 'placeholder' => yc("Bölüm").'-'.yc("Tümü"), 'options' => $sekme_options, 'db_kolon' => 'ms_no', 'class' => 'i1 g_180_ changesubmit'],
+		'yayin' => ['type' => 'select', 'placeholder' => yc("Yayın").'-'.yc("Tümü"), 'options' => ['1' => yc("Yayında"),'0' => yc("Yayında Değil")], 'class' => 'i1 g_130_ changesubmit'],
 	]);
+
 	$arama_ = $arama_form->sql_where();
 
 	echo '
