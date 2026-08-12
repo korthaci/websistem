@@ -26,20 +26,26 @@ function handleCredentialResponse(response) {
 
 $(window).on('load', function () {
 
-    google.accounts.id.initialize({
-        client_id: js_vars.gloginc,
-        callback: handleCredentialResponse,
-        auto_select: false
-    });
+	const googleBtn = document.getElementById("hiddenGoogleBtn");
 
-    google.accounts.id.renderButton(
-        document.getElementById("hiddenGoogleBtn"),
-        { theme: "outline", size: "large" }
-    );
+	if (googleBtn) {
+		google.accounts.id.renderButton(
+			googleBtn,
+			{
+				theme: "outline",
+				size: "large"
+			}
+		);
+	}
 
-    $(".google_login_buton").on("click", function (e) {
-        e.preventDefault();
-        $("#hiddenGoogleBtn").find('div[role="button"]').click();
-    });
+	$(".google_login_buton").on("click", function (e) {
+		e.preventDefault();
+
+		if (googleBtn) {
+			$(googleBtn)
+				.find('div[role="button"]')
+				.click();
+		}
+	});
 
 });
