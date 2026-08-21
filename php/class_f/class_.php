@@ -1823,9 +1823,26 @@ class dil_yonlendir {
 
 
 
+
 class yc_kelime_tanimla
 {
     private array $results = [];
+
+    /**
+     * Taranmayacak dosya uzantilari (veri/dokum/arsiv/medya/font vb.).
+     * Bunlar cevrilebilir metin icermez veya yanlis yakalamalara yol acar
+     * (ornegin .sql dump icindeki ayraclar).
+     */
+    private const EXCLUDED_EXTENSIONS = [
+        'sql', 'bak', 'dump',
+        'json', 'xml', 'yml', 'yaml', 'ini', 'env', 'lock',
+        'zip', 'gz', 'tar', 'rar', '7z', 'bz2',
+        'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'ico', 'bmp', 'tiff', 'avif',
+        'woff', 'woff2', 'ttf', 'eot', 'otf',
+        'mp3', 'mp4', 'avi', 'mov', 'webm', 'ogg', 'wav', 'flac',
+        'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
+        'map', 'log', 'md',
+    ];
 
     public function findPatterns(string $directory): array
     {
@@ -1849,6 +1866,9 @@ class yc_kelime_tanimla
             if (is_dir($path)) {
                 $this->scan($path);
             } else {
+                if (in_array(strtolower(pathinfo($item, PATHINFO_EXTENSION)), self::EXCLUDED_EXTENSIONS, true)) {
+                    continue;
+                }
                 $this->extractFromFile($path);
             }
         }

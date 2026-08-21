@@ -93,6 +93,13 @@
 	__endif}}
 
 	<div id="izi_modal"></div>
+	<div id="modal_c_genel" class="modal_c">
+		<div class="modal_c_overlay" data-modal-c-close></div>
+		<div class="modal_c_box">
+			<button type="button" class="modal_c_close" data-modal-c-close></button>
+			<div id="modal_c_genel_icerik" class="modal_c_content"></div>
+		</div>
+	</div>
 
 	{{__if%google_login_oauth%
 	<div id="g_id_onload" data-client_id="{{$:google_login_client_id}}" data-auto_prompt="true"

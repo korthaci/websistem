@@ -28,6 +28,13 @@ $(document).ready(function () {
 		});
 	});
 
+	const CEVIRI_ISTEK_ARALIK_MS = 1000; // ceviri istegi arasi min bekleme (ms)
+	const KAYDIRMA_IYILESTIRME_MS = 3000; // kullanici kaydirinca otomatik kaydirmayi ertele (ms)
+	let sonManuelKaydirma = 0;
+	$(window).on('wheel touchmove', function () {
+		sonManuelKaydirma = Date.now();
+	});
+
 	let stopScrollingInputText = false;
 	$('.text_ceviri_tumunu_cevir').on("click", async function () {
 		$('.text_ceviri_tumunu_cevir').text('🔴').css({ 'pointer-events': 'none' }).addClass('blinking');
@@ -38,11 +45,13 @@ $(document).ready(function () {
 			if (stopScrollingInputText) { break; }
 			await new Promise(resolve => {
 				setTimeout(() => {
-					const currentButtonTop = $(buttons[index]).offset().top;
-					$('html, body').animate({ scrollTop: currentButtonTop - 200 }, 500);
+					if (Date.now() - sonManuelKaydirma >= KAYDIRMA_IYILESTIRME_MS) {
+						const currentButtonTop = $(buttons[index]).offset().top;
+						$('html, body').animate({ scrollTop: currentButtonTop - 200 }, 500);
+					}
 					$(buttons[index]).trigger("click");
 					resolve();
-				}, 1000);
+				}, CEVIRI_ISTEK_ARALIK_MS);
 			});
 		}
 	});

@@ -290,7 +290,11 @@ if ($n == -1 || empty($n)) {
 		echo yc('Bulunan yeni kelimeler') . ' : ';
 		echo '<div class="textarea_ekle" data-textarea-name="yeni_text_ceviri">';
 		foreach ($txt_icinde_olmayan_kelimeler as $tiok) {
-			echo '<span class="uis-btn uis-btn-outline uis-btn-sm uis-mt-1">' . $tiok . '</span> ';
+			if (strpos($tiok, '{{') !== false || strpos($tiok, '}}') !== false) {
+				echo '<a href="#" class="uis-btn uis-btn-outline uis-btn-sm uis-mt-1">' . hs($tiok) . '</a> ';
+			} else {
+				echo '<span class="uis-btn uis-btn-outline uis-btn-sm uis-mt-1">' . hs($tiok) . '</span> ';
+			}
 		}
 		echo '</div>';
 	}
