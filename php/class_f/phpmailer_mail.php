@@ -32,7 +32,8 @@ class phpmailer_mail {
         string $body = '',
         string $reply = '',
         string $bcc = 'bcc',
-        string $textMessage = ''
+        string $textMessage = '',
+        string $gonderen_adi = ''
     ): bool {
 
         if ($this->local_test) {
@@ -44,10 +45,10 @@ class phpmailer_mail {
         $method = $this->smtp_dizi['method'] ?? 'smtp';
 
         if ($driver === 'symfony' && class_exists('Symfony\Component\Mailer\Transport')) {
-            return $this->symfony_ile_gonder($to, $subject, $body, $reply, $bcc, $textMessage, $method);
+            return $this->symfony_ile_gonder($to, $subject, $body, $reply, $bcc, $textMessage, $method, $gonderen_adi);
         }
 
-        if ($this->phpmailer_ile_gonder($to, $subject, $body, $reply, $bcc, $textMessage)) {
+        if ($this->phpmailer_ile_gonder($to, $subject, $body, $reply, $bcc, $textMessage, $gonderen_adi)) {
             return true;
         } else {
             process_log("Mail Gönderilemedi");
@@ -62,7 +63,8 @@ class phpmailer_mail {
         string $body,
         string $reply = '',
         string $bcc = 'bcc',
-        string $textMessage = ''
+        string $textMessage = '',
+        string $gonderen_adi = ''
     ): bool {
         $this->gonderildi = false;
         $mail = new PHPMailer(true);
@@ -70,6 +72,7 @@ class phpmailer_mail {
         $serverName = $_SERVER['SERVER_NAME'] ?? 'localhost';
         $subject_domain = strtoupper(preg_replace('/[^a-zA-Z0-9]+/i', '.', $serverName));
         $set_from_mail = $this->smtp_dizi[$this->server]['from'] ?: $this->smtp_dizi[$this->server]['k_adi'];
+        $from_adi = $gonderen_adi !== '' ? $gonderen_adi : $subject_domain;
 
         try {
             $mail->isSMTP();
@@ -90,7 +93,7 @@ class phpmailer_mail {
                 ]
             ];
 
-            $mail->setFrom($set_from_mail, $subject_domain);
+            $mail->setFrom($set_from_mail, $from_adi);
 
             if ($reply) {
                 $mail->addReplyTo($reply, $subject_domain);
@@ -134,12 +137,13 @@ class phpmailer_mail {
         string $reply = '',
         string $bcc = 'bcc',
         string $textMessage = '',
-        string $method = 'smtp'
+        string $method = 'smtp',
+        string $gonderen_adi = ''
     ): bool {
         $this->gonderildi = false;
 
         if (!class_exists('Symfony\Component\Mailer\Transport')) {
-            return $this->phpmailer_ile_gonder($to, $subject, $body, $reply, $bcc, $textMessage);
+            return $this->phpmailer_ile_gonder($to, $subject, $body, $reply, $bcc, $textMessage, $gonderen_adi);
         }
 
         $serverConfig = $this->smtp_dizi[$this->server];
@@ -159,12 +163,17 @@ class phpmailer_mail {
             $transport = \Symfony\Component\Mailer\Transport::fromDsn($dsn);
             $mailer = new \Symfony\Component\Mailer\Mailer($transport);
 
+            // Symfony mail sürücüsü aktif edilirse, virgüllü adres ayrıştırması normalize_email_list() ile uyumlu hale getirilmeli, aksi halde dizi içindeki virgüllü adresler yanlış işlenir.
             if (!is_array($to)) {
                 $to = explode(",", $to);
             }
 
+            $from = $gonderen_adi !== ''
+                ? new \Symfony\Component\Mime\Address($serverConfig['k_adi'], $gonderen_adi)
+                : $serverConfig['k_adi'];
+
             $email = (new \Symfony\Component\Mime\Email())
-                ->from($serverConfig['k_adi'])
+                ->from($from)
                 ->subject($subject)
                 ->html($body)
                 ->text($textMessage ?: strip_tags($body));
