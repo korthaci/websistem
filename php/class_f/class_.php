@@ -916,7 +916,7 @@ class LoginRateLimiter {
 		$this->do_ = $do_;
 		$this->maxAttempts = $maxAttempts;
 		$this->blockDuration = $blockDuration;
-		$this->ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+		$this->ip = getIP();
 		$this->tablo = $this->do_ . $this->tablo;
 	}
 
