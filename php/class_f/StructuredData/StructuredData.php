@@ -123,6 +123,14 @@ class StructuredData {
 		self::$katkilar[] = $katki;
 	}
 
+	/**
+	 * Domain tarafının SchemaOrgMapper'a özel tip mapper'ı kaydetmesi için passthrough.
+	 * Örn: StructuredData::typeRegister('car', fn(array $data): ?array => [...]);
+	 */
+	public static function typeRegister(string $type, callable $mapper): void {
+		SchemaOrgMapper::mapRegister($type, $mapper);
+	}
+
 	/** Bileşenlerin context'e doğrudan erişmesi için. */
 	public function getContext(): SemanticContext {
 		return $this->context;

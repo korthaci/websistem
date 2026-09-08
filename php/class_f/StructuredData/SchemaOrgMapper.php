@@ -1,6 +1,23 @@
 <?php
 
 class SchemaOrgMapper {
+
+	/**
+	 * Domain tarafının kaydettiği tip mapper'ları (tip => fn(array $data): ?array).
+	 * Kayıtlı tip, generic match() öncesinde çalıştırılır; null dönerse entity düşer.
+	 *
+	 * @var array<string, callable>
+	 */
+	private static array $typeMappers = [];
+
+	/**
+	 * Generic olmayan bir Schema.org tipi için harici mapper kaydeder.
+	 * Örn: SchemaOrgMapper::mapRegister('car', fn(array $data): ?array => [...]);
+	 */
+	public static function mapRegister(string $type, callable $mapper): void {
+		self::$typeMappers[$type] = $mapper;
+	}
+
 	public function map(SemanticContext $context): array {
 		$nodes = [];
 
@@ -15,6 +32,11 @@ class SchemaOrgMapper {
 	}
 
 	private function mapEntity(SemanticEntity $entity): ?array {
+		$registered = self::$typeMappers[$entity->type] ?? null;
+		if ($registered !== null) {
+			return $registered($entity->data);
+		}
+
 		return match ($entity->type) {
 			'organization' => $this->mapOrganization($entity->data),
 			'website' => $this->mapWebSite($entity->data),
