@@ -184,15 +184,55 @@ class StructuredData {
 	}
 
 	// -----------------------------------------------------------------------
-	// Canonical sayfa URL'si — REQUEST_URI'den güvenli şekilde üretir.
+	// Sayfa URL'i — generic provider + legacy fallback (F1.1).
 	//
-	// LOCAL = "http://localhost/site/binaraba" (tam URL)
-	// REQUEST_URI = "/site/binaraba/araba=kirala" (sadece path)
-	// SUB_DIR = "/site/binaraba" (sadece path kısmı)
-	//
-	// Çözüm: SUB_DIR'i kırparak sadece ek path'i al, sonra scheme+host+subdir+path.
+	// Provider kayıtlıysa (setPageUrlProvider) onun döndürdüğü URL kullanılır;
+	// kayıtlı değilse REQUEST_URI tabanlı legacy üretim (defaultPageUrl)
+	// çalışır. Provider contract'ı: fn(): string — tam sayfa URL'si döndürür,
+	// fragment (#...) İÇERMEZ, canonical identity için kullanılabilir olmalı.
+	// Boş string veya geçersiz sonuç (string dışı / exception) durumunda
+	// legacy fallback devreye girer; sahte URL üretilmez.
 	// -----------------------------------------------------------------------
-	private function currentPageUrl(): string {
+	private static $pageUrlProvider = null;
+
+	/**
+	 * Domain tarafının sayfa URL üreticisini kaydetmesi için generic API.
+	 * Provider'ın döndürdüğü URL; WebPage.url, breadcrumb son öğesi ve
+	 * canonical identity için tek kaynak olur.
+	 */
+	public static function setPageUrlProvider(callable $provider): void {
+		self::$pageUrlProvider = $provider;
+	}
+
+	/**
+	 * Sayfanın kimlik URL'si. Provider kayıtlıysa onun sonucu; değilse
+	 * legacy default üretim.
+	 */
+	public static function getPageUrl(): string {
+		if (self::$pageUrlProvider !== null) {
+			try {
+				$url = (self::$pageUrlProvider)();
+			} catch (Throwable $e) {
+				error_log('[StructuredData] Page URL provider hatasi: ' . $e->getMessage());
+				return self::defaultPageUrl();
+			}
+
+			if (!is_string($url)) {
+				error_log('[StructuredData] Page URL provider string donmedi.');
+				return self::defaultPageUrl();
+			}
+
+			$url = trim($url);
+			if ($url !== '') {
+				return $url;
+			}
+		}
+
+		return self::defaultPageUrl();
+	}
+
+	// Legacy/default üretim — provider yokkenki davranış, birebir korunur.
+	private static function defaultPageUrl(): string {
 		if (!defined('LOCAL')) {
 			return '';
 		}
@@ -208,6 +248,11 @@ class StructuredData {
 		}
 
 		return $scheme . '://' . $host . $subDir . '/' . ltrim($uri, '/');
+	}
+
+	// Geriye dönük uyumluluk: sınıf içi tüm URL çağrıları provider zincirinden geçer.
+	private function currentPageUrl(): string {
+		return self::getPageUrl();
 	}
 
 	// -----------------------------------------------------------------------
