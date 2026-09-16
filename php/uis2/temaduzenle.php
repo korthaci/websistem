@@ -19,6 +19,14 @@ $dosyalar_raw = dosya_listele($tema_yolu, [
     'exclude' => ['screenshot.*', '*__install_db_sample*'],
     'recursive' => true,
 ]);
+
+// HTML dosyaları yalnızca tema kök dizininden listelenir; alt klasörlerdeki
+// html dosyaları (örn. font kütüphanesi demo sayfaları) listeye alınmaz.
+// CSS/JS için alt klasör taraması aynen korunur (örn. assets/css/tema_stil.css).
+$dosyalar_raw = array_filter($dosyalar_raw, function ($d) {
+    return !str_ends_with($d, '.html') || strpos($d, '/') === false;
+});
+
 sort($dosyalar_raw);
 
 $dosyalar = [
@@ -34,6 +42,13 @@ foreach ($dosyalar_raw as $d) {
 }
 
 $secili_dosya = isset($_GET['dosya']) ? z($_GET['dosya']) : '';
+
+// Güvenlik: Yalnızca yukarıda listelenen dosyalar açılabilir/kaydedilebilir.
+// (Path traversal engeli: ?dosya=../../... gibi değerler yok sayılır.)
+if ($secili_dosya !== '' && !in_array($secili_dosya, array_merge($dosyalar['html'], $dosyalar['css'], $dosyalar['js']), true)) {
+    $secili_dosya = '';
+}
+
 $dosya_icerik = '';
 $kayit_mesaj = '';
 
@@ -147,7 +162,10 @@ if (isset($_POST['dosya_kaydet']) && !empty($secili_dosya)) {
 
         if ($can_save) {
             $mevcut_icerik = file_get_contents($dosya_yolu);
-            tema_dosya_yedek_al($tema_url, $secili_dosya, $mevcut_icerik);
+            $yedek_dosya = tema_dosya_yedek_al($tema_url, $secili_dosya, $mevcut_icerik);
+            if ($yedek_dosya !== false) {
+                process_log("Tema dosyasi kaydedilmeden once yedek olusturuldu | tema: {$tema_url} | dosya: {$secili_dosya} | yedek: {$yedek_dosya}");
+            }
         }
     }
     
