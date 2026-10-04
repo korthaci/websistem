@@ -46,7 +46,7 @@ Basic knowledge of **HTML / CSS (and optionally JS)** is expected.
 
 - Users looking for a no‑code solution
 - Plugin‑first workflows
-- Large-scale infrastructure consoles (AWS-style) or real-time, highly distributed systems.
+- Large-scale infrastructure consoles or real-time, highly distributed systems.
 - Real-time or highly distributed systems
 
 ---
