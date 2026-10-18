@@ -21,6 +21,10 @@ Global_::$yonlendir_index_body_class ??= [];
 Global_::$yonlendir_index_body_class[] = isset($routeParams['type']) && !empty(($routeParams['type'])) ? ' __'.$routeParams['type'].' ' : '';
 Global_::$yonlendir_index_body_class[] = ' __indexx' . $indexx;
 
+if (!empty($routeParams['bilesen']) && !empty($routeParams['islem'])) {
+    Global_::$yonlendir_index_body_class[] = ' __' . preg_replace('/[^a-z0-9_]/i', '', $routeParams['bilesen'] . '_' . $routeParams['islem']);
+}
+
 //$yonlendir_index_body_class .= ($_dmod) ? ' __dmod ' : '';
 //$yonlendir_index_body_class .= ($tema_demo) ? ' ____demo ' : '';
 
