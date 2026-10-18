@@ -764,114 +764,231 @@ function yc($text_adi, ...$sprintf_args) {
 }
 
 
-function middle_dot_yc($html, $yabanci_dil_acik = true, $exclude_get = []) {
-    $__protected_map = [];
 
-    $html = preg_replace_callback(
-        '/(<textarea\b[^>]*>)([\s\S]*?)(<\/textarea>)/i',
-        function ($m) use (&$__protected_map) {
-            $key = '___PROTECTED_BLOCK_' . count($__protected_map) . '___';
-            $__protected_map[$key] = $m[2];
-            return $m[1] . $key . $m[3];
-        },
-        $html
-    );
-
-    $html = preg_replace_callback(
-        '/(<(pre|code|script|style)\b[^>]*>[\s\S]*?<\/\2>)/i',
-        function ($m) use (&$__protected_map) {
-            $key = '___PROTECTED_BLOCK_' . count($__protected_map) . '___';
-            $__protected_map[$key] = $m[1];
-            return $key;
-        },
-        $html
-    );
-
-    $restore = function ($html) use (&$__protected_map) {
-        if (!empty($__protected_map)) {
-            $html = str_replace(array_keys($__protected_map), array_values($__protected_map), $html);
-        }
-        return $html;
+/**
+ * middle_dot_yc
+ *
+ * ·...· ile işaretlenmiş bloklardaki içerikleri yc() çeviri fonksiyonuna
+ * yönlendirir. textarea/pre/code/script/style içerikleri işlem dışı
+ * bırakılır (korunur), işlem sonunda geri konur.
+ *
+ * DEĞİŞİKLİKLER (önceki sürüme göre):
+ *  - Tüm preg_* çağrıları null dönüşe karşı kontrol ediliyor.
+ *    Hata olursa: error_log'a yazılır ve İŞLENMEMİŞ ORİJİNAL veri
+ *    kullanılır (asla sessizce boş string'e düşürülmez).
+ *  - $html string değilse (null/false/array/obj) baştan yakalanır.
+ *  - ·...· callback'i içindeki (.)/(..) eşleşme sayımı ve yc() çağrısı
+ *    try/catch ile sarmalandı; hata durumunda o blok işlenmemiş haliyle
+ *    (orijinal ·...· metni) bırakılır.
+ *  - Tüm fonksiyon dış bir try/catch ile sarıldı: içeride ne olursa
+ *    olsun sayfa "bembeyaz" dönmez, en kötü ihtimalle orijinal $html
+ *    (hiç işlenmemiş) geri döner.
+ *  - Loglama hem error_log() hem de (log_errors kapalıysa diye) isteğe
+ *    bağlı bir dosya fallback'i ile garanti altına alındı.
+ */
+ 
+function middle_dot_yc($html, $yabanci_dil_acik = true, $exclude_get = [])
+{
+    $__original_html = $html;
+ 
+    // --- Loglama yardımcıları -------------------------------------------
+ 
+    // log_errors kapalı olabileceği ihtimaline karşı isteğe bağlı dosya
+    // fallback'i. Sunucu ayarlarına güvenmek istemezsen bu satırı
+    // etkinleştir (yol/izinleri kendine göre ayarla).
+    $__log = function (string $msg) {
+        error_log('[middle_dot_yc] ' . $msg);
+        // Aşağıdaki satırı açarsan log_errors kapalı olsa bile garanti
+        // bir kayıt alırsın:
+        // @file_put_contents(__DIR__ . '/middle_dot_yc_errors.log',
+        //     date('Y-m-d H:i:s') . ' ' . $msg . "\n", FILE_APPEND);
     };
-
-    $html = trim(preg_replace('/^\xEF\xBB\xBF+|[\x{200E}\x{200F}]+/u', '', $html));
-
-    if (!empty($exclude_get)) {
-        foreach ($exclude_get as $eg) {
-            if (set_dolu($eg, "g")) {
-                return $restore($html);
+ 
+    // preg_* sonucunu kontrol eder: null ise logla + orijinali döndür.
+    $__safe_preg = function ($result, $original, string $context) use ($__log) {
+        if ($result === null) {
+            $__log(sprintf(
+                'preg hatası (%s): %s | uzunluk=%d | ilk200=%s',
+                $context,
+                preg_last_error_msg(),
+                is_string($original) ? strlen($original) : -1,
+                is_string($original) ? substr($original, 0, 200) : '(string değil)'
+            ));
+            return $original;
+        }
+        return $result;
+    };
+ 
+    try {
+        // --- Giriş tipi kontrolü ----------------------------------------
+        if (!is_string($html)) {
+            $__log('giriş string değil, tip: ' . gettype($html) . ' — işlem yapılmadan döndürülüyor');
+            return is_string($__original_html) ? $__original_html : '';
+        }
+ 
+        $__protected_map = [];
+ 
+        // --- textarea içeriklerini koru ----------------------------------
+        $__before = $html;
+        $html = preg_replace_callback(
+            '/(<textarea\b[^>]*>)([\s\S]*?)(<\/textarea>)/i',
+            function ($m) use (&$__protected_map) {
+                $key = '___PROTECTED_BLOCK_' . count($__protected_map) . '___';
+                $__protected_map[$key] = $m[2];
+                return $m[1] . $key . $m[3];
+            },
+            $html
+        );
+        $html = $__safe_preg($html, $__before, 'textarea_protect');
+ 
+        // --- pre/code/script/style bloklarını koru -----------------------
+        $__before = $html;
+        $html = preg_replace_callback(
+            '/(<(pre|code|script|style)\b[^>]*>[\s\S]*?<\/\2>)/i',
+            function ($m) use (&$__protected_map) {
+                $key = '___PROTECTED_BLOCK_' . count($__protected_map) . '___';
+                $__protected_map[$key] = $m[1];
+                return $key;
+            },
+            $html
+        );
+        $html = $__safe_preg($html, $__before, 'pre_code_script_style_protect');
+ 
+        $restore = function ($html) use (&$__protected_map) {
+            if (!empty($__protected_map)) {
+                $html = str_replace(array_keys($__protected_map), array_values($__protected_map), $html);
+            }
+            return $html;
+        };
+ 
+        // --- BOM / RTL-LTR görünmez karakter temizliği --------------------
+        $__before = $html;
+        $__cleaned = preg_replace('/^\xEF\xBB\xBF+|[\x{200E}\x{200F}]+/u', '', $html);
+        if ($__cleaned === null) {
+            $__log(sprintf(
+                'BOM/RTL temizleme preg hatası: %s | ilk200=%s',
+                preg_last_error_msg(),
+                substr($__before, 0, 200)
+            ));
+            $__cleaned = $__before; // boşa düşürme, orijinali koru
+        }
+        $html = trim($__cleaned);
+ 
+        // --- exclude_get kontrolü ------------------------------------------
+        if (!empty($exclude_get)) {
+            foreach ($exclude_get as $eg) {
+                try {
+                    if (set_dolu($eg, "g")) {
+                        return $restore($html);
+                    }
+                } catch (\Throwable $e) {
+                    $__log('set_dolu() hatası (' . $eg . '): ' . $e->getMessage());
+                    // set_dolu patlarsa, güvenli tarafta kalıp exclude
+                    // edilmemiş gibi devam ediyoruz (istersen return $restore($html); yapabilirsin).
+                }
             }
         }
-    }
-
-    if ($yabanci_dil_acik === true && strpos($html, '·') !== false) {
-        $html = preg_replace_callback("/·([^·]+)·/", function ($matches) {
-
-            $content = trim($matches[1]);
-            $content = preg_replace('/[\p{C}\x{200E}\x{200F}]+/u', '', $content);
-
-            $degisken_1_sayisi = substr_count($content, '(.)');
-            $degisken_2_sayisi = substr_count($content, '(..)');
-
-            if ($degisken_2_sayisi > 1) {
-
-                preg_match("/\(\.\)(.+)\(\.\)/is", $content, $d1m);
-                preg_match("/\(\.\.\)(.+)\(\.\.\)/is", $content, $d2m);
-
-                $degisken_1 = $d1m[1] ?? '';
-                $degisken_2 = $d2m[1] ?? '';
-
-                if ($degisken_2 === '') {
-                    return yc($content);
+ 
+        // --- ·...· blokları -------------------------------------------------
+        if ($yabanci_dil_acik === true && strpos($html, '·') !== false) {
+            $html = preg_replace_callback("/·([^·]+)·/", function ($matches) use ($__log) {
+                try {
+                    $content = trim($matches[1]);
+                    $content = preg_replace('/[\p{C}\x{200E}\x{200F}]+/u', '', $content);
+                    if ($content === null) {
+                        $__log('görünmez karakter temizleme preg hatası: ' . preg_last_error_msg()
+                            . ' | ham=' . substr($matches[1], 0, 200));
+                        return $matches[0]; // ·...· bloğunu olduğu gibi bırak
+                    }
+ 
+                    $degisken_1_sayisi = substr_count($content, '(.)');
+                    $degisken_2_sayisi = substr_count($content, '(..)');
+ 
+                    if ($degisken_2_sayisi > 1) {
+                        preg_match("/\(\.\)(.+)\(\.\)/is", $content, $d1m);
+                        preg_match("/\(\.\.\)(.+)\(\.\.\)/is", $content, $d2m);
+ 
+                        if (!isset($d1m[0]) || !isset($d2m[0])) {
+                            $__log('beklenen (.)/(..)çifti bulunamadı, ham içerik: ' . substr($content, 0, 200));
+                            return yc($content);
+                        }
+ 
+                        $degisken_1 = $d1m[1] ?? '';
+                        $degisken_2 = $d2m[1] ?? '';
+                        if ($degisken_2 === '') {
+                            return yc($content);
+                        }
+                        return yc(
+                            str_replace([$d1m[0], $d2m[0]], ['%s', '%s'], $content),
+                            $degisken_1,
+                            $degisken_2
+                        );
+                    } elseif ($degisken_1_sayisi > 1) {
+                        preg_match("/\(\.\)(.+)\(\.\)/is", $content, $d1m);
+ 
+                        if (!isset($d1m[0])) {
+                            $__log('beklenen (.) çifti bulunamadı, ham içerik: ' . substr($content, 0, 200));
+                            return yc($content);
+                        }
+ 
+                        $degisken_1 = $d1m[1] ?? '';
+                        if ($degisken_1 === '') {
+                            return yc($content);
+                        }
+                        return yc(
+                            str_replace($d1m[0], '%s', $content),
+                            $degisken_1
+                        );
+                    } else {
+                        $tags = [];
+                        $clean_key = preg_replace_callback(
+                            '/<\/?[a-z1-6]+\b[^>]*>/i',
+                            function ($m) use (&$tags) {
+                                $tags[] = $m[0];
+                                return '%s';
+                            },
+                            $content
+                        );
+ 
+                        if ($clean_key === null) {
+                            $__log('tag temizleme preg hatası: ' . preg_last_error_msg()
+                                . ' | içerik=' . substr($content, 0, 200));
+                            return yc($content);
+                        }
+ 
+                        if (!empty($tags)) {
+                            return yc($clean_key, ...$tags);
+                        }
+                        return yc($content);
+                    }
+                } catch (\Throwable $e) {
+                    $__log('·...· blok işlemede hata: ' . $e->getMessage()
+                        . ' | dosya=' . $e->getFile() . ':' . $e->getLine()
+                        . ' | ham içerik=' . substr($matches[1] ?? '', 0, 200));
+                    return $matches[0]; // orijinal ·...· bloğunu olduğu gibi bırak
                 }
-
-                return yc(
-                    str_replace([$d1m[0], $d2m[0]], ['%s', '%s'], $content),
-                    $degisken_1,
-                    $degisken_2
-                );
-
-            } elseif ($degisken_1_sayisi > 1) {
-
-                preg_match("/\(\.\)(.+)\(\.\)/is", $content, $d1m);
-                $degisken_1 = $d1m[1] ?? '';
-
-                if ($degisken_1 === '') {
-                    return yc($content);
-                }
-
-                return yc(
-                    str_replace($d1m[0], '%s', $content),
-                    $degisken_1
-                );
-
-            } else {
-
-                $tags = [];
-
-                $clean_key = preg_replace_callback(
-                    '/<\/?[a-z1-6]+\b[^>]*>/i',
-                    function ($m) use (&$tags) {
-                        $tags[] = $m[0];
-                        return '%s';
-                    },
-                    $content
-                );
-
-                if (!empty($tags)) {
-                    return yc($clean_key, ...$tags);
-                }
-
-                return yc($content);
+            }, $html);
+ 
+            if ($html === null) {
+                $__log('·...· ana preg_replace_callback null döndü: ' . preg_last_error_msg());
+                $html = $__before; // en son bilinen iyi hale dön
             }
-
-        }, $html);
+        }
+ 
+        $html = str_replace(['(.)', '(..)', '·'], '', $html);
+ 
+        return $restore($html);
+ 
+    } catch (\Throwable $e) {
+        // Beklenmeyen her türlü hata (TypeError, set_dolu/yc içinden gelen
+        // exception vs.) burada yakalanır. Sayfa asla bembeyaz dönmez;
+        // en kötü ihtimalle işlenmemiş orijinal html geri verilir.
+        $__log('KRİTİK HATA: ' . $e->getMessage()
+            . ' | dosya=' . $e->getFile() . ':' . $e->getLine());
+        return is_string($__original_html) ? $__original_html : '';
     }
-
-    $html = str_replace(['(.)', '(..)', '·'], '', $html);
-
-    return $restore($html);
 }
+
 
 
 
@@ -1010,6 +1127,98 @@ function rg_opendir($r_dizin_k, $r_dizin_b = '',
 	return $yaz;
 }
 
+
+
+
+/**
+ * HTML içerisindeki özel etiketleri işleyerek PHP dosyalarını dahil eden fonksiyon
+ * İki tür etiket işler:
+ * 1. {$degisken} -> Basit değişken değeri yerleştirme
+ * 2. {{i:konum:dosya}} -> PHP dosyası dahil etme
+ * 
+ * @param string $html_ İşlenecek HTML içeriği
+ * @return string İşlenmiş HTML içeriği
+ */
+function sablon_include($html_) {	// Basit değişken yerleştirmeleri için: [[$degisken]]
+	$html_ = preg_replace_callback('/\[\[\$([^\]]+)\]\]/', function($m_){
+		global ${$m_[1]}; // Değişkeni global scope'dan al
+		return ${$m_[1]}; // Değerini yerleştir
+	}, $html_);
+
+	// {{...}} formatındaki dahil etme etiketlerini işle
+	$desen = '/{{(.+)}}/';
+	$html_duzenle = preg_replace_callback($desen, function($m){
+		global $pdo, $db, $pdo_db, $do_, $so_, $bo_, $indexx, $u_no__, $n;
+
+		// Etiketi parçalara ayır (örn: i:tema:kolon1 -> ['i', 'tema', 'kolon1'])
+		$eslesme = explode(":", q_($m[1]));
+
+		// Son parça her zaman dosya adıdır
+		$m_dosya_adi_bu = $eslesme[count($eslesme) - 1];
+		$m_dosya_uzantisi_bu = 'php';
+		
+		if (!isset($eslesme[1])) {
+			return; // Geçersiz format, işleme devam etme
+		}
+
+		// Dosyanın aranacağı dizini belirle:
+		// - tema: Tema dosyaları için (örn: header.php, footer.php)
+		// - yon: Yönlendirme dosyaları için (örn: kolon1.php, sayfa.php)
+		//        Bu dosyalar genelde dinamik içerik veya sayfa parçaları içerir
+		// - varsayılan: Ana PHP dizini
+		//{{i:yon:...}}
+		if ($eslesme[1] === 'tema') {
+			$dosya_yolu_dizin = TEMA_DIR . '/' . $so_->d('tema');
+		} elseif ($eslesme[1] === 'yon') {
+			$dosya_yolu_dizin = YONLENDIR_D;
+		} else {
+			$dosya_yolu_dizin = R_PHP;
+		}
+		$dosya_adi = $m_dosya_adi_bu . '.' . $m_dosya_uzantisi_bu;
+		$dosya_yolu_dosya = $dosya_yolu_dizin . '/' . $dosya_adi;
+
+		//process_log("Trying to include: " . $dosya_yolu_dosya);
+
+
+		if ($eslesme[0]==='i' || $eslesme[0]==='i1'){
+			
+			if (strpos($eslesme[2], '+') !== false) {
+				$e2 = trim($eslesme[2],'+');
+				global ${$e2};
+	
+				if (isset($$e2) && $$e2==true) {
+					ob_start();
+					if (file_exists($dosya_yolu_dosya)){
+						//include_once dosya aynı anda iki defa kullanılamaz. çakışmalara veya döngülere girmemesi için. bu tekrar düzenlenebilir.
+						include_once ($dosya_yolu_dosya);
+					}
+					return ob_get_clean();
+				}
+
+			} elseif ($eslesme[1]==='$'){
+				global $$m_dosya_adi_bu;/**burada $kolon1 olarak kullanılıyor {{i:$:kolon1}} -> include_once $kolon1;*/
+				ob_start();
+					if (file_exists($$m_dosya_adi_bu)){
+						include_once ($$m_dosya_adi_bu);
+					}
+				return ob_get_clean();
+			} elseif (file_exists($dosya_yolu_dosya)) {
+				ob_start();
+				include_once ($dosya_yolu_dosya);
+				return ob_get_clean();
+			} else {
+				return $m[0];
+			}
+		} elseif ($eslesme[0]==='c') {
+			global ${$eslesme[1]};
+			$obje_ = ${$eslesme[1]};
+			$obje_fn_ = $eslesme[2];
+			return $obje_->$obje_fn_();
+		}
+		
+	}, $html_);
+	return $html_duzenle;
+}
 
 function html_modul($yazi) {
 	global $pdo, $db, $pdo_db, $do_, $so_, $bo_, $indexx, $u_no__, $n;
