@@ -1019,7 +1019,7 @@ function html_modul($yazi) {
 	}
 	
 	$yazi_son = '';
-	$desen = '/\[[^\]]+\]/';    // [al:örnek_metin]
+	$desen = '/\[(?:\[\]|[^\[\]])+\]/';    // [al:örnek_metin]
 	$mtablo_no = 0;  // modul fonksiyon içinden alındığı için, burada oluşturulan mtablo_no, include olan dosya içinde kullanılıyor.
 	
 	$yazilar = preg_split($desen, $yazi);
@@ -1040,6 +1040,23 @@ function html_modul($yazi) {
 			$dizi_modul_bilesen_url = preg_replace("/\W+/", "", $dizi_url[2]);
 			
 			if ($dizi_modul_bilesen === 'modul') {
+				$modul_parametreleri = [];
+				$modul_url_icerigi = $dizi_url[2];
+				if (preg_match("/^\[al\:modul\:((?:\[\]|[^\[\]])+)\]$/is", $dizi_al, $modul_url_eslesme)) {
+					$modul_url_icerigi = $modul_url_eslesme[1];
+				}
+				$modul_url_parcalari = explode('?', $modul_url_icerigi, 2);
+				$dizi_modul_bilesen_url = preg_replace("/\W+/", "", $modul_url_parcalari[0]);
+
+				if (isset($modul_url_parcalari[1])) {
+					$modul_sorgu = html_entity_decode(
+						$modul_url_parcalari[1],
+						ENT_QUOTES | ENT_HTML5,
+						'UTF-8'
+					);
+					parse_str($modul_sorgu, $modul_parametreleri);
+				}
+
 				$modul_stmt->execute(['url' => $dizi_modul_bilesen_url]);
 				$modul_url_var = $modul_stmt->fetchColumn();
 				
