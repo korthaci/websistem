@@ -225,6 +225,13 @@ class Router {
 					continue;
 				}
 
+				// Sayfa yonlendirmesi yalnizca islemler.php dosyasi olan bilesenlerde vardir.
+				// (orn. onboarding, sanalpos yalnizca AJAX/header uzerinden calisir.)
+				// Eksik dosyada include_once uyarisi uretilmemelidir; istek 404'e duser.
+				if (!is_file($bilesenDir . '/islemler.php')) {
+					continue;
+				}
+
 				$this->params = array_merge($this->params, [
 					'bilesen' => $bilesen,
 					'islem'   => $_GET[$bilesen],
@@ -252,7 +259,8 @@ class Router {
 			$param !== null &&
 			in_array($routeKey, $this->getAktifBilesenler(), true) &&
 			defined('BILESEN_DIR') &&
-			is_dir(BILESEN_DIR . '/' . $routeKey)
+			is_dir(BILESEN_DIR . '/' . $routeKey) &&
+			is_file(BILESEN_DIR . '/' . $routeKey . '/islemler.php')
 		) {
 			$this->params = array_merge($this->params, [
 				'bilesen' => $routeKey,
