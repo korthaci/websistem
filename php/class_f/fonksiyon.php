@@ -826,6 +826,25 @@ function middle_dot_yc($html, $yabanci_dil_acik = true, $exclude_get = [])
             return is_string($__original_html) ? $__original_html : '';
         }
  
+		if (!mb_check_encoding($html, 'UTF-8')) {
+            // Bozuk baytın tam ofsetini ve etrafındaki metni bul
+            $pattern = '/^(?:[\x00-\x7F]|[\xC2-\xDF][\x80-\xBF]|\xE0[\xA0-\xBF][\x80-\xBF]|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}|\xED[\x80-\x9F][\x80-\xBF]|\xF0[\x90-\xBF][\x80-\xBF]{2}|[\xF1-\xF3][\x80-\xBF]{3}|\xF4[\x80-\x8F][\x80-\xBF]{2})*/s';
+            preg_match($pattern, $html, $matches);
+            $offset = isset($matches[0]) ? strlen($matches[0]) : 0;
+            $start = max(0, $offset - 60);
+            $context = substr($html, $start, 120);
+            $bad_bytes = bin2hex(substr($html, $offset, 8));
+
+            $__log(sprintf(
+                'Geçersiz UTF-8 tespit edildi! Ofset: %d, Bozuk bayt (hex): %s | Çevre metni: [%s]',
+                $offset,
+                $bad_bytes,
+                $context
+            ));
+
+            $html = mb_convert_encoding($html, 'UTF-8', 'UTF-8');
+        }
+		
         $__protected_map = [];
  
         // --- textarea içeriklerini koru ----------------------------------
@@ -1139,6 +1158,8 @@ function rg_opendir($r_dizin_k, $r_dizin_b = '',
  * @param string $html_ İşlenecek HTML içeriği
  * @return string İşlenmiş HTML içeriği
  */
+//class_.php'ye taşındı. buradan silinecek
+/*
 function sablon_include($html_) {	// Basit değişken yerleştirmeleri için: [[$degisken]]
 	$html_ = preg_replace_callback('/\[\[\$([^\]]+)\]\]/', function($m_){
 		global ${$m_[1]}; // Değişkeni global scope'dan al
@@ -1196,7 +1217,7 @@ function sablon_include($html_) {	// Basit değişken yerleştirmeleri için: [[
 				}
 
 			} elseif ($eslesme[1]==='$'){
-				global $$m_dosya_adi_bu;/**burada $kolon1 olarak kullanılıyor {{i:$:kolon1}} -> include_once $kolon1;*/
+				global $$m_dosya_adi_bu; //burada $kolon1 olarak kullanılıyor {{i:$:kolon1}} -> include_once $kolon1;
 				ob_start();
 					if (file_exists($$m_dosya_adi_bu)){
 						include_once ($$m_dosya_adi_bu);
@@ -1219,6 +1240,7 @@ function sablon_include($html_) {	// Basit değişken yerleştirmeleri için: [[
 	}, $html_);
 	return $html_duzenle;
 }
+*/
 
 function html_modul($yazi) {
 	global $pdo, $db, $pdo_db, $do_, $so_, $bo_, $indexx, $u_no__, $n;
@@ -1272,6 +1294,9 @@ function html_modul($yazi) {
 				$modul_include_dosya_url = MODUL_DIR . '/' . $dizi_modul_bilesen_url . '/index.php';
 				
 				if ($modul_url_var && is_file($modul_include_dosya_url)) {
+					if (class_exists('asset_kayit')) {
+						asset_kayit::kaydet('modul', $dizi_modul_bilesen_url);
+					}					
 					ob_start();
 					include_once $modul_include_dosya_url;
 					$yazi_son .= ob_get_clean();
@@ -1286,6 +1311,9 @@ function html_modul($yazi) {
 				$bilesen_include_dosya_url = BILESEN_DIR . '/' . $dizi_modul_bilesen_url . '/php/b_al_modul/' . $bilesen_dosya . '.php';
 				
 				if ($bilesen_url_var && is_file($bilesen_include_dosya_url)) {
+					if (class_exists('asset_kayit')) {
+						asset_kayit::kaydet('bilesen', $dizi_modul_bilesen_url);
+					}
 					ob_start();
 					include_once $bilesen_include_dosya_url;
 					$yazi_son .= ob_get_clean();

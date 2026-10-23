@@ -11,6 +11,5 @@ include R_PHP.'/index1.php';
 $html = ob_get_clean();
 
 $html = middle_dot_yc($html, ($so_->d('yabanci_dil') == 1 && Global_::$d != 'tr'), ['ui']);
-
-echo $html;
-?>
+//$html = isset($_GET['ui']) ? $html : bosluklari_sil($html);
+echo class_exists('asset_kayit') ? asset_kayit::cikti_duzenle($html) : $html;
