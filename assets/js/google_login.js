@@ -1,5 +1,4 @@
 function handleCredentialResponse(response) {
-
     $.ajax({
         data: {
             islem: 'google_login',
@@ -21,31 +20,71 @@ function handleCredentialResponse(response) {
             });
         }
     });
-
 }
 
-$(window).on('load', function () {
+function loadGoogleSDK() {
+    if (window.googleSDKPromise) return window.googleSDKPromise;
 
-	const googleBtn = document.getElementById("hiddenGoogleBtn");
+    window.googleSDKPromise = new Promise((resolve) => {
+        const script = document.createElement('script');
+        script.src = 'https://accounts.google.com/gsi/client';
+        script.async = true;
+        script.defer = true;
+        script.setAttribute('data-cfasync', 'false');
+        script.onload = () => {
+            resolve();
+        };
+        document.head.appendChild(script);
+    });
 
-	if (googleBtn) {
-		google.accounts.id.renderButton(
-			googleBtn,
-			{
-				theme: "outline",
-				size: "large"
-			}
-		);
-	}
+    return window.googleSDKPromise;
+}
 
-	$(".google_login_buton").on("click", function (e) {
-		e.preventDefault();
+function initializeGoogleComponents() {
+    loadGoogleSDK().then(() => {
+        const googleBtn = document.getElementById("hiddenGoogleBtn");
+        if (googleBtn && typeof google !== 'undefined') {
+            google.accounts.id.renderButton(
+                googleBtn,
+                { theme: "outline", size: "large" }
+            );
+        }
 
-		if (googleBtn) {
-			$(googleBtn)
-				.find('div[role="button"]')
-				.click();
-		}
-	});
+        if (typeof google !== 'undefined' && window.js_vars?.gloginc) {
+            google.accounts.id.initialize({
+                client_id: window.js_vars.gloginc,
+                callback: handleCredentialResponse,
+                use_fedcm_for_prompt: true,
+                itp_support: true
+            });
+            google.accounts.id.prompt();
+        }
+    });
 
+    removeLazyTriggers();
+}
+
+function removeLazyTriggers() {
+    ['pointerdown', 'mousemove', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
+        window.removeEventListener(evt, initializeGoogleComponents);
+    });
+}
+
+['pointerdown', 'mousemove', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
+    window.addEventListener(evt, initializeGoogleComponents, { passive: true });
+});
+
+$(document).ready(function() {
+    $(document).on("click", ".google_login_buton", function (e) {
+        e.preventDefault();
+        
+        loadGoogleSDK().then(() => {
+            const hiddenBtn = $("#hiddenGoogleBtn");
+            if (hiddenBtn.find('div[role="button"]').length > 0) {
+                hiddenBtn.find('div[role="button"]').click();
+            } else {
+                google.accounts.id.prompt();
+            }
+        });
+    });
 });

@@ -2,6 +2,7 @@
 <html lang="{{$:dil_kod}}">
 
 <head>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"denied",wait_for_update:500});(function(){if(document.documentElement.innerHTML.indexOf('gtm.js')>-1){const observer=new MutationObserver(mutations=>{mutations.forEach(mutation=>{mutation.addedNodes.forEach(node=>{if(node.tagName==='SCRIPT'&&node.src&&node.src.indexOf('gtag/js?id=G-')>-1){node.remove()}})})});observer.observe(document.head||document.documentElement,{childList:true,subtree:true})}})();</script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<base href="{{$:local}}/">
@@ -103,7 +104,7 @@
 
 	{{__if%google_login_oauth%
 	<div id="g_id_onload" data-client_id="{{$:google_login_client_id}}" data-auto_prompt="true"
-		data-callback="handleCredentialResponse" data-use_fedcm_for_prompt="true">
+		data-callback="handleCredentialResponse" data-use_fedcm_for_prompt="true" data-itp_support="true">
 	</div>
 	__endif}}
 
@@ -122,8 +123,8 @@
 	<script src="{{$:local}}/assets/js/dropdown_select.js" defer></script>
 
 	{{__if%google_login_oauth%
-	<script src="https://accounts.google.com/gsi/client" async defer></script>
-	<script src="{{$:local}}/assets/js/google_login.js" defer></script>
+	<!--<script src="https://accounts.google.com/gsi/client" async defer data-cfasync="false"></script>-->
+	<script src="{{$:local}}/assets/js/google_login.js?v=8" defer></script>
 	__endif}}
 
 	{{$:modul_js}}

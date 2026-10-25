@@ -1015,31 +1015,44 @@ $(document).ready(function () {
 	document.querySelectorAll('select.select_c').forEach((el, index) => {
 
 		const isMultiple = el.hasAttribute('multiple');
+		const aria_label = el.getAttribute('aria-label') || el.getAttribute('data-placeholder') || 'Seçim alanı';
+		const search_placeholder = el.getAttribute('data-search-placeholder') || 'Ara...';
 
 		if (typeof SlimSelect !== 'undefined') {
 
-			new SlimSelect({
+			const slim_select = new SlimSelect({
 				select: el,
-				placeholder: 'Bir seçenek seçin',
-				showSearch: true,
-				searchPlaceholder: 'Ara...',
-				searchText: 'Sonuç bulunamadı',
-				beforeOpen: () => console.log(`Dropdown ${index} açılacak`),
-				afterOpen: () => console.log(`Dropdown ${index} açıldı`),
-				beforeClose: () => console.log(`Dropdown ${index} kapanacak`),
-				afterClose: () => console.log(`Dropdown ${index} kapandı`)
+				settings: {
+					placeholderText: el.getAttribute('data-placeholder') || 'Bir seçenek seçin',
+					showSearch: true,
+					searchPlaceholder: search_placeholder,
+					searchText: 'Sonuç bulunamadı',
+					searchingText: 'Aranıyor...',
+					ariaLabel: aria_label
+				},
+				events: {
+					beforeOpen: () => console.log(`Dropdown ${index} açılacak`),
+					afterOpen: () => console.log(`Dropdown ${index} açıldı`),
+					beforeClose: () => console.log(`Dropdown ${index} kapanacak`),
+					afterClose: () => console.log(`Dropdown ${index} kapandı`)
+				}
 			});
+
+			if (slim_select && slim_select.render && slim_select.render.content) {
+				const initOptions = slim_select.render.content.main.querySelectorAll('.ss-option');
+				initOptions.forEach(option => {
+					if (option.classList.contains('is-empty') || !option.textContent.trim()) {
+						option.setAttribute('aria-label', aria_label + ' - Boş Seçenek');
+					}
+				});
+			}
 
 		} else if (typeof Choices !== 'undefined') {
 
 			const placeholder =
 				el.getAttribute('data-placeholder') ||
-				el.options[0]?.text ||
+				el.options?.text ||
 				'Seçiniz';
-
-			const itemSelectText = index === 0
-				? (el.getAttribute('data-choices_text') || 'Seçmek için tıklayın')
-				: '';
 
 			const inst = new Choices(el, {
 				searchEnabled: true,
@@ -1047,7 +1060,7 @@ $(document).ready(function () {
 				placeholderValue: placeholder,
 				removeItemButton: isMultiple,
 				placeholder: isMultiple,
-				itemSelectText: null,//itemSelectText,
+				itemSelectText: null,
 				searchFloor: 1,
 				searchFields: ['label', 'value']
 			});
