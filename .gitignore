@@ -51,3 +51,5 @@ tema/*
 !tema/minimal/
 !tema/bulma/
 .aider*
+
+py_scripts/
