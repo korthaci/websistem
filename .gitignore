@@ -6,6 +6,7 @@
 .htaccess
 *.code-workspace
 **/.backups/*
+ai/
 
 md/*
 
