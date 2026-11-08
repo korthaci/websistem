@@ -299,6 +299,10 @@
 	background: var(--ws-theme-shadow);
 }
 
+.ws_dropdown_item a {
+	width:100%;
+	display: block;
+}
 /* Selected state */
 .ws_dropdown_item.ws_selected {
 	background: linear-gradient(90deg, var(--ws-theme-soft) 0%, transparent 100%);
