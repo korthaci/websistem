@@ -30,6 +30,7 @@ resim/**
 !**/ .gitkeep
 
 ### --- DOKÜMANTASYON ---
+docs/
 documentation/md/
 documentation/py/
 documentation/video/
