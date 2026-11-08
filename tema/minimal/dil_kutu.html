@@ -7,8 +7,12 @@
 	<div class="ws_dropdown_menu">
 		<ul class="ws_dropdown_list">
 			{{__foreach %diller->%dil}}
-			<li class="ws_dropdown_item dil_secenek" data-cookie-name="d" data-cookie-value="{{%dil.dkod}}"
-				data-value="{{%dil.dkod}}" data-reload="true"><b>{{%dil.dkod}}</b> | {{%dil.adio}}</li>
+			<li class="ws_dropdown_item dil_secenek" data-value="{{%dil.dkod}}">
+				<a href="{{%dil.url}}" data-href="{{%dil.url}}"
+					data-cookie-name="d" data-cookie-value="{{%dil.dkod}}" data-reload="true">
+					<b>{{%dil.dkod}}</b> | {{%dil.adio}}
+				</a>
+			</li>
 			{{__endforeach}}
 		</ul>
 	</div>
