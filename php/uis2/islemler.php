@@ -34,6 +34,7 @@ if (isset($_GET['ui'])) {
 		'ai_studio' =>			['php' => 'ai_studio',			'yetki' => [2],		'_class' => 'uis-container uis-mt-4'],
 		'ai_static_site_generator' =>	['php' => 'ai_static_site_generator',	'yetki' => [2],		'_class' => 'uis-container uis-mt-4'],
 		'sistem_guncelle' =>	['php' => 'update/sistem_guncelle',			'yetki' => [2],		'_class' => 'uis-container uis-mt-4'],
+		'sitemap' =>			['php' => 'sitemap',					'yetki' => [2,3],		'_class' => 'uis-container'],
 	];
 
 	if (array_key_exists($uis2_url, $case)) {

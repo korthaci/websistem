@@ -11,6 +11,8 @@
 	{{$:csrf_token_meta}}
 	<meta name="description" content="{{$:description}}">
 	{{$:structured_data}}
+	{{$:canonical}}
+	{{$:hreflang}}
 	{{__if%has_meta_tags%
 	<meta name="keywords" content="{{$:tags}}">
 	__endif}}

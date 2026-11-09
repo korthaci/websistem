@@ -8,11 +8,7 @@ if ((int) $so_->d('yabanci_dil') === 1 && !empty(Global_::$dil_yonlendir->acik_d
 
 	foreach (Global_::$dil_yonlendir->acik_diller_bilgi as $dil) {
 		if ($d !== $dil->dkod) {
-			/*$dil_kutu_yaz .= '
-				<a href="#" data-cookie-name="d" data-cookie-value="' . $dil->dkod . '">
-					<img src="' . IMG . '/trspr.gif" class="dilbayrak dilk_' . $dil->dkod . '" alt="" />' . $dil->dkod . '
-				</a>
-			';*/
+			$dil->url = Global_::$dil_yonlendir->dil_url($dil->dkod);
 			$diller_db_foreach[] = $dil;
 		}
 	}

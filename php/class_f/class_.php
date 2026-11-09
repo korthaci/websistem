@@ -1729,7 +1729,7 @@ class dil_yonlendir {
         $info = $stmt->fetch(PDO::FETCH_OBJ);
 
         if ($info) {
-            $this->dil_no  = ($info->no == $fallback) ? 0 : (int) $info->no;
+            $this->dil_no  = ($this->aktif_dil === $fallback) ? 0 : (int) $info->no;
             $this->dltr    = ($info->ltr == 0) ? 'rtl' : 'ltr';
             $this->dil_adi = $info->adio ?? '';
         }
@@ -1795,30 +1795,56 @@ class dil_yonlendir {
         return $this->aktif_dil;
     }
 
-    public function d_hreflang_yaz(): string
-    {
-        $proto = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
-        $url   = $proto . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    public function dil_url(string $dkod, bool $tam = false, ?string $yol = null): string
+{
+		$uri   = $yol ?? ($_SERVER['REQUEST_URI'] ?? '/');
+		$parts = parse_url($uri);
+		$path  = $parts['path'] ?? '/';
 
-        $url = rtrim(
-            preg_replace('/([&?])' . self::COOKIE_KEY . '=[^&]*(&|$)/', '$1', $url),
-            '?&'
-        );
+		$query = [];
+		if (!empty($parts['query'])) {
+			parse_str($parts['query'], $query);
+		}
 
-        $amp = (strpos($url, '?') !== false) ? '&' : '?';
-        $out = '';
+		unset($query[self::COOKIE_KEY]);
+		$query[self::COOKIE_KEY] = $dkod;
 
-        foreach ($this->acik_diller_bilgi as $dil) {
-            if ($dil->dkod !== $this->aktif_dil) {
-                $out .= PHP_EOL .
-                    '<link rel="alternate" href="' .
-                    $url . $amp . self::COOKIE_KEY . '=' . $dil->dkod .
-                    '" hreflang="' . $dil->dkod . '" />';
-            }
-        }
+		if ($tam) {
+			// Tam URL: SUB_DIR korunur.
+			$proto = (defined('HTTPS') && HTTPS === 'https') || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+				? 'https://'
+				: 'http://';
 
-        return $out;
-    }
+			$host = defined('DOMAIN') ? (string) DOMAIN : ($_SERVER['HTTP_HOST'] ?? 'localhost');
+
+			$path = $proto . $host . $path;
+		} else {
+			// Göreceli URL: SUB_DIR kaldırılır.
+			$sub_dir = defined('SUB_DIR') ? trim((string) SUB_DIR, '/') : '';
+			$prefix  = '/' . $sub_dir;
+
+			if (
+				$sub_dir !== '' &&
+				str_starts_with($path, $prefix) &&
+				(
+					strlen($path) === strlen($prefix) ||
+					$path[strlen($prefix)] === '/'
+				)
+			) {
+				$path = substr($path, strlen($prefix));
+			}
+
+			$path = ltrim($path, '/');
+
+			// Ana dizindeysek base href'e göre dizini koru.
+			if ($path === '') {
+				$path = './';
+			}
+		}
+
+		$url = $path . '?' . http_build_query($query);
+		return htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+	}
 }
 
 

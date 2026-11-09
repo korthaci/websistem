@@ -6,6 +6,8 @@ class PageMetadata {
     private $do_;
     private $so_;
     private static $instance = null;
+    private ?array $seoActiveLanguages = null;
+    private array $seoContentCache = [];
 
     public $title = '';
     public $description = '';
@@ -154,6 +156,269 @@ class PageMetadata {
         } catch (PDOException $e) {
             $this->logError("Error loading tab metadata: " . $e->getMessage());
         }
+    }
+
+    public function sayfa_url_uret(string $dkod, ?array $context = null): string
+    {
+        $path = $this->seoPagePath($context);
+        if ($path === '') {
+            return '';
+        }
+
+        $query = $this->seoQueryParams($context);
+        unset($query['d']);
+
+        if ($this->isForeignLanguageEnabled() && $dkod !== (string) $this->so_->d('varsayilan_dil')) {
+            $query['d'] = $dkod;
+        }
+
+        $queryString = http_build_query($query, '', '&', PHP_QUERY_RFC3986);
+        return $path . ($queryString !== '' ? '?' . $queryString : '');
+    }
+
+    public function canonical_etiketi_uret(?array $context = null): string
+    {
+        if (!$this->isSeoPage($context)) {
+            return '';
+        }
+
+        $activeLanguage = (string) ($context['activeLanguage'] ?? Global_::$d);
+        $defaultLanguage = (string) $this->so_->d('varsayilan_dil');
+        $language = $activeLanguage;
+
+        if (($this->isPage($context) || $this->isHome($context)) && !$this->hasSeoContent($activeLanguage, $context)) {
+            $language = $defaultLanguage;
+        }
+
+        $url = $this->sayfa_url_uret($language, $context);
+        if ($url === '') {
+            return '';
+        }
+
+        return '<link rel="canonical" href="' . $this->seoEscapeAttribute($url) . '">';
+    }
+
+    public function hreflang_etiketleri_uret(?array $context = null): string
+    {
+        $out = '';
+
+        foreach ($this->hreflang_url_dizisi_uret($context) as $alternative) {
+            $out .= PHP_EOL . '<link rel="alternate" href="'
+                . $this->seoEscapeAttribute($alternative['url'])
+                . '" hreflang="' . $this->seoEscapeAttribute($alternative['hreflang']) . '">';
+        }
+
+        return $out;
+    }
+
+    public function hreflang_url_dizisi_uret(?array $context = null): array
+    {
+        if (!$this->isForeignLanguageEnabled() || !$this->isSeoPage($context)) {
+            return [];
+        }
+
+        $defaultLanguage = (string) $this->so_->d('varsayilan_dil');
+        $alternatives = [];
+
+        foreach ($this->getSeoActiveLanguages() as $language) {
+            $dkod = (string) $language->dkod;
+            $isDefault = $dkod === $defaultLanguage;
+
+            if (!$isDefault && ($this->isPage($context) || $this->isHome($context)) && !$this->hasSeoContent($dkod, $context)) {
+                continue;
+            }
+
+            $url = $this->sayfa_url_uret($dkod, $context);
+            if ($url === '') {
+                continue;
+            }
+
+            $alternatives[] = ['hreflang' => $dkod, 'url' => $url];
+        }
+
+        $defaultUrl = $this->sayfa_url_uret($defaultLanguage, $context);
+        if ($defaultUrl !== '') {
+            $alternatives[] = ['hreflang' => 'x-default', 'url' => $defaultUrl];
+        }
+
+        return $alternatives;
+    }
+
+    private function isForeignLanguageEnabled(): bool
+    {
+        return (int) $this->so_->d('yabanci_dil') === 1;
+    }
+
+    private function isSeoPage(?array $context = null): bool
+    {
+        $type = (string) ($context['type'] ?? $this->params['type'] ?? '');
+        return $type === '' || $type === 'home' || $type === 'sayfa' || $type === 'sekme';
+    }
+
+    private function isPage(?array $context = null): bool
+    {
+        return ($context['type'] ?? $this->params['type'] ?? '') === 'sayfa';
+    }
+
+    private function isHome(?array $context = null): bool
+    {
+        $type = (string) ($context['type'] ?? $this->params['type'] ?? '');
+        return $type === '' || $type === 'home';
+    }
+
+    private function seoPagePath(?array $context = null): string
+    {
+        if ($this->isHome($context)) {
+            return rtrim((string) LOCAL, '/') . '/';
+        }
+
+        $slug = trim((string) ($context['slug'] ?? $this->params['slug'] ?? ''), '/');
+        if ($slug === '') {
+            return '';
+        }
+
+        return rtrim((string) LOCAL, '/') . '/' . $slug;
+    }
+
+    private function seoQueryParams(?array $context = null): array
+    {
+        $query = [];
+        $source = is_array($context) && array_key_exists('query', $context)
+            ? (array) $context['query']
+            : $_GET;
+
+        foreach ($source as $key => $value) {
+            $key = (string) $key;
+
+            if (str_starts_with(strtolower($key), 'utm_')) {
+                continue;
+            }
+
+            if ($this->isInternalSeoRouteParameter($key, $value, $context)) {
+                continue;
+            }
+
+            $query[$key] = $value;
+        }
+
+        return $query;
+    }
+
+    private function isInternalSeoRouteParameter(string $key, $value, ?array $context = null): bool
+    {
+        if (in_array($key, ['sayfa', 'sekme', 's'], true)) {
+            return true;
+        }
+
+        $slug = trim((string) ($context['slug'] ?? $this->params['slug'] ?? ''), '/');
+        return $slug !== '' && $key === $slug && ($value === '' || $value === null);
+    }
+
+    private function getSeoActiveLanguages(): array
+    {
+        if ($this->seoActiveLanguages !== null) {
+            return $this->seoActiveLanguages;
+        }
+
+        $stmt = $this->pdo->query(
+            "SELECT no, dkod
+             FROM {$this->do_}diller
+             WHERE yayin = 1
+             ORDER BY sira ASC, no ASC"
+        );
+
+        return $this->seoActiveLanguages = $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    private function hasSeoContent(string $dkod, ?array $context = null): bool
+    {
+        $defaultLanguage = (string) $this->so_->d('varsayilan_dil');
+        if ($dkod === $defaultLanguage) {
+            return true;
+        }
+
+        $cacheKey = $this->seoContentCacheKey($dkod, $context);
+        if (array_key_exists($cacheKey, $this->seoContentCache)) {
+            return $this->seoContentCache[$cacheKey];
+        }
+
+        $languageNo = null;
+        foreach ($this->getSeoActiveLanguages() as $language) {
+            if ((string) $language->dkod === $dkod) {
+                $languageNo = (int) $language->no;
+                break;
+            }
+        }
+
+        if ($languageNo === null) {
+            return $this->seoContentCache[$cacheKey] = false;
+        }
+
+        if ($this->isHome($context)) {
+            $stmt = $this->pdo->prepare(
+                "SELECT 1
+                 FROM {$this->do_}blok_html b
+                 INNER JOIN {$this->do_}ceviriler c
+                    ON c.tablo = 'blok_html'
+                   AND c.tablo_no = b.no
+                   AND c.dil_no = :dil_no
+                   AND c.alan = 'icerik'
+                   AND c.yazi IS NOT NULL
+                   AND TRIM(c.yazi) <> ''
+                 WHERE b.yayin = 1
+                   AND b.tema = :tema
+                 LIMIT 1"
+            );
+            $stmt->execute([
+                ':dil_no' => $languageNo,
+                ':tema' => $this->so_->d('tema'),
+            ]);
+
+            return $this->seoContentCache[$cacheKey] = (bool) $stmt->fetchColumn();
+        }
+
+        if (!$this->isPage($context)) {
+            return $this->seoContentCache[$cacheKey] = true;
+        }
+
+        $pageId = (int) ($context['id'] ?? $this->params['id'] ?? 0);
+        if ($pageId <= 0) {
+            return $this->seoContentCache[$cacheKey] = false;
+        }
+
+        $stmt = $this->pdo->prepare(
+            "SELECT 1
+             FROM {$this->do_}ceviriler
+             WHERE dil_no = :dil_no
+               AND tablo = 'sayfa'
+               AND tablo_no = :tablo_no
+               AND alan = 'icerik'
+               AND yazi IS NOT NULL
+               AND TRIM(yazi) <> ''
+             LIMIT 1"
+        );
+        $stmt->execute([
+            ':dil_no' => $languageNo,
+            ':tablo_no' => $pageId,
+        ]);
+
+        return $this->seoContentCache[$cacheKey] = (bool) $stmt->fetchColumn();
+    }
+
+    private function seoContentCacheKey(string $dkod, ?array $context = null): string
+    {
+        return implode('|', [
+            (string) ($context['type'] ?? $this->params['type'] ?? ''),
+            (string) ($context['id'] ?? $this->params['id'] ?? ''),
+            (string) ($context['slug'] ?? $this->params['slug'] ?? ''),
+            (string) $this->so_->d('tema'),
+            $dkod,
+        ]);
+    }
+
+    private function seoEscapeAttribute(string $value): string
+    {
+        return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }
 
     private function loadSearchMetadata() {

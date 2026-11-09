@@ -114,6 +114,8 @@ if (syetki([2, 3, 4])) {
 
 	$yp_linkler_ga = syetki([2,3]) ? '
 	<a href="ui/ga" class="ws_nav-item"><i class="fa fa-cog"></i><span>'.yc("Genel ayarlar").'</span></a>' : '';
+	$yp_linkler_ga .= syetki([2,3]) ? '
+	<a href="ui/sitemap" class="ws_nav-item"><i class="fa fa-sitemap"></i><span>'.yc("Sitemap oluştur").'</span></a>' : '';
 
 	$yaz_sidebar->vars = [
 		'__degisken' => [

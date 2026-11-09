@@ -122,10 +122,15 @@ class Router {
 				['id' => $id],
 				false
 			);
+			$slug = $exists ? (string) $this->safeQuery(
+				"SELECT url FROM {$this->do_}sayfa WHERE no = :id AND yayin = 1",
+				['id' => $id],
+				''
+			) : '';
 			
 			return [
 				'file' => $exists ? YONLENDIR_D.'/sayfa' : YONLENDIR_D.'/404',
-				'params' => ['id' => $id, 'type' => 'sayfa']
+				'params' => ['id' => $id, 'type' => 'sayfa', 'slug' => $slug]
 			];
 		});
 		// Example of how to add a tab route
@@ -143,10 +148,15 @@ class Router {
 				['id' => $id],
 				false
 			);
+			$slug = $exists ? (string) $this->safeQuery(
+				"SELECT url FROM {$this->do_}sekme WHERE no = :id AND yayin = 1",
+				['id' => $id],
+				''
+			) : '';
 			
 			return [
 				'file' => $exists ? YONLENDIR_D.'/sekme' : YONLENDIR_D.'/404',
-				'params' => ['id' => $id, 'type' => 'sekme']
+				'params' => ['id' => $id, 'type' => 'sekme', 'slug' => $slug]
 			];
 		});
 
@@ -302,7 +312,8 @@ class Router {
 					if ($exists) {
 						$this->params = array_merge($this->params, [
 							'id'   => $seoId,
-							'type' => 'sayfa'
+							'type' => 'sayfa',
+							'slug' => $routeKey
 						]);
 
 						return YONLENDIR_D . '/sayfa';
@@ -319,7 +330,8 @@ class Router {
 					if ($exists) {
 						$this->params = array_merge($this->params, [
 							'id'   => $seoId,
-							'type' => 'sekme'
+							'type' => 'sekme',
+							'slug' => $routeKey
 						]);
 
 						return YONLENDIR_D . '/sekme';

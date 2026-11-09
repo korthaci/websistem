@@ -1169,12 +1169,13 @@ $(document).ready(function () {
 		}, delay);
 	});
 
-	$(document).on('click', '[data-cookie-name]', function (e) {
+	$(document).on('click', '[data-cookie-name], [data-href]', function (e) {
 		const $this = $(this);
 		const name = $this.attr('data-cookie-name');
 		const value = $this.attr('data-cookie-value');
 		const hours = $this.attr('data-cookie-saat');
 		const reloadAttr = $this.attr('data-reload');
+		const href = $this.attr('data-href');
 
 		if (name && value) {
 			let maxAge = 86400;
@@ -1182,10 +1183,16 @@ $(document).ready(function () {
 				maxAge = parseInt(hours) * 3600;
 			}
 			document.cookie = `${name}=${value}; path=/; max-age=${maxAge}`;
+		}
 
-			if ($this.hasClass('__reload') || reloadAttr === 'true' || reloadAttr === '1') {
-				window.location.reload();
-			}
+		if (href) {
+			e.preventDefault();
+			window.location.href = href;
+			return;
+		}
+
+		if ($this.hasClass('__reload') || reloadAttr === 'true' || reloadAttr === '1') {
+			window.location.reload();
 		}
 	});
 
