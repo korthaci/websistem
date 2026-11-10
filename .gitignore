@@ -9,6 +9,7 @@
 ai/
 
 md/*
+**/bilesen/araba/
 
 ### --- LOGLAR & VERİTABANI ---
 *.log
