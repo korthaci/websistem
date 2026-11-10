@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_SERVER['HTTP_USER_AGENT'])) exit('hua');
+// if (!isset($_SERVER['HTTP_USER_AGENT'])) exit('hua');
 
 header("Content-Type: text/html; charset=utf-8");
 ini_set("default_charset", 'utf-8');
