@@ -186,7 +186,7 @@ class PageMetadata {
         $defaultLanguage = (string) $this->so_->d('varsayilan_dil');
         $language = $activeLanguage;
 
-        if (($this->isPage($context) || $this->isHome($context)) && !$this->hasSeoContent($activeLanguage, $context)) {
+        if (($this->isPage($context) || $this->isHome($context) || $this->isComponent($context)) && !$this->hasSeoContent($activeLanguage, $context)) {
             $language = $defaultLanguage;
         }
 
@@ -224,7 +224,7 @@ class PageMetadata {
             $dkod = (string) $language->dkod;
             $isDefault = $dkod === $defaultLanguage;
 
-            if (!$isDefault && ($this->isPage($context) || $this->isHome($context)) && !$this->hasSeoContent($dkod, $context)) {
+            if (!$isDefault && ($this->isPage($context) || $this->isHome($context) || $this->isComponent($context)) && !$this->hasSeoContent($dkod, $context)) {
                 continue;
             }
 
@@ -252,7 +252,7 @@ class PageMetadata {
     private function isSeoPage(?array $context = null): bool
     {
         $type = (string) ($context['type'] ?? $this->params['type'] ?? '');
-        return $type === '' || $type === 'home' || $type === 'sayfa' || $type === 'sekme';
+        return $type === '' || $type === 'home' || $type === 'sayfa' || $type === 'sekme' || $this->isComponent($context);
     }
 
     private function isPage(?array $context = null): bool
@@ -266,10 +266,39 @@ class PageMetadata {
         return $type === '' || $type === 'home';
     }
 
+    private function isComponent(?array $context = null): bool
+    {
+        $source = is_array($context) ? $context : $this->params;
+        if (($source['type'] ?? '') !== 'bilesen') {
+            return false;
+        }
+
+        $path = trim((string) ($source['path'] ?? ''), '/');
+        if ($path !== '') {
+            return ($source['published'] ?? true) !== false;
+        }
+
+        return trim((string) ($source['bilesen'] ?? ''), '/') !== ''
+            && trim((string) ($source['islem'] ?? ''), '/') !== '';
+    }
+
     private function seoPagePath(?array $context = null): string
     {
         if ($this->isHome($context)) {
             return rtrim((string) LOCAL, '/') . '/';
+        }
+
+        if ($this->isComponent($context)) {
+            $source = is_array($context) ? $context : $this->params;
+            $path = trim((string) ($source['path'] ?? ''), '/');
+            if ($path === '') {
+                $path = trim(
+                    (string) ($source['bilesen'] ?? '') . '/' . (string) ($source['islem'] ?? ''),
+                    '/'
+                );
+            }
+
+            return $path === '' ? '' : rtrim((string) LOCAL, '/') . '/' . $path;
         }
 
         $slug = trim((string) ($context['slug'] ?? $this->params['slug'] ?? ''), '/');
@@ -310,6 +339,12 @@ class PageMetadata {
             return true;
         }
 
+        $source = is_array($context) ? $context : $this->params;
+        $component = trim((string) ($source['bilesen'] ?? ''), '/');
+        if ($component !== '' && $key === $component) {
+            return true;
+        }
+
         $slug = trim((string) ($context['slug'] ?? $this->params['slug'] ?? ''), '/');
         return $slug !== '' && $key === $slug && ($value === '' || $value === null);
     }
@@ -340,6 +375,25 @@ class PageMetadata {
         $cacheKey = $this->seoContentCacheKey($dkod, $context);
         if (array_key_exists($cacheKey, $this->seoContentCache)) {
             return $this->seoContentCache[$cacheKey];
+        }
+
+        if ($this->isComponent($context)) {
+            $source = is_array($context) ? $context : $this->params;
+            if (array_key_exists('languages', $source) && is_array($source['languages'])) {
+                foreach ($source['languages'] as $language) {
+                    if (!is_array($language)) {
+                        continue;
+                    }
+
+                    if ((string) ($language['dkod'] ?? '') === $dkod) {
+                        return $this->seoContentCache[$cacheKey] = ($language['content_available'] ?? false) === true;
+                    }
+                }
+
+                return $this->seoContentCache[$cacheKey] = false;
+            }
+
+            return $this->seoContentCache[$cacheKey] = true;
         }
 
         $languageNo = null;

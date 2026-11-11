@@ -7,13 +7,17 @@ class SitemapGenerator
     private $so_;
     private PageMetadata $pageMetadata;
     private int $urlCount = 0;
+    private string $lastmod_tarih_tipi;
 
-    public function __construct(PDO $pdo, string $do_, $so_, PageMetadata $pageMetadata)
+    public function __construct(PDO $pdo, string $do_, $so_, PageMetadata $pageMetadata, string $lastmod_tarih_tipi = 'now')
     {
         $this->pdo = $pdo;
         $this->do_ = $do_;
         $this->so_ = $so_;
         $this->pageMetadata = $pageMetadata;
+        $this->lastmod_tarih_tipi = in_array($lastmod_tarih_tipi, ['tarih', 'now'], true)
+            ? $lastmod_tarih_tipi
+            : 'now';
     }
 
     public function generate(): array
@@ -38,7 +42,11 @@ class SitemapGenerator
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
             . 'xmlns:xhtml="http://www.w3.org/1999/xhtml">' . PHP_EOL;
 
-        $this->appendUrlEntries($xml, ['type' => 'home', 'query' => []], $yazilan_urller);
+        $this->appendUrlEntries($xml, [
+            'type' => 'home',
+            'query' => [],
+            'lastmod' => $this->lastmodDegeri(null, $generatedAt),
+        ], $yazilan_urller);
 
         $stmt = $this->pdo->query(
             "SELECT no, url, tarih
@@ -54,7 +62,7 @@ class SitemapGenerator
                 'id' => (int) $page->no,
                 'slug' => (string) $page->url,
                 'query' => [],
-                'lastmod' => $page->tarih,
+                'lastmod' => $this->lastmodDegeri($page->tarih, $generatedAt),
             ], $yazilan_urller);
         }
 
@@ -73,6 +81,7 @@ class SitemapGenerator
                 'slug' => (string) $tab->url,
                 'query' => [],
                 'sitemap_default_only' => true,
+                'lastmod' => $this->lastmodDegeri(null, $generatedAt),
             ], $yazilan_urller);
         }
 
@@ -115,22 +124,10 @@ class SitemapGenerator
             }
         }
 
-        foreach ($alternatives as $alternative) {
-            if ($alternative['hreflang'] === 'x-default') {
-                continue;
-            }
-
-            $this->appendUrl($xml, $alternative['url'], $alternatives, $context['lastmod'] ?? null, $yazilan_urller);
-        }
-
-        if (!array_filter($alternatives, static function (array $alternative): bool {
-            return $alternative['hreflang'] !== 'x-default';
-        })) {
-            $defaultLanguage = (string) $this->so_->d('varsayilan_dil');
-            $defaultUrl = $this->pageMetadata->sayfa_url_uret($defaultLanguage, $context);
-            if ($defaultUrl !== '') {
-                $this->appendUrl($xml, $defaultUrl, $alternatives, $context['lastmod'] ?? null, $yazilan_urller);
-            }
+        $defaultLanguage = (string) $this->so_->d('varsayilan_dil');
+        $defaultUrl = $this->pageMetadata->sayfa_url_uret($defaultLanguage, $context);
+        if ($defaultUrl !== '') {
+            $this->appendUrl($xml, $defaultUrl, $alternatives, $context['lastmod'] ?? null, $yazilan_urller);
         }
     }
 
@@ -293,6 +290,11 @@ class SitemapGenerator
         }
 
         return $date->format(DATE_ATOM);
+    }
+
+    private function lastmodDegeri($tarih, string $generatedAt): ?string
+    {
+        return $this->lastmod_tarih_tipi === 'now' ? $generatedAt : $tarih;
     }
 
     private function xmlEscape(string $value): string
