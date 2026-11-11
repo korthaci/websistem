@@ -1795,8 +1795,7 @@ class dil_yonlendir {
         return $this->aktif_dil;
     }
 
-    public function dil_url(string $dkod, bool $tam = false, ?string $yol = null): string
-{
+    public function dil_url(string $dkod, bool $tam = false, ?string $yol = null): string {
 		$uri   = $yol ?? ($_SERVER['REQUEST_URI'] ?? '/');
 		$parts = parse_url($uri);
 		$path  = $parts['path'] ?? '/';
@@ -1944,9 +1943,17 @@ class yc_kelime_tanimla
 
     private function isValidKey(string $text): bool
     {
+        $text = trim($text);
+        if ($text === '') return false;
+        if (strlen($text) > 300) return false;
+
         if (strpos($text, '`') !== false) return false;
         if (strpos($text, '(.)') !== false) return false;
         if (strpos($text, '(..)') !== false) return false;
+
+        if (strpos($text, '<') !== false || strpos($text, '>') !== false) return false;
+        if (strpos($text, "\r") !== false || strpos($text, "\n") !== false) return false;
+
         return true;
     }
 
@@ -2778,7 +2785,7 @@ class para_birimi_bilgi {
 			'simge_html' => '&#8378;',
 			'isim' => 'Türk Lirası',
 			'isim_en' => 'Turkish Lira',
-			'fa_icon' => 'fas fa-lira-sign',
+			'fa_icon' => 'ws-ikon ws-lira-sign fas fa-lira-sign',
 			'kod' => 'TRY',
 			'kod_no' => '949',
 			'ulke' => 'TR',
@@ -2791,7 +2798,7 @@ class para_birimi_bilgi {
 			'simge_html' => '&#36;',
 			'isim' => 'Amerikan Doları',
 			'isim_en' => 'US Dollar',
-			'fa_icon' => 'fas fa-dollar-sign',
+			'fa_icon' => 'ws-ikon ws-dollar-sign fas fa-dollar-sign',
 			'kod' => 'USD',
 			'kod_no' => '840',
 			'ulke' => 'US',
@@ -2804,7 +2811,7 @@ class para_birimi_bilgi {
 			'simge_html' => '&#8364;',
 			'isim' => 'Euro',
 			'isim_en' => 'Euro',
-			'fa_icon' => 'fas fa-euro-sign',
+			'fa_icon' => 'ws-ikon ws-euro-sign fas fa-euro-sign',
 			'kod' => 'EUR',
 			'kod_no' => '978',
 			'ulke' => 'EU',
