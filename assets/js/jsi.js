@@ -51,12 +51,12 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (input) {
 				if (input.type === 'password') {
 					input.type = 'text';
-					icon.classList.remove('fa-eye');
-					icon.classList.add('fa-eye-slash');
+					icon.classList.remove('fa-eye ws-eye');
+					icon.classList.add('fa-eye-slash ws-eye-slash');
 				} else {
 					input.type = 'password';
-					icon.classList.remove('fa-eye-slash');
-					icon.classList.add('fa-eye');
+					icon.classList.remove('fa-eye-slash ws-eye-slash');
+					icon.classList.add('fa-eye ws-eye');
 				}
 			}
 		});
@@ -470,6 +470,108 @@ $(document).ready(function () {
 			zindex: 9999
 		});
 	}
+
+	
+	/* modal_c */
+
+	window.modalCAjaxCallbacks = window.modalCAjaxCallbacks || {};
+
+	document.addEventListener('click', async function(e) {
+		const btn = e.target.closest('.modal_c_ac_html');
+
+		if (btn) {
+			e.preventDefault();
+
+			const modal = document.getElementById('modal_c_genel');
+			const modalBox = modal.querySelector('.modal_c_box');
+			const modalOverlay = modal.querySelector('.modal_c_overlay');
+			const modalIcerik = document.getElementById('modal_c_genel_icerik');
+
+			let width = btn.dataset.width || '800px';
+
+			if (/^\d+$/.test(width)) {
+				width += 'px';
+			}
+
+			modalBox.style.maxWidth = width;
+
+			modalBox.classList.remove('kapanis');
+			modalOverlay.classList.remove('kapanis');
+
+			modal.classList.add('aktif');
+			document.body.classList.add('modal_c_acik');
+
+			if (btn.dataset.ajaxCallback) {
+				modalIcerik.innerHTML = '<div class="notification is-light">Yükleniyor...</div>';
+
+				try {
+					const fn = window.modalCAjaxCallbacks[btn.dataset.ajaxCallback];
+
+					if (typeof fn !== 'function') {
+						throw new Error('Modal AJAX callback bulunamadı: ' + btn.dataset.ajaxCallback);
+					}
+
+					const html = await fn(btn);
+
+					modalIcerik.innerHTML = html;
+				} catch (err) {
+					const id = btn.dataset.id;
+					const kaynak = id ? document.getElementById(id) : null;
+
+					if (kaynak) {
+						modalIcerik.innerHTML = kaynak.innerHTML;
+					} else {
+						const mesaj = typeof err === 'string'
+							? err
+							: (err && err.message ? err.message : 'İçerik yüklenemedi.');
+
+						modalIcerik.innerHTML = '<div class="notification is-danger is-light">' + mesaj + '</div>';
+					}
+				}
+
+				return;
+			}
+
+			const id = btn.dataset.id;
+			const kaynak = document.getElementById(id);
+
+			if (!kaynak) return;
+
+			modalIcerik.innerHTML = kaynak.innerHTML;
+		}
+
+		if (e.target.closest('[data-modal-c-close]')) {
+			modalCKapat();
+		}
+	});
+
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape') {
+			modalCKapat();
+		}
+	});
+
+	function modalCKapat() {
+		const modal = document.getElementById('modal_c_genel');
+
+		if (!modal.classList.contains('aktif')) return;
+
+		const modalBox = modal.querySelector('.modal_c_box');
+		const modalOverlay = modal.querySelector('.modal_c_overlay');
+
+		modalBox.classList.add('kapanis');
+		modalOverlay.classList.add('kapanis');
+
+		setTimeout(function() {
+			modal.classList.remove('aktif');
+			document.body.classList.remove('modal_c_acik');
+
+			modalBox.classList.remove('kapanis');
+			modalOverlay.classList.remove('kapanis');
+		}, 220);
+	}
+
+	/* modal_c sonu */
 
 	$(document).on("click", ".yazdir", function () {
 		var yazdirc = $(this).attr("data-yazdir");
@@ -1031,10 +1133,10 @@ $(document).ready(function () {
 					ariaLabel: aria_label
 				},
 				events: {
-					beforeOpen: () => console.log(`Dropdown ${index} açılacak`),
+					/*beforeOpen: () => console.log(`Dropdown ${index} açılacak`),
 					afterOpen: () => console.log(`Dropdown ${index} açıldı`),
 					beforeClose: () => console.log(`Dropdown ${index} kapanacak`),
-					afterClose: () => console.log(`Dropdown ${index} kapandı`)
+					afterClose: () => console.log(`Dropdown ${index} kapandı`)*/
 				}
 			});
 
@@ -1097,32 +1199,6 @@ $(document).ready(function () {
 			});
 		}
 	});
-
-
-
-	if (typeof $.fn.daterangepicker !== 'undefined') {
-		$('input.tarihsec[type="text"]').each(function () {
-			let singleDatePicker = !$(this).attr('data-range');
-
-			$(this).daterangepicker({
-				locale: {
-					format: singleDatePicker ? 'DD.MM.YYYY' : 'DD.MM.YYYY',//'DD.MM.YYYY' : 'DD.MM.YY - DD.MM.YY',
-					firstDay: 1
-				},
-				singleDatePicker: singleDatePicker,
-				autoUpdateInput: true,
-				drops: 'auto',
-				autoClose: false,
-				showDropdowns: true
-			});
-		});
-
-		$('input.tarihsec[type="text"]').on('apply.daterangepicker', function (ev, picker) {
-			let e = jQuery.Event('keydown');
-			e.which = 13;
-			$(picker.element).trigger(e);
-		});
-	}
 
 
 	function stickyTheadWithScrollBackground(selector) {
