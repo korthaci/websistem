@@ -316,6 +316,10 @@ class SitemapGenerator
                 throw new RuntimeException('Sitemap geçici dosyaya yazılamadı.');
             }
 
+            if (!@chmod($temporary, 0755)) {
+                throw new RuntimeException('Sitemap geçici dosyasının izinleri 0755 olarak ayarlanamadı.');
+            }
+
             if (@rename($temporary, $target)) {
                 $temporary = null;
                 return;
