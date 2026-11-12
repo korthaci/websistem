@@ -25,10 +25,10 @@ if (n0_(1)) { // Simplified check for now or just remove if not needed, but keep
 
 	echo '
 	<div class="uis-page-header">
-		<h2 class="uis-page-title"><i class="fa fa-folder uis-text-p"></i> '.yc("Sekmeler").'</h2>
+		<h2 class="uis-page-title"><i class="ws-ikon ws-folder uis-text-p"></i> '.yc("Sekmeler").'</h2>
 		<div class="uis-action-group">
 			<div class="yeni">
-				<div class="yeniac uis-btn uis-btn-s"><i class="fa fa-plus uis-me-1"></i> '.yc("Yeni Sekme").'</div>		
+				<div class="yeniac uis-btn uis-btn-s"><i class="ws-ikon ws-plus uis-me-1"></i> '.yc("Yeni Sekme").'</div>
 				<form name="konu" action="" method="POST" class="dyok uis-mt-2">
 					<input type="text" name="adi" value="" class="uis-input uis-w-auto" placeholder="'.yc("Sekme Adı").'" required />
 					<button type="submit" name="yenikayit" class="uis-btn uis-btn-s">'.yc("Ekle").'</button>
@@ -41,8 +41,8 @@ if (n0_(1)) { // Simplified check for now or just remove if not needed, but keep
 		<form name="arama_formu" method="GET" action="" class="uis-flex uis-gap-2">
 			<input type="hidden" name="ui" value="sekmeler" />
 			'.$arama_form->form_html().'
-			<button type="submit" class="uis-btn uis-btn-p"><i class="fa fa-search"></i></button>
-			<a href="'.href('index', 'ui=sekmeler').'" class="uis-btn uis-btn-outline"><i class="fa fa-sync-alt"></i></a>
+			<button type="submit" class="uis-btn uis-btn-p"><i class="ws-ikon ws-search"></i></button>
+			<a href="'.href('index', 'ui=sekmeler').'" class="uis-btn uis-btn-outline"><i class="ws-ikon ws-sync-alt"></i></a>
 		</form>
 	</div>';
 
@@ -101,7 +101,7 @@ if (!empty($sekmeler)) {
 		<td><span class="db01 var'.$s->manset.'" '.data_nta($nt, 'manset').'>'.$s->manset.'</span></td>' .
 		( $so_->d('yabanci_dil') == 1 ? '<td class="yazi1">'. strip_tags(vcdil('icerik', 'blok_html', $s->no)) .'</td>' : '' ) . '
 		<td class="stut bgcenter" title="'.$s->sira.'">&nbsp;</td>			
-		<td> <a href="'.href('','ui=sekmeduzenle&n='.$s->no).'"><i class="fa fa-edit"></i></a></td>
+		<td> <a href="'.href('','ui=sekmeduzenle&n='.$s->no).'"><i class="ws-ikon ws-edit"></i></a></td>
 		<td><span class="db01 ok'.$s->yayin.'" ' . data_nta($nt, 'yayin') . '">'.$s->yayin.'</span></td>
 		<td><span class="sil" data-nt="'.sifrele($s->no.',,sekme').'" data-sil="0"> </span></td>
 

@@ -42,10 +42,10 @@ if (n0_($u_no__)) {
 
 	echo '
 	<div class="uis-page-header">
-		<h2 class="uis-page-title"><i class="fa fa-users uis-text-p"></i> '.yc("Üyeler").'</h2>
+		<h2 class="uis-page-title"><i class="ws-ikon ws-users uis-text-p"></i> '.yc("Üyeler").'</h2>
 		<div class="uis-action-group">
 			<div class="yeni">
-				<div class="yeniac uis-btn uis-btn-s" data-toggle=".form_uyeler"><i class="fa fa-plus uis-me-1"></i> '.yc("Yeni Üye").'</div>
+				<div class="yeniac uis-btn uis-btn-s" data-toggle=".form_uyeler"><i class="ws-ikon ws-plus uis-me-1"></i> '.yc("Yeni Üye").'</div>
 				<form name="konu" action="'.href('index', $form_link).'" method="POST" class="dyok uis-flex uis-align-center uis-gap-2 form_uyeler uis-mt-2">
 					<input type="text" name="adi" value="" class="uis-input uis-w-auto" maxlength="200" placeholder="'.yc("Adı Soyadı").'" required />
 					<input type="email" name="emailadresi" class="uis-input uis-w-auto" placeholder="'.yc("E-posta").'" required>
@@ -60,8 +60,8 @@ if (n0_($u_no__)) {
 		<form method="GET" action="'.href('index', $form_link).'" class="uis-flex uis-align-center uis-gap-2">
 			<input type="hidden" name="ui" value="uyeler" />
 			<input name="yazi_arama" type="text" class="uis-input uis-w-auto" value="'.$yazi_arama_value.'" placeholder="'.yc("Ara").'..." maxlength="30">
-			<button type="submit" class="uis-btn uis-btn-p"><i class="fa fa-search"></i></button>
-			<a href="'.href('index', $form_link).'" class="uis-btn uis-btn-outline"><i class="fa fa-sync-alt"></i></a>
+			<button type="submit" class="uis-btn uis-btn-p"><i class="ws-ikon ws-search"></i></button>
+			<a href="'.href('index', $form_link).'" class="uis-btn uis-btn-outline"><i class="ws-ikon ws-sync-alt"></i></a>
 		</form>
 	</div>';
 

@@ -14,16 +14,16 @@ if (isset($_GET['activated'])) {
     $activated_name = z($_GET['activated']);
     $activated_msg = '
     <div class="uis-alert uis-alert-s uis-flex uis-justify-between uis-align-center">
-        <span><i class="fa-solid fa-circle-check"></i> <b>' . ucfirst($activated_name) . '</b> '.yc("teması başarıyla etkinleştirildi. Görünümün tam olarak oturması için blokları yapılandırmanız gerekebilir.").'</span>
+        <span><i class="ws-ikon ws-circle-check"></i> <b>' . ucfirst($activated_name) . '</b> '.yc("teması başarıyla etkinleştirildi. Görünümün tam olarak oturması için blokları yapılandırmanız gerekebilir.").'</span>
         <a href="' . href('index', 'ui=temaduzenle&tema=' . $activated_name . '&recreate_notice=1') . '" class="uis-btn uis-btn-sm uis-btn-p">'.yc("Blokları Yapılandır").'</a>
     </div>';
 }
 
 echo '
 <div class="uis-page-header">
-    <h1 class="uis-page-title"><i class="fa-solid fa-palette"></i> '. yc("Tema Yönetimi").'</h1>
+    <h1 class="uis-page-title"><i class="ws-ikon ws-palette"></i> '. yc("Tema Yönetimi").'</h1>
     <div class="uis-action-bar">
-        <button class="uis-btn uis-btn-outline tema-tazele"><i class="fa-solid fa-sync"></i> '.yc("Listeyi Yenile").'</button>'.
+        <button class="uis-btn uis-btn-outline tema-tazele"><i class="ws-ikon ws-sync"></i> '.yc("Listeyi Yenile").'</button>'.
         (!empty($_ENV['LC_API_KEY']) && !empty($_ENV['LC_VERIFY_KEY']) ? '<a href="ui/ai_studio" class="uis-btn uis-btn-sm uis-btn-p">'.yc("AI Studio").'</a>' : '').' ' .
         (!empty($_ENV['LC_API_KEY']) && !empty($_ENV['LC_VERIFY_KEY']) ? '<a href="ui/ai_static_site_generator" class="uis-btn uis-btn-sm uis-btn-p">'.yc("AI Generator").'</a>' : '').'
     </div>
@@ -59,7 +59,7 @@ foreach ($tema_dizinleri as $tema) {
     $uis_col_md_stil = 'uis-col-md-' . ($tema_sayi_uis_md_stil_dizi[$tema_sayisi] ?? '3');
     
     $active_class = $is_active ? 'border-primary shadow-lg' : '';
-    $active_badge = $is_active ? '<span class="uis-status-live"> 🎗️ <i class="fa-solid fa-circle-check"></i> '.yc("Aktif").'</span>' : '';
+    $active_badge = $is_active ? '<span class="uis-status-live"> 🎗️ <i class="ws-ikon ws-circle-check"></i> '.yc("Aktif").'</span>' : '';
 
     echo '
     <div class="uis-col ' . $uis_col_md_stil .' uis-col-sm-12">
@@ -75,8 +75,8 @@ foreach ($tema_dizinleri as $tema) {
             <div class="uis-flex uis-gap-1 uis-mt-4">
                 ' . (!$is_active ? '<button class="uis-btn uis-btn-sm uis-btn-p tema-etkinlestir" data-tema="' . $tema . '">'.yc("Etkinleştir").'</button>' : '') . '
                 <a href="' . href('index', 'ui=temaduzenle&tema=' . $tema) . '" class="uis-btn uis-btn-sm uis-btn-outline uis-btn-danger"'.(!$is_active ? 'data-confirm="Bu tema aktif tema değildir. Yine de düzenle?"':'').'>'.yc("Düzenle").'</a>
-                <button class="uis-btn uis-btn-sm uis-btn-outline tema-kopyala" data-tema="' . $tema . '" title="'.yc("Kopyala").'"><i class="fa-solid fa-copy"></i></button>
-                ' . (!$is_active ? '<button class="uis-btn uis-btn-sm uis-btn-outline uis-btn-d tema-sil" data-tema="' . $tema . '" title="'.yc("Sil").'"><i class="fa-solid fa-trash"></i></button>' : '') . '
+                <button class="uis-btn uis-btn-sm uis-btn-outline tema-kopyala" data-tema="' . $tema . '" title="'.yc("Kopyala").'"><i class="ws-ikon ws-copy"></i></button>
+                ' . (!$is_active ? '<button class="uis-btn uis-btn-sm uis-btn-outline uis-btn-d tema-sil" data-tema="' . $tema . '" title="'.yc("Sil").'"><i class="ws-ikon ws-trash"></i></button>' : '') . '
             </div>
         </div>
     </div>';

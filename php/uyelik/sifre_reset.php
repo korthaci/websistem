@@ -57,7 +57,7 @@ echo ($form_yaz ? '
 <div class="ug-field">
     <div class="ug-control">
         <button type="submit" name="gonder_sifre_reset" class="ug-btn ug-btn--primary">
-            <i class="fas fa-envelope"></i> '.yc("Gönder").'
+            <i class="ws-ikon ws-envelope"></i> '.yc("Gönder").'
         </button>
     </div>
 </div>' : '');

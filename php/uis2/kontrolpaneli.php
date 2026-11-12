@@ -44,7 +44,7 @@ $dashboard_content = '
                         <p>'.yc("Aktif Sayfa").'</p>
                     </div>
                     <div class="stat-icon blue">
-                        <i class="fa fa-file-alt"></i>
+                        <i class="ws-ikon ws-file-alt"></i>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@ $dashboard_content = '
                         <p>'.yc("Aktif Modül").'</p>
                     </div>
                     <div class="stat-icon purple">
-                        <i class="fa fa-puzzle-piece"></i>
+                        <i class="ws-ikon ws-puzzle-piece"></i>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@ $dashboard_content = '
                         <p>'.yc("Kullanıcılar").'</p>
                     </div>
                     <div class="stat-icon green">
-                        <i class="fa fa-users"></i>
+                        <i class="ws-ikon ws-users"></i>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@ $dashboard_content = '
                         <p>'.yc("Sistem Sürümü").'</p>
                     </div>
                     <div class="stat-icon orange">
-                        ' . (syetki([2]) && is_file(R_PHP.'/_dev/update/sistem_guncelle.php') ? '<a href="ui/sistem_guncelle"><i class="fa fa-code-branch"></i></a>': '<i class="fa fa-code-branch"></i>') . '
+                        ' . (syetki([2]) && is_file(R_PHP.'/_dev/update/sistem_guncelle.php') ? '<a href="ui/sistem_guncelle"><i class="ws-ikon ws-code-branch"></i></a>': '<i class="ws-ikon ws-code-branch"></i>') . '
                     </div>
                 </div>
             </div>
@@ -100,19 +100,19 @@ $dashboard_content = '
                 <h5 class="uis-mb-4">'.yc("Hızlı İşlemler & Yönetim").'</h5>
                 <div class="quick-actions">
                     <a href="ui/sayfalar" class="quick-btn">
-                        <i class="fa fa-plus-circle text-primary"></i>
+                        <i class="ws-ikon ws-plus-circle text-primary"></i>
                         <span>'.yc("İçerik Yönetimi").'</span>
                     </a>
                     <a href="ui/moduller" class="quick-btn">
-                        <i class="fa fa-cubes text-info"></i>
+                        <i class="ws-ikon ws-cubes text-info"></i>
                         <span>'.yc("Modüller").'</span>
                     </a>
                     <a href="ui/ga" class="quick-btn">
-                        <i class="fa fa-cogs text-secondary"></i>
+                        <i class="ws-ikon ws-cogs text-secondary"></i>
                         <span>'.yc("Genel Ayarlar").'</span>
                     </a>
                     <a href="ui/dosyalar" class="quick-btn">
-                        <i class="fa fa-folder-open text-warning"></i>
+                        <i class="ws-ikon ws-folder-open text-warning"></i>
                         <span>'.yc("Dosya Yöneticisi").'</span>
                     </a>
                 </div>
@@ -128,7 +128,7 @@ $dashboard_content = '
                             $dashboard_content .= '
                             <li class="activity-item">
                                 <span class="activity-time">
-                                    <i class="far fa-clock uis-me-1"></i> 
+                                    <i class="ws-ikon ws-clock uis-me-1"></i>
                                     '.date('d.m.Y H:i', strtotime($log->tarih)).'
                                 </span>
                                 <span class="activity-content">
@@ -169,7 +169,7 @@ $dashboard_content = '
                 </table>
                 <div class="">
                     <div class="uis-alert uis-alert-info uis-py-2 small">
-                        <i class="fa fa-info-circle uis-me-1"></i>
+                        <i class="ws-ikon ws-info-circle uis-me-1"></i>
                         '.yc("Sistem v%s sürümünde çalışmaktadır.", (defined('VERSION') ? VERSION : '1.0')).'
                     </div>
                 </div>

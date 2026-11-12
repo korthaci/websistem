@@ -76,9 +76,9 @@ if ($modul_url) {
 
 	echo '
 	<div class="uis-page-header">
-		<h1 class="uis-page-title"><i class="fa-solid fa-code"></i> ' . ucfirst($modul_url) . ' ' . yc("Şablonlarını Düzenle").'</h1>
+		<h1 class="uis-page-title"><i class="ws-ikon ws-code"></i> ' . ucfirst($modul_url) . ' ' . yc("Şablonlarını Düzenle").'</h1>
 		<div class="uis-action-bar">
-			<a href="' . href('index', 'ui=moduller') . '" class="uis-btn uis-btn-outline uis-btn-danger"><i class="fa-solid fa-arrow-left"></i> '.yc("Modüllere Dön").'</a>
+			<a href="' . href('index', 'ui=moduller') . '" class="uis-btn uis-btn-outline uis-btn-danger"><i class="ws-ikon ws-arrow-left"></i> '.yc("Modüllere Dön").'</a>
 		</div>
 	</div>
 
@@ -87,7 +87,7 @@ if ($modul_url) {
 	echo '
 	<div class="uis-card uis-mb-4">
 		<div class="uis-card-header">
-			<h3 class="uis-card-title"><i class="fa-solid fa-list-check"></i> ' . yc("Şablon Seçimi") . '</h3>
+			<h3 class="uis-card-title"><i class="ws-ikon ws-list-check"></i> ' . yc("Şablon Seçimi") . '</h3>
 		</div>
 		<div class="uis-card-body">
 			<div class="uis-flex uis-wrap uis-gap-2">';
@@ -101,7 +101,7 @@ if ($modul_url) {
 					$msd_url = preg_replace('/\.html$/', '', $msd);
 					$msd_baslik = (strpos($msd, '/') !== false) ? $msd : $msd_yazi;
 					echo '<a href="' . href('index', 'ui=modulsablonlar&n='.$n.'&mddosya='.$msd_url) . '" class="uis-btn uis-btn-sm ' . $active_class . '" title="' . hs($msd) . '">
-						<i class="fa-regular fa-file-code"></i> ' . hs($msd_baslik) . '
+						<i class="ws-ikon ws-file-code"></i> ' . hs($msd_baslik) . '
 					</a>';
 				}
 			} else {
@@ -117,7 +117,7 @@ if ($modul_url) {
 			<div class="uis-flex uis-justify-between uis-align-center theme-editor-header">
 				<span class="font-weight-bold">' . ($md_dosya_url ? $md_dosya : yc("Şablon Seçiniz")) . '</span>
 				<div class="uis-flex uis-gap-2">
-					' . (!empty($md_dosya_url) ? '<button type="submit" name="mddosya_kaydet" class="uis-btn uis-btn-sm uis-btn-p"><i class="fa-solid fa-floppy-disk"></i> ' . yc("Kaydet") . '</button>' : '') . '
+					' . (!empty($md_dosya_url) ? '<button type="submit" name="mddosya_kaydet" class="uis-btn uis-btn-sm uis-btn-p"><i class="ws-ikon ws-floppy-disk"></i> ' . yc("Kaydet") . '</button>' : '') . '
 				</div>
 			</div>
 			<textarea name="mddosya_text" 
@@ -126,7 +126,7 @@ if ($modul_url) {
 	</div>
 	
 	<div class="uis-mt-3 uis-text-muted uis-text-s uis-p-2">
-		<i class="fa-solid fa-circle-info"></i> '.yc("Bu şablonlar FRONTEND tarafında modülün nasıl görüneceğini belirler. Standart HTML ve sistem etiketlerini içerebilir.").'
+		<i class="ws-ikon ws-circle-info"></i> '.yc("Bu şablonlar FRONTEND tarafında modülün nasıl görüneceğini belirler. Standart HTML ve sistem etiketlerini içerebilir.").'
 	</div>';
 
 }

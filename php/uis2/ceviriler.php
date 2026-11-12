@@ -109,7 +109,7 @@ if (is_file($base_dosyasi)) {
 
 	echo '
 	<div class="uis-page-header">
-		<h2 class="uis-page-title"><i class="fa fa-globe uis-text-p"></i> '.yc("Çeviriler").'</h2>
+		<h2 class="uis-page-title"><i class="ws-ikon ws-globe uis-text-p"></i> '.yc("Çeviriler").'</h2>
 		<div class="uis-action-group">' . 
 			($n > 0 ? '<a class="yazi1 standart_link input_sadece_bos_alanlar" data-text="'.yc("Tüm alanlar").'">'.yc("Sadece boş alanlar").'</a> &nbsp; ' : '').'
 			<input type="text" name="filtrele" class="uis-input uis-w-auto yazi_ceviri_filtrele" placeholder="'.yc("kelime ile ara").'" />
@@ -156,7 +156,7 @@ if (is_file($base_dosyasi)) {
 				$satir_uyumu = false;
 				$a_yazi_ek .= ' (!' . $dil_line_count . '/' . $base_line_count . ')';
 				$a_class_ek = ($n == $db_dil->no) ? 'uis-btn-w' : 'uis-btn-outline';
-				if ($n == $db_dil->no) $a_yazi_ek .= ' <a href="ui/ceviri?n='.$db_dil->no.'&fix_file='.$db_dil->dkod.'" class="uis-btn uis-btn-xs uis-btn-s ms-1"><i class="fa fa-sync"></i> '.yc("Sync").'</a>';
+				if ($n == $db_dil->no) $a_yazi_ek .= ' <a href="ui/ceviri?n='.$db_dil->no.'&fix_file='.$db_dil->dkod.'" class="uis-btn uis-btn-xs uis-btn-s ms-1"><i class="ws-ikon ws-sync"></i> '.yc("Sync").'</a>';
 			}
 		}
 

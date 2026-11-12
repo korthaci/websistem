@@ -1,7 +1,7 @@
 <?php if ( ! defined('otoban')) exit('vad.');
 	echo '
 	<div class="uis-page-header">
-		<h2 class="uis-page-title"><i class="fa fa-language uis-text-p"></i> '.yc("Diller").'</h2>
+		<h2 class="uis-page-title"><i class="ws-ikon ws-language uis-text-p"></i> '.yc("Diller").'</h2>
 	</div>';
 
 $ulkeler = [];

@@ -44,8 +44,8 @@ if (isset($_POST['tag']) && isset($_POST['cdil'])) {
 				$yazi .= '<input class="g_1__ input ajax_text" value="" data-cdiln="'.$cdil_no.'" data-a="'.$alan.'" data-tn="'.$tablo_no.'" data-t="'.$tablo.'" data-yeni="1" /> ';
 			}
 
-			$yazi .= '<button class="ceviri_kaydet_input btn btn-success">'.yc("Kaydet").' <i class="fa fa-paper-plane"></i></button>';
-			$yazi .= ($ekledegistir=='degistir' && $cdil_b) ? '<button class="ceviri_sil_input btn btn-danger" data-siln="'.$cdil_b->no.'">'.yc("Sil").' <i class="fa fa-trash"></i></button>' : '';
+			$yazi .= '<button class="ceviri_kaydet_input btn btn-success">'.yc("Kaydet").' <i class="ws-ikon ws-paper-plane"></i></button>';
+			$yazi .= ($ekledegistir=='degistir' && $cdil_b) ? '<button class="ceviri_sil_input btn btn-danger" data-siln="'.$cdil_b->no.'">'.yc("Sil").' <i class="ws-ikon ws-trash"></i></button>' : '';
 
 			$yazi .= '</div>';
 
@@ -58,8 +58,8 @@ if (isset($_POST['tag']) && isset($_POST['cdil'])) {
 				$yazi .= '<'.$tag.' class="g_1__ texticerik_a ajax_text" id="text_'.rand(0,100000).'" data-cdiln="'.$cdil_no.'" data-a="'.$alan.'" data-tn="'.$tablo_no.'" data-t="'.$tablo.'" data-yeni="1"></'.$tag.'> ';
 			}
 
-			$yazi .= '<button class="ceviri_kaydet_input btn btn-success">'.yc("Kaydet").' <i class="fa fa-paper-plane"></i></button>';
-			$yazi .= ($ekledegistir=='degistir' && $cdil_b) ? '<button class="ceviri_sil_input btn btn-danger" data-siln="'.$cdil_b->no.'">'.yc("Sil").' <i class="fa fa-trash"></i></button>' : '';
+			$yazi .= '<button class="ceviri_kaydet_input btn btn-success">'.yc("Kaydet").' <i class="ws-ikon ws-paper-plane"></i></button>';
+			$yazi .= ($ekledegistir=='degistir' && $cdil_b) ? '<button class="ceviri_sil_input btn btn-danger" data-siln="'.$cdil_b->no.'">'.yc("Sil").' <i class="ws-ikon ws-trash"></i></button>' : '';
 			
 		}
 	}

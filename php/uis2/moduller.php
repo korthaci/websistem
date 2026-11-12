@@ -6,9 +6,9 @@ if (!syetki([2])) {
 
 	echo '
 	<div class="uis-page-header">
-		<h1 class="uis-page-title"><i class="fa-solid fa-puzzle-piece"></i>'.yc("Modül Yönetimi").'</h1>
+		<h1 class="uis-page-title"><i class="ws-ikon ws-puzzle-piece"></i>'.yc("Modül Yönetimi").'</h1>
 		<div class="uis-action-bar">
-			<a href="' . href('index', 'ui=moduller') . '" class="uis-btn uis-btn-outline uis-btn-primary uis-btn-light"><i class="fa-solid fa-sync"></i> '.yc("Tazele").'</a>
+			<a href="' . href('index', 'ui=moduller') . '" class="uis-btn uis-btn-outline uis-btn-primary uis-btn-light"><i class="ws-ikon ws-sync"></i> '.yc("Tazele").'</a>
 		</div>
 	</div>';
 
@@ -38,7 +38,7 @@ if (!empty($db_moduller)) {
 						<th class="uis-text-center g_60_">'.yc("Ayarlar").'</th>
 						<th class="uis-text-center g_60_">'.yc("Şablonlar").'</th>		
 						<th class="uis-text-center g_30_">'.yc("Aktif").'</th>
-						<th class="uis-text-center g_30_"><i class="fa-solid fa-trash-can"></i></th>
+						<th class="uis-text-center g_30_"><i class="ws-ikon ws-trash-can"></i></th>
 					</tr>
 				</thead>
 				<tbody>';
@@ -59,19 +59,19 @@ if (!empty($db_moduller)) {
 			<td>
 				<div class="uis-flex uis-align-center uis-gap-2">
 					<code class="uis-code-inline">[al:modul:'.$s->url.']</code>
-					<button class="uis-btn uis-btn-icon-sm uis-kopyala" data-kopyala="[al:modul:'.$s->url.']" title="'.yc("Kopyala").'"><i class="fa-regular fa-copy"></i></button>
+					<button class="uis-btn uis-btn-icon-sm uis-kopyala" data-kopyala="[al:modul:'.$s->url.']" title="'.yc("Kopyala").'"><i class="ws-ikon ws-copy"></i></button>
 				</div>
 			</td>
 			<td class="uis-text-center">
-				<a href="'.href('','ui=modulduzenle&n='.$s->no).'" class="uis-btn uis-btn-icon uis-btn-outline" title="'.yc("Yönetim Dosyaları").'"><i class="fa-solid fa-sliders"></i></a>
+				<a href="'.href('','ui=modulduzenle&n='.$s->no).'" class="uis-btn uis-btn-icon uis-btn-outline" title="'.yc("Yönetim Dosyaları").'"><i class="ws-ikon ws-sliders"></i></a>
 			</td>
 			<td class="uis-text-center">
-				<a href="'.href('','ui=modulsablonlar&n='.$s->no).'" class="uis-btn uis-btn-icon uis-btn-outline" title="'.yc("Görünüm Şablonları").'"><i class="fa-solid fa-code"></i></a>
+				<a href="'.href('','ui=modulsablonlar&n='.$s->no).'" class="uis-btn uis-btn-icon uis-btn-outline" title="'.yc("Görünüm Şablonları").'"><i class="ws-ikon ws-code"></i></a>
 			</td>
 			<td><span class="db01 ok'.$s->yayin.'" data-nta="'.sifrele($s->no.',,moduller,,yayin').'"></span></td>
 
 			<td class="uis-text-center">
-				<span class="sil uis-text-d pointer" data-nt="'.sifrele($s->no.',,moduller').'" data-sil="0" data-reload=""><i class="fa-solid fa-circle-xmark"></i></span>
+				<span class="sil uis-text-d pointer" data-nt="'.sifrele($s->no.',,moduller').'" data-sil="0" data-reload=""><i class="ws-ikon ws-circle-xmark"></i></span>
 			</td>
 		</tr>';
 		
@@ -85,11 +85,11 @@ if (!empty($db_moduller)) {
 	if (defined('MODUL_CSS_DOSYA') && defined('MODUL_JS_DOSYA')) {
 		echo '
 		<div class="uis-mt-4 uis-flex uis-align-center uis-gap-3 uis-p-3 uis-bg-light uis-rounded">
-			<div class="uis-text-muted uis-text-s"><i class="fa-solid fa-bolt"></i> '.yc("Performans için CSS ve JS dosyalarını birleştirebilirsiniz.").'</div>
+			<div class="uis-text-muted uis-text-s"><i class="ws-ikon ws-bolt"></i> '.yc("Performans için CSS ve JS dosyalarını birleştirebilirsiniz.").'</div>
 			<form method="POST" action="ui/moduller" class="submitconfirm">
 			' . ( file_exists(ROOT.'/'.MODUL_CSS_DOSYA) && file_exists(ROOT.'/'.MODUL_JS_DOSYA) 
-			? '<button type="submit" name="modul_css_js_dosyalari_sil" class="uis-btn uis-btn-sm uis-btn-d"><i class="fa-solid fa-broom"></i> '.yc("Birleşik Dosyaları Sil").'</button>' 
-			: '<button type="submit" name="modul_css_js_dosyalari_birlestir" class="uis-btn uis-btn-sm uis-btn-p"><i class="fa-solid fa-compress"></i> '.yc("Dosyaları Birleştir").'</button>' ) . '
+			? '<button type="submit" name="modul_css_js_dosyalari_sil" class="uis-btn uis-btn-sm uis-btn-d"><i class="ws-ikon ws-broom"></i> '.yc("Birleşik Dosyaları Sil").'</button>'
+			: '<button type="submit" name="modul_css_js_dosyalari_birlestir" class="uis-btn uis-btn-sm uis-btn-p"><i class="ws-ikon ws-compress"></i> '.yc("Dosyaları Birleştir").'</button>' ) . '
 			</form>
 		</div>';
 	}
@@ -105,7 +105,7 @@ $filter_moduller_url = array_filter($moduller_url, function ($value) use ($db_ur
 
 if (!empty($filter_moduller_url)){
 	echo '<div class="uis-mt-5">';
-	echo '<h3 class="uis-section-title"><i class="fa-solid fa-download"></i> '.yc("Kurulabilir Modüller").'</h3>';
+	echo '<h3 class="uis-section-title"><i class="ws-ikon ws-download"></i> '.yc("Kurulabilir Modüller").'</h3>';
 	echo '<div class="uis-row uis-mt-3">';
 	foreach ($filter_moduller_url as $m) {
 		echo '

@@ -81,17 +81,17 @@ if (n0_($u_no__)) {
 					<ul class="menu-list">
 						<li>
 							<a href="' . href('index', 'uis=bilgileriduzenle') . '">
-								<i class="fas fa-user-edit mr-2"></i> ' . yc("Bilgileri düzenle") . '
+								<i class="ws-ikon ws-user-edit mr-2"></i> ' . yc("Bilgileri düzenle") . '
 							</a>
 						</li>
 						<li>
 							<a href="' . href('index', 'uis=sifredegistir') . '">
-								<i class="fas fa-key mr-2"></i> ' . yc("Şifre değiştir") . '
+								<i class="ws-ikon ws-key mr-2"></i> ' . yc("Şifre değiştir") . '
 							</a>
 						</li>
 						<li>
 							<a class="uye_cikis">
-								<i class="fas fa-sign-out-alt mr-2"></i> ' . yc("Güvenli çıkış") . '
+								<i class="ws-ikon ws-sign-out-alt mr-2"></i> ' . yc("Güvenli çıkış") . '
 							</a>
 						</li>
 					</ul>

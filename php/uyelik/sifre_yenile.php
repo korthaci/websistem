@@ -44,10 +44,10 @@ echo '
                    class="input is-medium"
                    placeholder="' . yc("Yeni şifre girin") . '" />
             <span class="icon is-small is-left">
-                <i class="fas fa-lock"></i>
+                <i class="ws-ikon ws-lock"></i>
             </span>
             <span class="icon is-small is-right toggle-password zindex_10" data-action="toggle-password">
-                <i class="fas fa-eye"></i>
+                <i class="ws-ikon ws-eye"></i>
             </span>
         </div>
         <p class="help">' . yc("En az %s karakter olmalı", $sifre_min_chars) . '</p>
@@ -56,7 +56,7 @@ echo '
     <div class="field">
         <div class="control">
             <button type="submit" class="button is-success is-fullwidth is-medium">
-                <span class="icon"><i class="fas fa-save"></i></span>
+                <span class="icon"><i class="ws-ikon ws-save"></i></span>
                 <span>' . yc("Şifreyi Güncelle") . '</span>
             </button>
         </div>

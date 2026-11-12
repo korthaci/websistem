@@ -3,7 +3,7 @@
 $resim_dizini = 'resim/_r';
 	echo '
 	<div class="uis-page-header">
-		<h2 class="uis-page-title"><i class="fa fa-images uis-text-p"></i> '.yc("Resimler").'</h2>
+		<h2 class="uis-page-title"><i class="ws-ikon ws-images uis-text-p"></i> '.yc("Resimler").'</h2>
 		<div class="uis-action-group">
 			<a class="uis-btn uis-btn-outline uis-btn-sm dosya_getir" tabindex="1" 
 				data-dd="'.$resim_dizini.'"

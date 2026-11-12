@@ -202,10 +202,10 @@ echo '
     <h5 class="uis-m-0 uis-p-0">/ ' . ucfirst($tema_url) . ' ' . yc("Temasını Düzenle") .'</h5>
     <div class="uis-action-bar">
         <button type="button" class="uis-btn uis-btn-sm uis-btn-primary uis-btn-light tema-blok-yedek-al" data-tema="' . hs($tema_url) . '">
-            <i class="fa-solid fa-cloud-upload"></i> ' . yc("Blokları Yedekle") . '
+            <i class="ws-ikon ws-cloud-upload"></i> ' . yc("Blokları Yedekle") . '
         </button>
         <button type="button" class="uis-btn uis-btn-sm uis-btn-primary tema-blok-listesi-btn" data-tema="' . hs($tema_url) . '">
-            <i class="fa-solid fa-history"></i> ' . yc("Blokları Yapılandır") . '
+            <i class="ws-ikon ws-history"></i> ' . yc("Blokları Yapılandır") . '
         </button>
         <a href="' . href('index', 'ui=temalar') . '" class="uis-btn uis-btn-sm uis-btn-outline">< ' . yc("Temalara Dön") .'</a>
     </div>

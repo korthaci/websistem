@@ -90,21 +90,21 @@ if (n0_($u_no__)) {
 							<div class="uis-mb-3">
 								<br>'.yc("Telefon").'
 								<div class="uis-flex uis-align-center uis-gap-2">
-									<i class="fas fa-phone uis-text-muted"></i>
+									<i class="ws-ikon ws-phone uis-text-muted"></i>
 									<input class="uis-input dbtext" type="tel" value="'.$sb_->telefon.'" placeholder="'.yc("Telefon").'" data-nta="'.sifrele($sb_->no.',,uyeler,,telefon').'" />
 								</div>
 							</div>
 							<div class="uis-mb-3">
 								<label class="uis-label">'.yc("GSM").'</label>
 								<div class="uis-flex uis-align-center uis-gap-2">
-									<i class="fas fa-phone uis-text-muted"></i>
+									<i class="ws-ikon ws-phone uis-text-muted"></i>
 									<input class="uis-input dbtext" type="tel" value="'.$sb_->gsm.'" placeholder="'.yc("GSM").'" data-nta="'.sifrele($sb_->no.',,uyeler,,gsm').'" />
 								</div>
 							</div>
 							<div class="uis-mb-3">
 								<label class="uis-label">'.yc("Email Adresi").'</label>
 								<div class="uis-flex uis-align-center uis-gap-2">
-									<i class="fas fa-envelope uis-text-muted"></i>
+									<i class="ws-ikon ws-envelope uis-text-muted"></i>
 									<input class="uis-input dbtext" type="email" value="'.$sb_->email.'" placeholder="'.yc("Email adresi").'" data-nta="'.sifrele($sb_->no.',,uyeler,,email').'" />
 								</div>
 							</div>

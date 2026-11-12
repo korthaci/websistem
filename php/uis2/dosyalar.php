@@ -7,7 +7,7 @@ $dosya_dizini = 'dosya';
 
 	echo '
 	<div class="uis-page-header">
-		<h2 class="uis-page-title"><i class="fa fa-folder-open uis-text-p"></i> '.yc("Dosyalar").'</h2>
+		<h2 class="uis-page-title"><i class="ws-ikon ws-folder-open uis-text-p"></i> '.yc("Dosyalar").'</h2>
 		<div class="uis-action-group">
 			<a class="uis-btn uis-btn-outline uis-btn-sm dosya_getir" tabindex="1" 
 				data-dd="'.$dosya_dizini.'"

@@ -13,11 +13,11 @@ if (isset($_POST['yenikayit']) && set_dolu('adi','p')) {
 }
 	echo '
 	<div class="uis-page-header">
-		<h2 class="uis-page-title"><i class="fa fa-cogs uis-text-p"></i> '.yc("Genel Ayarlar").'</h2>
+		<h2 class="uis-page-title"><i class="ws-ikon ws-cogs uis-text-p"></i> '.yc("Genel Ayarlar").'</h2>
 		<div class="uis-action-group">
 		' . ( syetki([1,2]) ? '
 			<div class="yeni">
-				<div class="yeniac uis-btn uis-btn-s"><i class="fa fa-plus uis-me-1"></i> '.yc("Yeni Özellik").'</div>
+				<div class="yeniac uis-btn uis-btn-s"><i class="ws-ikon ws-plus uis-me-1"></i> '.yc("Yeni Özellik").'</div>
 				<form name="konu" action="ui/ga" method="POST" class="dyok uis-mt-2">
 					<input type="text" name="adi" value="" class="uis-input uis-w-auto" placeholder="'.yc("Özellik Adı").'" required />
 					<button type="submit" name="yenikayit" class="uis-btn uis-btn-s">'.yc("Ekle").'</button>
@@ -36,7 +36,7 @@ if ($site_o__) {
 	foreach ($site_o__ as $so__){
 		if ($current_group !== $so__->grup) {
 			$current_group = $so__->grup;
-			echo '<tr class="uis-group-row"><td colspan="4" class="uis-table-group-header"><i class="fa fa-folder-open uis-me-2"></i> '.yc($current_group ?: "Genel").'</td></tr>';
+			echo '<tr class="uis-group-row"><td colspan="4" class="uis-table-group-header"><i class="ws-ikon ws-folder-open uis-me-2"></i> '.yc($current_group ?: "Genel").'</td></tr>';
 		}
 		$sil_td = (syetki([1,2])) ? '<td><span class="sil" data-nt="'.sifrele($so__->no.',,genel_ayarlar').'">x</span></td>':'<td> </td>';
 		echo '<tr>';

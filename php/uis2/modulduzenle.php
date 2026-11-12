@@ -19,9 +19,9 @@ if ($modul_b) {
 
 	echo '
 	<div class="uis-page-header">
-		<h1 class="uis-page-title"><i class="fa-solid fa-sliders"></i> ' . $modul_adi . ' ' . yc("Modül Yönetimi") . '</h1>
+		<h1 class="uis-page-title"><i class="ws-ikon ws-sliders"></i> ' . $modul_adi . ' ' . yc("Modül Yönetimi") . '</h1>
 		<div class="uis-action-bar">
-			<a href="ui/moduller" class="uis-btn uis-btn-outline uis-btn-danger"><i class="fa-solid fa-arrow-left"></i> ' . yc("Modüllere Dön") . '</a>
+			<a href="ui/moduller" class="uis-btn uis-btn-outline uis-btn-danger"><i class="ws-ikon ws-arrow-left"></i> ' . yc("Modüllere Dön") . '</a>
 		</div>
 	</div>';
 
@@ -47,7 +47,7 @@ if ($modul_b) {
 					
 					if (!$menude_gizle) {
 						$sidebar_links .= '<a href="' . href('index', 'ui=modulduzenle&n=' . $modul_no . '&islem=' . $dosya_basename) . '" class="theme-file-item ' . $active_class. '">
-							<i class="fa-solid fa-file-code"></i> ' . $dosya_isim . '
+							<i class="ws-ikon ws-file-code"></i> ' . $dosya_isim . '
 						</a>';
 						$_php_dosya_sayisi++;
 					}
@@ -83,7 +83,7 @@ if ($modul_b) {
 		echo '
 		<div class="uis-card uis-mb-4">
 			<div class="uis-card-header">
-				<h3 class="uis-card-title"><i class="fa-solid fa-list-check"></i> ' . yc("Yönetim Aracı Seçimi") . '</h3>
+				<h3 class="uis-card-title"><i class="ws-ikon ws-list-check"></i> ' . yc("Yönetim Aracı Seçimi") . '</h3>
 			</div>
 			<div class="uis-card-body">
 				<div class="uis-flex uis-wrap uis-gap-2">';
@@ -98,7 +98,7 @@ if ($modul_b) {
 						$dosya_isim = ucfirst_utf8(str_replace("_"," ",trim($f['name'],"_")));
 						
 						echo '<a href="' . href('index', 'ui=modulduzenle&n=' . $modul_no . '&islem=' . $f['name']) . '" class="uis-btn uis-btn-sm ' . $active_class . '">
-							<i class="fa-solid fa-file-code"></i> ' . $dosya_isim . '
+							<i class="ws-ikon ws-file-code"></i> ' . $dosya_isim . '
 						</a>';
 					}
 				} else {
@@ -117,7 +117,7 @@ if ($modul_b) {
 			echo '
 			<div class="uis-card uis-text-center uis-py-5">
 				<div class="uis-text-muted">
-					<i class="fa-solid fa-hand-pointer fa-3x uis-mb-3"></i>
+					<i class="ws-ikon ws-hand-pointer ws-ikon-3x uis-mb-3"></i>
 					<p>'.yc("Lütfen işlem yapmak için yukarıdan bir dosya seçiniz.").'</p>
 				</div>
 			</div>';

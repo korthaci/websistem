@@ -3142,13 +3142,13 @@ function pb_kod(?string $pb = null): string {
 /**
  * Para birimi Font Awesome ikonu döndürür
  * @param string|null $pb Para birimi ('tl', 'dolar', 'euro'). Null ise Global_::$pb kullanır
- * @return string Font Awesome class (fas fa-lira-sign gibi)
+ * @return string Font Awesome and WS icon classes
  */
 function pb_fa_icon(?string $pb = null): string {
 	$pb = $pb ?? Global_::get('pb', 'tl');
 	$pb_bilgi = Global_::get('pb_bilgi');
 	$pb_obj = $pb_bilgi ? $pb_bilgi->get($pb) : null;
-	return $pb_obj->fa_icon ?? 'fas fa-lira-sign';
+	return $pb_obj->fa_icon ?? 'fas fa-lira-sign ws-ikon ws-lira-sign';
 }
 
 /**

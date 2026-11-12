@@ -22,9 +22,9 @@ $(function () {
     function updateThemeIcon(theme) {
         const icon = $('.uis-theme-toggle i');
         if (theme === 'uis-dark') {
-            icon.removeClass('fa-moon').addClass('fa-sun');
+            icon.removeClass('fa-moon ws-ikon ws-moon').addClass('fa-sun ws-ikon ws-sun');
         } else {
-            icon.removeClass('fa-sun').addClass('fa-moon');
+            icon.removeClass('fa-sun ws-ikon ws-sun').addClass('fa-moon ws-ikon ws-moon');
         }
     }
 
@@ -238,7 +238,7 @@ $(function () {
         const _this = $(this);
         const tema = _this.data('tema');
 
-        _this.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin"></i> Yedekleniyor...');
+        _this.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin ws-ikon ws-spinner ws-ikon-spin"></i> Yedekleniyor...');
 
         $.post(API_URL, {
             islem: 'uis_tema',
@@ -251,7 +251,7 @@ $(function () {
             } else {
                 iziToast.error({ title: 'Hata', message: response.mesaj });
             }
-            _this.prop('disabled', false).html('<i class="fa-solid fa-cloud-upload"></i> Blokları Yedekle');
+            _this.prop('disabled', false).html('<i class="fa-solid fa-cloud-upload ws-ikon ws-cloud-upload"></i> Blokları Yedekle');
         }, 'json');
     });
 
@@ -278,7 +278,7 @@ $(function () {
     function loadBlockBackups(tema) {
         const body = $('#blok-yedek-liste-body');
         const originalRow = body.find('tr:first').prop('outerHTML');
-        body.html(originalRow + '<tr><td colspan="3" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Yükleniyor...</td></tr>');
+        body.html(originalRow + '<tr><td colspan="3" class="text-center"><i class="fa-solid fa-spinner fa-spin ws-ikon ws-spinner ws-ikon-spin"></i> Yükleniyor...</td></tr>');
 
         $.post(API_URL, {
             islem: 'uis_tema',
@@ -372,16 +372,16 @@ $(function () {
             const $adjuster = $(`
                 <div id="ws-ui-pos-adjuster" style="position:absolute; bottom:60px; left:12px; z-index:9999; display:flex; flex-direction:column; gap:4px; background:rgba(15,23,42,0.9); backdrop-filter:blur(8px); padding:6px 4px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
                     <button class="adj-btn up" aria-label="Yukarı" title="Yukarı (+Shift+Alt+Up)" style="background:rgba(255,255,255,0.05); border:0; color:#cbd5e1; width:22px; height:22px; border-radius:4px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; outline:none;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                        <i class="fas fa-chevron-up" style="font-size: 10px;"></i>
+                        <i class="fas fa-chevron-up ws-ikon ws-chevron-up" style="font-size: 10px;"></i>
                     </button>
                     <button class="adj-btn reset" aria-label="Sıfırla" title="Sıfırla" style="background:rgba(255,255,255,0.05); border:0; color:#cbd5e1; width:22px; height:22px; border-radius:4px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; outline:none;" onmouseover="this.style.background='rgba(15,118,110,0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                        <i class="fas fa-undo-alt" style="font-size: 9px;"></i>
+                        <i class="fas fa-undo-alt ws-ikon ws-undo-alt" style="font-size: 9px;"></i>
                     </button>
                     <button class="adj-btn down" aria-label="Aşağı" title="Aşağı (+Shift+Alt+Down)" style="background:rgba(255,255,255,0.05); border:0; color:#cbd5e1; width:22px; height:22px; border-radius:4px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; outline:none;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                        <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                        <i class="fas fa-chevron-down ws-ikon ws-chevron-down" style="font-size: 10px;"></i>
                     </button>
                     <button class="adj-btn close" title="Kapat" style="background:rgba(239,68,68,0.15); border:0; color:#f87171; width:22px; height:22px; border-radius:4px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; outline:none; margin-top:2px;" onmouseover="this.style.background='rgba(239,68,68,0.3)';" onmouseout="this.style.background='rgba(239,68,68,0.15)';">
-                        <i class="fas fa-times" style="font-size: 9px;"></i>
+                        <i class="fas fa-times ws-ikon ws-times" style="font-size: 9px;"></i>
                     </button>
                 </div>
             `);

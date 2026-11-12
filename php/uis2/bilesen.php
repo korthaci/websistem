@@ -25,9 +25,9 @@ if (!empty($db_bilesen)) {
 	<tr>
 	<th>'.count($db_bilesen).' '.yc("Bileşen").'</th>
 	<th>[]</th>
-	<th class="g_20_"><i class="fa fa-cog"></i></th>
-	<th class="g_20_"><i class="fa fa-bars"></i></th>
-	<th class="g_30_"><i class="fa fa-file"></i></th>		
+	<th class="g_20_"><i class="ws-ikon ws-cog"></i></th>
+	<th class="g_20_"><i class="ws-ikon ws-bars"></i></th>
+	<th class="g_30_"><i class="ws-ikon ws-file"></i></th>
 	<th>'.yc("Aktif").'</th>
 	<th>x</th>
 	</tr>
@@ -52,9 +52,9 @@ if (!empty($db_bilesen)) {
 		<tr class="yazi1">
 		<td title="'.$s->no.'"> <input class="dbtext i2 g_99__ uis-input" type="text" value="'.$s->adi.'" data-nta="'.sifrele($s->no.',,bilesen,,adi').'" /></td>
 		<td>'.$b_al_modul_yaz.'</td>
-		<td><a href="'.href('','ui=bilesenayarlar&n='.$s->no).'"><i class="fa fa-cog"></i></a></td>
-		<td><a href="'.href('','ui=bilesenduzenle&n='.$s->no).'"><i class="fa fa-bars"></i></a></td>
-		<td><a href="'.href('','ui=bilesensablonlar&n='.$s->no).'"><i class="fa fa-file"></i></a></td>
+		<td><a href="'.href('','ui=bilesenayarlar&n='.$s->no).'"><i class="ws-ikon ws-cog"></i></a></td>
+		<td><a href="'.href('','ui=bilesenduzenle&n='.$s->no).'"><i class="ws-ikon ws-bars"></i></a></td>
+		<td><a href="'.href('','ui=bilesensablonlar&n='.$s->no).'"><i class="ws-ikon ws-file"></i></a></td>
 		<td><span class="db01 ok'.$s->yayin.'" data-nta="'.sifrele($s->no.',,bilesen,,yayin').'">'.$s->yayin.'</span></td>
 		<td><span class="sil" data-nt="'.sifrele($s->no.',,bilesen').'" data-sil="0" data-reload=""> </span></td>
 		</tr>';
@@ -87,7 +87,7 @@ if (!empty($filter_bilesen_url)){
 	foreach ($filter_bilesen_url as $m) {
 		echo '
 		<div class="modul_mdbi">
-			<i class="fa fa-database"></i> '.$m.' <a class="bilesenkur" data-m="'.$m.'">'.yc("Kur").'</a>
+			<i class="ws-ikon ws-database"></i> '.$m.' <a class="bilesenkur" data-m="'.$m.'">'.yc("Kur").'</a>
 		</div>';
 	}
 }
