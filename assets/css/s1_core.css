@@ -2184,6 +2184,12 @@ thead.sticky.scrolled th {
 	color: #222;
 }
 
+.ws_dropdown-secenek a {
+    width: 100%;
+    display: block;
+    padding: 10px;
+}
+
 
 
 /*ws_form*/
