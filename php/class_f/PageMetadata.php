@@ -32,9 +32,7 @@ class PageMetadata {
 
     private function loadMetadata() {
 
-        // Check for araba parameter first (before type check)
-        if (isset($_GET['araba'])) {
-            $this->loadCarMetadata();
+        if ($this->loadComponentMetadata()) {
             return;
         }
 
@@ -79,6 +77,70 @@ class PageMetadata {
         $this->title = $this->sanitizeString($this->title);
         $this->description = $this->sanitizeString($this->description);
         $this->tags = $this->sanitizeString($this->tags);
+    }
+
+    private function loadComponentMetadata(): bool
+    {
+        $component = (string) ($this->params['bilesen'] ?? '');
+        if ($component === '') {
+            foreach ((array) (Global_::$bilesenler_url_dizi ?? []) as $candidate) {
+                if (is_string($candidate) && array_key_exists($candidate, $_GET)) {
+                    $component = $candidate;
+                    break;
+                }
+            }
+        }
+
+        if ($component === '' || !preg_match('/^[A-Za-z0-9_]+$/', $component)) {
+            return false;
+        }
+
+        $class = $component . '_pagemetadata_katki';
+        if (!class_exists($class, false) || !method_exists($class, 'metadata')) {
+            return false;
+        }
+
+        try {
+            $metadata = $class::metadata([
+                'pdo' => $this->pdo,
+                'table_prefix' => $this->do_,
+                'settings' => $this->so_,
+                'params' => $this->params,
+                'query' => $_GET,
+            ]);
+
+            if (!is_array($metadata) || trim((string) ($metadata['title'] ?? '')) === '') {
+                return false;
+            }
+
+            $title = trim((string) $metadata['title']);
+            $siteTitle = $this->getLocalizedSiteTitle();
+            $this->title = $this->sanitizeString($title . ($siteTitle !== '' ? ' | ' . $siteTitle : ''));
+            $this->description = $this->sanitizeString((string) ($metadata['description'] ?? ''));
+            $this->tags = $this->sanitizeString((string) ($metadata['tags'] ?? ''));
+            $this->image = (string) ($metadata['image'] ?? '');
+            $this->pageName = $this->sanitizeString((string) ($metadata['pageName'] ?? $title));
+
+            return true;
+        } catch (Throwable $e) {
+            $this->logError('Component metadata hook error: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    private function getLocalizedSiteTitle(): string
+    {
+        if (!method_exists($this->so_, 'd') || !method_exists($this->so_, 'no') || !function_exists('cc')) {
+            return '';
+        }
+
+        return trim((string) $this->getSafeValue(
+            'cc',
+            $this->so_->d('site_title'),
+            $this->so_->no('site_title'),
+            'genel_ayarlar',
+            'site_title'
+        ));
     }
 
     private function loadDefaultMetadata() {
@@ -536,120 +598,6 @@ class PageMetadata {
     }
     
 
-    /*
-    if isset($_GET['eo']) // araba numarası
-    $araba_no = intval($_GET['eo']);
-    $stmt = $pdo->prepare("SELECT 
-		a.no AS ano, a.firma_no, a.sehir_no, a.marka_no, a.marka_model_no, a.model_ayrinti,
-        f.no AS fno, f.adi AS fadi
-			FROM {$do_}araba a, {$do_}firmalar f
-				WHERE a.no=? AND a.firma_no = f.no AND a.yayin = 1 AND a.yayin1 = 1");
-    $araba_bilgi = $stmt->execute([$araba_no]);
-
-    $bolge1_sehir_adi = db_adi::get($pdo, $do_, 'araba_sehir_bolge', $_GET['b1'], 'adi');//Şehir bölge adı
-    
-    $marka = db_adi::get($pdo, $do_, 'araba_marka', $araba_bilgi->marka_no, 'adi');
-	$model = db_adi::get($pdo, $do_, 'araba_marka_model', $araba_bilgi->marka_model_no, 'adi');
-
-    //eğer eo varsa title şu şekilde olmalı : 
-    [Şehir bölge adı ] [Araba marka Model model ayrinti] [Araba Kirala] // buradaki araba kirala yazısı aslında  (araba key araba value) değerlerinden geliyor.
-
-    // $_GET : eğer t1 varsa ve eo yoksa o zaman yine de t1 title'a eklenmeli. 
-    [Şehir bölge adı ] [araba get key ve value değerleri]
-
-    */
-
-    private function loadCarMetadata() {
-        try {
-            // Safely get araba parameter
-            $araba = isset($_GET['araba']) ? (function_exists('z') ? z($_GET['araba']) : htmlspecialchars($_GET['araba'], ENT_QUOTES, 'UTF-8')) : '';
-            
-            if (empty($araba)) {
-                $this->loadDefaultMetadata();
-                return;
-            }
-            
-            // Create base title from araba parameter
-            if (function_exists('ucfirst_utf8')) {
-                $arabaTitle = ucfirst_utf8($araba);
-            } else {
-                $arabaTitle = ucfirst($araba);
-            }
-            
-            $titleParts = [];
-            
-            // Check if eo (araba no) exists
-            if (isset($_GET['eo']) && !empty($_GET['eo'])) {
-                $araba_no = intval($_GET['eo']);
-                
-                // Get car information from database
-                $sql = "SELECT 
-                    a.no AS ano, a.firma_no, a.sehir_no, a.marka_no, a.marka_model_no, a.model_ayrinti,
-                    f.no AS fno, f.adi AS fadi
-                FROM {$this->do_}araba a
-                LEFT JOIN {$this->do_}firmalar f ON a.firma_no = f.no
-                WHERE a.no = :araba_no AND a.yayin = 1 AND a.yayin1 = 1";
-                
-                $stmt = $this->pdo->prepare($sql);
-                $stmt->execute(['araba_no' => $araba_no]);
-                $araba_bilgi = $stmt->fetch(PDO::FETCH_OBJ);
-                
-                if ($araba_bilgi) {
-                    // Get city/region name if b1 exists
-                    if (isset($_GET['b1']) && !empty($_GET['b1']) && class_exists('db_adi')) {
-                        $bolge1_sehir_adi = db_adi::get($this->pdo, $this->do_, 'araba_sehir_bolge', $_GET['b1'], 'adi');
-                        if (!empty($bolge1_sehir_adi)) {
-                            $titleParts[] = $bolge1_sehir_adi;
-                        }
-                    }
-                    
-                    // Get car brand and model
-                    if (class_exists('db_adi')) {
-                        $marka = db_adi::get($this->pdo, $this->do_, 'araba_marka', $araba_bilgi->marka_no, 'adi');
-                        $model = db_adi::get($this->pdo, $this->do_, 'araba_marka_model', $araba_bilgi->marka_model_no, 'adi');
-                        
-                        $carInfo = trim($marka . ' ' . $model . ' ' . $araba_bilgi->model_ayrinti);
-                        if (!empty($carInfo)) {
-                            $titleParts[] = $carInfo;
-                        }
-                    }
-                    
-                    // Add araba action (e.g., "Araba Kirala"). The passive detail page
-                    // keeps the vehicle name as the title.
-                    if ($araba !== 'goster') {
-                        $titleParts[] = 'Araba ' . $arabaTitle;
-                    }
-                }
-            } else {
-                // If eo doesn't exist but t1 exists, still add city/region
-                if (isset($_GET['t1']) && !empty($_GET['t1'])) {
-                    if (isset($_GET['b1']) && !empty($_GET['b1']) && class_exists('db_adi')) {
-                        $bolge1_sehir_adi = db_adi::get($this->pdo, $this->do_, 'araba_sehir_bolge', $_GET['b1'], 'adi');
-                        if (!empty($bolge1_sehir_adi)) {
-                            $titleParts[] = $bolge1_sehir_adi;
-                        }
-                    }
-                }
-                
-                // Add araba action
-                $titleParts[] = 'Araba ' . $arabaTitle;
-            }
-            
-            // Build final title
-            $this->title = implode(' ', $titleParts);
-            $this->pageName = $this->title;
-            
-            // Set default metadata
-            $this->description = '';
-            $this->tags = '';
-            $this->image = '';
-            
-        } catch (Exception $e) {
-            $this->logError("Error loading car metadata: " . $e->getMessage());
-            $this->loadDefaultMetadata();
-        }
-    }
-    
     /**
      * Sanitize a string (replacement for ampd function)
      * 
