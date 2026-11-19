@@ -115,6 +115,10 @@ $dashboard_content = '
                         <i class="ws-ikon ws-folder-open text-warning"></i>
                         <span>'.yc("Dosya Yöneticisi").'</span>
                     </a>
+                    <a href="ui/sitemap" class="quick-btn">
+                        <i class="ws-ikon ws-sitemap"></i>
+                        <span>'.yc("Sitemap oluştur").'</span>
+                    </a>
                 </div>
 
                 <div class="">

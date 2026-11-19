@@ -179,6 +179,38 @@
 	display: block;
 }
 
+/* Sidebar mode toggle */
+.ws_sidebar .ws_sidebar_mode_toggle {
+	width: 100%;
+	margin: 0;
+	box-sizing: border-box;
+	border: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+
+.ws_sidebar .ws_sidebar_mode_toggle:hover,
+.ws_sidebar .ws_sidebar_mode_toggle[aria-pressed="true"] {
+	background: linear-gradient(135deg, rgba(0, 212, 170, 0.15) 0%, rgba(0, 212, 170, 0.1) 100%);
+	color: #ffffff;
+}
+
+.ws_sidebar.ws_sidebar_mode_focus .ws_sidebar_scope:not(.ws_sidebar_scope_selected) {
+	display: none !important;
+}
+
+.ws_sidebar.ws_sidebar_mode_focus .ws_sidebar_scope_selected [data-sidebar-component-header] {
+	display: none !important;
+}
+
+.ws_sidebar.ws_sidebar_mode_focus .ws_sidebar_scope_selected [data-sidebar-component-menu] {
+	max-height: 400px;
+	border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
 /* Navigation Menu */
 .ws_nav-menu {
 	padding: 0.5rem 0;

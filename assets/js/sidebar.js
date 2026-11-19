@@ -78,7 +78,72 @@ function toggleResetButton(filterText) {
 	}
 }
 
+function initSidebarMode() {
+	var $sidebar = $('.ws_sidebar').first();
+	var $toggle = $('[data-sidebar-mode-toggle]').first();
+	var storageKey = 'binaraba.sidebar.mode';
+	var focusComponent = ($toggle.attr('data-sidebar-component') || '').trim();
+	var allMode = 'all';
+
+	if (!$sidebar.length || !$toggle.length || !focusComponent) {
+		return;
+	}
+
+	function readMode() {
+		var mode = allMode;
+		try {
+			mode = localStorage.getItem(storageKey) || allMode;
+		} catch (error) {
+			mode = allMode;
+		}
+		return mode === allMode || mode === focusComponent ? mode : allMode;
+	}
+
+	function writeMode(mode) {
+		try {
+			localStorage.setItem(storageKey, mode);
+		} catch (error) {
+			// localStorage kullanılamıyorsa görünüm yalnızca mevcut sayfada sürer.
+		}
+	}
+
+	function applyMode(mode) {
+		var focusMode = mode === focusComponent;
+		var toggleText = focusMode
+			? ($toggle.attr('data-toggle-close') || '')
+			: ($toggle.attr('data-toggle-open') || '');
+		var $scopes = $sidebar.find('.ws_sidebar_scope[data-sidebar-component]');
+
+		$sidebar.toggleClass('ws_sidebar_mode_focus', focusMode);
+		$sidebar.attr('data-sidebar-mode', mode);
+		$toggle.attr('aria-pressed', focusMode ? 'true' : 'false');
+		$toggle.attr('title', toggleText);
+		$toggle.find('.ws_sidebar_mode_text').text(toggleText);
+
+		$scopes.removeClass('ws_sidebar_scope_selected');
+		if (focusMode) {
+			$scopes.filter(function () {
+				return $(this).attr('data-sidebar-component') === focusComponent;
+			}).addClass('ws_sidebar_scope_selected');
+
+			$sidebar.find('.ws_sidebar_scope:not(.ws_sidebar_scope_selected) .ws_nav-item.ws_has-submenu').removeClass('open');
+			$sidebar.find('.ws_sidebar_scope:not(.ws_sidebar_scope_selected) .ws_submenu').removeClass('open');
+		}
+	}
+
+	applyMode(readMode());
+
+	$toggle.on('click', function (event) {
+		event.preventDefault();
+		var nextMode = $sidebar.hasClass('ws_sidebar_mode_focus') ? allMode : focusComponent;
+		writeMode(nextMode);
+		applyMode(nextMode);
+		setActiveSidebarLink();
+	});
+}
+
 $(document).ready(function() {
+	initSidebarMode();
 	setActiveSidebarLink();
 	toggleResetButton($('.ws_sidebar_menu_filtre').val());
 
@@ -155,7 +220,7 @@ $(document).ready(function() {
 		/* Mobil mouseleave kontrolü başlangıcı */
 		if (window.matchMedia('(max-width: 768px)').matches) return;
 		/* Mobil mouseleave kontrolü sonu */
-		if (!$(this).hasClass('fixed')) {
+		if (!$(this).hasClass('fixed') && !$(this).hasClass('ws_sidebar_mode_focus')) {
 			$('.ws_sidebar .ws_nav-item.ws_has-submenu').removeClass('open');
 			$('.ws_sidebar .ws_submenu').removeClass('open');
 		}
