@@ -146,7 +146,7 @@ if (syetki([2, 3, 4])) {
 	//uye_yetkiler
 
 	
-	$yp_linkler_dil_ceviri = syetki([2]) ? '
+	$yp_linkler_dil_ceviri = syetki([2]) && $so_->d('yabanci_dil') === 1 ? '
 	<div class="ws_nav-item ws_has-submenu">
 		<i class="ws-ikon ws-image"></i> <span>'.yc("Diller & Çeviriler").'</span>
 	</div>
