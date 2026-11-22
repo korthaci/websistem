@@ -19,7 +19,7 @@ if ($mansetler && count($mansetler) > 0) {
 
 		$m_->href = $link__;
 		$m_->resim = $resimbu;
-		$m_->icerik = yazi_tag_kes(strip_tags($m_->icerik),230);
+		$m_->icerik = mb_substr(strip_tags($m_->icerik), 0, 230, 'UTF-8');
 		$m_->tarih = tarih_dt($m_->tarih);
 		$sayfalar_dizi[] = $m_;
 	}
@@ -34,4 +34,3 @@ if ($mansetler && count($mansetler) > 0) {
 } else {
 	echo '!';
 }
-?>
