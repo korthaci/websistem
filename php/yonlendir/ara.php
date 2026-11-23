@@ -37,6 +37,12 @@ if (!empty($arama_string)) {
     $sayfalar = $stmt_sayfalar->fetchAll(PDO::FETCH_OBJ);
 
     if ($sayfalar && count($sayfalar) > 0) {
+        $siralama_baslangic_sayi = $siralama->limit1 + 1;
+        $siralama_bitis_sayi = min(
+            $siralama->limit1 + $siralama->limit2_bu,
+            $toplam_sayfa_sayisi
+        );
+
         foreach ($sayfalar as $s) {
             $resimbu = dosya_fe($s->resim) ? $s->resim : IMG.'/fg1.jpg';
             $link__ = href('index','sayfa='.$s->url . '.' . $s->no);
@@ -54,6 +60,10 @@ if (!empty($arama_string)) {
         $ara_sablon_yaz->vars = [
             '__degisken' => [
                 'ara_adi' => $ara_adi, 
+                'toplam_sayfa_sayisi' => $toplam_sayfa_sayisi,
+                'arama_kelimesi' => $arama_string,
+                'siralama_baslangic_sayi' => $siralama_baslangic_sayi,
+                'siralama_bitis_sayi' => $siralama_bitis_sayi,
                 'siralama_yaz' => $siralama_yaz
             ],
             '__foreach' => [
