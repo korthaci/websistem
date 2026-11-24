@@ -38,7 +38,7 @@ if (isset($u_no__) && $u_no__ > 0) {
 }
 
 $yeni_yorum_uye_adi = ($yorum_uye_b__) ? $yorum_uye_b__->adi : '';
-$yeni_yorum_uye_email_adresi = ($yorum_uye_b__) ? $yorum_uye_b__->email_adresi : '';
+$yeni_yorum_uye_email_adresi = ($yorum_uye_b__) ? $yorum_uye_b__->email : '';
 $yeni_yorum_uye_foto_var = ($yorum_uye_b__ && is_file($yorum_uye_b__->fotograf??''));
 $yeni_yorum_uye_foto = $yeni_yorum_uye_foto_var ? $yorum_uye_b__->fotograf : IMG.'/fg1.jpg';
 

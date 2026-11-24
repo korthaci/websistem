@@ -17,7 +17,7 @@ RewriteEngine On
 RewriteRule ^\.well-known/acme-challenge - [L]
 RewriteRule "(^|/)\." - [F]
 
-<FilesMatch "^(composer\.(json|lock)|package\.json)$">
+<FilesMatch "^(composer\.(json|lock)|package\.json|config\.json)$">
     Require all denied
 </FilesMatch>
 

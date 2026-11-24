@@ -18,7 +18,7 @@ if ($u_no__ > 0) {
 		$modul_sablon_yaz->vars = [
 			'__degisken' => [
 				'uye_adi' => $yorum_uye_b__->adi,
-				'uye_email' => $yorum_uye_b__->email_adresi,
+				'uye_email' => $yorum_uye_b__->email,
 				'uye_foto' => $uye_foto,
 			]
 		];

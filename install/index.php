@@ -442,7 +442,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ht .= "RewriteRule \"(^|/)\\.\" - [F]\n\n";
                 $ht .= "RewriteRule ^php/sqlite_data/.*$ - [F,L]\n\n";
 
-                $ht .= "<FilesMatch \"^(composer\\.(json|lock)|package\\.json)$\">\n";
+                $ht .= "<FilesMatch \"^(composer\\.(json|lock)|package\\.json|config\\.json)$\">\n";
                 $ht .= "Require all denied\n";
                 $ht .= "</FilesMatch>\n\n";
 
