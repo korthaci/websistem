@@ -30,7 +30,7 @@ if ($yorumlar && count($yorumlar) > 0) {
 
 $yorum_uye_b__ = null;
 if (isset($u_no__) && $u_no__ > 0) {
-	$sql_current_user = "SELECT adi, email_adresi, fotograf FROM {$do_}uyeler WHERE no = :uye_no";
+	$sql_current_user = "SELECT adi, email, fotograf FROM {$do_}uyeler WHERE no = :uye_no";
 	$stmt_current_user = $pdo->prepare($sql_current_user);
 	$stmt_current_user->bindParam(':uye_no', $u_no__, PDO::PARAM_INT);
 	$stmt_current_user->execute();

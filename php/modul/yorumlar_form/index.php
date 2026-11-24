@@ -4,7 +4,7 @@
 /* yorum altı yorumları yap */
 if ($u_no__ > 0) {
 
-	$sql = "SELECT adi, email_adresi, fotograf FROM {$do_}uyeler WHERE no = :uye_no";
+	$sql = "SELECT adi, email, fotograf FROM {$do_}uyeler WHERE no = :uye_no";
 	$stmt = $pdo->prepare($sql);
 	$stmt->bindParam(':uye_no', $u_no__, PDO::PARAM_INT);
 	$stmt->execute();
